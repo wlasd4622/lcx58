@@ -659,20 +659,20 @@
     <return_field />
     <fields>
       <field>
-        <column_name>transfer_store_id</column_name>
-        <stream_name>transfer_store_id</stream_name>
-      </field>
-      <field>
-        <column_name>url</column_name>
-        <stream_name>url</stream_name>
-      </field>
-      <field>
         <column_name>password</column_name>
         <stream_name>password</stream_name>
       </field>
       <field>
         <column_name>username</column_name>
         <stream_name>telephone</stream_name>
+      </field>
+      <field>
+        <column_name>key</column_name>
+        <stream_name>transfer_store_id</stream_name>
+      </field>
+      <field>
+        <column_name>url</column_name>
+        <stream_name>url</stream_name>
       </field>
     </fields>
     <attributes />
