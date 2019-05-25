@@ -125,16 +125,19 @@ Function main()
     Call mySqlConnect()
     Call start()
     Rem fLogin
+    MessageBox "login"
     status = login()
-    If status = 0 Then
+    call updateStatus(user,status)
+    If status = 0 Then 
+        Goto fLogin
         //正常登陆成功
-        //        Call publish()
+        //Call publish()
         Call houseList()
         Call quit()
         EndScript
     Else
         //账号异常
-        MessageBox "更新账号状态"
+        Goto fLogin
     End If
 End Function
 Function find(str,c)
@@ -171,7 +174,12 @@ Function login()
         Call Plugin.chrome.exec_js(id,"if($('.change_qrcode[type_attr=pclogin]').length){$('.pop_head .qrcode').click()}")
         Delay 500
         // 输入搜索内容
+        //(userName, password,houseListId,key,url,cookie)
         user = getUser()
+        cookie = user(5)
+        If cookie <> "" Then 
+            Call setCookie(cookie)
+        End If
         Call Plugin.chrome.exec_js(id, "$('#username').val('').focus().val('"+user(0)+"');")
         Delay 500
         Call Plugin.chrome.exec_js(id, "$('#password').val('').focus().val('"+user(1)+"');")
@@ -179,7 +187,7 @@ Function login()
         Call Plugin.chrome.exec_js(id,"verifyobject.isverifyaccount=true;verifyobject.isverifyvalidcode1=true;verifyobject.isverifypwd=true;")
         // 点击登录按钮
         Call Plugin.chrome.exec_js(id, "$('#btn_account').click();")
-        count=0
+        count = 0 
         Do
             loginStatus = 0
             Delay 500
@@ -187,7 +195,7 @@ Function login()
             If result = "" Then
                 result=0
             End If
-            If CInt(result) = 1 Then
+            If CInt(result) = 1 Then  
                 loginStatus = 4000
                 TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
             End If
@@ -195,7 +203,7 @@ Function login()
             If result1 = "" Then
                 result1=0
             End If
-            If CInt(result1) = 1 Then
+            If CInt(result1) = 1 Then  
                 loginStatus =4004
                 TracePrint "您的账户存在安全风险"
             End If
@@ -209,17 +217,59 @@ Function login()
     End If
     login=loginStatus
 End Function
+Function updateStatus(userInfo, status)
+    //每次只能更新一个字段
+    //获取待插入的id
+    sql = "select max(id) as id from `log`"
+    TracePrint sql
+    call Plugin.Super_MySQL.mysql_query(mysql, sql)
+    store = Plugin.Super_MySQL.store_result(mysql)
+    rows = Plugin.Super_MySQL.num_rows(store)
+    If rows > 0 Then 
+        maxId = Plugin.Super_MySQL.fetch_text(store, "id")
+        If maxId = "" Then 
+            maxId="1"
+        End If
+        maxId = cstr(cint(maxId)+1)
+        //insert id 
+        sql = "INSERT into log (id) value(" + maxId + ")"
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        call Plugin.Super_MySQL.num_rows(store)
+        //update house_key
+        sql = "UPDATE log SET `house_key`='" + userInfo(3) + "' WHERE id=" + maxId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        call Plugin.Super_MySQL.num_rows(store)
+        //update status
+        sql = "UPDATE log SET `status`=" + cstr(status) + " WHERE id=" + maxId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        call Plugin.Super_MySQL.num_rows(store)
+        //update create_date
+        sql = "UPDATE log SET `create_date`=now() WHERE id=" + maxId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        call Plugin.Super_MySQL.num_rows(store)
+    Else 
+        MessageBox "未处理异常12"
+    End if
+End Function
 Function start()
     // 启动浏览器
     If Plugin.chrome.launch(chromeSrc, "--user-data-dir") = False Then
         TracePrint "启动失败"
-        ExitScript
-    End If
-    // 获取启动浏览器后的默认标签
-    id = Plugin.chrome.get_ids()
-    If id = "" Then
-        TracePrint "获取标签id失败"
-        ExitScript
+        Call start()
+    Else 
+        // 获取启动浏览器后的默认标签
+        id = Plugin.chrome.get_ids()
+        If id = "" Then
+            call start()
+        End If
     End If
 End Function
 Function object()
@@ -324,7 +374,7 @@ Function checkChrome()
                 Call Plugin.Window.CloseEx(Clng(MyArray(i)))
                 i=i+1
             Next
-            Delay 500
+            Delay 300
         Else
             EndScript
         End If
@@ -336,8 +386,7 @@ End Function
 Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
-    //TODO 条件待补全
-    sql = "SELECT*FROM house_list WHERE `block` IS NULL AND username IS NOT NULL LIMIT 1"
+    sql = "SELECT * FROM house_list WHERE	`block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
     call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -353,14 +402,32 @@ Function getUser()
         sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
         TracePrint sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
-        MessageBox key
-        getUser = Array(userName, password,houseListId,key,url)
+        //MessageBox userName+"&"+password+"&"+houseListId+"&"+key+"&"+url
+        cookie = getCookie(userName)
+        getUser = Array(userName, password,houseListId,key,url,cookie)
     Else
         //TODO
         MessageBox "任务完成"
     End If
 End Function
-
-Function setCookie()
-  call exec_js("function setCookie(name, value, domain = '58.com') {var Days = 30;var exp = new Date();exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);let cookie = name + '=' + value + ';expires=' + exp.toGMTString() + '; path=/;';if (domain) {cookie += 'domain=' + domain + ';';}document.cookie = cookie;};")
+Function getCookie(userName)
+    //TODO 
+    userName="13002422180"
+    sql = "SELECT * from cookie where username='" + userName + "'"
+    TracePrint sql
+    call Plugin.Super_MySQL.mysql_query(mysql, sql)
+    store = Plugin.Super_MySQL.store_result(mysql)
+    rows = Plugin.Super_MySQL.num_rows(store)
+    If rows > 0 Then 
+        cookie = Plugin.Super_MySQL.fetch_text(store, "value")
+        getCookie=cookie
+    Else
+        getCookie=""
+    End if
+End Function
+Function setCookie(value)
+    TracePrint "setCookie"
+    Call execjs("function setCookie(name, value, domain = '58.com') {var Days = 30;var exp = new Date();exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);let cookie = name + '=' + value + ';expires=' + exp.toGMTString() + '; path=/;';if (domain) {cookie += 'domain=' + domain + ';';}document.cookie = cookie;};")
+    Call execjs("var cookieArr=JSON.parse(decodeURIComponent('" + value + "'))") 
+    call execjs("cookieArr.map(item => {  let {domain,name,value} = item;setCookie(name, value)})")
 end Function
