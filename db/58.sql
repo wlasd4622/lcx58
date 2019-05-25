@@ -59,6 +59,17 @@ create table `house_info`(
    `create_date` DATE COMMENT '创建日期',
    PRIMARY KEY ( id )
 );
+
+
+
+-- cookie
+drop table if exists `cookie`;
+create table `cookie`(
+   `id` INT NOT NULL AUTO_INCREMENT,
+   `username` VARCHAR(100) DEFAULT NULL COMMENT '用户名',
+   `value` TEXT DEFAULT NULL COMMENT 'cookie',
+   PRIMARY KEY ( id )
+);
 ---------------------------------------
 SELECT * from users WHERE id=1
 SELECT * FROM users WHERE type=1 and status=0 LIMIT 1

@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/wlasd4622/lcx58/issues"
   },
-  "homepage": "https://github.com/wlasd4622/lcx58#readme"
+  "homepage": "https://github.com/wlasd4622/lcx58#readme",
+  "devDependencies": {
+    "mysql": "^2.17.1"
+  }
 }
