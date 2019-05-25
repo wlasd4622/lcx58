@@ -1,10 +1,10 @@
 //免费刷新：直接刷新			0
 //发布超过30天：发新帖		3030
-//7天内超过4次:重新编辑		3070	
+//7天内超过4次:重新编辑		3070
 //免费刷新用完：不管 			3100
 //个人删除 					3404
 //需返回修改 				3401
-//订单异常					3500 
+//订单异常					3500
 //审核不通过 				3501
 //--------------------------------------
 //账户正常					0
@@ -17,7 +17,7 @@
 //--------------------------------------
 Dim id, chromeSrc, mysql,houseInfo
 configStatus = config()
-If configStatus = 0 Then 
+If configStatus = 0 Then
     call checkChrome()
     Call main()
 End If
@@ -27,7 +27,7 @@ Function config()
     Path = Plugin.Sys.GetDir(0)
     Call Plugin.File.WriteINI("Command", "name", "58",Path+"\58config.ini")
     chromeSrc = Plugin.File.ReadINI("Command", "chromeSrc", Path + "\58config.ini")
-    If (chromeSrc = "") Then 
+    If (chromeSrc = "") Then
         status=-1
         MessageBox "请设置chrome目录"
     End If
@@ -60,20 +60,20 @@ Function refresh()
     Loop While Plugin.chrome.is_loading(id)
     //        length = find("document.querySelectorAll('.nav-item').length", "查找刷新页面的tabs")
     length = find("document.querySelectorAll('.nav-item').length", "查找刷新页面元素")
-    If length > 0 Then 
+    If length > 0 Then
         Call loadJquery()
         execjs("$('.form-body').remove()")
         execjs ("document.querySelectorAll('.nav-item')[1]. click()")
         length = find("$('.form-body').length", "切换免费刷新tab")
         index = execjs("$('.form-body').text().trim().indexOf('30天不享有免费刷新')")
-        If index = "" Then 
+        If index = "" Then
             index=0
         End If
         index=CInt(index)
-        If index > - 1  Then 
+        If index > - 1  Then
             //发布超过30天：发新帖		3030
             orderStatus=3030
-        Else 
+        Else
             MessageBox "待刷新"
         End If
         MessageBox "orderStatus:"+cstr(orderStatus)
@@ -89,10 +89,10 @@ Function houseList()
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('body .rightside-publish-content .my-item-item').length","个人中心房产列表")
-    If length > 0 Then 
+    If length > 0 Then
         houseId = houseInfo(0)
         length = find("$('.my-item-item-header-code:contains("+houseId+")').length", "查找是否存在制定房屋id的信息")
-        If length > 0 Then 
+        If length > 0 Then
             //获取房产状态
             //免费刷新：直接刷新:0,
             //发布超过30天：发新帖3030,
@@ -104,19 +104,19 @@ Function houseList()
             //审核不通过 :3501
             //账户需未实名认证:4001
             state=execjs("$('.my-item-item-header-code:contains("+houseId+")').parents('.my-item-item-tb:eq(0)').attr('state')")
-            If state = "" Then 
-                state = - 1 
-            Else 
+            If state = "" Then
+                state = - 1
+            Else
                 state=cint(state)
             End If
-            If state = 2 Then 
+            If state = 2 Then
                 //账户需未实名认证:4001
                 houseStatus = 4001
                 MessageBox "账户需未实名认证:4001"
-            Else 
+            Else
                 Call refresh()
             End If
-        Else 
+        Else
             MessageBox "未查找到此条记录"
         End If
     End If
@@ -126,7 +126,7 @@ Function main()
     Call start()
     Rem fLogin
     status = login()
-    If status = 0 Then 
+    If status = 0 Then
         //正常登陆成功
         //        Call publish()
         Call houseList()
@@ -145,7 +145,7 @@ Function find(str,c)
     Do
         Delay 150
         length = execjs(str)
-        If length = "" Then 
+        If length = "" Then
             length=0
         End If
         length = CInt(length)
@@ -165,7 +165,7 @@ Function login()
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.passwordlogin').length", "查找登录窗口")
-    If length > 0 Then 
+    If length > 0 Then
         loginStatus = 0
         //判断登录窗口类型
         Call Plugin.chrome.exec_js(id,"if($('.change_qrcode[type_attr=pclogin]').length){$('.pop_head .qrcode').click()}")
@@ -184,26 +184,26 @@ Function login()
             loginStatus = 0
             Delay 500
             result = execjs("$('.password_msg.msg:visible').length||0")
-            If result = "" Then 
+            If result = "" Then
                 result=0
             End If
-            If CInt(result) = 1 Then  
-                loginStatus = 4000 
+            If CInt(result) = 1 Then
+                loginStatus = 4000
                 TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
             End If
             result1 = execjs("$('.write.write58').length||0")
-            If result1 = "" Then 
+            If result1 = "" Then
                 result1=0
             End If
-            If CInt(result1) = 1 Then 
-                loginStatus =4004 
+            If CInt(result1) = 1 Then
+                loginStatus =4004
                 TracePrint "您的账户存在安全风险"
             End If
             url = Plugin.chrome.get_url(id)
             TracePrint url
             count=count+1
         Loop While InStr(url, "my.58.com/index") = 0 and count < 10
-    Else 
+    Else
         loginStatus=4004
         MessageBox "未处理异常"
     End If
@@ -211,13 +211,13 @@ Function login()
 End Function
 Function start()
     // 启动浏览器
-    If Plugin.chrome.launch(chromeSrc, "--user-data-dir") = False Then 
+    If Plugin.chrome.launch(chromeSrc, "--user-data-dir") = False Then
         TracePrint "启动失败"
         ExitScript
     End If
     // 获取启动浏览器后的默认标签
     id = Plugin.chrome.get_ids()
-    If id = "" Then 
+    If id = "" Then
         TracePrint "获取标签id失败"
         ExitScript
     End If
@@ -315,17 +315,17 @@ Function checkChrome()
     HwndEx = Plugin.Window.Search("Google")
     dim MyArray
     MyArray = Split(HwndEx, "|")
-    If UBound(MyArray) >= 0 Then 
+    If UBound(MyArray) >= 0 Then
         //        result = MsgBox("是否关闭chrome浏览器？", 1)
         result=1
-        If result = 1 Then 
+        If result = 1 Then
             i=0
             For UBound(MyArray)
                 Call Plugin.Window.CloseEx(Clng(MyArray(i)))
                 i=i+1
             Next
             Delay 500
-        Else 
+        Else
             EndScript
         End If
     End If
@@ -337,42 +337,30 @@ Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
     //TODO 条件待补全
-    sql = "SELECT * FROM house WHERE `ignore`=1 and `block` is null LIMIT 1"
+    sql = "SELECT*FROM house_list WHERE `block` IS NULL AND username IS NOT NULL LIMIT 1"
     TracePrint sql
     call Plugin.Super_MySQL.mysql_query(mysql, sql)
-    store = Plugin.Super_MySQL.store_result(mysql)
-    //读字段 
-    userId=Plugin.Super_MySQL.fetch_text(store,"user_id") 
-    number = Plugin.Super_MySQL.fetch_text(store, "number")
-    houseId = Plugin.Super_MySQL.fetch_text(store, "id")
-    houseInfo=Array(number)
-    //TODO 获取完house数据后应该先判断状态
-    //免费刷新：直接刷新:0,
-    //发布超过30天：发新帖3030,
-    //7天内超过4次:重新编辑3070,
-    //免费刷新用完：不管 :3100,
-    //个人删除 :3404,
-    //需返回修改 :3401,
-    //订单异常:3500 ,
-    //审核不通过 :3501
-    //锁定这条数据
-    sql = "UPDATE house SET `block`=1 WHERE id=" + houseId
-    TracePrint sql
-    call Plugin.Super_MySQL.mysql_query(mysql, sql)
-    //根据userId 读取用户信息
-    sql = "SELECT * from users WHERE id=" + userId
-    TracePrint sql
-    Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
-    If rows > 0 Then 
-        userName = Plugin.Super_MySQL.fetch_text(store, "username")
+    If rows > 0 Then
+        //读字段
+        userName=Plugin.Super_MySQL.fetch_text(store,"username")
         password = Plugin.Super_MySQL.fetch_text(store, "password")
-        status = Plugin.Super_MySQL.fetch_text(store, "status")
-        cookie = Plugin.Super_MySQL.fetch_text(store, "cookie")
-        getUser = Array(userName, password,status,cookie)
-    Else 
-        Delay 1000
-        Goto fGetUser
+        houseListId = Plugin.Super_MySQL.fetch_text(store, "id")
+        key = Plugin.Super_MySQL.fetch_text(store, "key")
+        url = Plugin.Super_MySQL.fetch_text(store, "url")
+        //锁定这条数据
+        sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        MessageBox key
+        getUser = Array(userName, password,houseListId,key,url)
+    Else
+        //TODO
+        MessageBox "任务完成"
     End If
 End Function
+
+Function setCookie()
+  call exec_js("function setCookie(name, value, domain = '58.com') {var Days = 30;var exp = new Date();exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);let cookie = name + '=' + value + ';expires=' + exp.toGMTString() + '; path=/;';if (domain) {cookie += 'domain=' + domain + ';';}document.cookie = cookie;};")
+end Function
