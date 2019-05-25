@@ -167,6 +167,7 @@ Function login()
     Do
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
+    Call clearAllCookie()
     length = find("$('.passwordlogin').length", "查找登录窗口")
     If length > 0 Then
         loginStatus = 0
@@ -175,6 +176,7 @@ Function login()
         Delay 500
         // 输入搜索内容
         //(userName, password,houseListId,key,url,cookie)
+        Dim fGetUser
         user = getUser()
         cookie = user(5)
         If cookie <> "" Then 
@@ -256,6 +258,7 @@ Function updateStatus(userInfo, status)
         store = Plugin.Super_MySQL.store_result(mysql)
         call Plugin.Super_MySQL.num_rows(store)
     Else 
+        TracePrint "未处理异常12"
         MessageBox "未处理异常12"
     End if
 End Function
@@ -386,15 +389,18 @@ End Function
 Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
-    sql = "SELECT * FROM house_list WHERE	`block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
+    sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
+    //sql = "SELECT * FROM house_list WHERE username='13477036053' ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
     call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
     If rows > 0 Then
         //读字段
-        userName=Plugin.Super_MySQL.fetch_text(store,"username")
+        userName = Plugin.Super_MySQL.fetch_text(store, "username")
+        TracePrint "userName:" + userName
         password = Plugin.Super_MySQL.fetch_text(store, "password")
+        TracePrint "parrword:"+parrword
         houseListId = Plugin.Super_MySQL.fetch_text(store, "id")
         key = Plugin.Super_MySQL.fetch_text(store, "key")
         url = Plugin.Super_MySQL.fetch_text(store, "url")
@@ -404,15 +410,17 @@ Function getUser()
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         //MessageBox userName+"&"+password+"&"+houseListId+"&"+key+"&"+url
         cookie = getCookie(userName)
+        TracePrint "cookie:"+cookie
         getUser = Array(userName, password,houseListId,key,url,cookie)
-    Else
-        //TODO
-        MessageBox "任务完成"
+    Else 
+        //getUser=Array("-1")
+        TracePrint "获取house_list信息异常"
+        Goto fGetUser
     End If
 End Function
 Function getCookie(userName)
     //TODO 
-    userName="13002422180"
+    //    userName="13002422180"
     sql = "SELECT * from cookie where username='" + userName + "'"
     TracePrint sql
     call Plugin.Super_MySQL.mysql_query(mysql, sql)
@@ -427,7 +435,11 @@ Function getCookie(userName)
 End Function
 Function setCookie(value)
     TracePrint "setCookie"
-    Call execjs("function setCookie(name, value, domain = '58.com') {var Days = 30;var exp = new Date();exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);let cookie = name + '=' + value + ';expires=' + exp.toGMTString() + '; path=/;';if (domain) {cookie += 'domain=' + domain + ';';}document.cookie = cookie;};")
+    Call execjs("function setCookie(name, value, domain = '58.com', expirationDate) {    var Days = 30;    var exp = new Date();    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);    let cookie = name + '=' + value + ';expires=' + new Date(1575683213 * 1000).toGMTString() + '; path=/;';    if (domain) {        cookie += 'domain=' + domain + ';';    }    console.log(cookie);document.cookie = cookie;};")
     Call execjs("var cookieArr=JSON.parse(decodeURIComponent('" + value + "'))") 
-    call execjs("cookieArr.map(item => {  let {domain,name,value} = item;setCookie(name, value)})")
+    Call execjs("cookieArr.map(item => {    let {        domain,        name,        value,        expirationDate    } = item;    if (expirationDate) {        setCookie(name, value, null, expirationDate);    }})")
 end Function
+Function clearAllCookie()
+    Call execjs("function clearAllCookie() {var date=new Date();date.setTime(date.getTime()-10000);var keys=document.cookie.match(/[^ =;]+(?=\=)/g);if (keys) { ? ?for (var i = ?keys.length; i--;){document.cookie=keys[i]+'=0; expire='+date.toGMTString()+'; path=/;';document.cookie=keys[i]+'=0; expire='+date.toGMTString()+'; path=/;domain=.58.com';}}}")
+    Call execjs("clearAllCookie();")
+End Function

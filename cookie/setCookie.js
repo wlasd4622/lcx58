@@ -1,324 +1,192 @@
 var cookieArr = [{
-    'domain': '.58.com',
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': '58cooper',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': true,
-    'storeId': '0',
-    'value': '\'userid=42730260879380&username=6d4exe\'',
-    'id': 1
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1558454400,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': '58home',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'bj',
-    'id': 2
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1587452102,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': '58tj_uuid',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'b665927d-0bac-4656-95ee-e944067bafa7',
-    'id': 3
-  },
-  {
-    'domain': '.58.com',
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': '58uname',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': true,
-    'storeId': '0',
-    'value': '6d4exe',
-    'id': 4
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1587452076,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'als',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '0',
-    'id': 5
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1558454400,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'city',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'bj',
-    'id': 6
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1618988102,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'id58',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'c5/nn1y9ZUZSg14jbCNOAg==',
-    'id': 7
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1555917902,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'init_refer',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '',
-    'id': 8
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1555917902,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'new_session',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '0',
-    'id': 9
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1587452102,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'new_uv',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '1',
-    'id': 10
-  },
-  {
-    'domain': '.58.com',
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'PPU',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': true,
-    'storeId': '0',
-    'value': '\'UID=42730260879380&UN=6d4exe&TT=bc177fafe9c8a8d576dc528ba00203e4&PBODY=dGedF05XiNXmrv13gfo48p0Sa6gerc0lss8dCetmIgwLkQr1cMOMzW5tLhXmUk8nHjEH-9XA2_cm5dG_TvGdWjv8wuoLmrBLcvDXAlGyteZs4FhXJlPT7U1Q5DjykR-MjbEiF9XUlT_VtD5Vb8jT50Lm9i8FrkWV0tbdJEsdPDc&VER=1\'',
-    'id': 11
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1555917902,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'spm',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '',
-    'id': 12
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1555917902,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'utm_source',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '',
-    'id': 13
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1555917881,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'wmda_session_id_3381039819650',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '1555916081249-5be901cc-42b7-82b3',
-    'id': 14
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1587452081,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'wmda_uuid',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'd80e04ae2c1bcbfad38ca64c14377820',
-    'id': 15
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1587452081,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'wmda_visited_projects',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '%3B3381039819650%3B7790950805815',
-    'id': 16
-  },
-  {
-    'domain': '.58.com',
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'www58com',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': true,
-    'storeId': '0',
-    'value': '\'UserID=42730260879380&UserName=6d4exe\'',
-    'id': 17
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1587452103,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'xxzl_deviceid',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'RgrhqBqaXdhsZUPKGmXZs%2Bq6VltYzqgwQC9mxLZNbeIGKNf02Y6Lfy1gQhX1Prih',
-    'id': 18
-  },
-  {
-    'domain': '.58.com',
-    'expirationDate': 1587452103,
-    'hostOnly': false,
-    'httpOnly': false,
-    'name': 'xxzl_smartid',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'd73d1fa542d44e3be81ea676ffe54b20',
-    'id': 19
-  },
-  {
-    'domain': 'post.58.com',
-    'expirationDate': 1555948800,
-    'hostOnly': true,
-    'httpOnly': false,
-    'name': 'commontopbar_ipcity',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': 'bj%7C%E5%8C%97%E4%BA%AC%7C0',
-    'id': 20
-  },
-  {
-    'domain': 'post.58.com',
-    'expirationDate': 1555948800,
-    'hostOnly': true,
-    'httpOnly': false,
-    'name': 'commontopbar_new_city_info',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '342%7C%E9%83%91%E5%B7%9E%7Czz',
-    'id': 21
-  },
-  {
-    'domain': 'post.58.com',
-    'expirationDate': 1555948800,
-    'hostOnly': true,
-    'httpOnly': false,
-    'name': 'commontopbar_new_city_info',
-    'path': '/fang/342/14',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '342%7C%E9%83%91%E5%B7%9E%7Czz',
-    'id': 22
-  },
-  {
-    'domain': 'post.58.com',
-    'expirationDate': 1556175301.253705,
-    'hostOnly': true,
-    'httpOnly': false,
-    'name': 'post_uuid',
-    'path': '/',
-    'sameSite': 'no_restriction',
-    'secure': false,
-    'session': false,
-    'storeId': '0',
-    'value': '659fc99b-b576-4e56-9c23-1db25bab141c',
-    'id': 23
-  }
+        "domain": ".58.com",
+        "expirationDate": 1590307716,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "58tj_uuid",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "4967ea49-02d6-40f9-9aa8-451ac8946d93",
+        "id": 1
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1575683019,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "als",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "0",
+        "id": 2
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1607219018.875045,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "id58",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "c5/nn1wJ0HkvkWfLBDKlAg==",
+        "id": 3
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1558773516,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "init_refer",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "http%253A%252F%252Fpost.58.com%252F",
+        "id": 4
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1558773516,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "new_session",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "1",
+        "id": 5
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1590307716,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "new_uv",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "2",
+        "id": 6
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1859507117,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "ppStore_fingerprint",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "1882B9B1D964C32CB10C4B7D629167F55D8CCD4E8F671F72%EF%BC%BF1544147117709",
+        "id": 7
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1558773516,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "spm",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "",
+        "id": 8
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1558773516,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "utm_source",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "",
+        "id": 9
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1575683213,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "xxzl_deviceid",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "EjbFf2scr%2Bh9e8qUJVtECY5KZCMli1e3E80KgUpOOSqXugXQ5vWoclIm5%2Fx64sfp",
+        "id": 10
+    },
+    {
+        "domain": ".58.com",
+        "expirationDate": 1575683213,
+        "hostOnly": false,
+        "httpOnly": false,
+        "name": "xxzl_smartid",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": false,
+        "session": false,
+        "storeId": "0",
+        "value": "eeabfcc3b864806e27f68ad7253ec28b",
+        "id": 11
+    }
 ]
 
+function setCookie(name, value, domain = '58.com', expirationDate) {
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    let cookie = name + '=' + value + ';expires=' + new Date(1575683213 * 1000).toGMTString() + '; path=/;';
+    if (domain) {
+        cookie += 'domain=' + domain + ';';
+    }
+    console.log(cookie);
+    document.cookie = cookie;
+};
 
-function setCookie(name, value, domain = '58.com') {var Days = 30;var exp = new Date();exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);let cookie = name + '=' + value + ';expires=' + exp.toGMTString() + '; path=/;';if (domain) {cookie += 'domain=' + domain + ';';}document.cookie = cookie;};
+cookieArr.map(item => {
+    let {
+        domain,
+        name,
+        value,
+        expirationDate
+    } = item;
+    if (expirationDate) {
+        setCookie(name, value, null, expirationDate)
+    }
+})
 
-cookieArr.map(item => {  let {domain,name,value} = itemsetCookie(name, value)})
+ 
+function clearAllCookie() {
+    var date = new Date();
+    date.setTime(date.getTime() - 10000);
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+    if (keys) {  
+        for (var i =  keys.length; i--;) {
+            document.cookie = keys[i] + '=0; expire=' + date.toGMTString() + '; path=/;';
+            document.cookie = keys[i] + '=0; expire=' + date.toGMTString() + '; path=/;domain=.58.com';
+        }
+    }
+}
