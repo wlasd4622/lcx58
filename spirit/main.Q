@@ -33,6 +33,24 @@ Function config()
     End If
     config=status
 End Function
+Function main()
+    Call mySqlConnect()
+    Call start()
+    Rem fLogin
+    //MessageBox "login"
+    status = login()
+    If status = 0 Then 
+        //Goto fLogin
+        //正常登陆成功
+        //Call publish()
+        call houseList()
+        Goto fLogin
+    Else 
+        call updateStatus(user,status)
+        //账号异常
+        Goto fLogin
+    End If
+End Function
 Function loadJquery()
     execjs ("window.$=null;")
     execjs("var script=document.createElement('script');script.type='text/javascript';script.src='https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js';document.getElementsByTagName('head')[0].appendChild(script); ")
@@ -49,39 +67,57 @@ Function refresh()
     status = execjs("$('body .rightside-publish-content .my-item-item:eq(0) .my-item-item-tb-content-states-p1').text()")
     //orderId
     orderId = execjs("$('body .rightside-publish-content .my-item-item:eq(0) .my-item-item-header-code').text().match(/\d+/)[0]")
-    MessageBox "title:" + title
-    MessageBox "status:" + status
-    MessageBox "orderId:" + orderId
     url = "https://refreshplus.vip.58.com/refreshplus/pc/normalrefreshpage?infoId=" + orderId + "&source=1#/immediate"
     Call Plugin.chrome.load(id, url)
     // 等待载入完成
     Do
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
+    Call find("document.querySelectorAll('div').length","查找div")
+    Call loadJquery() 
     //        length = find("document.querySelectorAll('.nav-item').length", "查找刷新页面的tabs")
-    length = find("document.querySelectorAll('.nav-item').length", "查找刷新页面元素")
+    length=find("$('a[href$=immediate]').length","查找立即刷新a标签")
     If length > 0 Then
-        Call loadJquery()
-        execjs("$('.form-body').remove()")
-        execjs ("document.querySelectorAll('.nav-item')[1]. click()")
-        length = find("$('.form-body').length", "切换免费刷新tab")
-        index = execjs("$('.form-body').text().trim().indexOf('30天不享有免费刷新')")
-        If index = "" Then
-            index=0
-        End If
-        index=CInt(index)
-        If index > - 1  Then
-            //发布超过30天：发新帖		3030
-            orderStatus=3030
-        Else
-            MessageBox "待刷新"
-        End If
-        MessageBox "orderStatus:"+cstr(orderStatus)
+        execjs ("$('a[href$=immediate]')[1]. click()")
+        Delay 300
+        //剩余刷新次数
+        rCount=execjs("$('p.warning-message.important').text().trim().match(/\d{1,}/)[0]")
+        MessageBox "剩余" & rCount & "次"
+        rHouseStatus=execjs("function getStatus(){"&_
+							"if($('.yyset').text().indexOf('近7天免费刷新已到上限')>-1){"&_
+							"return 3070"&_
+							"}else($('.yyset').text().indexOf('30天不享有免费刷新')>-1){"&_
+							"return 3030"&_
+							"}"&_
+							"}")
+        MessageBox rHouseStatus
+        //免费刷新：直接刷新			0
+        //发布超过30天：发新帖		3030
+        //7天内超过4次:重新编辑		3070
+        //免费刷新用完：不管 			3100
+        //个人删除 					3404
+        //需返回修改 				3401
+        //订单异常					3500
+        //审核不通过 				3501
+        //length = find("$('.form-body').length", "切换免费刷新tab")
+        //        index = execjs("$('.form-body').text().trim().indexOf('30天不享有免费刷新')")
+        //        If index = "" Then
+        //            index=0
+        //        End If
+        //        index=CInt(index)
+        //        If index > - 1  Then
+        //            //发布超过30天：发新帖		3030
+        //            houseStatus=3030
+        //        Else
+        //            MessageBox "待刷新"
+        //        End If
+        //        MessageBox "houseStatus:"+cstr(houseStatus)
     End If
 End Function
 Function houseList()
+    Rem fHouseList
     //订单列表
-    orderStatus=0
+    houseStatus=3502
     url = "https://fangmypost.58.com/fang/infoall/notabs"
     Call Plugin.chrome.load(id, url)
     // 等待载入完成
@@ -91,19 +127,16 @@ Function houseList()
     length = find("$('body .rightside-publish-content .my-item-item').length","个人中心房产列表")
     If length > 0 Then
         houseId = houseInfo(0)
-        length = find("$('.my-item-item-header-code:contains("+houseId+")').length", "查找是否存在制定房屋id的信息")
-        If length > 0 Then
-            //获取房产状态
-            //免费刷新：直接刷新:0,
-            //发布超过30天：发新帖3030,
-            //7天内超过4次:重新编辑3070,
-            //免费刷新用完：不管 :3100,
-            //个人删除 :3404,
-            //需返回修改 :3401,
-            //订单异常:3500 ,
-            //审核不通过 :3501
-            //账户需未实名认证:4001
-            state=execjs("$('.my-item-item-header-code:contains("+houseId+")').parents('.my-item-item-tb:eq(0)').attr('state')")
+        TracePrint "houseId:"+houseId
+        length = find("$('.my-item-item-header-code:contains(" + houseId + ")').length", "查找是否存在指定房屋id的信息")
+        If length > 0 Then 
+            Call execjs("var houseItem=$('.my-item-item-header-code:contains(" + houseId + ")').parents('.my-item-item-tb:eq(0)')")
+            state = execjs("houseItem.attr('state')")
+            //===============================================
+            //state 
+            //显示中:1
+            //未实名认证:2
+            //===============================================
             If state = "" Then
                 state = - 1
             Else
@@ -112,33 +145,40 @@ Function houseList()
             If state = 2 Then
                 //账户需未实名认证:4001
                 houseStatus = 4001
-                MessageBox "账户需未实名认证:4001"
-            Else
-                Call refresh()
+            ElseIf state = - 1  Then
+                houseStatus=3502
+                MessageBox "未处理异常4564"
+            Else 
+                Call execjs("var statusContent=houseItem.find('.my-item-item-tb-content-states').text().trim().replace(/\n/g,'').replace(/\s/g,'').substr(0,20)")
+                call execjs("function getHouseStatusJs(){"&_
+                "if(statusContent.indexOf('显示中')>-1){"&_
+                "return 1"&_
+                "}else if(statusContent.indexOf('个人删除')>-1){"&_
+                "return 3404"&_
+                "}else if(statusContent.indexOf('审核不通过')>-1){"&_
+                "return 3501"&_
+                "}else if(statusContent.indexOf('返回修改')>-1){"&_
+                "return 3401"&_
+                "}"&_
+                "}")
+                houseStatus=execjs("getHouseStatusJs();")
             End If
-        Else
+        Else 
+            houseStatus=3502
+            TracePrint "未查找到此条记录"
             MessageBox "未查找到此条记录"
         End If
+    Else 
+        TracePrint "个人中心房产列表"
+        MessageBox "个人中心房产列表"
+        Goto fHouseList
     End If
-End Function
-Function main()
-    Call mySqlConnect()
-    Call start()
-    Rem fLogin
-    MessageBox "login"
-    status = login()
-    call updateStatus(user,status)
-    If status = 0 Then 
-        Goto fLogin
-        //正常登陆成功
-        //Call publish()
-        Call houseList()
-        Call quit()
-        EndScript
-    Else
-        //账号异常
-        Goto fLogin
+    call updateStatus(user,houseStatus)
+    If houseStatus = 1 Then 
+        TracePrint "跳转刷新页面"
+        Call refresh()
     End If
+    houseList=houseStatus
 End Function
 Function find(str,c)
     TracePrint "find   "+c
@@ -410,7 +450,9 @@ Function getUser()
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         //MessageBox userName+"&"+password+"&"+houseListId+"&"+key+"&"+url
         cookie = getCookie(userName)
-        TracePrint "cookie:"+cookie
+        TracePrint "cookie:" + cookie
+        houseId = getHouseId(url)
+        houseInfo=Array(houseId)
         getUser = Array(userName, password,houseListId,key,url,cookie)
     Else 
         //getUser=Array("-1")
@@ -442,4 +484,12 @@ end Function
 Function clearAllCookie()
     Call execjs("function clearAllCookie() {var date=new Date();date.setTime(date.getTime()-10000);var keys=document.cookie.match(/[^ =;]+(?=\=)/g);if (keys) { ? ?for (var i = ?keys.length; i--;){document.cookie=keys[i]+'=0; expire='+date.toGMTString()+'; path=/;';document.cookie=keys[i]+'=0; expire='+date.toGMTString()+'; path=/;domain=.58.com';}}}")
     Call execjs("clearAllCookie();")
+End Function
+Function getHouseId(url)
+    regstr = url
+    regin1 = Instr(regstr, "shangpu/")
+    regin2 = Instr(regstr, "x.shtm")
+    regl1 = Len("shangpu/")
+    regr1 = Mid(regstr, regin1 + regl1, regin2 - regin1 - regl1)
+    getHouseId=regr1
 End Function
