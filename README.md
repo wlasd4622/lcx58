@@ -1,5 +1,5 @@
 # lcx58
-1.从数据库获house_list表获取一遍没有被block并且用户名存在的数据
+1.从数据库获house_list表获取一遍没有被block并且用户名存在的数据 v
 2.把这条数据block字段更新成1
 3.根据用户名查找cookie表数据
 4.如果查找到cookie信息，就进行setcookie操作

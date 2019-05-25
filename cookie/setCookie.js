@@ -321,11 +321,4 @@ var cookieArr = [{
 
 function setCookie(name, value, domain = '58.com') {var Days = 30;var exp = new Date();exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);let cookie = name + '=' + value + ';expires=' + exp.toGMTString() + '; path=/;';if (domain) {cookie += 'domain=' + domain + ';';}document.cookie = cookie;};
 
-cookieArr.map(item => {
-  let {
-    domain,
-    name,
-    value
-  } = item
-  setCookie(name, value)
-})
+cookieArr.map(item => {  let {domain,name,value} = itemsetCookie(name, value)})

@@ -11,16 +11,16 @@ let connection = mysql.createConnection({
 connection.connect();
 
 // JSON.parse(fs.readFileSync('./cookies/')
-let userNameList = [];
-queryHouseList(() => {
-  let list = fs.readdirSync('./cookies')
-  list.map(filename => {
-    // if (String((filename.match(/\d+/g) || []).pop() || 0).length > 5 && userNameList.includes(filename.match(/\d+/g).pop())) {
-    if (String((filename.match(/\d+/g) || []).pop() || 0).length > 5 && userNameList.includes(filename.match(/\d+/g).pop()) && filename.indexOf('.lnk') == -1) {
-      readFile(path.join(__dirname, '../cookies', filename))
-    }
-  })
-});
+// let userNameList = [];
+// queryHouseList(() => {
+//   let list = fs.readdirSync('./cookies')
+//   list.map(filename => {
+//     // if (String((filename.match(/\d+/g) || []).pop() || 0).length > 5 && userNameList.includes(filename.match(/\d+/g).pop())) {
+//     if (String((filename.match(/\d+/g) || []).pop() || 0).length > 5 && userNameList.includes(filename.match(/\d+/g).pop()) && filename.indexOf('.lnk') == -1) {
+//       readFile(path.join(__dirname, '../cookies', filename))
+//     }
+//   })
+// });
 
 function readFile(file) {
   let username = file.match(/\d+/g).pop();
@@ -70,3 +70,10 @@ function queryHouseList(cb) {
     cb && cb()
   });
 }
+//----------
+
+let sql = `SELECT * from cookie where username='13002422180'`;
+connection.query(sql, function (error, results, fields) {
+  if (error) throw error;
+  console.log(results)
+});

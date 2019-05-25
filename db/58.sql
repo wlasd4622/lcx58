@@ -67,7 +67,7 @@ drop table if exists `cookie`;
 create table `cookie`(
    `id` INT NOT NULL AUTO_INCREMENT,
    `username` VARCHAR(100) DEFAULT NULL COMMENT '用户名',
-   `value` TEXT DEFAULT NULL COMMENT 'cookie',
+   `value` varchar(9999) DEFAULT NULL COMMENT 'cookie',
    PRIMARY KEY ( id )
 );
 ---------------------------------------
