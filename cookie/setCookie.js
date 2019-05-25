@@ -154,29 +154,12 @@ var cookieArr = [{
     }
 ]
 
-function setCookie(name, value, domain = '58.com', expirationDate) {
-    var Days = 30;
-    var exp = new Date();
-    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-    let cookie = name + '=' + value + ';expires=' + new Date(1575683213 * 1000).toGMTString() + '; path=/;';
-    if (domain) {
-        cookie += 'domain=' + domain + ';';
-    }
+function setCookie(name, value, domain = '58.com', expirationDate) { var Days = 30; var exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000); let cookie = name + '=' + value + ';expires=' + new Date(1575683213 * 1000).toGMTString() + '; path=/;'; if (domain) { cookie += 'domain=' + domain + ';'; }
     console.log(cookie);
-    document.cookie = cookie;
-};
+    document.cookie = cookie; };
 
-cookieArr.map(item => {
-    let {
-        domain,
-        name,
-        value,
-        expirationDate
-    } = item;
-    if (expirationDate) {
-        setCookie(name, value, null, expirationDate)
-    }
-})
+cookieArr.map(item => { let { domain, name, value, expirationDate } = item; if (expirationDate) { setCookie(name, value, null, expirationDate); } })
 
  
 function clearAllCookie() {
