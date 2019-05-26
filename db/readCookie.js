@@ -24,29 +24,30 @@ queryHouseList(() => {
 
 function readFile(file) {
     let username = file.match(/\d+/g).pop();
-    let newArr = []
-    console.log(file);
-    let arr = JSON.parse(fs.readFileSync(file))
-    arr.map(item => {
-        let {
-            domain,
-            name,
-            path,
-            value,
-            expirationDate
-        } = item;
-        if (expirationDate) {
-            newArr.push({
-                domain,
-                name,
-                path,
-                value,
-                expirationDate
-            })
-        }
+    // let newArr = []
+    // console.log(file);
+    // let arr = JSON.parse(fs.readFileSync(file))
+    // arr.map(item => {
+    //     let {
+    //         domain,
+    //         name,
+    //         path,
+    //         value,
+    //         expirationDate
+    //     } = item;
+    //     if (expirationDate) {
+    //         newArr.push({
+    //             domain,
+    //             name,
+    //             path,
+    //             value,
+    //             expirationDate
+    //         })
+    //     }
 
-    })
-    let value = encodeURIComponent(JSON.stringify(newArr));
+    // })
+    let value = encodeURIComponent(fs.readFileSync(file));
+    console.log("username", username)
     insert(username, value)
 }
 

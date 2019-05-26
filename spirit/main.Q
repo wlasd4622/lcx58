@@ -1,4 +1,5 @@
-//免费刷新：直接刷新			0
+//免费刷新：直接刷新			1000
+//当天已经刷新过				3001
 //发布超过30天：发新帖		3030
 //7天内超过4次:重新编辑		3070
 //免费刷新用完：不管 			3100
@@ -6,8 +7,11 @@
 //需返回修改 				3401
 //订单异常					3500
 //审核不通过 				3501
+//刷新成功 					3502
+//刷新失败 					3503
+//订单不存在 				3504
 //--------------------------------------
-//账户正常					0
+//账户正常					2000
 //密码错 					4000
 //未实名认证 				4001
 //认证超时 					4002
@@ -43,13 +47,10 @@ Function main()
         //Goto fLogin
         //正常登陆成功
         //Call publish()
-        call houseList()
-        Goto fLogin
-    Else 
-        call updateStatus(user,status)
-        //账号异常
-        Goto fLogin
+        status= houseList()
     End If
+    call updateStatus(user,status)
+    Goto fLogin
 End Function
 Function loadJquery()
     execjs ("window.$=null;")
@@ -60,14 +61,8 @@ Function loadJquery()
         flag=CBool(flag)
     Loop While flag
 End Function
-Function refresh()
-    //title
-    title=execjs("$('body .rightside-publish-content .my-item-item:eq(0) .t').text()")
-    //status
-    status = execjs("$('body .rightside-publish-content .my-item-item:eq(0) .my-item-item-tb-content-states-p1').text()")
-    //orderId
-    orderId = execjs("$('body .rightside-publish-content .my-item-item:eq(0) .my-item-item-header-code').text().match(/\d+/)[0]")
-    url = "https://refreshplus.vip.58.com/refreshplus/pc/normalrefreshpage?infoId=" + orderId + "&source=1#/immediate"
+Function refresh(houseId)
+    url = "https://refreshplus.vip.58.com/refreshplus/pc/normalrefreshpage?infoId=" + cstr(houseId) + "&source=1#/immediate"
     Call Plugin.chrome.load(id, url)
     // 等待载入完成
     Do
@@ -76,43 +71,80 @@ Function refresh()
     Call find("document.querySelectorAll('div').length","查找div")
     Call loadJquery() 
     //        length = find("document.querySelectorAll('.nav-item').length", "查找刷新页面的tabs")
-    length=find("$('a[href$=immediate]').length","查找立即刷新a标签")
+    length = find("$('a[href$=immediate]').length", "查找立即刷新a标签")
+    rHouseStatus=-1
     If length > 0 Then
-        execjs ("$('a[href$=immediate]')[1]. click()")
+        execjs ("$('a[href$=immediate]')[0].click()")
         Delay 300
         //剩余刷新次数
-        rCount=execjs("$('p.warning-message.important').text().trim().match(/\d{1,}/)[0]")
-        MessageBox "剩余" & rCount & "次"
-        rHouseStatus=execjs("function getStatus(){"&_
-							"if($('.yyset').text().indexOf('近7天免费刷新已到上限')>-1){"&_
-							"return 3070"&_
-							"}else($('.yyset').text().indexOf('30天不享有免费刷新')>-1){"&_
-							"return 3030"&_
-							"}"&_
-							"}")
-        MessageBox rHouseStatus
-        //免费刷新：直接刷新			0
-        //发布超过30天：发新帖		3030
-        //7天内超过4次:重新编辑		3070
-        //免费刷新用完：不管 			3100
-        //个人删除 					3404
-        //需返回修改 				3401
-        //订单异常					3500
-        //审核不通过 				3501
-        //length = find("$('.form-body').length", "切换免费刷新tab")
-        //        index = execjs("$('.form-body').text().trim().indexOf('30天不享有免费刷新')")
-        //        If index = "" Then
-        //            index=0
-        //        End If
-        //        index=CInt(index)
-        //        If index > - 1  Then
-        //            //发布超过30天：发新帖		3030
-        //            houseStatus=3030
-        //        Else
-        //            MessageBox "待刷新"
-        //        End If
-        //        MessageBox "houseStatus:"+cstr(houseStatus)
+        //rCount=execjs("$('p.warning-message.important').text().trim().match(/\d{1,}/)[0]")
+        //        MessageBox "剩余" & rCount & "次"
+        //Call find("$('form.form-container.immediate').length;","查找immediate")
+        Delay 1000
+        Call execjs("var wContent=$('form.form-container.immediate').text().trim().replace(/[\n\s]/g,'')||$('form.yyset').text().trim().replace(/[\s\n]/g,'');")
+        call execjs("function getStatus() {"&_
+    					"if (wContent.indexOf('近7天免费刷新已到上限') > -1) {"&_
+        					"return 3070"&_
+    					"} else if(wContent.indexOf('30天不享有免费刷新') > -1||wContent.indexOf('免费刷新次数已用完，您可尝试付费刷新') > -1) {"&_
+        					"return 3030"&_
+    					"} else if (wContent.indexOf('本次刷新免费') > -1||/账号剩余刷新资源[^0]/.test(wContent)) {"&_
+        					"return 1000"&_
+    					"} else {"&_
+        					"return - 1"&_
+    					"}"&_
+					"}")
+        rHouseStatus=execjs("getStatus();")
+        If rHouseStatus = "" Then 
+            rHouseStatus=-1
+        End If
+        rHouseStatus=cint(rHouseStatus)
+        If rHouseStatus = 1000 Then 
+            Call find("$('button:contains(确定刷新)').length", "查找确认刷新按钮")
+            Call execjs("$('button:contains(确定刷新)').click();")
+            Delay 1000
+            rResult = find("$('.result__title-text:contains(立即刷新成功)').length||($('.success-title').text()=='立即刷新成功'?1:0)", "查找刷新成功结果")
+            If rResult = "" Then 
+                rResult=0
+            End If
+            rResult = cint(rResult)
+            //刷新成功 					3502
+            //刷新失败 					3503
+            If rResult > 0 Then 
+                //刷新成功
+                rHouseStatus=3502
+            Else 
+                //刷新失败
+                rHouseStatus=3503
+            End If
+        ElseIf rHouseStatus = 3070 Then
+            //重新编辑
+            editHouseInfo(houseId)
+        End If
     End If
+    refresh=rHouseStatus
+End Function
+Function editHouseInfo(houseId)
+    //获取详情
+    url = "https://sy.58.com/shangpu/" + houseId + "x.shtml"
+    Call Plugin.chrome.load(id, url)
+    // 等待载入完成
+    Do
+        Delay 10
+    Loop While Plugin.chrome.is_loading(id)
+    length = find("$('.house-title h1').length", "查找登录窗口")
+    //获取原详情
+    //标题
+    detailTitle=execjs("$('.house-title h1').text().trim();")
+    //状态
+    detailStatus=execjs("$($('.house_basic_title_content').html().replace(/[\n\t]/g,'').replace(/\&nbsp\;/g,'')).find('span:contains(状态)').next().text().trim()")
+    //租金
+    detaulMoneyNum = execjs("$('span.house_basic_title_money_num').text()")
+    //转让费
+    detailMoneyZrf = execjs("$('span.house_basic_title_money_zrf').text()")
+    MessageBox detailTitle&detailStatus&detaulMoneyNum&detailMoneyZrf
+    //重新编辑
+    url="http://post.58.com/fang/update/38077469810309?PGTID=0d000000-0000-09ac-94b4-e42db8fdb8fd&ClickID=1"
+    //提交 保存状态
 End Function
 Function houseList()
     Rem fHouseList
@@ -131,6 +163,7 @@ Function houseList()
         length = find("$('.my-item-item-header-code:contains(" + houseId + ")').length", "查找是否存在指定房屋id的信息")
         If length > 0 Then 
             Call execjs("var houseItem=$('.my-item-item-header-code:contains(" + houseId + ")').parents('.my-item-item-tb:eq(0)')")
+            execjs("var rDate=houseItem.find('p.my-item-item-content-left-date').length?new Date(houseItem.find('p.my-item-item-content-left-date').text().trim()).getTime():0")
             state = execjs("houseItem.attr('state')")
             //===============================================
             //state 
@@ -163,20 +196,32 @@ Function houseList()
                 "}")
                 houseStatus=execjs("getHouseStatusJs();")
             End If
+            If houseStatus = 1 Then 
+                Call execjs("function isToday(str) {"&_
+    						"if (new Date(str).toDateString() === new Date().toDateString()) {"&_
+        						"return true;"&_
+    						"} else if (new Date(str) < new Date()){"&_
+        						"return false;"&_
+    						"}"&_
+						"}")
+                isToday = execjs("isToday(rDate);")
+                If isToday = "" Then 
+                    isToday=False
+                End If
+                isToday = CBool(isToday) 
+                If isToday = - 1  Then  
+                    houseStatus = 3001
+                Else 
+                    houseStatus = refresh(houseId)
+                End If
+            End If
         Else 
-            houseStatus=3502
+            houseStatus=3504
             TracePrint "未查找到此条记录"
-            MessageBox "未查找到此条记录"
         End If
     Else 
+        houseStatus=-1
         TracePrint "个人中心房产列表"
-        MessageBox "个人中心房产列表"
-        Goto fHouseList
-    End If
-    call updateStatus(user,houseStatus)
-    If houseStatus = 1 Then 
-        TracePrint "跳转刷新页面"
-        Call refresh()
     End If
     houseList=houseStatus
 End Function
@@ -197,38 +242,70 @@ Function find(str,c)
     Loop While length = 0 and count < 200
     find=length
 End Function
+Function findp2(str,c,pageId)
+    TracePrint "find   "+c
+    TracePrint str
+    count = 0
+    length=0
+    Do
+        Delay 150
+        length = execjsp2(str,pageId)
+        If length = "" Then
+            length=0
+        End If
+        length = CInt(length)
+        count = count + 1
+        TracePrint count
+    Loop While length = 0 and count < 200
+    findp2=length
+End Function
+Function execjsp2(str,pageid)
+    TracePrint "execjs: "& str
+    result= Plugin.chrome.exec_js(pageid,str)
+    execjsp2=result
+End Function
 Function execjs(str)
+    TracePrint "execjs: "& str
     result= Plugin.chrome.exec_js(id,str)
     execjs=result
 End Function
 Function login()
+    Call clearAllCookie() 
+    user = getUser()
+    cookie = user(5)
+    If cookie <> "" Then 
+        Call setCookie(cookie)
+    End If
+    call Plugin.chrome.activate(id)
     Call Plugin.chrome.load(id, "https://passport.58.com/logout")
     // 等待载入完成
     Do
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
-    Call clearAllCookie()
     length = find("$('.passwordlogin').length", "查找登录窗口")
     If length > 0 Then
         loginStatus = 0
         //判断登录窗口类型
         Call Plugin.chrome.exec_js(id,"if($('.change_qrcode[type_attr=pclogin]').length){$('.pop_head .qrcode').click()}")
         Delay 500
-        // 输入搜索内容
-        //(userName, password,houseListId,key,url,cookie)
-        Dim fGetUser
-        user = getUser()
-        cookie = user(5)
-        If cookie <> "" Then 
-            Call setCookie(cookie)
-        End If
-        Call Plugin.chrome.exec_js(id, "$('#username').val('').focus().val('"+user(0)+"');")
+        Call Plugin.chrome.activate(id)
         Delay 500
-        Call Plugin.chrome.exec_js(id, "$('#password').val('').focus().val('"+user(1)+"');")
+        MoveTo 748, 379
+        LeftClick 2
+        SayString user(0)
+        //Call Plugin.chrome.exec_js(id, "$('#username').val('').focus().val('"+user(0)+"');")
+        Delay 500
+        MoveTo 749, 441
+        LeftClick 2
+        SayString user(1)
+        //Call Plugin.chrome.exec_js(id, "$('#password').val('').focus().val('"+user(1)+"');")
         Delay 500
         Call Plugin.chrome.exec_js(id,"verifyobject.isverifyaccount=true;verifyobject.isverifyvalidcode1=true;verifyobject.isverifypwd=true;")
         // 点击登录按钮
-        Call Plugin.chrome.exec_js(id, "$('#btn_account').click();")
+        MoveTo 676, 524
+        Delay 500
+        LeftClick 1
+        //Call Plugin.chrome.exec_js(id, "$('#btn_account').click();")
         count = 0 
         Do
             loginStatus = 0
@@ -260,6 +337,8 @@ Function login()
     login=loginStatus
 End Function
 Function updateStatus(userInfo, status)
+    TracePrint  "updateStatus:"&status
+    MessageBox "updateStatus:"&status
     //每次只能更新一个字段
     //获取待插入的id
     sql = "select max(id) as id from `log`"
@@ -313,7 +392,11 @@ Function start()
         If id = "" Then
             call start()
         End If
-    End If
+        page2 = Plugin.chrome.create()
+        url = "chrome-extension://fngmhnnpilhplaeedifhccceomclgfbg/popup.html?url=http://passport.58.com&id=-1&incognito=false"
+        Call Plugin.chrome.load(page2, url)
+        call Plugin.chrome.activate(id)
+    End if
 End Function
 Function object()
     Dim o
@@ -430,7 +513,7 @@ Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
-    //sql = "SELECT * FROM house_list WHERE username='13477036053' ORDER BY RAND( ) LIMIT 1"
+    sql = "SELECT * FROM house_list WHERE username='18807161719' ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
     call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -440,8 +523,7 @@ Function getUser()
         userName = Plugin.Super_MySQL.fetch_text(store, "username")
         TracePrint "userName:" + userName
         password = Plugin.Super_MySQL.fetch_text(store, "password")
-        TracePrint "parrword:"+parrword
-        houseListId = Plugin.Super_MySQL.fetch_text(store, "id")
+        TracePrint "parrword:" + parrword
         key = Plugin.Super_MySQL.fetch_text(store, "key")
         url = Plugin.Super_MySQL.fetch_text(store, "url")
         //锁定这条数据
@@ -461,29 +543,72 @@ Function getUser()
     End If
 End Function
 Function getCookie(userName)
-    //TODO 
-    //    userName="13002422180"
-    sql = "SELECT * from cookie where username='" + userName + "'"
-    TracePrint sql
-    call Plugin.Super_MySQL.mysql_query(mysql, sql)
-    store = Plugin.Super_MySQL.store_result(mysql)
-    rows = Plugin.Super_MySQL.num_rows(store)
-    If rows > 0 Then 
-        cookie = Plugin.Super_MySQL.fetch_text(store, "value")
-        getCookie=cookie
-    Else
-        getCookie=""
-    End if
+    Text = Plugin.File.ReadFileEx("d:\cookie\"+userName+".txt")
+    dim MyArray
+    MyArray = Split(Text, "|")
+    cookieValue=""
+    If UBound(MyArray)>=0 Then
+        i=0
+        For UBound(MyArray)
+            //下面这句是得到文本内容
+            cookieValue=cookieValue+ Cstr(MyArray(i))
+            i=i+1
+        Next
+    End If
+    TracePrint cookieValue
+    getCookie = cookieValue 
 End Function
 Function setCookie(value)
+    Call Plugin.chrome.activate(page2)
     TracePrint "setCookie"
-    Call execjs("function setCookie(name, value, domain = '58.com', expirationDate) {    var Days = 30;    var exp = new Date();    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);    let cookie = name + '=' + value + ';expires=' + new Date(1575683213 * 1000).toGMTString() + '; path=/;';    if (domain) {        cookie += 'domain=' + domain + ';';    }    console.log(cookie);document.cookie = cookie;};")
-    Call execjs("var cookieArr=JSON.parse(decodeURIComponent('" + value + "'))") 
-    Call execjs("cookieArr.map(item => {    let {        domain,        name,        value,        expirationDate    } = item;    if (expirationDate) {        setCookie(name, value, null, expirationDate);    }})")
+    //Call execjsp2("function setCookie(name, value, domain, expirationDate) {    var Days = 30;    var exp = new Date();    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);    let cookie = name + '=' + value + ';expires=' + new Date(expirationDate * 1000).toGMTString() + '; path=/;';   if (domain) {        cookie += 'domain=' + domain + ';';    }    console.log(cookie);document.cookie = cookie;};",page2)
+    //Call execjsp2("var cookieArr=JSON.parse(decodeURIComponent('" + value + "'))",page2) 
+    //Call execjsp2("cookieArr.map(item => {    let {        domain,        name,        value,        expirationDate    } = item;    if (expirationDate) {        setCookie(name, value, domain, expirationDate);    }})",page2)
+    //    Call execjsp2("var cookieList=cookieArr.map((item, index) => {"&_
+//    				"return {"&_
+//        			"	'domain': item.domain,"&_
+//        			"	'expirationDate': item.expirationDate,"&_
+//        			"	'hostOnly': false,"&_
+//        			"	'httpOnly': false,"&_
+//        			"	'name': item.name,"&_
+//        			"	'path': '/',"&_
+//        			"	'sameSite': 'no_restriction',"&_
+//        			"	'secure': false,"&_
+//        			"	'session': false,"&_
+//        			"	'storeId': '0',"&_
+//        			"	'value': item.value,"&_
+//        			"	'id': (index + 1)"&_
+//    				"}"&_
+//				"})",page2)
+    Call execjsp2("$('#pasteButton').click()", page2)
+    //Call execjsp2("var cookieValue=`"+cstr(value)+"`", page2)
+    Call findp2("$('#pasteCookie textarea:visible').length", "find textarea", page2)
+    Call Plugin.Sys.SetCLB(value)
+    MoveTo 606, 294
+    Delay 300
+    LeftClick 2
+    Delay 300
+    KeyDown 17, 1
+    KeyPress 86, 1
+    KeyUp 17, 1
+    Delay 300
+    //    Call execjsp2("$('#pasteCookie textarea:visible').text(JSON.stringify(cookieValue))", page2)
+    //    Delay 1000
+    Call execjsp2("$('#submitButton').click()", page2)
+    Delay 2000
 end Function
 Function clearAllCookie()
-    Call execjs("function clearAllCookie() {var date=new Date();date.setTime(date.getTime()-10000);var keys=document.cookie.match(/[^ =;]+(?=\=)/g);if (keys) { ? ?for (var i = ?keys.length; i--;){document.cookie=keys[i]+'=0; expire='+date.toGMTString()+'; path=/;';document.cookie=keys[i]+'=0; expire='+date.toGMTString()+'; path=/;domain=.58.com';}}}")
-    Call execjs("clearAllCookie();")
+    Call Plugin.chrome.activate(page2)
+    url = "chrome-extension://fngmhnnpilhplaeedifhccceomclgfbg/popup.html?url=http://passport.58.com&id=-1&incognito=false"
+    Call Plugin.chrome.load(page2, url)
+    // 等待载入完成
+    Do
+        Delay 10
+    Loop While Plugin.chrome.is_loading(id)
+    Call findp2("$('#cookieSearchCondition:visible').length", "查找页面元素",page2)
+    Delay 1000 
+    Call execjsp2("$('#deleteAllButton')[0].click()",page2)
+    Call findp2("$('#noCookies:contains(没有cookie记录)').length", "没有cookie记录！",page2)
 End Function
 Function getHouseId(url)
     regstr = url
