@@ -43,7 +43,7 @@ Function main()
     Rem fLogin
     //MessageBox "login"
     status = login()
-    If status = 0 Then 
+    If status = 0 Then
         //Goto fLogin
         //正常登陆成功
         //Call publish()
@@ -69,7 +69,7 @@ Function refresh(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     Call find("document.querySelectorAll('div').length","查找div")
-    Call loadJquery() 
+    Call loadJquery()
     //        length = find("document.querySelectorAll('.nav-item').length", "查找刷新页面的tabs")
     length = find("$('a[href$=immediate]').length", "查找立即刷新a标签")
     rHouseStatus=-1
@@ -94,25 +94,25 @@ Function refresh(houseId)
     					"}"&_
 					"}")
         rHouseStatus=execjs("getStatus();")
-        If rHouseStatus = "" Then 
+        If rHouseStatus = "" Then
             rHouseStatus=-1
         End If
         rHouseStatus=cint(rHouseStatus)
-        If rHouseStatus = 1000 Then 
+        If rHouseStatus = 1000 Then
             Call find("$('button:contains(确定刷新)').length", "查找确认刷新按钮")
             Call execjs("$('button:contains(确定刷新)').click();")
             Delay 1000
             rResult = find("$('.result__title-text:contains(立即刷新成功)').length||($('.success-title').text()=='立即刷新成功'?1:0)", "查找刷新成功结果")
-            If rResult = "" Then 
+            If rResult = "" Then
                 rResult=0
             End If
             rResult = cint(rResult)
             //刷新成功 					3502
             //刷新失败 					3503
-            If rResult > 0 Then 
+            If rResult > 0 Then
                 //刷新成功
                 rHouseStatus=3502
-            Else 
+            Else
                 //刷新失败
                 rHouseStatus=3503
             End If
@@ -161,12 +161,12 @@ Function houseList()
         houseId = houseInfo(0)
         TracePrint "houseId:"+houseId
         length = find("$('.my-item-item-header-code:contains(" + houseId + ")').length", "查找是否存在指定房屋id的信息")
-        If length > 0 Then 
+        If length > 0 Then
             Call execjs("var houseItem=$('.my-item-item-header-code:contains(" + houseId + ")').parents('.my-item-item-tb:eq(0)')")
             execjs("var rDate=houseItem.find('p.my-item-item-content-left-date').length?new Date(houseItem.find('p.my-item-item-content-left-date').text().trim()).getTime():0")
             state = execjs("houseItem.attr('state')")
             //===============================================
-            //state 
+            //state
             //显示中:1
             //未实名认证:2
             //===============================================
@@ -181,7 +181,7 @@ Function houseList()
             ElseIf state = - 1  Then
                 houseStatus=3502
                 MessageBox "未处理异常4564"
-            Else 
+            Else
                 Call execjs("var statusContent=houseItem.find('.my-item-item-tb-content-states').text().trim().replace(/\n/g,'').replace(/\s/g,'').substr(0,20)")
                 call execjs("function getHouseStatusJs(){"&_
                 "if(statusContent.indexOf('显示中')>-1){"&_
@@ -196,7 +196,7 @@ Function houseList()
                 "}")
                 houseStatus=execjs("getHouseStatusJs();")
             End If
-            If houseStatus = 1 Then 
+            If houseStatus = 1 Then
                 Call execjs("function isToday(str) {"&_
     						"if (new Date(str).toDateString() === new Date().toDateString()) {"&_
         						"return true;"&_
@@ -205,21 +205,21 @@ Function houseList()
     						"}"&_
 						"}")
                 isToday = execjs("isToday(rDate);")
-                If isToday = "" Then 
+                If isToday = "" Then
                     isToday=False
                 End If
-                isToday = CBool(isToday) 
-                If isToday = - 1  Then  
+                isToday = CBool(isToday)
+                If isToday = - 1  Then
                     houseStatus = 3001
-                Else 
+                Else
                     houseStatus = refresh(houseId)
                 End If
             End If
-        Else 
+        Else
             houseStatus=3504
             TracePrint "未查找到此条记录"
         End If
-    Else 
+    Else
         houseStatus=-1
         TracePrint "个人中心房产列表"
     End If
@@ -270,10 +270,10 @@ Function execjs(str)
     execjs=result
 End Function
 Function login()
-    Call clearAllCookie() 
+    Call clearAllCookie()
     user = getUser()
     cookie = user(5)
-    If cookie <> "" Then 
+    If cookie <> "" Then
         Call setCookie(cookie)
     End If
     call Plugin.chrome.activate(id)
@@ -306,7 +306,7 @@ Function login()
         Delay 500
         LeftClick 1
         //Call Plugin.chrome.exec_js(id, "$('#btn_account').click();")
-        count = 0 
+        count = 0
         Do
             loginStatus = 0
             Delay 500
@@ -314,7 +314,7 @@ Function login()
             If result = "" Then
                 result=0
             End If
-            If CInt(result) = 1 Then  
+            If CInt(result) = 1 Then
                 loginStatus = 4000
                 TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
             End If
@@ -322,7 +322,7 @@ Function login()
             If result1 = "" Then
                 result1=0
             End If
-            If CInt(result1) = 1 Then  
+            If CInt(result1) = 1 Then
                 loginStatus =4004
                 TracePrint "您的账户存在安全风险"
             End If
@@ -346,13 +346,13 @@ Function updateStatus(userInfo, status)
     call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
-    If rows > 0 Then 
+    If rows > 0 Then
         maxId = Plugin.Super_MySQL.fetch_text(store, "id")
-        If maxId = "" Then 
+        If maxId = "" Then
             maxId="1"
         End If
         maxId = cstr(cint(maxId)+1)
-        //insert id 
+        //insert id
         sql = "INSERT into log (id) value(" + maxId + ")"
         TracePrint sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
@@ -376,7 +376,7 @@ Function updateStatus(userInfo, status)
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         call Plugin.Super_MySQL.num_rows(store)
-    Else 
+    Else
         TracePrint "未处理异常12"
         MessageBox "未处理异常12"
     End if
@@ -386,7 +386,7 @@ Function start()
     If Plugin.chrome.launch(chromeSrc, "--user-data-dir") = False Then
         TracePrint "启动失败"
         Call start()
-    Else 
+    Else
         // 获取启动浏览器后的默认标签
         id = Plugin.chrome.get_ids()
         If id = "" Then
@@ -536,7 +536,7 @@ Function getUser()
         houseId = getHouseId(url)
         houseInfo=Array(houseId)
         getUser = Array(userName, password,houseListId,key,url,cookie)
-    Else 
+    Else
         //getUser=Array("-1")
         TracePrint "获取house_list信息异常"
         Goto fGetUser
@@ -556,13 +556,13 @@ Function getCookie(userName)
         Next
     End If
     TracePrint cookieValue
-    getCookie = cookieValue 
+    getCookie = cookieValue
 End Function
 Function setCookie(value)
     Call Plugin.chrome.activate(page2)
     TracePrint "setCookie"
     //Call execjsp2("function setCookie(name, value, domain, expirationDate) {    var Days = 30;    var exp = new Date();    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);    let cookie = name + '=' + value + ';expires=' + new Date(expirationDate * 1000).toGMTString() + '; path=/;';   if (domain) {        cookie += 'domain=' + domain + ';';    }    console.log(cookie);document.cookie = cookie;};",page2)
-    //Call execjsp2("var cookieArr=JSON.parse(decodeURIComponent('" + value + "'))",page2) 
+    //Call execjsp2("var cookieArr=JSON.parse(decodeURIComponent('" + value + "'))",page2)
     //Call execjsp2("cookieArr.map(item => {    let {        domain,        name,        value,        expirationDate    } = item;    if (expirationDate) {        setCookie(name, value, domain, expirationDate);    }})",page2)
     //    Call execjsp2("var cookieList=cookieArr.map((item, index) => {"&_
 //    				"return {"&_
@@ -606,7 +606,7 @@ Function clearAllCookie()
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     Call findp2("$('#cookieSearchCondition:visible').length", "查找页面元素",page2)
-    Delay 1000 
+    Delay 1000
     Call execjsp2("$('#deleteAllButton')[0].click()",page2)
     Call findp2("$('#noCookies:contains(没有cookie记录)').length", "没有cookie记录！",page2)
 End Function
@@ -618,3 +618,24 @@ Function getHouseId(url)
     regr1 = Mid(regstr, regin1 + regl1, regin2 - regin1 - regl1)
     getHouseId=regr1
 End Function
+
+
+
+var editData = {
+  "zuJInUnit": "元/月",
+  "zuJIn": "18000",
+  "status": "经营中",
+  "title": "(转让) 饭店转让火锅店串串店转让饭店转让",
+  "zrf": "22",
+  "zrfUnit": "万元"
+}
+
+$('[name=title] input').val(editData['title']);
+
+$('[name=params_205] label:contains(' + editData[status] + ')').parent().click()
+
+$('[name=params_205] label:contains(' + editData['status'] + ')').parent().click()
+
+
+editData.surplusMonth = $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1];
+editData.surplusMonthUnit = $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[2];
