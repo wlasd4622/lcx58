@@ -10,6 +10,8 @@
 //刷新成功 					3502
 //刷新失败 					3503
 //订单不存在 				3504
+//编辑帖子成功 				3505
+//编辑帖子失败 				3506
 //--------------------------------------
 //账户正常					2000
 //密码错 					4000
@@ -118,7 +120,7 @@ Function refresh(houseId)
             End If
         ElseIf rHouseStatus = 3070 Then
             //重新编辑
-            editHouseInfo(houseId)
+            rHouseStatus=editHouseInfo(houseId)
         End If
     End If
     refresh=rHouseStatus
@@ -132,18 +134,48 @@ Function editHouseInfo(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找登录窗口")
-    //获取原详情
-    //标题
-    detailTitle=execjs("$('.house-title h1').text().trim();")
-    //状态
-    detailStatus=execjs("$($('.house_basic_title_content').html().replace(/[\n\t]/g,'').replace(/\&nbsp\;/g,'')).find('span:contains(状态)').next().text().trim()")
-    //租金
-    detaulMoneyNum = execjs("$('span.house_basic_title_money_num').text()")
-    //转让费
-    detailMoneyZrf = execjs("$('span.house_basic_title_money_zrf').text()")
-    MessageBox detailTitle&detailStatus&detaulMoneyNum&detailMoneyZrf
-    //重新编辑
-    url="http://post.58.com/fang/update/38077469810309?PGTID=0d000000-0000-09ac-94b4-e42db8fdb8fd&ClickID=1"
+    Call execjs("var editData={};"&_
+    			"editData.surplusMonth = $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1];"&_
+				"editData.surplusMonthUnit = $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[2];"&_
+				"editData.zuJInUnit=$('span.house_basic_title_money_num').next().text();"&_
+				"editData.zuJIn=$('span.house_basic_title_money_num').text();"&_
+				"editData.status=$($('.house_basic_title_content').html().replace(/[\n\t]/g,'').replace(/\&nbsp\;/g,'')).find('span:contains(状态)').next().text().trim();"&_
+				"editData.title=$('.house-title h1').text().trim();"&_
+				"editData.zrf=$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[1];"&_
+				"editData.zrfUnit=$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[2];")
+    editData = execjs("JSON.stringify(editData)")
+    TracePrint editData
+    //回到列表页面点击编辑进入详情编辑页面
+    url = "https://fangmypost.58.com/fang/infoall/notabs"
+    Call Plugin.chrome.load(id, url)
+    // 等待载入完成
+    Do
+        Delay 10
+    Loop While Plugin.chrome.is_loading(id)
+    Call find("$('body .rightside-publish-content .my-item-item').length", "个人中心房产列表")
+    call execjs("$('#update" + houseId + "').click();")
+    url = execjs("$('#update" + houseId + "').attr('href');")
+    Rem fEditDetailPage
+    Call Plugin.chrome.load(id, url)
+    // 等待载入完成
+    Do
+        Delay 10
+    Loop While Plugin.chrome.is_loading(id)
+    length = find("$('#postForm div').length", "获取form下面的div个数，以证明页面渲染完成")
+    If length > 0 Then
+        TracePrint "var editData="&editData&";"
+        Call execjs("var editData=" & editData & ";")
+        Call execjs("$('[name=title] input').val(editData['title']);"&_
+					"$('[name=params_205] label:contains(' + editData['status'] + ')').parent().click();"&_
+					"$('[name=jiaGe05] input').val(editData['zuJIn']);"&_
+					"$('[name=jiageDanwei] .optiondef').show();"&_
+					"$('[name=jiageDanwei] .optiondef li:contains(' + editData['zuJInUnit'] + ')').click();"&_
+					"$('[name=params_215] input').val(editData['surplusMonth']);"&_
+					"$('[name=params_214] input').val(editData['zrf']);")
+        MessageBox "????"
+    Else
+        Goto fEditDetailPage
+    End If
     //提交 保存状态
 End Function
 Function houseList()
@@ -338,7 +370,6 @@ Function login()
 End Function
 Function updateStatus(userInfo, status)
     TracePrint  "updateStatus:"&status
-    MessageBox "updateStatus:"&status
     //每次只能更新一个字段
     //获取待插入的id
     sql = "select max(id) as id from `log`"
@@ -513,7 +544,7 @@ Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
-    sql = "SELECT * FROM house_list WHERE username='18807161719' ORDER BY RAND( ) LIMIT 1"
+    sql = "SELECT * FROM house_list WHERE username='13452761797' ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
     call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -524,6 +555,9 @@ Function getUser()
         TracePrint "userName:" + userName
         password = Plugin.Super_MySQL.fetch_text(store, "password")
         TracePrint "parrword:" + parrword
+        If password = "" Then
+            MessageBox "密码为空！！！"
+        End If
         key = Plugin.Super_MySQL.fetch_text(store, "key")
         url = Plugin.Super_MySQL.fetch_text(store, "url")
         //锁定这条数据
@@ -618,24 +652,3 @@ Function getHouseId(url)
     regr1 = Mid(regstr, regin1 + regl1, regin2 - regin1 - regl1)
     getHouseId=regr1
 End Function
-
-
-
-var editData = {
-  "zuJInUnit": "元/月",
-  "zuJIn": "18000",
-  "status": "经营中",
-  "title": "(转让) 饭店转让火锅店串串店转让饭店转让",
-  "zrf": "22",
-  "zrfUnit": "万元"
-}
-
-$('[name=title] input').val(editData['title']);
-
-$('[name=params_205] label:contains(' + editData[status] + ')').parent().click()
-
-$('[name=params_205] label:contains(' + editData['status'] + ')').parent().click()
-
-
-editData.surplusMonth = $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1];
-editData.surplusMonthUnit = $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[2];
