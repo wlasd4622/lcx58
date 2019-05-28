@@ -37,7 +37,6 @@ Function config()
     If (chromeSrc = "") Then
         status=-1
         MessageBox "请设置chrome目录"
-        EndScript
     End If
     config=status
 End Function
@@ -45,6 +44,7 @@ Function main()
     Call mySqlConnect()
     Rem fLogin
     Call start()
+    //MessageBox "login"
     status = login()
     If status = 0 Then 
         status= houseList()
@@ -69,14 +69,20 @@ Function refresh(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     Call find("document.querySelectorAll('div').length","查找div")
-    Call loadJquery()
+    Call loadJquery() 
+    //        length = find("document.querySelectorAll('.nav-item').length", "查找刷新页面的tabs")
     length = find("$('a[href$=immediate]').length", "查找立即刷新a标签")
-    rHouseStatus=-456
+    rHouseStatus=-1
     If length > 0 Then
         execjs ("$('a[href$=immediate]')[0].click()")
-        Delay 500
+        Delay 300
+        //剩余刷新次数
+        //rCount=execjs("$('p.warning-message.important').text().trim().match(/\d{1,}/)[0]")
+        //        MessageBox "剩余" & rCount & "次"
+        //Call find("$('form.form-container.immediate').length;","查找immediate")
+        Delay 1000
         Call execjs("var wContent=$('form.form-container.immediate').text().trim().replace(/[\n\s]/g,'')||$('form.yyset').text().trim().replace(/[\s\n]/g,'');")
-        Call execjs("function getStatus() {"&_
+        call execjs("function getStatus() {"&_
     					"if (wContent.indexOf('近7天免费刷新已到上限') > -1) {"&_
         					"return 3070"&_
     					"} else if(wContent.indexOf('30天不享有免费刷新') > -1||wContent.indexOf('免费刷新次数已用完，您可尝试付费刷新') > -1) {"&_
@@ -84,12 +90,12 @@ Function refresh(houseId)
     					"} else if (wContent.indexOf('本次刷新免费') > -1||/账号剩余刷新资源[^0]/.test(wContent)) {"&_
         					"return 1000"&_
     					"} else {"&_
-        					"return -76593"&_
+        					"return - 1"&_
     					"}"&_
 					"}")
         rHouseStatus=execjs("getStatus();")
         If rHouseStatus = "" Then 
-            rHouseStatus=-7642
+            rHouseStatus=-1
         End If
         rHouseStatus=cint(rHouseStatus)
         If rHouseStatus = 1000 Then 
@@ -201,7 +207,7 @@ End Function
 Function houseList()
     Rem fHouseList
     //订单列表
-    houseStatus=-44
+    houseStatus=3502
     url = "https://fangmypost.58.com/fang/infoall/notabs"
     Call Plugin.chrome.load(id, url)
     // 等待载入完成
@@ -273,8 +279,7 @@ Function houseList()
         End If
     Else 
         houseStatus=-1
-        TracePrint "个人中心房产列表获取失败"
-        Goto fHouseList
+        TracePrint "个人中心房产列表"
     End If
     houseList=houseStatus
 End Function
@@ -292,7 +297,7 @@ Function find(str,c)
         length = CInt(length)
         count = count + 1
         TracePrint count
-    Loop While length = 0 and count < 100
+    Loop While length = 0 and count < 200
     find=length
 End Function
 Function findp2(str,c,pageId)
@@ -314,14 +319,12 @@ Function findp2(str,c,pageId)
 End Function
 Function execjsp2(str,pageid)
     TracePrint "execjs: "& str
-    result = Plugin.chrome.exec_js(pageid, str)
-    TracePrint "result:"&result
+    result= Plugin.chrome.exec_js(pageid,str)
     execjsp2=result
 End Function
 Function execjs(str)
     TracePrint "execjs: "& str
-    result = Plugin.chrome.exec_js(id, str)
-    TracePrint "result:"&result
+    result= Plugin.chrome.exec_js(id,str)
     execjs=result
 End Function
 Function login()
@@ -331,8 +334,7 @@ Function login()
     If cookie <> "" Then 
         Call setCookie(cookie)
     End If
-    Call Plugin.chrome.activate(id)
-    Rem fLoadLogin
+    call Plugin.chrome.activate(id)
     Call Plugin.chrome.load(id, "https://passport.58.com/logout")
     // 等待载入完成
     Do
@@ -344,65 +346,68 @@ Function login()
         //判断登录窗口类型
         Call Plugin.chrome.exec_js(id,"if($('.change_qrcode[type_attr=pclogin]').length){$('.pop_head .qrcode').click()}")
         Delay 500
+        Call Plugin.chrome.activate(id)
+        //        Delay 500
+        //        MoveTo 748, 379
+        //        LeftClick 2
+        //        SayString user(0)
         Call Plugin.chrome.exec_js(id, "$('#username').val('').focus().val('"+user(0)+"');")
+        //        Delay 500
+        //        MoveTo 749, 441
+        //        LeftClick 2
+        //        SayString user(1)
         Call Plugin.chrome.exec_js(id, "$('#password').val('').focus().val('"+user(1)+"');")
         Delay 500
         Call Plugin.chrome.exec_js(id,"verifyobject.isverifyaccount=true;verifyobject.isverifyvalidcode1=true;verifyobject.isverifypwd=true;")
+        // 点击登录按钮
+//        MoveTo 676, 524
+//        Delay 500
+//        LeftClick 1
         Call Plugin.chrome.exec_js(id, "$('#btn_account').click();")
+        
         count = 0 
-        Do 
+        Do
             loginStatus = 0
             Delay 500
-            result = execjs("$('.password_msg.msg:visible').text()")
-            If result <>"" Then
-                TracePrint result
-                If result="该用户名与密码不符" Then  
-                    loginStatus = 4000
-                    TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
-                    Goto fBreakDo
-                Else 
-                    MessageBox "未处理异常897"
-                End If
+            result = execjs("$('.password_msg.msg:visible').length||0")
+            If result = "" Then
+                result=0
+            End If
+            If CInt(result) = 1 Then  
+                loginStatus = 4000
+                TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
             End If
             result1 = execjs("$('.write.write58').length||0")
             If result1 = "" Then
                 result1=0
             End If
-            TracePrint result1
             If CInt(result1) = 1 Then  
                 loginStatus =4004
                 TracePrint "您的账户存在安全风险"
-                Goto fBreakDo
             End If
             url = Plugin.chrome.get_url(id)
             TracePrint url
             count=count+1
-        Loop While InStr(url, "my.58.com/index") = 0 and count < 20
-        url = Plugin.chrome.get_url(id)
-        If InStr(url, "my.58.com/index") = 0 Then 
-            //登录页面未处理异常 重新开始
-            Goto fLoadLogin
-        End If
-        Rem fBreakDo
+        Loop While InStr(url, "my.58.com/index") = 0 and count < 10
     Else
-        Goto fLoadLogin
+        loginStatus=4004
+        MessageBox "未处理异常"
     End If
     login=loginStatus
 End Function
 Function updateStatus(userInfo, status)
-    Rem fUpdateStatus
     TracePrint  "updateStatus:"&status
     //每次只能更新一个字段
     //获取待插入的id
     sql = "select max(id) as id from `log`"
     TracePrint sql
-    Call Plugin.Super_MySQL.mysql_query(mysql, sql)
+    call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
-    If rows > 0 Then
+    If rows > 0 Then 
         maxId = Plugin.Super_MySQL.fetch_text(store, "id")
         If maxId = "" Then 
-            maxId=1
+            maxId="1"
         End If
         maxId = cstr(cint(maxId)+1)
         //insert id 
@@ -410,7 +415,7 @@ Function updateStatus(userInfo, status)
         TracePrint sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
-        Call Plugin.Super_MySQL.num_rows(store)
+        call Plugin.Super_MySQL.num_rows(store)
         //update house_key
         sql = "UPDATE log SET `house_key`='" + userInfo(3) + "' WHERE id=" + maxId
         TracePrint sql
@@ -431,11 +436,11 @@ Function updateStatus(userInfo, status)
         call Plugin.Super_MySQL.num_rows(store)
     Else 
         TracePrint "更新数据失败"
-        Goto fUpdateStatus
     End if
 End Function
 Function start()
     Call Plugin.chrome.quit()
+    Delay 1000
     // 启动浏览器
     If Plugin.chrome.launch(chromeSrc, "--user-data-dir") = False Then
         TracePrint "启动失败"
@@ -447,6 +452,9 @@ Function start()
             call start()
         End If
         page2 = Plugin.chrome.create()
+        url = "chrome-extension://fngmhnnpilhplaeedifhccceomclgfbg/popup.html?url=http://passport.58.com&id=-1&incognito=false"
+        Call Plugin.chrome.load(page2, url)
+        call Plugin.chrome.activate(id)
     End if
 End Function
 Function object()
@@ -543,12 +551,18 @@ Function checkChrome()
     dim MyArray
     MyArray = Split(HwndEx, "|")
     If UBound(MyArray) >= 0 Then
-        i=0
-        For UBound(MyArray)
-            Call Plugin.Window.CloseEx(Clng(MyArray(i)))
-            i=i+1
-        Next
-        Delay 300
+        //        result = MsgBox("是否关闭chrome浏览器？", 1)
+        result=1
+        If result = 1 Then
+            i=0
+            For UBound(MyArray)
+                Call Plugin.Window.CloseEx(Clng(MyArray(i)))
+                i=i+1
+            Next
+            Delay 300
+        Else
+            EndScript
+        End If
     End If
 End Function
 Function mySqlConnect()
@@ -560,7 +574,7 @@ Function getUser()
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
     //sql = "SELECT * FROM house_list WHERE `username`='13272718539' ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
-    Call Plugin.Super_MySQL.mysql_query(mysql, sql)
+    call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
     If rows > 0 Then
@@ -572,13 +586,14 @@ Function getUser()
         TracePrint "parrword:" + parrword
         key = Plugin.Super_MySQL.fetch_text(store, "key")
         url = Plugin.Super_MySQL.fetch_text(store, "url")
+        If password = "" Then 
+            MessageBox "password"+password
+        End If
         //锁定这条数据
         sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
         TracePrint sql
         Call Plugin.Super_MySQL.mysql_query(mysql, sql)
-        If password = "" Then 
-            Goto fGetUser
-        End If
+        //MessageBox userName+"&"+password+"&"+houseListId+"&"+key+"&"+url
         cookie = getCookie(userName)
         TracePrint "cookie:" + cookie
         houseId = getHouseId(url)
@@ -609,7 +624,27 @@ End Function
 Function setCookie(value)
     Call Plugin.chrome.activate(page2)
     TracePrint "setCookie"
+    //Call execjsp2("function setCookie(name, value, domain, expirationDate) {    var Days = 30;    var exp = new Date();    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);    let cookie = name + '=' + value + ';expires=' + new Date(expirationDate * 1000).toGMTString() + '; path=/;';   if (domain) {        cookie += 'domain=' + domain + ';';    }    console.log(cookie);document.cookie = cookie;};",page2)
+    //Call execjsp2("var cookieArr=JSON.parse(decodeURIComponent('" + value + "'))",page2) 
+    //Call execjsp2("cookieArr.map(item => {    let {        domain,        name,        value,        expirationDate    } = item;    if (expirationDate) {        setCookie(name, value, domain, expirationDate);    }})",page2)
+    //    Call execjsp2("var cookieList=cookieArr.map((item, index) => {"&_
+//    				"return {"&_
+//        			"	'domain': item.domain,"&_
+//        			"	'expirationDate': item.expirationDate,"&_
+//        			"	'hostOnly': false,"&_
+//        			"	'httpOnly': false,"&_
+//        			"	'name': item.name,"&_
+//        			"	'path': '/',"&_
+//        			"	'sameSite': 'no_restriction',"&_
+//        			"	'secure': false,"&_
+//        			"	'session': false,"&_
+//        			"	'storeId': '0',"&_
+//        			"	'value': item.value,"&_
+//        			"	'id': (index + 1)"&_
+//    				"}"&_
+//				"})",page2)
     Call execjsp2("$('#pasteButton').click()", page2)
+    //Call execjsp2("var cookieValue=`"+cstr(value)+"`", page2)
     Call findp2("$('#pasteCookie textarea:visible').length", "find textarea", page2)
     Call Plugin.Sys.SetCLB(value)
     MoveTo 606, 294
@@ -620,6 +655,8 @@ Function setCookie(value)
     KeyPress 86, 1
     KeyUp 17, 1
     Delay 300
+    //    Call execjsp2("$('#pasteCookie textarea:visible').text(JSON.stringify(cookieValue))", page2)
+    //    Delay 1000
     Call execjsp2("$('#submitButton').click()", page2)
     Delay 2000
 end Function
