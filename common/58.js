@@ -1,3 +1,4 @@
+// https://wlasd4622.github.io/lcx58/common/58.js
 function getHouseDetail() {
   //标题
   var title = $('.house-title h1').text().trim().substr(0, 30);
@@ -14,8 +15,8 @@ function getHouseDetail() {
   //出租单位
   var numChuZuUnit = $('span.house_basic_title_money_unit_chuzu').text();
   //平均每平米多少元
-  var avrageMoney = $('span.house_basic_title_money_num_chushou').text().split('元')[0]||0
-  var avrageMoneyUnit = avrageMoney?('元' + $('span.house_basic_title_money_num_chushou').text().split('元')[1]):''
+  var avrageMoney = $('span.house_basic_title_money_num_chushou').text().split('元')[0] || 0
+  var avrageMoneyUnit = avrageMoney ? ('元' + $('span.house_basic_title_money_num_chushou').text().split('元')[1]) : ''
   //转让费
   var transferFee = parseFloat($('span.house_basic_title_money_zrf').text()) || 0
   //转让费单位
@@ -120,6 +121,11 @@ function getHouseDetail() {
   }
   window.houseDetailValue = encodeURIComponent(JSON.stringify(houseDetailData));
   return window.houseDetailValue || ''
+}
+
+function addHouseInfoData(code) {
+  window.houseDetaulData = JSON.parse(decodeURIComponent(`${code}`))
+  console.log(houseDetaulData);
 }
 // getHouseDetail();
 // houseDetailData;
