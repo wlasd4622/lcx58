@@ -210,6 +210,16 @@ function addHouseInfoData(code) {
   console.log(houseDetailData);
 }
 
+function getAddHosueInfoStatus() {
+  var status = -8930
+  var paytips = $('.paytips').text().replace(/[\s\t\n]/g, '');
+  if (paytips.indexOf('发帖权限已用尽') > -1) {
+    status = 3513
+  } else if (paytips.match(/本月还可免费发帖(\d+)条/) && paytips.match(/本月还可免费发帖(\d+)条/)[1] && parseInt(paytips.match(/本月还可免费发帖(\d+)条/)[1])) {
+    status = 3514
+  }
+  return status
+}
 // var houseDetailData = {
 //   "title": "(转让) 双碑酒楼餐饮 火锅店转让串串店转让江湖菜商铺门面转",
 //   "picList": ["https://pic3.58cdn.com.cn/p1/big/n_v20de9988050c442d7bbf34bfd7371a0ac.jpg?w=640&h=480&crop=1", "https://pic1.58cdn.com.cn/p1/big/n_v237ff3eb7ca1c4b90aa1811b4ad5b6f2c.jpg?w=640&h=480&crop=1", "https://pic4.58cdn.com.cn/p1/big/n_v2a9cb10323594470ca1961d4bea5f5a4d.jpg?w=640&h=480&crop=1"],
