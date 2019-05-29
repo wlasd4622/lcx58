@@ -70,6 +70,15 @@ create table `cookie`(
    `value` varchar(9999) DEFAULT NULL COMMENT 'cookie',
    PRIMARY KEY ( id )
 );
+
+-- code
+drop table if exists `code`;
+create table `code`(
+   `id` INT NOT NULL AUTO_INCREMENT, 
+   `key` VARCHAR(100) DEFAULT NULL COMMENT 'key',
+   `code` varchar(100) DEFAULT NULL COMMENT 'code',
+   PRIMARY KEY ( id )
+);
 ---------------------------------------
 SELECT * from users WHERE id=1
 SELECT * FROM users WHERE type=1 and status=0 LIMIT 1
