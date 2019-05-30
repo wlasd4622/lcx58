@@ -132,7 +132,7 @@ function addHouseInfoData(code) {
   if (houseDetailData.title.indexOf("转让") > -1) {
     $('[name=fenlei] [data-value=511571]').click();
     //转让费
-    $('[name=params_214] input').val(houseDetailData.transferFee||1)
+    $('[name=params_214] input').val(houseDetailData.transferFee || 1)
     //剩余租期
     $('[name=params_215] input').val(houseDetailData.endMonth)
   } else if (houseDetailData.title.indexOf("出租") > -1) {
@@ -189,7 +189,7 @@ function addHouseInfoData(code) {
     }, 1000)
   }, 1000)
   //客流人群
-  $('[name=params_210] label:contains(' + (houseDetailData.passengerFlow==='暂无数据'?'其他':houseDetailData.passengerFlow) + ')').click();
+  $('[name=params_210] label:contains(' + (houseDetailData.passengerFlow === '暂无数据' ? '其他' : houseDetailData.passengerFlow) + ')').click();
   //租金
   $('[name=jiaGe05] input').val(houseDetailData.moneyNum);
   //租金单位
@@ -209,6 +209,8 @@ function addHouseInfoData(code) {
   //
   //联系人
   $('[name=contactName] input').val(houseDetailData.name)
+  //是否是个人
+  $('[name=params_202] .optiondef li:contains(' + (houseDetailData.isSingle ? '个人' : '经纪人') + ')').click();
   //联系电话
   $('[name=phone] input').val(houseDetailData.phone)
 
