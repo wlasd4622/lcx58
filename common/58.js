@@ -56,7 +56,9 @@ function getHouseDetail() {
     //起租期
     var span = baseContent.find('span:contains(起租期)').next().text().trim().replace(/\s/g, '');
     var minMonth = span && span.match(/\d+/)[0]
-        //剩余租期
+        //免租期
+    var rentFreePeriod = span && span.match(/\d+/g)[1] || 0;
+    //剩余租期
     var span = parseInt(baseContent.find('span:contains(剩余租期)').next().text().trim().replace(/\s/g, '')) || 0;
     var endMonth = span;
     //客流
@@ -108,6 +110,7 @@ function getHouseDetail() {
         payType2, //付款方式2
         industry, //经营行业
         minMonth, //起租期
+        rentFreePeriod, //免租期
         endMonth, //剩余租期
         passengerFlow, //客流
         address1, //位置1
@@ -202,7 +205,7 @@ function addHouseInfoData(code, userName) {
     //起租期
     $('[name=params_116] input').val(houseDetailData.minMonth || 1);
     //免租期
-    $('[name=params_117]:visible input').val('1')
+    $('[name=params_117]:visible input').val(houseDetailData.rentFreePeriod || 0)
         //标题
     $('[name=title] input').val(houseDetailData.title.replace(/\(.*?\)/, '').trim().substr(0, 30));
     //描述
