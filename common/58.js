@@ -181,7 +181,13 @@ function addHouseInfoData(code) {
   //商铺位置
   $('[name=localArea01] .optiondef li:contains(' + houseDetailData.address1.replace('区', '') + ')').click();
   $('[name=localDiduan01] .optiondef li:contains(' + houseDetailData.address2 + ')').click();
-  $('[name=xiangXiDiZhi] input').val(houseDetailData.address3)
+  $('[name=xiangXiDiZhi] input').val(houseDetailData.address3).keyup();
+  setTimeout(() => {
+    $('[name=xiangXiDiZhi] .tooltip li:eq(0)').click()
+    setTimeout(() => {
+      $('[name=xiangXiDiZhi] .tooltip li:eq(0)').click()
+    }, 1000)
+  }, 1000)
   //客流人群
   $('[name=params_210] label:contains(' + houseDetailData.passengerFlow + ')').click();
   //租金
@@ -196,7 +202,7 @@ function addHouseInfoData(code) {
   //免租期
   //
   //标题
-  $('[name=title] input').val(houseDetailData.title.replace(/\(.*?\)/,'').trim().substr(0, 30));
+  $('[name=title] input').val(houseDetailData.title.replace(/\(.*?\)/, '').trim().substr(0, 30));
   //描述
   $('#edui1 iframe').contents().find('body').html(houseDetailData.describe);
   //上传图片
