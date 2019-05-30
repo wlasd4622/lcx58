@@ -132,7 +132,7 @@ function addHouseInfoData(code) {
   if (houseDetailData.title.indexOf("转让") > -1) {
     $('[name=fenlei] [data-value=511571]').click();
     //转让费
-    $('[name=params_214] input').val(houseDetailData.transferFee)
+    $('[name=params_214] input').val(houseDetailData.transferFee||1)
     //剩余租期
     $('[name=params_215] input').val(houseDetailData.endMonth)
   } else if (houseDetailData.title.indexOf("出租") > -1) {
