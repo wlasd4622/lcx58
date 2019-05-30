@@ -48,8 +48,8 @@ function getHouseDetail() {
     var status = baseContent.find('span:contains(状态)').next().text().trim().replace(/\s/g, '');
     //付款方式
     var span = baseContent.find('span:contains(付款方式)').next().text().trim().replace(/\s/g, '');
-    var payType1 = span && span.match(/(\d+)/g)[0];
-    var payType2 = span && span.match(/(\d+)/g)[1];
+    var payType1 = span && span.match(/付(\d+)/)[1]; //付
+    var payType2 = span && span.match(/押(\d+)/)[1]; //押
     //经营行业
     var span = baseContent.find('span:contains(经营行业)').next().text().trim().replace(/\s/g, '');
     var industry = span;
@@ -195,13 +195,15 @@ function addHouseInfoData(code, userName) {
     //租金单位
     $('[name=jiageDanwei] .optiondef li:contains(' + houseDetailData.moneyNumUnit + ')').click();
     //支付方式
-    $('[name=params_119] input').val(houseDetailData.payType2);
-    $('[name=params_118] input').val(houseDetailData.payType1);
+    // var payType1 = span && span.match(/付(\d+)/)[1];//付
+    // var payType2 = span && span.match(/押(\d+)/)[1];//押
+    $('[name=params_119] input').val(houseDetailData.payType1); //付
+    $('[name=params_118] input').val(houseDetailData.payType2); //押
     //起租期
     $('[name=params_116] input').val(houseDetailData.minMonth || 1);
     //免租期
-    //
-    //标题
+    $('[name=params_117]:visible input').val('1')
+        //标题
     $('[name=title] input').val(houseDetailData.title.replace(/\(.*?\)/, '').trim().substr(0, 30));
     //描述
     $('#edui1 iframe').contents().find('body').html(houseDetailData.describe);
