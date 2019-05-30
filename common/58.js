@@ -189,14 +189,14 @@ function addHouseInfoData(code) {
   //租金单位
   $('[name=jiageDanwei] .optiondef li:contains(' + houseDetailData.moneyNumUnit + ')').click();
   //支付方式
-  $('[name=params_119] input').val(houseDetailData.payType1);
-  $('[name=params_118] input').val(houseDetailData.payType2);
+  $('[name=params_119] input').val(houseDetailData.payType2);
+  $('[name=params_118] input').val(houseDetailData.payType1);
   //起租期
   $('[name=params_116] input').val(houseDetailData.minMonth || 1);
   //免租期
   //
   //标题
-  $('[name=title] input').val(houseDetailData.title.substr(0, 30));
+  $('[name=title] input').val(houseDetailData.title.replace(/\(.*?\)/,'').trim().substr(0, 30));
   //描述
   $('#edui1 iframe').contents().find('body').html(houseDetailData.describe);
   //上传图片
