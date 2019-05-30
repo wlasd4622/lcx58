@@ -189,7 +189,7 @@ function addHouseInfoData(code) {
     }, 1000)
   }, 1000)
   //客流人群
-  $('[name=params_210] label:contains(' + houseDetailData.passengerFlow + ')').click();
+  $('[name=params_210] label:contains(' + (houseDetailData.passengerFlow==='暂无数据'?'其他':houseDetailData.passengerFlow) + ')').click();
   //租金
   $('[name=jiaGe05] input').val(houseDetailData.moneyNum);
   //租金单位
