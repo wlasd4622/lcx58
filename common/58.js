@@ -156,11 +156,11 @@ function addHouseInfoData(code) {
   $('[name=mianJi] input').val(houseDetailData.area);
   //楼层
   $('[name=zongLouCeng] input').val(houseDetailData.totalFloot)
-  if (curFloor.includes('-')) {
+  if (houseDetailData.curFloor.includes('-')) {
     //多层
     $('[name=params_109] .optiondef li:contains(多层)').click()
-    $('[name=suoZaiLouCeng] input').val(parseInt(curFloor.split('-')[0]))
-    $('[name=params_219] input').val(parseInt(curFloor.split('-')[1]))
+    $('[name=suoZaiLouCeng] input').val(parseInt(houseDetailData.curFloor.split('-')[0]))
+    $('[name=params_219] input').val(parseInt(houseDetailData.curFloor.split('-')[1]))
   } else {
     //单层
     $('[name=params_109] .optiondef li:contains(单层)').click()
