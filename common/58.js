@@ -124,7 +124,7 @@ function getHouseDetail() {
   return window.houseDetailValue || ''
 }
 
-function addHouseInfoData(code) {
+function addHouseInfoData(code,userName) {
   window.houseDetailData = JSON.parse(decodeURIComponent(`${code}`))
   //分类  商铺租售/生意转让
   //
@@ -212,7 +212,7 @@ function addHouseInfoData(code) {
   //是否是个人
   $('[name=params_202] .optiondef li:contains(' + (houseDetailData.isSingle ? '个人' : '经纪人') + ')').click();
   //联系电话
-  $('[name=phone] input').val(houseDetailData.phone)
+  $('[name=phone] input').val(parseInt(houseDetailData.phone)?parseInt(houseDetailData.phone):userName)
 
 
   console.log(houseDetailData);
