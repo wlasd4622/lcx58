@@ -1,7 +1,7 @@
 // https://wlasd4622.github.io/lcx58/common/58.js
 function getHouseDetail() {
     //标题
-    var title = $('.house-title h1').text().trim().substr(0, 30);
+    var title = $('.house-title h1').text().trim();
     //图片列表
     var picList = $('#leftImg li').toArray().map((item) => {
             return $(item).data('value').split('?')[0]
@@ -81,7 +81,7 @@ function getHouseDetail() {
         return $(item).text().trim()
     });
     //描述
-    var describe = $('#generalSound .general-item-wrap').html().trim();
+    var describe = $('#generalSound .general-item-wrap').html().trim().replace(/\n/g, '').replace(`<p name="data_2">联系我时，请说是在58同城上看到的，谢谢！</p>`, '');
     //houseDetailData
     window.houseDetailData = {
         title, //标题
