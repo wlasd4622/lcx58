@@ -128,6 +128,20 @@ function getHouseDetail() {
   return window.houseDetailValue || ''
 }
 
+function getTitle() {
+  let title = houseDetailData.title.replace(/\(.*?\)/, '')
+  if (title.length < 10) {
+    title = houseDetailData.address3 + ' ' + title
+  }
+  if (title.length < 10) {
+    title = houseDetailData.address2 + ' ' + title
+  }
+  if (title.length < 10) {
+    title = houseDetailData.address1 + ' ' + title
+  }
+  return title.trim().substr(0, 30);
+}
+
 function addHouseInfoData(code, userName) {
   window.houseDetailData = JSON.parse(decodeURIComponent(`${code}`))
   //分类  商铺租售/生意转让
@@ -214,7 +228,7 @@ function addHouseInfoData(code, userName) {
   //免租期
   $('[name=params_117]:visible input').val(houseDetailData.rentFreePeriod || 0)
   //标题
-  $('[name=title] input').val(houseDetailData.title.replace(/\(.*?\)/, '').trim().substr(0, 30));
+  $('[name=title] input').val(getTitle());
   //描述
   $('#edui1 iframe').contents().find('body').html(houseDetailData.describe);
   //上传图片
