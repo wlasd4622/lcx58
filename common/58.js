@@ -187,23 +187,15 @@ function addHouseInfoData(code, userName) {
   $('[name=localDiduan01] .optiondef li:contains(' + houseDetailData.address2 + ')').click();
   $('[name=xiangXiDiZhi] input').val(houseDetailData.address3).keyup();
   setTimeout(() => {
-    let li = $(`[name=xiangXiDiZhi] .tooltip li[lat='${houseDetailData.xiaoqu.baidulat}'][lng='${houseDetailData.xiaoqu.baidulon}']`)
-    if (!li.length) {
-      li = $(`[name=xiangXiDiZhi] .tooltip li[lat='${houseDetailData.xiaoqu.baidulat}']`)
-    }
-    if (!li.length) {
-      li = $('[name=xiangXiDiZhi] .tooltip li:eq(0)');
-    }
-    li.click()
-    setTimeout(() => {
-      let li = $(`[name=xiangXiDiZhi] .tooltip li[lat='${houseDetailData.xiaoqu.baidulat}'][lng='${houseDetailData.xiaoqu.baidulon}']`)
-      if (!li.length) {
-        li = $(`[name=xiangXiDiZhi] .tooltip li[lat='${houseDetailData.xiaoqu.baidulat}']`)
-      }
-      if (!li.length) {
-        li = $('[name=xiangXiDiZhi] .tooltip li:eq(0)');
-      }
+    let li = $(`[name=xiangXiDiZhi] .tooltip li[key='${houseDetailData.address3}']:eq(0)`)
+    if (li.length) {
       li.click()
+    }
+    setTimeout(() => {
+      let li = $(`[name=xiangXiDiZhi] .tooltip li[key='${houseDetailData.address3}']:eq(0)`)
+      if (li.length) {
+        li.click()
+      }
     }, 1000)
   }, 1000)
   //客流人群
@@ -248,3 +240,5 @@ function getAddHosueInfoStatus() {
   }
   return status
 }
+
+//%7B%22title%22%3A%22(%E8%BD%AC%E8%AE%A9)%20%E5%B7%B4%E5%8D%97%E7%9B%88%E5%88%A9%E7%9B%88%E5%88%A9%E5%AE%BE%E9%A6%86%E8%BD%AC%E8%AE%A9%22%2C%22picList%22%3A%22https%3A%2F%2Fpic4.58cdn.com.cn%2Fp1%2Fbig%2Fn_v28ad7450e13e34ace973177862e81ea7c.jpg%7Chttps%3A%2F%2Fpic1.58cdn.com.cn%2Fp1%2Fbig%2Fn_v2028046a8b06543f9a2c514811b7aa9fd.jpg%7Chttps%3A%2F%2Fpic7.58cdn.com.cn%2Fp1%2Fbig%2Fn_v29860a17b2e284cfc8ac80141f4e63465.jpg%7Chttps%3A%2F%2Fpic8.58cdn.com.cn%2Fp1%2Fbig%2Fn_v205453de2eafc49dfa870906c38844ac0.jpg%7Chttps%3A%2F%2Fpic7.58cdn.com.cn%2Fp1%2Fbig%2Fn_v2cfc908a0f6494f0680049c2e0f3968bb.jpg%7Chttps%3A%2F%2Fpic2.58cdn.com.cn%2Fp1%2Fbig%2Fn_v2f2763199716a4009a69485a2f411da63.jpg%7Chttps%3A%2F%2Fpic5.58cdn.com.cn%2Fp1%2Fbig%2Fn_v2e4a12a32f4574951ab24ab317bf3cf0c.jpg%7Chttps%3A%2F%2Fpic8.58cdn.com.cn%2Fp1%2Fbig%2Fn_v2fdf7788b33524aa588050f32814c05bd.jpg%7Chttps%3A%2F%2Fpic2.58cdn.com.cn%2Fp1%2Fbig%2Fn_v296cbfbc8a82249099ece279299e011c5.jpg%22%2C%22moneyNum%22%3A%2215000%22%2C%22moneyNumUnit%22%3A%22%E5%85%83%2F%E6%9C%88%22%2C%22numChuZu%22%3A%22%22%2C%22numChuZuUnit%22%3A%22%22%2C%22avrageMoney%22%3A0%2C%22avrageMoneyUnit%22%3A%22%22%2C%22transferFee%22%3A48%2C%22transferFeeUnit%22%3A%22%E4%B8%87%E5%85%83%22%2C%22area%22%3A%22938%22%2C%22areaUnit%22%3A%22%E3%8E%A1%22%2C%22type%22%3A%22%E5%95%86%E4%B8%9A%E8%A1%97%E5%95%86%E9%93%BA%22%2C%22isStreet%22%3A%22%E4%B8%B4%E8%A1%97%22%2C%22curFloor%22%3A%221-2%22%2C%22totalFloot%22%3A%223%22%2C%22sWidth%22%3A16%2C%22sDeep%22%3A26%2C%22sHeight%22%3A5%2C%22status%22%3A%22%E7%BB%8F%E8%90%A5%E4%B8%AD%22%2C%22payType1%22%3A%221%22%2C%22payType2%22%3A%223%22%2C%22industry%22%3A%22%E9%A4%90%E9%A5%AE%E7%BE%8E%E9%A3%9F%22%2C%22minMonth%22%3A%22%22%2C%22rentFreePeriod%22%3A0%2C%22endMonth%22%3A36%2C%22passengerFlow%22%3A%22%E5%85%B6%E4%BB%96%22%2C%22address1%22%3A%22%E5%B7%B4%E5%8D%97%E5%8C%BA%22%2C%22address2%22%3A%22%E6%9D%8E%E5%AE%B6%E6%B2%B1%22%2C%22address3%22%3A%22%E5%9C%9F%E6%A1%A5%E6%AD%A3%E8%A1%9713%E5%8F%B7%22%2C%22name%22%3A%22%E8%88%92%E8%80%81%E5%B8%88%22%2C%22isSingle%22%3Atrue%2C%22phone%22%3A%2215923633193%22%2C%22phoneAddress%22%3A%22%E9%87%8D%E5%BA%86%22%2C%22peotao%22%3A%5B%22%E4%B8%AD%E5%A4%AE%E7%A9%BA%E8%B0%83%22%2C%22%E7%BD%91%E7%BB%9C%22%2C%22%E6%9A%96%E6%B0%94%22%2C%22%E4%B8%8A%E6%B0%B4%22%2C%22%E4%B8%8B%E6%B0%B4%22%2C%22%E6%8E%92%E6%B1%A1%22%5D%2C%22describe%22%3A%22%3Cp%3E%E2%80%8B%E6%9C%AC%E9%85%92%E5%BA%97%E4%BD%8D%E4%BA%8E%E6%B8%9D%E5%8D%97%E5%88%86%E6%B5%81%E9%81%93%20%E7%BA%A2%E5%85%89%E7%AB%8B%E4%BA%A4%20%E6%97%81%E8%BE%B9%E6%98%AF%E5%B1%8F%E9%83%BD%E5%B0%8F%E5%8C%BA%20%E6%B0%B8%E8%BE%89%E8%B6%85%E5%B8%82%20%E6%A5%BC%E4%B8%8B%E6%9C%89%E5%B9%BC%E5%84%BF%E5%9B%AD%20%E6%B1%BD%E4%BF%AE%E5%8E%82%20%E7%A6%BB%E5%AD%A6%E6%A0%A1%E5%BE%88%E8%BF%91%20%E7%B4%A7%E6%8C%A8%E5%B7%B4%E5%8D%97%E4%B8%AD%E5%AD%A6%20%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6%20%E6%9C%AC%E9%85%92%E5%BA%97%E6%98%AF%E7%8B%AC%E6%A0%8B%20%E4%B8%80%E5%85%B13%E5%B1%82%E6%A5%BC%20%E6%88%BF%E9%97%B4%E5%B9%B2%E5%87%80%E6%95%B4%E6%B4%81%20%E5%AE%BD%E5%A4%A7%E6%98%8E%E4%BA%AE%20%E6%96%B0%E8%A3%85%E4%BF%AE%20%E5%86%85%E8%AE%BE%E6%9C%89%E5%8D%A1%E6%8B%89OK%20%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%99%A2%20%E5%A4%9A%E5%8A%9F%E8%83%BD%E4%BC%9A%E8%AE%AE%E5%8E%85%20%E6%A3%8B%E7%89%8C%20%E9%9C%B2%E5%A4%A9%E5%96%9D%E8%8C%B6%20%E4%BC%91%E6%81%AF%E5%BA%A6%E5%81%87%E7%9A%84%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%92%E5%BA%97%20%E7%BD%91%E8%AF%844.8%E5%88%86%20%E7%94%9F%E6%84%8F%E7%A8%B3%E5%AE%9A%20%E8%80%8C%E4%B8%94%E6%88%BF%E7%A7%9F%E4%BE%BF%E5%AE%9C%20%E5%85%8D%E8%B4%B9%E5%81%9C%E8%BD%A6%E4%BD%8D%E5%9B%A0%E6%9C%89%E5%B0%BD%E6%9C%89%20%E6%9C%AC%E4%BA%BA%E5%9B%A0%E5%B9%B4%E7%BA%AA%E5%A4%A7%E4%BA%86%E4%B8%8D%E6%83%B3%E7%BB%8F%E8%90%A5%E4%BA%86%20%E6%AC%A2%E8%BF%8E%2C%E8%80%85%E5%89%8D%E4%BE%86%E8%80%83%E5%AF%9F%20%E5%B7%B2%E5%90%88%E4%BD%9C%E4%B8%AD%E4%BB%8B%2C%E5%8B%BF%E6%89%B0%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cbr%3E%3Cbr%3E%3C%2Fp%3E%22%2C%22xiaoqu%22%3A%7B%22baidulat%22%3A%2229.460962%22%2C%22baidulon%22%3A%22106.552522%22%2C%22dizhi%22%3A%22%E5%9C%9F%E6%A1%A5%E6%AD%A3%E8%A1%9713%E5%8F%B7%22%2C%22lon%22%3A0%2C%22lat%22%3A0%7D%7D
