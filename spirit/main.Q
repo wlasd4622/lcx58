@@ -18,6 +18,9 @@
 //发布帖子异常 				3512
 //发帖权限已用尽				3513
 //本月还可免费发帖			3514
+//js发帖未处理异常			3521
+//js发帖正常					3522
+//租金为空				3523
 //--------------------------------------
 //账户正常					2000
 //密码错 					4000
@@ -27,7 +30,7 @@
 //账户异常					4004
 //账户需要设置cookie			4005
 //--------------------------------------
-Dim id, chromeSrc, mysql,houseInfo
+Dim id, chromeSrc, mysql,houseInfo,userInfo
 configStatus = config()
 If configStatus = 0 Then
     call checkChrome()
@@ -187,17 +190,21 @@ Function editHouseInfo(houseId)
 					"$('[name=jiageDanwei] .optiondef li:contains(' + editData['zuJInUnit'] + ')').click();"&_
 					"$('[name=params_215] input').val(editData['surplusMonth']);"&_
 					"$('[name=params_214] input').val(editData['zrf']);")
+        Delay 200
         //补充楼层
-        Call execjs("if($('[name=zongLouCeng] input').val()>1){"&_
-					"$('[name=params_109] .optiondef [val=2]').click();"&_
-					"var ceng=$('[name=suoZaiLouCeng] input').val()||1"&_
-					"$('[name=params_219] input').val(ceng)"&_
-					"}else{"&_
-					"$('[name=params_109] .optiondef [val=1]').click();"&_
-					"}")
+        js="function changeStatus(){"&_
+        			"var title=$('[name=params_109] .title').text().trim();"&_
+					"$('[name=params_109] li:eq(0)').click();"&_
+					"$('[name=params_109] li:contains('+title+')').click();"&_
+        			"}"
+        TracePrint js
+        Call execjs(js)
+        Call execjs("changeStatus()")
+        Delay 200
         execjs("window.scrollTo(0,99999);")
         Delay 1000
         execjs ("window.scrollTo(0,0);")
+        Call execjs("$('input').click();")
         Delay 1000
         execjs ("window.scrollTo(0,99999);")
         Delay 1000
@@ -223,6 +230,7 @@ Function editHouseInfo(houseId)
 End Function
 Function houseList()
     Rem fHouseList
+    TracePrint "func:houseList"
     //订单列表
     houseStatus=-44
     url = "https://fangmypost.58.com/fang/infoall/notabs"
@@ -255,7 +263,8 @@ Function houseList()
                 houseStatus = 4001
             ElseIf state = - 1  Then
                 houseStatus=3502
-                MessageBox "未处理异常4564"
+                TracePrint "未处理异常4564"
+                Goto fHouseList
             Else 
                 Call execjs("var statusContent=houseItem.find('.my-item-item-tb-content-states').text().trim().replace(/\n/g,'').replace(/\s/g,'').substr(0,20)")
                 call execjs("function getHouseStatusJs(){"&_
@@ -383,8 +392,6 @@ Function login()
                     loginStatus = 4000
                     TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
                     Goto fBreakDo
-                Else 
-                    MessageBox "未处理异常897"
                 End If
             End If
             result1 = execjs("$('.write.write58').length||0")
@@ -519,6 +526,7 @@ Function addHouseInfo(houseId)
     End If
     codeKey=execjs("$('a.house_basic_title_content_item3.blue-link:eq(0)').attr('href').match(/\w*.*?\.com/)[0].replace('//','')")
     code = queryCode(codeKey)
+    Rem rNotabsPage
     //回到列表页面点击编辑进入详情编辑页面
     url = "https://fangmypost.58.com/fang/infoall/notabs"
     Call Plugin.chrome.load(id, url)
@@ -526,20 +534,51 @@ Function addHouseInfo(houseId)
     Do
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
-    Call find("$('body .rightside-publish-content .my-item-item').length", "个人中心房产列表")
+    length = find("$('body .rightside-publish-content .my-item-item').length", "个人中心房产列表")
+    If length = 0 Then 
+        Goto rNotabsPage
+    End If
+    Rem rPostPage
     Delay 1000
     //发布信息
-    Call Plugin.chrome.exec_js(id,"$(function(){window.location.href=`https://post.58.com/fang/"+cstr(code)+"/14/s5?PGTID=${window.getGTID()}&ClickID=2`})")
+    Rem fJsAddpage
+    js = "window.location.href=`https://post.58.com/fang/" + cstr(code) + "/14/s5?PGTID=${window.getGTID()}&ClickID=2`"
+    TracePrint js
+    Call Plugin.chrome.exec_js(id,js)
     // 等待载入完成
-    Delay 500
-    Call find("$('.submit_wrap').length", "查找发布按钮")
+    Delay 1500
+    length = find("$('.submit_wrap').length", "查找发布按钮")
+    If length = 0 Then 
+        Goto fJsAddpage
+    End If
     Call loadScript("58")
     Delay 500
-    Call find("$('.paytips').length","查找发布页面消息信息")
+    length = find("$('.paytips').length", "查找发布页面消息信息")
+    If length=0 Then 
+        Goto rPostPage
+    End If
+    Call find("$('.paytips').length","查找paytips")
     addStatus = execjs("getAddHosueInfoStatus();")
+    If addStatus = "" Then 
+        addStatus=-44
+    End If
     If cint(addStatus) = 3514 Then 
         //发帖
-        Call execjs("addHouseInfoData(`" + hosueDetailCode + "`);")
+        addStatus = execjs("addHouseInfoData(`" + hosueDetailCode + "`,'" + userInfo(0) + "');")
+        If addStatus = "" Then 
+            addStatus=3521
+        End If
+        If cint(addStatus) = 3521 Then 
+            //js发帖未处理异常
+            MessageBox "js发帖未处理异常"
+            Goto rPostPage
+        ElseIf cint(addStatus) = 3522 Then
+            //js发帖正常
+            TracePrint "js发帖正常"
+        ElseIf cint(addStatus) = 3523 Then
+            //租金为空
+            Goto fMoneyNumEmit
+        End If
         picStr=execjs("houseDetailData.picList")
         //下载图片
         picList = Split(picStr, "|")
@@ -548,31 +587,92 @@ Function addHouseInfo(houseId)
         //上传图片
         Call Plugin.chrome.set_file_input_files(id, ".imgUpload input", picStr)
         Rem fUpdaaImage
-        length = find("($('.img_box').length===$('.img_box[draggable=true]').length)?1:0", "检查图片是否上传完毕")
+        length = find("(houseDetailData.picList.split('|').length===$('.img_box[draggable=true]').length?1:0)", "检查图片是否上传完毕")
         If length > 0 Then 
+            imageCount = execjs("$('.img_box[draggable=true]').length")
+            TracePrint "图片总数:"&imageCount
+            Delay 2000
             execjs ("$('.submit_wrap span').trigger('click');")
-            Delay 5000
-            index = find("document.title.indexOf('息发布成功')","查找发布成功标题")
+            Delay 2000
+            index = find("document.title.indexOf('息发布成功')", "查找发布成功标题")
             If index = "" Then 
                 index=-1
             End If
             index = cint(index)
-            If index > 0 Then
-                addStatus=3510
-                MessageBox "发布成功"
+            If index > 0 Then 
+                Call find("$('.p_active_btn').length","查找查看信息按钮")
+                addStatus = 3510
+                newUrl = execjs("'http:'+$('.p_active_btn').attr('href').replace(/^http\w{0,1}\:/,'')")
+                If newUrl = "" Then 
+                    MessageBox "url为空"
+                End If
+                Call addNewHouseInfo(newUrl)
             Else 
-                MessageBox "发布失败"
-                addStatus=3511
+                TracePrint "发布失败"
+                Goto rAddHouseInfo
             End If
         Else 
             Goto fUpdaaImage
         End If
     Else 
-        //本月无法发帖
-        MessageBox "本月无法发帖"
+        TracePrint addStatus
+        TracePrint "状态异常"
+        Goto rPostPage
     End If
-    MessageBox addStatus
+    Rem fMoneyNumEmit
+    TracePrint houseInfo(0)
+    //MessageBox addStatus
     addHouseInfo=addStatus
+End Function
+Function addNewHouseInfo(url)
+    Rem fAddNewHouseInfo
+    //每次只能更新一个字段
+    //获取待插入的id
+    sql = "select max(id) as id from `house_info`"
+    TracePrint sql
+    Call Plugin.Super_MySQL.mysql_query(mysql, sql)
+    store = Plugin.Super_MySQL.store_result(mysql)
+    rows = Plugin.Super_MySQL.num_rows(store)
+    If rows > 0 Then
+        maxId = Plugin.Super_MySQL.fetch_text(store, "id")
+        If maxId = "" Then 
+            maxId=1
+        End If
+        maxId = cstr(cint(maxId)+1)
+        //insert id 
+        sql = "INSERT into house_info (id) value(" + maxId + ")"
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        Call Plugin.Super_MySQL.num_rows(store)
+        //update url
+        sql = "UPDATE house_info SET `url`='" + url + "' WHERE id=" + maxId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        call Plugin.Super_MySQL.num_rows(store)
+        //update house_key
+        sql = "UPDATE house_info SET `house_key`='" + cstr(userInfo(3)) + "' WHERE id=" + maxId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        Call Plugin.Super_MySQL.num_rows(store)
+        //update old_url
+        sql = "UPDATE house_info SET `old_url`='" + cstr(userInfo(4)) + "' WHERE id=" + maxId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        call Plugin.Super_MySQL.num_rows(store)
+        //update create_date
+        sql = "UPDATE house_info SET `create_date`=now() WHERE id=" + maxId
+        TracePrint sql
+        call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        call Plugin.Super_MySQL.num_rows(store)
+    Else 
+        TracePrint "更新数据失败"
+        Goto fAddNewHouseInfo
+    End if
 End Function
 Function quit()
     MsgBox "脚本执行完毕"
@@ -599,7 +699,7 @@ Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
-    sql = "SELECT * FROM house_list WHERE `username`='17844667405' ORDER BY RAND( ) LIMIT 1"
+    //sql = "SELECT * FROM house_list WHERE `username`='13820867295' ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -623,8 +723,9 @@ Function getUser()
         cookie = getCookie(userName)
         TracePrint "cookie:" + cookie
         houseId = getHouseId(url)
-        houseInfo=Array(houseId)
-        getUser = Array(userName, password,houseListId,key,url,cookie)
+        houseInfo = Array(houseId)
+        userInfo=Array(userName, password,houseListId,key,url,cookie)
+        getUser =userInfo
     Else 
         //getUser=Array("-1")
         TracePrint "获取house_list信息异常"
