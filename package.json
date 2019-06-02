@@ -1,23 +1,26 @@
 {
-  "name": "lcx58",
-  "version": "1.0.0",
-  "description": "",
-  "main": ".eslintrc.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wlasd4622/lcx58.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wlasd4622/lcx58/issues"
-  },
-  "homepage": "https://github.com/wlasd4622/lcx58#readme",
-  "devDependencies": {
-    "mysql": "^2.17.1"
-  }
+    "name": "lcx58",
+    "version": "1.0.0",
+    "description": "",
+    "main": ".eslintrc.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wlasd4622/lcx58.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/wlasd4622/lcx58/issues"
+    },
+    "homepage": "https://github.com/wlasd4622/lcx58#readme",
+    "devDependencies": {
+        "mysql": "^2.17.1",
+        "node-xlsx": "^0.14.1",
+        "puppeteer": "^1.13.0",
+        "sqlite3": "^4.0.7"
+    }
 }
