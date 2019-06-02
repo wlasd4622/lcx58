@@ -170,8 +170,11 @@ function addHouseInfoData(code, userName) {
         //商铺性质
         $('[name=params_122] .optiondef li[val=2]').click()
             //当前状态
-        $('[name=params_205] label:contains(' + houseDetailData.status + ')').click()
-            //经营行业
+        $('[name=params_205] label:contains(' + houseDetailData.status + ')').click();
+        //经营行业
+        if (houseDetailData.industry == '家居建材') {
+            houseDetailData.industry = "家具建材"
+        }
         $('[name=params_22701] .optiondef li:contains(' + houseDetailData.industry + ')').click();
         $('[name=params_20601] .optiondef li:eq(1)').click();
 
