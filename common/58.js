@@ -201,17 +201,19 @@ function addHouseInfoData(code, userName) {
     $('[name=localDiduan01] .optiondef li:contains(' + houseDetailData.address2 + ')').click();
     $('[name=xiangXiDiZhi] input').val(houseDetailData.address3).keyup();
     setTimeout(() => {
-        let li = $(`[name=xiangXiDiZhi] .tooltip li[key='${houseDetailData.address3}']:eq(0)`)
-        if (li.length) {
-            li.click()
+        let li = $(`[name=xiangXiDiZhi] .tooltip li[lat='${houseDetailData.xiaoqu.baidulat}'][lng='${houseDetailData.xiaoqu.baidulon}']`)
+        if (!li.length) {
+            li = $(`[name=xiangXiDiZhi] .tooltip li[lat='${houseDetailData.xiaoqu.baidulat}']`)
         }
-        setTimeout(() => {
-            let li = $(`[name=xiangXiDiZhi] .tooltip li[key='${houseDetailData.address3}']:eq(0)`)
-            if (li.length) {
-                li.click()
-            }
-        }, 1000)
-    }, 1000);
+        if (!li.length) {
+            li = $(`[name=xiangXiDiZhi] .tooltip li[lng='${houseDetailData.xiaoqu.baidulon}']`)
+        }
+        if (!li.length) {
+            li = $('[name=xiangXiDiZhi] .tooltip li:eq(0)');
+        }
+        li.click()
+
+    }, 2000);
     //客流人群
     houseDetailData.passengerFlowArr = houseDetailData.passengerFlow ? (houseDetailData.passengerFlow.split('、') || []) : [];
     if (houseDetailData.passengerFlowArr.length === 0) {
