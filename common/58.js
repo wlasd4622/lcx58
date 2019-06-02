@@ -177,13 +177,16 @@ function addHouseInfoData(code, userName) {
     $('[name=mianJi] input').val(houseDetailData.area);
     //楼层
     $('[name=zongLouCeng] input').val(houseDetailData.totalFloot)
-    if (houseDetailData.curFloor.includes('-')) {
+    if (houseDetailData.curFloor.includes('-') && houseDetailData.curFloor.split('-')[1] > houseDetailData.curFloor.split('-')[0]) {
         //多层
         $('[name=params_109] .optiondef li:contains(多层)').click()
         $('[name=suoZaiLouCeng] input').val(parseInt(houseDetailData.curFloor.split('-')[0]))
         $('[name=params_219] input').val(parseInt(houseDetailData.curFloor.split('-')[1]))
     } else {
         //单层
+        if (houseDetailData.curFloor.includes('-')) {
+            houseDetailData.curFloor = houseDetailData.curFloor.split('-')[0];
+        }
         $('[name=params_109] .optiondef li:contains(单层)').click()
         $('[name=suoZaiLouCeng] input').val(parseInt(houseDetailData.curFloor))
     }
