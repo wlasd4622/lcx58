@@ -143,14 +143,17 @@ function getTitle() {
 }
 
 function addHouseInfoData(code, userName) {
-    window.houseDetailData = JSON.parse(decodeURIComponent(`${code}`))
-        //分类  商铺租售/生意转让
-        //
-        //出租，转让，出售
+    window.houseDetailData = JSON.parse(decodeURIComponent(`${code}`));
+    //分类  商铺租售/生意转让
+    //
+    //出租，转让，出售
     if (houseDetailData.title.indexOf("(转让)") > -1) {
         $('[name=fenlei] [data-value=511571]').click();
         //转让费
-        $('[name=params_214] input').val(houseDetailData.transferFee || 1)
+        if (!houseDetailData.transferFee || houseDetailData.transferFee < 1) {
+            houseDetailData.transferFee = 1
+        }
+        $('[name=params_214] input').val(houseDetailData.transferFee)
             //剩余租期
         $('[name=params_215] input').val(houseDetailData.endMonth)
     } else if (houseDetailData.title.indexOf("(出租)") > -1) {
