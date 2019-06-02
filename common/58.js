@@ -145,7 +145,7 @@ function getTitle() {
 function addHouseInfoData(code, userName) {
     let result = 3521;
     window.houseDetailData = JSON.parse(decodeURIComponent(`${code}`));
-    if (houseDetailData.moneyNum) {
+    if (houseDetailData.moneyNum && parseFloat(houseDetailData.moneyNum)) {
         //分类  商铺租售/生意转让
         //
         //出租，转让，出售
