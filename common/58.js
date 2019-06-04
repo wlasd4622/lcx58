@@ -129,7 +129,7 @@ function getHouseDetail() {
 }
 
 function getTitle() {
-    let title = houseDetailData.title.replace(/\(.*?\)/, '')
+    let title = houseDetailData.title.replace(/\(.*?\)/, '').trim();
     if (title.length < 10) {
         title = houseDetailData.address3 + ' ' + title
     }
