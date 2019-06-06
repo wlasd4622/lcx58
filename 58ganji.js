@@ -1,13 +1,46 @@
 let puppeteer = require('puppeteer');
 let schedule = require('node-schedule');
+var mysql = require('mysql');
 class GanJi {
   constructor() {
-    this.AccountList = [
-      'HUOKE_STATUS=1; sessid=467DAFD5-543C-8CCA-588D-52CBF0DDF8B9; aQQ_brokerguid=6A683DB2-0096-5738-9CDA-D98DA6E5C686; wmda_uuid=99721d90b855844a9716fc888d8ba59e; wmda_new_uuid=1; wmda_visited_projects=%3B8920741036080; anjukereg=7orZe6nCH0WtY0Zj; wmda_session_id_8920741036080=1559629144565-4c4459a1-21b9-7b97; 58tj_uuid=827f6bf8-ab82-4d37-8de7-f471b518fb24; new_session=1; init_refer=http%253A%252F%252Fvip.58ganji.com%252F; new_uv=1; ajk_broker_id=6850935; ajk_broker_ctid=14; ajk_broker_uid=44150906; aQQ_brokerauthinfos=P9OIdXo0bt%2BA9jE18ioF8DJwYM%2Fu7332238SK4m%2BLlrAztK0XLNBJV10SE23hW0P%2FnK5RxYGuIucx1fCuvGYprYZe5c%2BB8JN27PaTRBg44nrk9rib2zpqJVSQuE1XZfQY9GyrYDrCQ3%2FjIQz4P4xYQ8P4LV1EUBX4mxmSrpNTHsNGaDMYfaSnsppEsggETPl0LA'
-    ]
+    this.userList = [];
     this.page = null;
     this.browser = null;
+
   }
+
+  connection() {
+    return new Promise((resolve, reject) => {
+      this.connection = mysql.createConnection({
+        host: '101.201.49.69',
+        user: 'refresh',
+        password: 'Dianzhijia@1',
+        port: '3306',
+        database: 'datarefresh',
+      });
+      this.connection.connect(function (err) {
+        if (err) {
+          console.error(err)
+          reject(err)
+        } else {
+          resolve()
+        }
+      })
+    })
+  }
+
+  execSql(sql) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(sql, function (err, value) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(value)
+        }
+      })
+    })
+  }
+
   async runPuppeteer() {
     this.browser = await puppeteer.launch({
       headless: false,
@@ -41,55 +74,94 @@ class GanJi {
         domain
       }
     });
-    cookies.push({
-      name: 'aaa',
-      value: '111',
-      domain
-    })
     return Promise.all(cookies.map(pair => {
       return page.setCookie(pair)
     }));
   }
-  async task1() {
+  async getCookie() {
+    let cookie = await this.page.evaluate(() => {
+      return document.cookie
+    })
+    return cookie
+  }
+
+  async task1(user) {
     try {
       await this.runPuppeteer();
       let url = `http://vip.58ganji.com/user/brokerhomeV2`
-      await this.setCookie(this.AccountList[0], '.58ganji.com', this.page);
-      await this.setCookie(this.AccountList[0], '.58.com', this.page);
-      await this.setCookie(this.AccountList[0], '.vip.58.com', this.page);
-      await this.page.goto(url, {
-        waitUntil: 'domcontentloaded'
-      });
+      await this.setCookie(user.session, '.58ganji.com', this.page);
+      await this.setCookie(user.session, '.58.com', this.page);
+      await this.setCookie(user.session, '.vip.58.com', this.page);
+      await this.page.goto(url);
       await this.page.waitForSelector('.account-mod')
+      await this.sleep(500)
       //房产推广币
       let blanceHbg58 = await this.page.evaluate(() => {
         return $('.account-mod li:eq(1) b').text();
       });
       //服务中及预约中的套餐开通及到期时间
-      await this.myService();
+      await this.myService(user);
       //推送中，在线购买，还可推送，今日推送到期数量
-      await this.yxtgsp58();
+      await this.yxtgsp58(user);
       // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
-      await this.myperiod();
+      await this.myperiod(user);
+      //回到首页 获取cookie
+      url = `http://vip.58ganji.com/user/brokerhomeV2`
+      await this.page.goto(url);
+      await this.page.waitForSelector('.account-mod')
+      let cookie = await this.getCookie()
+      await this.updateUser(user, blanceHbg58, cookie)
       await this.close()
     } catch (err) {
       console.error(err)
     }
   }
+  async updateUser(user, blanceHbg58, cookie) {
+    let sql = "update `gj_user` set `account`=" + (blanceHbg58.replace(/\,/g, '') || '') + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
+    let result = await this.execSql(sql)
+    if (result) {
+      console.log('更新成功!');
+    }
+  }
+  async getUserList() {
+    await this.sleep()
+    this.userList = [];
+    let result = await this.execSql("select * from `gj_user`")
+    if (result && result.length) {
+      this.userList = result;
+    } else {
+      throw "获取用户信息异常"
+    }
+  }
+  async eachUser() {
+    await this.getUserList()
+    if (this.userList.length) {
+      for (let index = 0; index < this.userList.length; index++) {
+        const user = this.userList[index];
+        await this.task1(user);
+        await this.sleep(1000)
+      }
+    }
+  }
+  async mainTask() {
+    try {
+      await this.connection()
+      await this.eachUser();
+    } catch (err) {
+      console.log(err);
+      await this.sleep(2000)
+      await this.mainTask()
+    }
+  }
   async main() {
-    // 每分钟的第30秒触发： '30 * * * * *'
-    // 每小时的1分30秒触发 ：'30 1 * * * *'
-    // 每天的凌晨1点1分30秒触发 ：'30 1 1 * * *'
-    // 每月的1日1点1分30秒触发 ：'30 1 1 1 * *'
-    // 2016年的1月1日1点1分30秒触发 ：'30 1 1 1 2016 *'
-    // 每周1的1点1分30秒触发 ：'30 1 1 * * 1'
-    schedule.scheduleJob('30 1 * * * *', function () {
+    let that = this;
+    schedule.scheduleJob('30 1 * * * *', async function () {
       console.log('scheduleCronstyle:' + new Date());
-      this.task1();
+      await that.mainTask()
     });
   }
   //服务中及预约中的套餐开通及到期时间
-  async myService() {
+  async myService(user) {
     let url = "http://vip.58ganji.com/thirdredirect/?logintype=wuba&dialog=1/&redirecturl=http://vip.58.com/app/fuwu#/app/wltdingdan/"
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -126,11 +198,20 @@ class GanJi {
       }
       return filter()
     })
-    console.log(JSON.stringify(serviceArr))
+    for (let index = 0; index < serviceArr.length; index++) {
+      const service = serviceArr[index];
+      let sql = "insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (" + user.id + ",'" + user.username + "','" + service.status + "','" + service.start + "','" + service.end + "',4,NOW())"
+      console.log(sql);
+      try {
+        await this.execSql(sql)
+      } catch (err) {
+        console.error(err)
+      }
+    }
     return serviceArr
   }
   //推送中，在线购买，还可推送，今日推送到期数量
-  async yxtgsp58() {
+  async yxtgsp58(user) {
     let url = `http://vip.58ganji.com/jp58/yxtgsp58`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -152,12 +233,19 @@ class GanJi {
       }
       return foamat()
     })
-    console.log(JSON.stringify(result))
+    let sql = "insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)" +
+      "values(" + user.id + ",'" + user.username + "','" + result['推送中'] + "','" + result['还可推送'] + "','" + result['今日推送到期'] + "','" + result['在线购买'] + "',NOW())"
+    console.log(sql);
+    try {
+      await this.execSql(sql)
+    } catch (err) {
+      console.error(err)
+    }
     return result;
   }
 
   // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
-  async myperiod() {
+  async myperiod(user) {
     let url = `https://my.58.com/pro/tuiguangbi/myperiod/`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -189,6 +277,19 @@ class GanJi {
       return format()
     })
     console.log(JSON.stringify(data))
+    if (data && data.length) {
+      for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        let sql = "insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)" +
+          "values(" + user.id + ",'" + user.username + "','" + element['推广币'] + "','" + element['到期时间'] + "','" + element['剩余可用数量'] + "',NOW())"
+        console.log(sql);
+        try {
+          await this.execSql(sql)
+        } catch (err) {
+          console.error(err)
+        }
+      }
+    }
     return data;
   }
 
