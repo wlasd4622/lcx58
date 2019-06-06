@@ -98,6 +98,11 @@ class GanJi {
     let blanceHbg58 = await this.page.evaluate(() => {
       return $('.account-mod li:eq(1) b').text();
     });
+
+    let nickName = await this.page.evaluate(() => {
+      return $('a:contains(您好)').text().replace('您好，', '').trim() || ''
+    })
+
     //服务中及预约中的套餐开通及到期时间
     await this.myService(user);
     //推送中，在线购买，还可推送，今日推送到期数量
@@ -109,14 +114,16 @@ class GanJi {
     await this.page.goto(url);
     await this.page.waitForSelector('.account-mod')
     let cookie = await this.getCookie()
-    await this.updateUser(user, blanceHbg58, cookie)
+    await this.updateUser(user, blanceHbg58, cookie,nickName)
     await this.close()
   }
-  async updateUser(user, blanceHbg58, cookie) {
-    let sql = "update `gj_user` set `account`=" + (blanceHbg58.replace(/\,/g, '') || '') + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
-    let result = await this.execSql(sql)
-    if (result) {
-      console.log('更新成功!');
+  async updateUser(user, blanceHbg58, cookie,nickName) {
+    let sql = "update `gj_user` set `nickName`='" + nickName + "',`account`=" + (blanceHbg58.replace(/\,/g, '') || '') + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
+    console.log(sql);
+    try {
+      await this.execSql(sql)
+    } catch (err) {
+      console.error(err)
     }
   }
   async getUserList() {
@@ -155,6 +162,7 @@ class GanJi {
   }
   async main() {
     let that = this;
+    // await that.mainTask()
     schedule.scheduleJob('30 1 * * * *', async function () {
       console.log('scheduleCronstyle:' + new Date());
       await that.mainTask()
