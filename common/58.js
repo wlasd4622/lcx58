@@ -129,7 +129,7 @@ function getHouseDetail() {
 }
 
 function getTitle() {
-    let title = houseDetailData.title.replace(/\(.*?\)/, '')
+    let title = houseDetailData.title.replace(/\(.*?\)/, '').trim();
     if (title.length < 10) {
         title = houseDetailData.address3 + ' ' + title
     }
@@ -225,6 +225,9 @@ function addHouseInfoData(code, userName) {
             li.click();
         }, 2000);
         //客流人群
+        if (houseDetailData.passengerFlow === '暂无数据') {
+            houseDetailData.passengerFlow = "其他"
+        }
         houseDetailData.passengerFlowArr = houseDetailData.passengerFlow ? (houseDetailData.passengerFlow.split('、') || []) : [];
         if (houseDetailData.passengerFlowArr.length === 0) {
             houseDetailData.passengerFlowArr.push('其他')
