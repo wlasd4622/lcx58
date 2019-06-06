@@ -43,7 +43,7 @@ class GanJi {
 
   async runPuppeteer() {
     this.browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ['--start-maximized', '--disable-infobars']
     });
     this.page = await this.browser.newPage();
@@ -86,35 +86,31 @@ class GanJi {
   }
 
   async task1(user) {
-    try {
-      await this.runPuppeteer();
-      let url = `http://vip.58ganji.com/user/brokerhomeV2`
-      await this.setCookie(user.session, '.58ganji.com', this.page);
-      await this.setCookie(user.session, '.58.com', this.page);
-      await this.setCookie(user.session, '.vip.58.com', this.page);
-      await this.page.goto(url);
-      await this.page.waitForSelector('.account-mod')
-      await this.sleep(500)
-      //房产推广币
-      let blanceHbg58 = await this.page.evaluate(() => {
-        return $('.account-mod li:eq(1) b').text();
-      });
-      //服务中及预约中的套餐开通及到期时间
-      await this.myService(user);
-      //推送中，在线购买，还可推送，今日推送到期数量
-      await this.yxtgsp58(user);
-      // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
-      await this.myperiod(user);
-      //回到首页 获取cookie
-      url = `http://vip.58ganji.com/user/brokerhomeV2`
-      await this.page.goto(url);
-      await this.page.waitForSelector('.account-mod')
-      let cookie = await this.getCookie()
-      await this.updateUser(user, blanceHbg58, cookie)
-      await this.close()
-    } catch (err) {
-      console.error(err)
-    }
+    await this.runPuppeteer();
+    let url = `http://vip.58ganji.com/user/brokerhomeV2`
+    await this.setCookie(user.session, '.58ganji.com', this.page);
+    await this.setCookie(user.session, '.58.com', this.page);
+    await this.setCookie(user.session, '.vip.58.com', this.page);
+    await this.page.goto(url);
+    await this.page.waitForSelector('.account-mod')
+    await this.sleep(500)
+    //房产推广币
+    let blanceHbg58 = await this.page.evaluate(() => {
+      return $('.account-mod li:eq(1) b').text();
+    });
+    //服务中及预约中的套餐开通及到期时间
+    await this.myService(user);
+    //推送中，在线购买，还可推送，今日推送到期数量
+    await this.yxtgsp58(user);
+    // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
+    await this.myperiod(user);
+    //回到首页 获取cookie
+    url = `http://vip.58ganji.com/user/brokerhomeV2`
+    await this.page.goto(url);
+    await this.page.waitForSelector('.account-mod')
+    let cookie = await this.getCookie()
+    await this.updateUser(user, blanceHbg58, cookie)
+    await this.close()
   }
   async updateUser(user, blanceHbg58, cookie) {
     let sql = "update `gj_user` set `account`=" + (blanceHbg58.replace(/\,/g, '') || '') + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
@@ -138,7 +134,11 @@ class GanJi {
     if (this.userList.length) {
       for (let index = 0; index < this.userList.length; index++) {
         const user = this.userList[index];
-        await this.task1(user);
+        try {
+          await this.task1(user);
+        } catch (err) {
+          console.error(err)
+        }
         await this.sleep(1000)
       }
     }
@@ -149,7 +149,7 @@ class GanJi {
       await this.eachUser();
     } catch (err) {
       console.log(err);
-      await this.sleep(2000)
+      await this.sleep(10000)
       await this.mainTask()
     }
   }
