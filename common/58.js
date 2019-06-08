@@ -158,7 +158,7 @@ function addHouseInfoData(code, userName) {
       }
       $('[name=params_214] input').val(houseDetailData.transferFee)
       //剩余租期
-      $('[name=params_215] input').val(houseDetailData.endMonth)
+      $('[name=params_215] input').val(houseDetailData.endMonth || 1)
     } else if (houseDetailData.title.indexOf("(出租)") > -1) {
       $('[name=fenlei] [data-value=511570]').click();
       $('[name=type] [data-value="2"]').click();
@@ -281,3 +281,37 @@ function getAddHosueInfoStatus() {
   }
   return status
 }
+
+
+
+if (houseDetailData.title.indexOf('(转让)') > -1) {
+  $('[name=fenlei] [data-value=511571]').click();
+  if (!houseDetailData.transferFee || houseDetailData.transferFee < 1) {
+    houseDetailData.transferFee = 1
+  }
+  $('[name=params_214] input').val(houseDetailData.transferFee);$('[name=params_215] input').val(houseDetailData.endMonth || 1)
+} else if (houseDetailData.title.indexOf('(出租)') > -1) {
+  $('[name=fenlei] [data-value=511570]').click();
+  $('[name=type] [data-value=2]').click();
+} else if (houseDetailData.title.indexOf('(出售)') > -1) {
+  $('[name=fenlei] [data-value=511570]').click();
+  $('[name=type] [data-value=0]').click();
+};
+
+
+if (houseDetailData.title.indexOf("(转让)") > -1) {
+  $('[name=fenlei] [data-value=511571]').click();
+  //转让费
+  if (!houseDetailData.transferFee || houseDetailData.transferFee < 1) {
+    houseDetailData.transferFee = 1
+  }
+  $('[name=params_214] input').val(houseDetailData.transferFee)
+  //剩余租期
+  $('[name=params_215] input').val(houseDetailData.endMonth || 1)
+} else if (houseDetailData.title.indexOf("(出租)") > -1) {
+  $('[name=fenlei] [data-value=511570]').click();
+  $('[name=type] [data-value="2"]').click();
+} else if (houseDetailData.title.indexOf("(出售)") > -1) {
+  $('[name=fenlei] [data-value=511570]').click();
+  $('[name=type] [data-value="0"]').click();
+};
