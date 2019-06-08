@@ -6,42 +6,57 @@ class GanJi {
     this.userList = [];
     this.page = null;
     this.browser = null;
-
+    this.dbConfig = {
+      host: '101.201.49.69',
+      user: 'refresh',
+      password: 'Dianzhijia@1',
+      port: '3306',
+      database: 'datarefresh',
+    }
   }
 
-  connection() {
+  handleDisconnect() {
+    console.log(`>>>handleDisconnect`);
     return new Promise((resolve, reject) => {
-      this.connection = mysql.createConnection({
-        host: '101.201.49.69',
-        user: 'refresh',
-        password: 'Dianzhijia@1',
-        port: '3306',
-        database: 'datarefresh',
-      });
-      this.connection.connect(function (err) {
+      this.connection = mysql.createConnection(this.dbConfig);
+      this.connection.connect(async function (err) {
         if (err) {
-          console.error(err)
-          reject(err)
+          console.log('error when connecting to db:', err);
+          reject()
         } else {
-          resolve()
+          resolve();
         }
-      })
+      });
+      this.connection.on('error', function (err) {
+        console.log('db error', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+          reject()
+        } else {
+          throw err;
+        }
+      });
     })
   }
 
   execSql(sql) {
+    console.log(sql);
     return new Promise((resolve, reject) => {
-      this.connection.query(sql, function (err, value) {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(value)
-        }
-      })
+      try {
+        this.connection.query(sql, function (err, value) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(value)
+          }
+        })
+      } catch (err) {
+        reject(err)
+      }
     })
   }
 
   async runPuppeteer() {
+    console.log(`>>>runPuppeteer`);
     this.browser = await puppeteer.launch({
       headless: true,
       args: ['--start-maximized', '--disable-infobars']
@@ -65,6 +80,7 @@ class GanJi {
   }
 
   async setCookie(cookies_str = "", domain, page) {
+    console.log(`>>>setCookie`);
     let cookies = cookies_str.split(';').map(pair => {
       let name = pair.trim().slice(0, pair.trim().indexOf('='))
       let value = pair.trim().slice(pair.trim().indexOf('=') + 1)
@@ -79,6 +95,7 @@ class GanJi {
     }));
   }
   async getCookie() {
+    console.log(`>>>getCookie`);
     let cookie = await this.page.evaluate(() => {
       return document.cookie
     })
@@ -86,13 +103,15 @@ class GanJi {
   }
 
   async task1(user) {
+    console.log(`>>>task1`);
     await this.runPuppeteer();
     let url = `http://vip.58ganji.com/user/brokerhomeV2`
-    await this.setCookie(user.session, '.58ganji.com', this.page);
-    await this.setCookie(user.session, '.58.com', this.page);
-    await this.setCookie(user.session, '.vip.58.com', this.page);
+    let session = decodeURIComponent(user.session)
+    await this.setCookie(session, '.58ganji.com', this.page);
+    await this.setCookie(session, '.58.com', this.page);
+    await this.setCookie(session, '.vip.58.com', this.page);
     await this.page.goto(url);
-    await this.page.waitForSelector('.account-mod')
+    await this.page.waitForSelector('#account_mod li div')
     await this.sleep(500)
     //房产推广币
     let blanceHbg58 = await this.page.evaluate(() => {
@@ -114,19 +133,31 @@ class GanJi {
     await this.page.goto(url);
     await this.page.waitForSelector('.account-mod')
     let cookie = await this.getCookie()
-    await this.updateUser(user, blanceHbg58, cookie,nickName)
+    await this.updateUser(user, blanceHbg58, cookie, nickName)
     await this.close()
   }
-  async updateUser(user, blanceHbg58, cookie,nickName) {
-    let sql = "update `gj_user` set `nickName`='" + nickName + "',`account`=" + (blanceHbg58.replace(/\,/g, '') || '') + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
-    console.log(sql);
-    try {
-      await this.execSql(sql)
-    } catch (err) {
-      console.error(err)
+  async updateUser(user, blanceHbg58, cookie, nickName, status = 0) {
+    console.log(`>>>updateUser`);
+    if (user && user.id) {
+      cookie = encodeURIComponent(cookie)
+      let sql = "update `gj_user` set `status`=" + status + ", `nickName`='" + nickName + "',`account`=" + (blanceHbg58.replace(/\,/g, '') || '') + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
+      if (status) {
+        sql = `update \`gj_user\` set \`status\`=${status},\`update_time\`=NOW() where id=${user.id}`
+      }
+      try {
+        await this.execSql(sql)
+      } catch (err) {
+        console.error(err)
+      }
+    } else {
+      console.error('未处理异常')
+      console.log(nickName);
+      console.log(JSON.stringify(user));
     }
+
   }
   async getUserList() {
+    console.log(`>>>getUserList`);
     await this.sleep()
     this.userList = [];
     let result = await this.execSql("select * from `gj_user`")
@@ -137,22 +168,36 @@ class GanJi {
     }
   }
   async eachUser() {
+    console.log(`>>>eachUser`);
+    let list = ['yaoshayanzheng1'];
     await this.getUserList()
     if (this.userList.length) {
       for (let index = 0; index < this.userList.length; index++) {
         const user = this.userList[index];
-        try {
-          await this.task1(user);
-        } catch (err) {
-          console.error(err)
+        // if (user.session && list.includes(user.username)) {
+        if (user.session) {
+          try {
+            await this.task1(user);
+          } catch (err) {
+            console.log(JSON.stringify(user));
+            console.error(err)
+            //user, blanceHbg58, cookie, nickName
+            this.updateUser(user, '', '', '', 500)
+          }
+          await this.sleep(1000)
         }
-        await this.sleep(1000)
       }
     }
   }
   async mainTask() {
+    console.log(`>>>mainTask`);
     try {
-      await this.connection()
+      await this.handleDisconnect()
+    } catch (err) {
+      await this.mainTask()
+      return false;
+    }
+    try {
       await this.eachUser();
     } catch (err) {
       console.log(err);
@@ -161,15 +206,19 @@ class GanJi {
     }
   }
   async main() {
+    console.log(`>>>main`);
     let that = this;
-    // await that.mainTask()
+    await that.mainTask()
+    console.log("-Start-");
     schedule.scheduleJob('30 1 * * * *', async function () {
       console.log('scheduleCronstyle:' + new Date());
       await that.mainTask()
+      console.log("-END-");
     });
   }
   //服务中及预约中的套餐开通及到期时间
   async myService(user) {
+    console.log(`>>>myService`);
     let url = "http://vip.58ganji.com/thirdredirect/?logintype=wuba&dialog=1/&redirecturl=http://vip.58.com/app/fuwu#/app/wltdingdan/"
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -209,7 +258,6 @@ class GanJi {
     for (let index = 0; index < serviceArr.length; index++) {
       const service = serviceArr[index];
       let sql = "insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (" + user.id + ",'" + user.username + "','" + service.status + "','" + service.start + "','" + service.end + "',4,NOW())"
-      console.log(sql);
       try {
         await this.execSql(sql)
       } catch (err) {
@@ -220,6 +268,7 @@ class GanJi {
   }
   //推送中，在线购买，还可推送，今日推送到期数量
   async yxtgsp58(user) {
+    console.log(`>>>yxtgsp58`);
     let url = `http://vip.58ganji.com/jp58/yxtgsp58`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -243,7 +292,7 @@ class GanJi {
     })
     let sql = "insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)" +
       "values(" + user.id + ",'" + user.username + "','" + result['推送中'] + "','" + result['还可推送'] + "','" + result['今日推送到期'] + "','" + result['在线购买'] + "',NOW())"
-    console.log(sql);
+
     try {
       await this.execSql(sql)
     } catch (err) {
@@ -254,6 +303,7 @@ class GanJi {
 
   // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
   async myperiod(user) {
+    console.log(`>>>myperiod`);
     let url = `https://my.58.com/pro/tuiguangbi/myperiod/`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -290,7 +340,7 @@ class GanJi {
         const element = data[index];
         let sql = "insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)" +
           "values(" + user.id + ",'" + user.username + "','" + element['推广币'] + "','" + element['到期时间'] + "','" + element['剩余可用数量'] + "',NOW())"
-        console.log(sql);
+
         try {
           await this.execSql(sql)
         } catch (err) {
