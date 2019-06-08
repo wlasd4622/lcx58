@@ -261,6 +261,8 @@ function addHouseInfoData(code, userName) {
     $('[name=params_202] .optiondef li:contains(' + (houseDetailData.isSingle ? '个人' : '经纪人') + ')').click();
     //联系电话
     $('[name=phone] input').val(parseInt(houseDetailData.phone) ? parseInt(houseDetailData.phone) : userName);
+    //售价
+    $('[name=jiaGe06] input:visible').val(houseDetailData.moneyNum||1)
     console.log(houseDetailData);
     result = 3522
   } else {
