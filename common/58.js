@@ -262,7 +262,9 @@ function addHouseInfoData(code, userName) {
     //联系电话
     $('[name=phone] input').val(parseInt(houseDetailData.phone) ? parseInt(houseDetailData.phone) : userName);
     //售价
-    $('[name=jiaGe06] input:visible').val(houseDetailData.moneyNum||1)
+    if ($('[name=jiaGe06] input:visible') && !$('[name=jiaGe06] input:visible').val()) {
+      $('[name=jiaGe06] input:visible').val(houseDetailData.moneyNum || 1)
+    }
     console.log(houseDetailData);
     result = 3522
   } else {

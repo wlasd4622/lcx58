@@ -12,6 +12,7 @@ class GanJi {
       password: 'Dianzhijia@1',
       port: '3306',
       database: 'datarefresh',
+      useConnectionPooling: true,
     }
   }
 
@@ -57,6 +58,11 @@ class GanJi {
 
   async runPuppeteer() {
     console.log(`>>>runPuppeteer`);
+    try {
+      this.close()
+    } catch (err) {
+      console.log(err);
+    }
     this.browser = await puppeteer.launch({
       headless: true,
       args: ['--start-maximized', '--disable-infobars']
@@ -106,41 +112,54 @@ class GanJi {
     console.log(`>>>task1`);
     await this.runPuppeteer();
     let url = `http://vip.58ganji.com/user/brokerhomeV2`
+    url = `http://vip.58ganji.com/broker/balancedetail/generalize`
     let session = decodeURIComponent(user.session)
     await this.setCookie(session, '.58ganji.com', this.page);
     await this.setCookie(session, '.58.com', this.page);
     await this.setCookie(session, '.vip.58.com', this.page);
-    await this.page.goto(url);
-    await this.page.waitForSelector('#account_mod li div')
+    await this.setCookie(session, '.anjuke.com', this.page);
+    await this.setCookie(session, '.vip.58ganji.com', this.page);
     await this.sleep(500)
-    //房产推广币
-    let blanceHbg58 = await this.page.evaluate(() => {
-      return $('.account-mod li:eq(1) b').text();
-    });
-
-    let nickName = await this.page.evaluate(() => {
-      return $('a:contains(您好)').text().replace('您好，', '').trim() || ''
-    })
-
-    //服务中及预约中的套餐开通及到期时间
-    await this.myService(user);
-    //推送中，在线购买，还可推送，今日推送到期数量
-    await this.yxtgsp58(user);
-    // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
-    await this.myperiod(user);
-    //回到首页 获取cookie
-    url = `http://vip.58ganji.com/user/brokerhomeV2`
-    await this.page.goto(url);
-    await this.page.waitForSelector('.account-mod')
+    let username = await this.getUserInfo();
     let cookie = await this.getCookie()
-    await this.updateUser(user, blanceHbg58, cookie, nickName)
+    if (username === user.username) {
+      url = `http://vip.58ganji.com/broker/balancedetail/generalize`
+      await this.page.goto(url);
+      await this.page.waitForSelector('.balance-detail .info-box-item .estate')
+      await this.sleep(2000)
+      //房产推广币
+      let blanceHbg58 = await this.page.evaluate(() => {
+        // return $('.account-mod li:eq(1) b').text();
+        return $('span:contains(房产推广币)').next('b').text() || ''
+      });
+
+      let nickName = await this.page.evaluate(() => {
+        return $('a:contains(您好)').text().replace('您好，', '').trim() || ''
+      })
+
+      //服务中及预约中的套餐开通及到期时间
+      await this.myService(user);
+      //推送中，在线购买，还可推送，今日推送到期数量
+      await this.yxtgsp58(user);
+      // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
+      await this.myperiod(user);
+      //回到首页 获取cookie
+      url = `http://vip.58ganji.com/user/brokerhomeV2`
+      url = `http://vip.58ganji.com/broker/balancedetail/generalize`
+      await this.page.goto(url);
+      await this.page.waitForSelector('.balance-detail .info-box-item .estate')
+      cookie = await this.getCookie()
+      await this.updateUser(user, blanceHbg58, cookie, nickName)
+    } else {
+      await this.updateUser(user, '', '', '', 5001)
+    }
     await this.close()
   }
   async updateUser(user, blanceHbg58, cookie, nickName, status = 0) {
     console.log(`>>>updateUser`);
     if (user && user.id) {
       cookie = encodeURIComponent(cookie)
-      let sql = "update `gj_user` set `status`=" + status + ", `nickName`='" + nickName + "',`account`=" + (blanceHbg58.replace(/\,/g, '') || '') + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
+      let sql = "update `gj_user` set `status`=" + status + ", `nickName`='" + nickName + "',`account`=" + (blanceHbg58.replace(/\,/g, '') || 0) + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
       if (status) {
         sql = `update \`gj_user\` set \`status\`=${status},\`update_time\`=NOW() where id=${user.id}`
       }
@@ -167,9 +186,22 @@ class GanJi {
       throw "获取用户信息异常"
     }
   }
+  async login(user) {
+    let loginName = await this.page.$('#loginName')
+    if (loginName) {
+      await this.page.click('span.login-switch.bar-code.iconfont')
+      await this.sleep();
+      await this.page.type('#loginName', user.username);
+      await this.page.type('#loginPwd', user.password)
+      await this.sleep(1000);
+      await this.page.click('#loginSubmit')
+      console.log(666);
+    }
+  }
+
   async eachUser() {
     console.log(`>>>eachUser`);
-    let list = ['yaoshayanzheng1'];
+    let list = ['廊坊010号'];
     await this.getUserList()
     if (this.userList.length) {
       for (let index = 0; index < this.userList.length; index++) {
@@ -182,7 +214,9 @@ class GanJi {
             console.log(JSON.stringify(user));
             console.error(err)
             //user, blanceHbg58, cookie, nickName
+            // await this.login(user);
             this.updateUser(user, '', '', '', 500)
+            this.close();
           }
           await this.sleep(1000)
         }
@@ -216,6 +250,19 @@ class GanJi {
       console.log("-END-");
     });
   }
+
+  async getUserInfo() {
+    let url = `http://vip.58ganji.com/broker/brokerinfo`
+    await this.page.goto(url, {
+      waitUntil: 'domcontentloaded'
+    })
+    await this.page.waitForSelector('.info-header-username')
+    let username = await this.page.evaluate(() => {
+      return $('.info-header-username').text().trim() || ''
+    })
+    return username || ''
+  }
+
   //服务中及预约中的套餐开通及到期时间
   async myService(user) {
     console.log(`>>>myService`);
