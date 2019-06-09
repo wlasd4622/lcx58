@@ -22,6 +22,7 @@
 //js发帖正常					3522
 //租金为空					3523
 //电话校验回填验证码			3524
+//上传的图片小于5K			3525
 //--------------------------------------
 //账户正常					2000
 //密码错 					4000
@@ -93,14 +94,14 @@ Function refresh(houseId)
         Delay 500
         Call execjs("var wContent=$('form.form-container.immediate').text().trim().replace(/[\n\s]/g,'')||$('form.yyset').text().trim().replace(/[\s\n]/g,'');")
         Call execjs("function getStatus() {"&_
-    					"if (wContent.indexOf('近7天免费刷新已到上限') > -1) {"&_
+    					"if (wContent.indexOf('近7天免费刷新已到上限') > -1||wContent.indexOf('帖子浏览量大于') > -1) {"&_
         					"return 3070"&_
     					"} else if(wContent.indexOf('30天不享有免费刷新') > -1||wContent.indexOf('免费刷新次数已用完，您可尝试付费刷新') > -1) {"&_
         					"return 3030"&_
     					"} else if (wContent.indexOf('本次刷新免费') > -1||/账号剩余刷新资源[^0]/.test(wContent)) {"&_
         					"return 1000"&_
     					"} else {"&_
-        					"return -76593"&_
+        					"return -793"&_
     					"}"&_
 					"}")
         rHouseStatus=execjs("getStatus();")
@@ -147,6 +148,17 @@ Function editHouseInfo(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找登录窗口")
+
+
+
+    Call loadScript("58")
+    Delay 100
+    hosueDetailCode=""
+    hosueDetailCode = execjs("getHouseDetail();")
+    If hosueDetailCode = "" Then
+        Goto rEditHouseInfo
+    End If
+
     Call execjs("var editData={};"&_
     			"editData.surplusMonth = $('span:contains(剩余租期:)').length?$('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1]:'';"&_
 				"editData.surplusMonthUnit = $('span:contains(剩余租期:)').length?$('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[2]:'';"&_
@@ -204,6 +216,43 @@ Function editHouseInfo(houseId)
         TracePrint js
         Call execjs(js)
         Call execjs("changeStatus()")
+
+
+
+        Call execjs("window.houseDetailData = JSON.parse(decodeURIComponent(`"+hosueDetailCode+"`));")
+        //经营行业
+        Call execjs("if (houseDetailData.industry == '家居建材') {"&_
+    					"houseDetailData.industry = '家具建材'"&_
+    				"}"&_
+    				"$('[name=params_22701] .optiondef li:contains(' + houseDetailData.industry + ')').click();"&_
+    				"$('[name=params_20601] .optiondef li:eq(1)').click();")
+    	//物业费
+    	Call execjs("if($('[name=params_218] input').val()==0){"&_
+					"	$('[name=params_218] input').val('').blur();"&_
+					"}")
+
+		//售价
+		Call execjs("if ($('[name=jiaGe06] input:visible') && !$('[name=jiaGe06] input:visible').val()) {"&_
+      				"$('[name=jiaGe06] input:visible').val(houseDetailData.moneyNum || 1);"&_
+    				"}")
+
+
+    	//转让费，剩余租期
+//    	Call execjs("if (houseDetailData.title.indexOf('(转让)') > -1) {"&_
+//      					"$('[name=fenlei] [data-value=511571]').click();"&_
+//      					"if (!houseDetailData.transferFee || houseDetailData.transferFee < 1) {"&_
+//        				"	houseDetailData.transferFee = 1"&_
+//      					"}"&_
+//      					"$('[name=params_214] input').val(houseDetailData.transferFee);"&_
+//      					"$('[name=params_215] input').val(houseDetailData.endMonth||1);"&_
+//    					"} else if (houseDetailData.title.indexOf('(出租)') > -1) {"&_
+//      					"$('[name=fenlei] [data-value=511570]').click();"&_
+//      					"$('[name=type] [data-value=2]').click();"&_
+//    					"} else if (houseDetailData.title.indexOf('(出售)') > -1) {"&_
+//      					"$('[name=fenlei] [data-value=511570]').click();"&_
+//      					"$('[name=type] [data-value=0]').click();"&_
+//    				"};")
+
         Delay 200
         execjs("window.scrollTo(0,99999);")
         Delay 1000
@@ -215,6 +264,11 @@ Function editHouseInfo(houseId)
         execjs ("$('.submit_wrap span').trigger('click');")
         Delay 2500
         Delay 2500
+        length = execjs("$('.tip:contains(详细地址不能为空):visible').length||0")
+        If cint(length) > 0 Then
+        	editStatus = 3507
+        	Goto rBreak
+        End If
         index = find("document.title.indexOf('息发布成功')", "查找发布成功标题")
         If index = "" Then
             index=-1
@@ -231,6 +285,7 @@ Function editHouseInfo(houseId)
     Else
         Goto fEditDetailPage
     End If
+    Rem rBreak
     editHouseInfo=editStatus
 End Function
 Function houseList()
@@ -412,7 +467,9 @@ Function login()
                     TracePrint result
                     Goto fBreakDo
                 Else
-                    MessageBox "登录，未处理异常"
+                loginStatus =4004
+                    TracePrint "登录，未处理异常"
+                    Goto fBreakDo
                 End If
             End If
             result1 = execjs("$('.write.write58').length||0")
@@ -498,7 +555,13 @@ Function start()
             call start()
         End If
         page2 = Plugin.chrome.create()
-    End if
+    End If
+    //得到当前最前面的窗口句柄
+    Hwnd = Plugin.Window.Foreground()
+    //延时200毫秒
+    delay 200
+    //最大化窗口
+    Call Plugin.Window.Max(Hwnd)
 End Function
 Function object()
     Dim o
@@ -510,11 +573,14 @@ End Function
 Function loadScript(name)
     Rem fLoadScript
     Call execjs("window.getHouseDetail=null;")
-    Call execjs("var script=document.createElement('script');script.type='text/javascript';script.src='//wlasd4622.github.io/lcx58/common/58.js';document.getElementsByTagName('head')[0].appendChild(script); ")
+    Call execjs("var script=document.createElement('script');script.type='text/javascript';script.async = true;script.defer = true;script.src='//wlasd4622.github.io/lcx58/common/58.js?v='+Date.now();document.getElementsByTagName('head')[0].appendChild(script); ")
     count=0
     Do
         Delay 100
         flag = execjs("getHouseDetail!==null")
+        If flag = "" Then
+        	flag=False
+        End If
         flag = CBool(flag)
         count = count + 1
         TracePrint "count:"&count
@@ -610,6 +676,7 @@ Function addHouseInfo(houseId)
         Rem fUpdaaImage
         length = find("(houseDetailData.picList.split('|').length===$('.img_box[draggable=true]').length?1:0)", "检查图片是否上传完毕")
         If length > 0 Then
+            Rem rSubmit
             imageCount = execjs("$('.img_box[draggable=true]').length")
             TracePrint "图片总数:"&imageCount
             Delay 2000
@@ -656,6 +723,11 @@ Function addHouseInfo(houseId)
                 Goto rAddHouseInfo
             End If
         Else
+            length = execjs("$('div:contains(上传的图片小于):visible').length||0")
+            If cint(length)>0 Then
+                addStatus = 3525
+                Goto rSubmit
+            End If
             Goto fUpdaaImage
         End If
     ElseIf cint(addStatus) = 3513 Then
@@ -747,7 +819,7 @@ Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
-    //sql = "SELECT * FROM house_list WHERE `username`='13122275816' ORDER BY RAND( ) LIMIT 1"
+    //sql = "SELECT * FROM house_list WHERE `username`='13555806826' ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -776,7 +848,8 @@ Function getUser()
         getUser =userInfo
     Else
         //getUser=Array("-1")
-        TracePrint "获取house_list信息异常"
+        TracePrint "没有获取到数据"
+        Delay 5000
         Goto fGetUser
     End If
 End Function
@@ -801,20 +874,17 @@ Function setCookie(value)
     TracePrint "setCookie"
     Call execjsp2("$('#pasteButton').click()", page2)
     Call findp2("$('#pasteCookie textarea:visible').length", "find textarea", page2)
-    Call Plugin.Sys.SetCLB(value)
-    MoveTo 606, 294
-    Delay 300
-    LeftClick 2
-    Delay 300
-    KeyDown 17, 1
-    KeyPress 86, 1
-    KeyUp 17, 1
+    value = Replace(value, "\""","\\""")
+    TracePrint value
+    Call execjsp2("$('#pasteCookie textarea:visible').val(`"+value+"`)", page2)
     Delay 300
     Call execjsp2("$('#submitButton').click()", page2)
     Delay 2000
 end Function
 Function clearAllCookie()
     Call Plugin.chrome.activate(page2)
+    call Plugin.chrome.clear_browser_cache(id)
+    call Plugin.chrome.clear_browser_cookies(id)
     url = "chrome-extension://fngmhnnpilhplaeedifhccceomclgfbg/popup.html?url=http://passport.58.com&id=-1&incognito=false"
     Call Plugin.chrome.load(page2, url)
     // 等待载入完成
