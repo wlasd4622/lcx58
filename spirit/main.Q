@@ -148,9 +148,6 @@ Function editHouseInfo(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找登录窗口")
-
-
-
     Call loadScript("58")
     Delay 100
     hosueDetailCode=""
@@ -158,7 +155,6 @@ Function editHouseInfo(houseId)
     If hosueDetailCode = "" Then
         Goto rEditHouseInfo
     End If
-
     Call execjs("var editData={};"&_
     			"editData.surplusMonth = $('span:contains(剩余租期:)').length?$('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1]:'';"&_
 				"editData.surplusMonthUnit = $('span:contains(剩余租期:)').length?$('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[2]:'';"&_
@@ -216,9 +212,6 @@ Function editHouseInfo(houseId)
         TracePrint js
         Call execjs(js)
         Call execjs("changeStatus()")
-
-
-
         Call execjs("window.houseDetailData = JSON.parse(decodeURIComponent(`"+hosueDetailCode+"`));")
         //经营行业
         Call execjs("if (houseDetailData.industry == '家居建材') {"&_
@@ -226,19 +219,16 @@ Function editHouseInfo(houseId)
     				"}"&_
     				"$('[name=params_22701] .optiondef li:contains(' + houseDetailData.industry + ')').click();"&_
     				"$('[name=params_20601] .optiondef li:eq(1)').click();")
-    	//物业费
-    	Call execjs("if($('[name=params_218] input').val()==0){"&_
+        //物业费
+        Call execjs("if($('[name=params_218] input').val()==0){"&_
 					"	$('[name=params_218] input').val('').blur();"&_
 					"}")
-
-		//售价
-		Call execjs("if ($('[name=jiaGe06] input:visible') && !$('[name=jiaGe06] input:visible').val()) {"&_
+        //售价
+        Call execjs("if ($('[name=jiaGe06] input:visible') && !$('[name=jiaGe06] input:visible').val()) {"&_
       				"$('[name=jiaGe06] input:visible').val(houseDetailData.moneyNum || 1);"&_
     				"}")
-
-
-    	//转让费，剩余租期
-//    	Call execjs("if (houseDetailData.title.indexOf('(转让)') > -1) {"&_
+        //转让费，剩余租期
+        //    	Call execjs("if (houseDetailData.title.indexOf('(转让)') > -1) {"&_
 //      					"$('[name=fenlei] [data-value=511571]').click();"&_
 //      					"if (!houseDetailData.transferFee || houseDetailData.transferFee < 1) {"&_
 //        				"	houseDetailData.transferFee = 1"&_
@@ -252,7 +242,6 @@ Function editHouseInfo(houseId)
 //      					"$('[name=fenlei] [data-value=511570]').click();"&_
 //      					"$('[name=type] [data-value=0]').click();"&_
 //    				"};")
-
         Delay 200
         execjs("window.scrollTo(0,99999);")
         Delay 1000
@@ -266,8 +255,8 @@ Function editHouseInfo(houseId)
         Delay 2500
         length = execjs("$('.tip:contains(详细地址不能为空):visible').length||0")
         If cint(length) > 0 Then
-        	editStatus = 3507
-        	Goto rBreak
+            editStatus = 3507
+            Goto rBreak
         End If
         index = find("document.title.indexOf('息发布成功')", "查找发布成功标题")
         If index = "" Then
@@ -467,7 +456,7 @@ Function login()
                     TracePrint result
                     Goto fBreakDo
                 Else
-                loginStatus =4004
+                    loginStatus =4004
                     TracePrint "登录，未处理异常"
                     Goto fBreakDo
                 End If
@@ -579,7 +568,7 @@ Function loadScript(name)
         Delay 100
         flag = execjs("getHouseDetail!==null")
         If flag = "" Then
-        	flag=False
+            flag=False
         End If
         flag = CBool(flag)
         count = count + 1

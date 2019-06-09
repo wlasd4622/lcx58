@@ -122,7 +122,7 @@ class GanJi {
     await this.sleep(500)
     let username = await this.getUserInfo();
     let cookie = await this.getCookie()
-    if (username === user.username) {
+    if (username.toLocaleLowerCase() === user.username.toLocaleLowerCase()) {
       url = `http://vip.58ganji.com/broker/balancedetail/generalize`
       await this.page.goto(url);
       await this.page.waitForSelector('.balance-detail .info-box-item .estate')
@@ -201,7 +201,7 @@ class GanJi {
 
   async eachUser() {
     console.log(`>>>eachUser`);
-    let list = ['廊坊010号'];
+    let list = ['W15810915325'];
     await this.getUserList()
     if (this.userList.length) {
       for (let index = 0; index < this.userList.length; index++) {
@@ -304,7 +304,7 @@ class GanJi {
     })
     for (let index = 0; index < serviceArr.length; index++) {
       const service = serviceArr[index];
-      let sql = "insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (" + user.id + ",'" + user.username + "','" + service.status + "','" + service.start + "','" + service.end + "',4,NOW())"
+      let sql = "insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (" + user.id + ",'" + user.username + "','" + service.status + "','" + service.start + "','" + service.end + "',"+(service.days||'')+",NOW())"
       try {
         await this.execSql(sql)
       } catch (err) {
