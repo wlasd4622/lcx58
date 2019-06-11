@@ -182,6 +182,16 @@ class GanJi {
     let result = await this.execSql("select * from `gj_user`")
     if (result && result.length) {
       this.userList = result;
+      this.userList.sort((user0, user1) => {
+        if (!user0.update_time) {
+          user0.update_time = new Date('2018-01-01')
+        }
+        if (!user1.update_time) {
+          user1.update_time = new Date('2018-01-01')
+        }
+        return user0.update_time.getTime() - user1.update_time.getTime()
+      })
+      console.log(this.userList);
     } else {
       throw "获取用户信息异常"
     }
@@ -304,7 +314,7 @@ class GanJi {
     })
     for (let index = 0; index < serviceArr.length; index++) {
       const service = serviceArr[index];
-      let sql = "insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (" + user.id + ",'" + user.username + "','" + service.status + "','" + service.start + "','" + service.end + "',"+(service.days||'')+",NOW())"
+      let sql = "insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (" + user.id + ",'" + user.username + "','" + service.status + "','" + service.start + "','" + service.end + "'," + (service.days || '') + ",NOW())"
       try {
         await this.execSql(sql)
       } catch (err) {
