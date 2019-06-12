@@ -293,7 +293,8 @@ if (houseDetailData.title.indexOf('(转让)') > -1) {
   if (!houseDetailData.transferFee || houseDetailData.transferFee < 1) {
     houseDetailData.transferFee = 1
   }
-  $('[name=params_214] input').val(houseDetailData.transferFee);$('[name=params_215] input').val(houseDetailData.endMonth || 1)
+  $('[name=params_214] input').val(houseDetailData.transferFee);
+  $('[name=params_215] input').val(houseDetailData.endMonth || 1)
 } else if (houseDetailData.title.indexOf('(出租)') > -1) {
   $('[name=fenlei] [data-value=511570]').click();
   $('[name=type] [data-value=2]').click();
@@ -319,3 +320,40 @@ if (houseDetailData.title.indexOf("(转让)") > -1) {
   $('[name=fenlei] [data-value=511570]').click();
   $('[name=type] [data-value="0"]').click();
 };
+
+// updateHouseInfo('FFFFFFFFF4958167!115C4F0D8CAD41C6876D957C3E0BFC', 3503, 'https://sjz.58.com/shangpu/38054053110436x.shtml')
+function updateHouseInfo(key, status, houseUrl) {
+  let url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
+  let data = {
+    transfer_store_id: key
+  }
+  if (key.length > 20) {
+    url = `https://api.dianzhijia.com/api/open/changebjspgeneralizestatus`
+    data = {
+      pid: key
+    }
+  }
+  data.status = status;
+  data.wbUrl = houseUrl;
+  data.gjUrl = houseUrl.replace('58.com/shangpu/', 'ganji.com/wbdetail/shangpu/')
+  $.ajax({
+    url,
+    type: 'post',
+    headers: {
+      Accept: `application/vnd.dpexpo.v1+json`
+    },
+    data,
+    success: function (res) {
+      if (res && res.data) {
+        //更新成功
+        console.log('更新成功');
+      } else {
+        //更新失败
+        console.log('更新失败');
+      }
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  })
+}
