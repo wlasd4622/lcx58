@@ -554,6 +554,11 @@
     </hop>
     <hop>
       <from>增加常量</from>
+      <to>字段选择</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>字段选择</from>
       <to>表输出</to>
       <enabled>Y</enabled>
     </hop>
@@ -659,20 +664,24 @@
     <return_field />
     <fields>
       <field>
+        <column_name>username</column_name>
+        <stream_name>username</stream_name>
+      </field>
+      <field>
+        <column_name>create_date</column_name>
+        <stream_name>create_date</stream_name>
+      </field>
+      <field>
+        <column_name>key</column_name>
+        <stream_name>key</stream_name>
+      </field>
+      <field>
         <column_name>url</column_name>
         <stream_name>url</stream_name>
       </field>
       <field>
         <column_name>password</column_name>
         <stream_name>password</stream_name>
-      </field>
-      <field>
-        <column_name>username</column_name>
-        <stream_name>telephone</stream_name>
-      </field>
-      <field>
-        <column_name>key</column_name>
-        <stream_name>transfer_store_id</stream_name>
       </field>
     </fields>
     <attributes />
@@ -684,8 +693,96 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
+      <xloc>864</xloc>
       <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>字段选择</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <rename />
+      </field>
+      <field>
+        <name>platform</name>
+        <rename />
+      </field>
+      <field>
+        <name>post_type</name>
+        <rename />
+      </field>
+      <field>
+        <name>telephone</name>
+        <rename>username</rename>
+      </field>
+      <field>
+        <name>description</name>
+        <rename />
+      </field>
+      <field>
+        <name>created_at</name>
+        <rename>create_date</rename>
+      </field>
+      <field>
+        <name>updated_at</name>
+        <rename />
+      </field>
+      <field>
+        <name>transfer_store_id</name>
+        <rename>key</rename>
+      </field>
+      <field>
+        <name>url</name>
+        <rename />
+      </field>
+      <field>
+        <name>url2</name>
+        <rename />
+      </field>
+      <field>
+        <name>generalize_account</name>
+        <rename />
+      </field>
+      <field>
+        <name>status</name>
+        <rename />
+      </field>
+      <field>
+        <name>end_time</name>
+        <rename />
+      </field>
+      <field>
+        <name>generalize_number</name>
+        <rename />
+      </field>
+      <field>
+        <name>password</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

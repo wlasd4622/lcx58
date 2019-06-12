@@ -548,13 +548,18 @@
   </connection>
   <order>
     <hop>
-      <from>增加常量 2</from>
-      <to>表输出 2</to>
+      <from>表输入 2</from>
+      <to>增加常量 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>表输入 2</from>
-      <to>增加常量 2</to>
+      <from>增加常量 2</from>
+      <to>字段选择</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>字段选择</from>
+      <to>表输出 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -659,20 +664,24 @@
     <return_field />
     <fields>
       <field>
-        <column_name>password</column_name>
-        <stream_name>password</stream_name>
+        <column_name>key</column_name>
+        <stream_name>key</stream_name>
+      </field>
+      <field>
+        <column_name>create_date</column_name>
+        <stream_name>create_date</stream_name>
       </field>
       <field>
         <column_name>username</column_name>
-        <stream_name>no_58</stream_name>
-      </field>
-      <field>
-        <column_name>key</column_name>
-        <stream_name>pid</stream_name>
+        <stream_name>username</stream_name>
       </field>
       <field>
         <column_name>url</column_name>
-        <stream_name>url_58</stream_name>
+        <stream_name>url</stream_name>
+      </field>
+      <field>
+        <column_name>password</column_name>
+        <stream_name>password</stream_name>
       </field>
     </fields>
     <attributes />
@@ -686,6 +695,102 @@
     <GUI>
       <xloc>656</xloc>
       <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>字段选择</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>entering_time</name>
+        <rename>create_date</rename>
+        <type>Timestamp</type>
+        <length>0</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>no_58</name>
+        <rename>username</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>pid</name>
+        <rename>key</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>url_58</name>
+        <rename>url</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
