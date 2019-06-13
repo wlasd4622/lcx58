@@ -322,9 +322,15 @@ if (window.houseDetailData) {
   };
 }
 
-
+window.updateHouseInfoStatus = "";
+window.updateHouseData = {}
 // updateHouseInfo('FFFFFFFFF4958167!115C4F0D8CAD41C6876D957C3E0BFC', 3503, 'https://sjz.58.com/shangpu/38054053110436x.shtml')
 function updateHouseInfo(key, status, houseUrl) {
+  window.updateHouseData = {
+    key,
+    status,
+    houseUrl
+  }
   console.log('key:' + key);
   console.log('status:' + status);
   console.log('houseUrl:' + houseUrl);
@@ -355,13 +361,17 @@ function updateHouseInfo(key, status, houseUrl) {
       if (res && res.data) {
         //更新成功
         console.log('更新成功');
+        updateHouseInfoStatus = '更新成功'
       } else {
         //更新失败
         console.log('更新失败');
+        updateHouseInfoStatus = '更新失败'
       }
     },
     error: function (err) {
       console.log(err);
+      window.updateHouseInfoMessate = err
+      updateHouseInfoStatus = "更新错误"
     }
   })
 }
