@@ -54,6 +54,7 @@ End Function
 Function main()
     Call mySqlConnect()
     Rem fLogin
+    newUrl=""
     Call start()
     status = login()
     If status = 0 Then
@@ -487,6 +488,24 @@ Function login()
     login=loginStatus
 End Function
 Function updateStatus(userInfo, status)
+    Rem rUpdateStatus
+    Call loadScript("58")
+    Delay 500
+    flag = execjs("typeof window.updateHouseInfo==='undefined'?0:1")
+    If flag = "" Then
+        flag=0
+    End If
+    If cint(flag) = 0 Then
+        Goto rUpdateStatus
+    End If
+    js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"')"
+    //MessageBox js
+    Call execjs(js)
+    Delay 500
+    result = execjs("window.updateHouseInfoStatus")
+    If result = "更新错误" Then
+        MessageBox "更新错误"
+    End If
     Rem fUpdateStatus
     TracePrint  "updateStatus:"&status
     //每次只能更新一个字段
@@ -573,8 +592,8 @@ Function loadScript(name)
         flag = CBool(flag)
         count = count + 1
         TracePrint "count:"&count
-    Loop While flag and count < 10 * 3
-    If flag Then
+    Loop While flag = 0 and count < 30
+    If flag=0 Then
         TracePrint "script加载失败！重试中..."
         Goto fLoadScript
     End If
@@ -584,6 +603,7 @@ Function addHouseInfo(houseId)
     //发布帖子失败 				3511
     //发布帖子异常 				3512
     Rem rAddHouseInfo
+    newUrl=""
     addStatus=3511
     //获取详情
     url = "https://sy.58.com/shangpu/" + houseId + "x.shtml"
@@ -807,8 +827,12 @@ End Function
 Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
-    sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1"
-    //sql = "SELECT * FROM house_list WHERE `username`='13555806826' ORDER BY RAND( ) LIMIT 1"
+    sql = "START TRANSACTION"
+    TracePrint sql
+    Call Plugin.Super_MySQL.mysql_query(mysql, sql)
+    store = Plugin.Super_MySQL.store_result(mysql)
+    sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='15000656246' ORDER BY RAND( ) LIMIT 1"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -824,6 +848,9 @@ Function getUser()
         url = Plugin.Super_MySQL.fetch_text(store, "url")
         //锁定这条数据
         sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
+        TracePrint sql
+        Call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        sql = "commit"
         TracePrint sql
         Call Plugin.Super_MySQL.mysql_query(mysql, sql)
         If password = "" Then
