@@ -1,0 +1,6556 @@
+var houseData = [{
+  "id": 2,
+  "house_key": "FFFFFFFFF4958167!3A4AB6D4B82D4C8694D7466F22E3A1",
+  "url": "http://sz.58.com/shangpu/38298098663299x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-29T16:00:00.000Z"
+}, {
+  "id": 3,
+  "house_key": "FFFFFFFFF4958167!90EF5E19EB6B4374962231BC5D4E4D",
+  "url": "http://tj.58.com/shangpu/38298180402328x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-29T16:00:00.000Z"
+}, {
+  "id": 4,
+  "house_key": "FFFFFFFFF4958167!22AF89C9A13847048CF0D28F3CD798",
+  "url": "http://sjz.58.com/shangpu/38298193290788x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-29T16:00:00.000Z"
+}, {
+  "id": 5,
+  "house_key": "FFFFFFFFF4958167!2FA909017B584112984CE92D213757",
+  "url": "http://cq.58.com/shangpu/38298609832835x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-29T16:00:00.000Z"
+}, {
+  "id": 6,
+  "house_key": "FFFFFFFFF4958167!90B6BCE31BD84ED0984572977CF627",
+  "url": "http://zz.58.com/shangpu/38298616237969x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-29T16:00:00.000Z"
+}, {
+  "id": 7,
+  "house_key": "FFFFFFFFF4958167!F66A13B1025D41F3A8CCFE922A47E0",
+  "url": "http://zz.58.com/shangpu/38303014284553x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 8,
+  "house_key": "FFFFFFFFF4958167!3A9CEDAD1C7C4464B5E86E4A546C0A",
+  "url": "http://cq.58.com/shangpu/38303308299552x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 9,
+  "house_key": "FFFFFFFFF4958167!3A9CEDAD1C7C4464B5E86E4A546C0A",
+  "url": "http://cq.58.com/shangpu/38303410997000x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 10,
+  "house_key": "FFFFFFFFF4958167!4509BDEEC4E34D3C90678EE8287B70",
+  "url": "http://sjz.58.com/shangpu/38303486875777x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 11,
+  "house_key": "FFFFFFFFF4958167!DEA9F308AFA74B679552DB94184631",
+  "url": "http://zz.58.com/shangpu/38303516294437x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 12,
+  "house_key": "FFFFFFFFF4958167!709984E7450E4B1589143D2AE96D55",
+  "url": "http://lf.58.com/shangpu/38303544227231x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 13,
+  "house_key": "FFFFFFFFF4958167!E90E2848AEAF41D6A06EBD5BEB886F",
+  "url": "http://zz.58.com/shangpu/38303579587979x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 14,
+  "house_key": "FFFFFFFFF4958167!8D9A6BE338A24145B17FEEA9CF6318",
+  "url": "http://zz.58.com/shangpu/38303595041564x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 15,
+  "house_key": "FFFFFFFFF4958167!6E15F1DE2D224EA5AFD348B8DA8C3A",
+  "url": "http://sjz.58.com/shangpu/38305074193051x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 16,
+  "house_key": "FFFFFFFFF4958167!4ACED039C7C043828C36F7F796E93F",
+  "url": "http://cd.58.com/shangpu/38305098372231x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 17,
+  "house_key": "FFFFFFFFF4958167!F482CBC9C80D467193719546E75A58",
+  "url": "http://wh.58.com/shangpu/38305124999198x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 18,
+  "house_key": "FFFFFFFFF4958167!F482CBC9C80D467193719546E75A58",
+  "url": "http://wh.58.com/shangpu/38305446848038x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 19,
+  "house_key": "FFFFFFFFF4958167!79A4875E60014DD189DBB0C2B60793",
+  "url": "http://sh.58.com/shangpu/38305463027472x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 20,
+  "house_key": "FFFFFFFFF4958167!39A15DA6183D4F26A379435FBF4612",
+  "url": "http://wh.58.com/shangpu/38305498629539x.shtml",
+  "old_url": null,
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 21,
+  "house_key": "FFFFFFFFF4958167!9DC07632DB054974A2C185E095AF3C",
+  "url": "http://wh.58.com/shangpu/38305740555670x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37943797450515x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 22,
+  "house_key": "FFFFFFFFF4958167!811F6EC3316B49698F19F7D00F5EDB",
+  "url": "http://cc.58.com/shangpu/38305823027588x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37908825577243x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 23,
+  "house_key": "FFFFFFFFF4958167!F9D8ADD9887C42828CC4C4F02AA459",
+  "url": "http://wh.58.com/shangpu/38305835617427x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37545260888339x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 24,
+  "house_key": "FFFFFFFFF4958167!CF994DB4C13647D29C62CED01B04CB",
+  "url": "http://sh.58.com/shangpu/38305847477781x.shtml",
+  "old_url": "http://sh.58.com/shangpu/37611413334544x.shtml",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 25,
+  "house_key": "FFFFFFFFF4958167!A12B5071FEFA4182B95FB7297A0F59",
+  "url": "http://sjz.58.com/shangpu/38305925954955x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37578651513231x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 26,
+  "house_key": "146683",
+  "url": "http://sh.58.com/shangpu/38306089036824x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37965129108485x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 27,
+  "house_key": "FFFFFFFFF4958167!BFBA0933BB584073A65297062A109F",
+  "url": "http://cq.58.com/shangpu/38306101772454x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37678415320227x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 29,
+  "house_key": "FFFFFFFFF4958167!3C03DD7CBFF2487BA60A7FC30CED08",
+  "url": "http://wh.58.com/shangpu/38307347399958x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37810555125779x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 30,
+  "house_key": "FFFFFFFFF4958167!3BE867A790774B149EFAD4D5CA396D",
+  "url": "http://cq.58.com/shangpu/38308266134559x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37734348110999x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 31,
+  "house_key": "FFFFFFFFF4958167!71863B1DB8914BC881599E82B3A382",
+  "url": "http://cd.58.com/shangpu/38309118043137x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37943494143748x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 32,
+  "house_key": "FFFFFFFFF4958167!525C216B550F420DBC98C22AD8C7A3",
+  "url": "http://sh.58.com/shangpu/38309130599591x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37543760343171x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 33,
+  "house_key": "FFFFFFFFF4958167!8A5D06D8FB7A469CBEF0A8470151FD",
+  "url": "http://zz.58.com/shangpu/38309146048163x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37943545991707x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 34,
+  "house_key": "FFFFFFFFF4958167!09521629859549BBAE199C2A05463A",
+  "url": "http://wh.58.com/shangpu/38309154571560x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37779115690148x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 35,
+  "house_key": "FFFFFFFFF4958167!EF7DDB217CD245609A408F40B95670",
+  "url": "http://sy.58.com/shangpu/38310087859865x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37889655892117x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 36,
+  "house_key": "FFFFFFFFF4958167!693F0C0AAFF64FB396F2F360114E04",
+  "url": "http://zz.58.com/shangpu/38310100991265x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37579110662668x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 37,
+  "house_key": "FFFFFFFFF4958167!5DE3353DC78D4498BE4721902CE2CD",
+  "url": "http://cd.58.com/shangpu/38310118331140x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37732057390730x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 38,
+  "house_key": "FFFFFFFFF4958167!04FB0634BC8D4D9191CA9198C9C8D4",
+  "url": "http://sz.58.com/shangpu/38310759235334x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37413711465481x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 39,
+  "house_key": "FFFFFFFFF4958167!452E2ECD58394BDF8FAD7CCBF59F86",
+  "url": "http://qd.58.com/shangpu/38310778337542x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37655347090187x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 40,
+  "house_key": "FFFFFFFFF4958167!09E1D95EB2CB4FF69BC73FC7E13BC2",
+  "url": "http://sz.58.com/shangpu/38310805632917x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37679271170819x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 41,
+  "house_key": "FFFFFFFFF4958167!2EEF61207A83414DA83F4F6B41AA3C",
+  "url": "http://cq.58.com/shangpu/38310830408718x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37899191925505x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 42,
+  "house_key": "FFFFFFFFF4958167!D0C85257DED84E978F809472D1D46D",
+  "url": "http://wh.58.com/shangpu/38310842956440x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37734614493343x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 43,
+  "house_key": "FFFFFFFFF4958167!780DD535B28643AEBCA2A9B038D499",
+  "url": "http://wh.58.com/shangpu/38310854833826x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37942300245411x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 44,
+  "house_key": "FFFFFFFFF4958167!EBCE691788524A67960E799E65EB0A",
+  "url": "http://cd.58.com/shangpu/38310881880093x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37900133182599x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 45,
+  "house_key": "FFFFFFFFF4958167!49DD6DD44B4C4AD09D7605E3953A1F",
+  "url": "http://cd.58.com/shangpu/38310907093028x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37534729431689x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 46,
+  "house_key": "FFFFFFFFF4958167!D3C5CA9B504046E59C348C354228AD",
+  "url": "http://sjz.58.com/shangpu/38310934153118x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37766901380239x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 47,
+  "house_key": "FFFFFFFFF4958167!6B32CF33898B4E62892ACAB2BB3BF9",
+  "url": "http://sy.58.com/shangpu/38310954058780x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37511542137877x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 48,
+  "house_key": "FFFFFFFFF4958167!D6BB766D185A4FF0ADFF128D97D022",
+  "url": "http://sy.58.com/shangpu/38310967145351x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37767262406304x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 49,
+  "house_key": "FFFFFFFFF4958167!8E4FDD732A0D43869660C08D7244A5",
+  "url": "http://cq.58.com/shangpu/38310984221698x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37877945145619x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 50,
+  "house_key": "FFFFFFFFF4958167!E4A6EEA729A641269A3D5221C1A95F",
+  "url": "http://sh.58.com/shangpu/38310997203606x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37422464323586x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 51,
+  "house_key": "FFFFFFFFF4958167!DB91B4B6D9004A2180C5489C53BD73",
+  "url": "http://cq.58.com/shangpu/38311013042964x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37745598151944x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 52,
+  "house_key": "FFFFFFFFF4958167!9CD973A34E0B48E6841E576BEFE7F7",
+  "url": "http://cq.58.com/shangpu/38311032071692x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37722334751244x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 53,
+  "house_key": "FFFFFFFFF4958167!C0191E1CEA864C06A026F603FCFC0A",
+  "url": "http://sh.58.com/shangpu/38311037732887x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37755999358504x.shtml",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 54,
+  "house_key": "FFFFFFFFF4958167!F32DADF52D9B4D67BEADEC40D8DE14",
+  "url": "http://xa.58.com/shangpu/38311058467109x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37798426671251x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 55,
+  "house_key": "FFFFFFFFF4958167!3AA2C81E603A49A5A031266F0E129B",
+  "url": "http://wh.58.com/shangpu/38311079156364x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37853164183080x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 56,
+  "house_key": "FFFFFFFFF4958167!160FAC3FF3C44AD4B22CA5B2E5EAE1",
+  "url": "http://sh.58.com/shangpu/38311088513155x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37576583645474x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 57,
+  "house_key": "FFFFFFFFF4958167!40A1C9DCEC9B40EA91C47812BDC5C5",
+  "url": "http://sy.58.com/shangpu/38311105125647x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37930307203623x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 58,
+  "house_key": "FFFFFFFFF4958167!190692336AA7423E8723CBE6979A63",
+  "url": "http://cd.58.com/shangpu/38311142570919x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37944365597714x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 59,
+  "house_key": "FFFFFFFFF4958167!FC1A0BE523F14802B5DA499737C577",
+  "url": "http://sy.58.com/shangpu/38311154424096x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37897184255879x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 60,
+  "house_key": "FFFFFFFFF4958167!B834CF24B3964F90B9E4766AD66802",
+  "url": "http://sjz.58.com/shangpu/38311165303555x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37820497488678x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 61,
+  "house_key": "FFFFFFFFF4958167!2B6F5EA4FC2C45F4B2FA002244FAF3",
+  "url": "http://sh.58.com/shangpu/38311171324417x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37500857121809x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 62,
+  "house_key": "FFFFFFFFF4958167!63CD4A7304464864A0D326CE7860D1",
+  "url": "http://sjz.58.com/shangpu/38311182871453x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37965870823702x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 63,
+  "house_key": "FFFFFFFFF4958167!896815BC89A44ED1BC59CDE36FEAD8",
+  "url": "http://sh.58.com/shangpu/38311199019937x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37899751919248x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 64,
+  "house_key": "FFFFFFFFF4958167!0CA3B18BC6DB4522B98419902FD1A3",
+  "url": "http://sjz.58.com/shangpu/38311215179542x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37964089650311x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 65,
+  "house_key": "FFFFFFFFF4958167!89C007CD9F1A41CA917D66EDF27E8D",
+  "url": "http://sy.58.com/shangpu/38311405890449x.shtml",
+  "old_url": "http://sy.58.com/shangpu/37468924195987x.shtml",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 66,
+  "house_key": "FFFFFFFFF4958167!98438245D8C3428FAE8F3DD011A751",
+  "url": "http://hrb.58.com/shangpu/38311435123334x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/37967356003100x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 67,
+  "house_key": "FFFFFFFFF4958167!162CD0319DEA4C508387B8AFE2EE24",
+  "url": "http://sjz.58.com/shangpu/38311542564239x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37800389892487x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 68,
+  "house_key": "FFFFFFFFF4958167!A0AECBF56F5343BEB4B600A795C244",
+  "url": "http://cq.58.com/shangpu/38311556206504x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37888563958053x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 69,
+  "house_key": "117214",
+  "url": "http://cq.58.com/shangpu/38311569375493x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37886856718098x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 70,
+  "house_key": "FFFFFFFFF4958167!1DC829BB42D948CE8E38155E21A725",
+  "url": "http://qd.58.com/shangpu/38311575367188x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37932655292951x.shtml",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 71,
+  "house_key": "FFFFFFFFF4958167!C42024CD09804558A08DCFF0C37396",
+  "url": "http://cq.58.com/shangpu/38311589621920x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37908540926986x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 72,
+  "house_key": "FFFFFFFFF4958167!7CB5793F368A4EFF94858AEDEE2814",
+  "url": "http://wh.58.com/shangpu/38311604622231x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37643296498856x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 73,
+  "house_key": "FFFFFFFFF4958167!C07A9D8536AF44539419CCF78F1AA3",
+  "url": "http://cd.58.com/shangpu/38311615515291x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37744309926668x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 74,
+  "house_key": "FFFFFFFFF4958167!4579F1F244094F80B20A45B8433170",
+  "url": "http://wh.58.com/shangpu/38311647745445x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37953185157278x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 75,
+  "house_key": "FFFFFFFFF4958167!AD0AD88041C94B2EBB0806A48DC8B8",
+  "url": "http://sh.58.com/shangpu/38311704506017x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37488813132061x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 76,
+  "house_key": "FFFFFFFFF4958167!5A8687701E7E45679FA954B3F1C6CB",
+  "url": "http://cd.58.com/shangpu/38311728833304x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37900189384705x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 77,
+  "house_key": "FFFFFFFFF4958167!9AFD3D71890F4048B46E5672A1C716",
+  "url": "http://sh.58.com/shangpu/38311739673510x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37513230523140x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 78,
+  "house_key": "FFFFFFFFF4958167!B0CCDC675E18437E8211919A57792A",
+  "url": "http://sjz.58.com/shangpu/38311747849121x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37810923761683x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 79,
+  "house_key": "FFFFFFFFF4958167!E4B47A0505BE4B3EB8A7D6A7E6ADFC",
+  "url": "http://sjz.58.com/shangpu/38311758108197x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37612906328351x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 80,
+  "house_key": "FFFFFFFFF4958167!151350563A904FFDA99B5236E3253F",
+  "url": "http://sh.58.com/shangpu/38311766151307x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37943303929350x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 81,
+  "house_key": "FFFFFFFFF4958167!CC75A43AC2B042F38D9D5C24F7F3E4",
+  "url": "http://qd.58.com/shangpu/38311779964062x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37967353516944x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 82,
+  "house_key": "FFFFFFFFF4958167!39E6BD4804D14918AEF3535D45F017",
+  "url": "http://cd.58.com/shangpu/38311802060169x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37841868463748x.shtml",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 83,
+  "house_key": "FFFFFFFFF4958167!BBC814EB4E214076AF801F5ACF012C",
+  "url": "http://cq.58.com/shangpu/38311811067426x.shtml",
+  "old_url": "http://cq.58.com/shangpu/37612911440926x.shtml",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 84,
+  "house_key": "FFFFFFFFF4958167!AAE3087CB75C489E9AB6AF07456A83",
+  "url": "http://sh.58.com/shangpu/38311819584421x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37521487074447x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 85,
+  "house_key": "FFFFFFFFF4958167!4F9C40A1A6644657B850F71C3F7EAA",
+  "url": "http://cd.58.com/shangpu/38311826929185x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37855341606551x.shtml?",
+  "create_date": "2019-05-30T16:00:00.000Z"
+}, {
+  "id": 86,
+  "house_key": "FFFFFFFFF4958167!41418163719B4F2DA1BDEF5B059A38",
+  "url": "http://sjz.58.com/shangpu/38319722081537x.shtml",
+  "old_url": "http://sjz.58.com/shangpu/37545947975042x.shtml",
+  "create_date": "2019-05-31T16:00:00.000Z"
+}, {
+  "id": 87,
+  "house_key": "FFFFFFFFF4958167!002ECB3E94C643ED89C6DAA862BA43",
+  "url": "http://cd.58.com/shangpu/38329950358402x.shtml",
+  "old_url": "https://cd.58.com/shangpu/36714670495489x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 88,
+  "house_key": "FFFFFFFFF4958167!49F8E68D5681466BB48EB97715CECF",
+  "url": "http://sy.58.com/shangpu/38329974719495x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37678776386459x.shtml",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 89,
+  "house_key": "FFFFFFFFF4958167!ADA45DC207CD462B98DCADCEDC1EE9",
+  "url": "http://sh.58.com/shangpu/38329980545153x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37767021563559x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 90,
+  "house_key": "FFFFFFFFF4958167!60B286579C8C4DF48D4AF800AC62A5",
+  "url": "http://xa.58.com/shangpu/38330295887497x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37391079232413x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 91,
+  "house_key": "FFFFFFFFF4958167!737696EF51CC4A28A488AC9A0C5451",
+  "url": "http://cq.58.com/shangpu/38330416831366x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37521028300419x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 92,
+  "house_key": "FFFFFFFFF4958167!7E17ACB665104C24BF7DA2E7BA7C09",
+  "url": "http://cd.58.com/shangpu/38330445788578x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37833835488146x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 93,
+  "house_key": "FFFFFFFFF4958167!36FF6D69E532468E801789C7FB4D6D",
+  "url": "http://sz.58.com/shangpu/38330608540562x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37579008814753x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 94,
+  "house_key": "FFFFFFFFF4958167!570D756185A94F468A694220F5B6F9",
+  "url": "http://sjz.58.com/shangpu/38330616312860x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37967043451029x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 95,
+  "house_key": "FFFFFFFFF4958167!0D15C51D313F4BF4864FECB5374748",
+  "url": "http://sjz.58.com/shangpu/38330631118241x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37966123142428x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 96,
+  "house_key": "FFFFFFFFF4958167!0EB8CC6E7194481D80D5829B80221F",
+  "url": "http://sh.58.com/shangpu/38330641817370x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37810953569281x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 97,
+  "house_key": "FFFFFFFFF4958167!A63AA8285466460C93925B8AEA2590",
+  "url": "http://cc.58.com/shangpu/38330674182302x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37522596337168x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 98,
+  "house_key": "FFFFFFFFF4958167!A4C989A6F590479196B96B64F96A4C",
+  "url": "http://sjz.58.com/shangpu/38330680531496x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37820375666314x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 99,
+  "house_key": "FFFFFFFFF4958167!E6C2380BEDA84D3984EE002E0D2CB6",
+  "url": "http://sh.58.com/shangpu/38330773771151x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37601251161765x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 100,
+  "house_key": "FFFFFFFFF4958167!D822C9B44A0F492DA996A0987DA8FB",
+  "url": "http://zz.58.com/shangpu/38330785698970x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37888212594321x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 101,
+  "house_key": "FFFFFFFFF4958167!D9343CD75257467FBAABF6AC1AC1A1",
+  "url": "http://wh.58.com/shangpu/38330794280332x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37487956623261x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 102,
+  "house_key": "FFFFFFFFF4958167!3BE6544BA846424E84FE2D3ACCB0F6",
+  "url": "http://sy.58.com/shangpu/38330811808515x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37933590760078x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 103,
+  "house_key": "FFFFFFFFF4958167!1BB4A4AFC61B4CDEA2BF280E60BC1B",
+  "url": "http://wh.58.com/shangpu/38330819912604x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37756578973697x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 104,
+  "house_key": "FFFFFFFFF4958167!7F8A5AA304474A0BAA9AD8BA52F328",
+  "url": "http://sy.58.com/shangpu/38330827818258x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37412758676101x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 105,
+  "house_key": "FFFFFFFFF4958167!220183E9CDF243A4BDF7672DD2C67C",
+  "url": "http://xa.58.com/shangpu/38330840909846x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37734629733915x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 106,
+  "house_key": "FFFFFFFFF4958167!98F672B8529F4FF996B028468AA001",
+  "url": "http://xa.58.com/shangpu/38330846796451x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37731702384281x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 107,
+  "house_key": "FFFFFFFFF4958167!F805C061E6C34229AA1C2C3A420D41",
+  "url": "http://sjz.58.com/shangpu/38330855044740x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37712346709893x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 108,
+  "house_key": "FFFFFFFFF4958167!0EC97B3DD3D440ADBB388DBB3DA853",
+  "url": "http://zz.58.com/shangpu/38330867761177x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37755313973387x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 109,
+  "house_key": "FFFFFFFFF4958167!BD915B64D34E4B37BD217D19E593E8",
+  "url": "http://xa.58.com/shangpu/38330873153568x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37899597196839x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 110,
+  "house_key": "FFFFFFFFF4958167!807460EDF05A4A3289595CBE3F6622",
+  "url": "http://sh.58.com/shangpu/38330889088904x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37520884503683x.shtml",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 111,
+  "house_key": "FFFFFFFFF4958167!7A30DAEBB4DD4E8F8AE5476939953A",
+  "url": "http://sy.58.com/shangpu/38330914088450x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37777787794958x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 112,
+  "house_key": "FFFFFFFFF4958167!81D0FB7201494A879C0B9E59562D67",
+  "url": "http://zz.58.com/shangpu/38330922763671x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37679244657298x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 113,
+  "house_key": "FFFFFFFFF4958167!68E5827DBF7E46CE93DC4AAC080F2E",
+  "url": "http://zz.58.com/shangpu/38330954046241x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37965511776146x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 114,
+  "house_key": "FFFFFFFFF4958167!273759AEC6134113AADA4703BEA55E",
+  "url": "http://sy.58.com/shangpu/38330959167656x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37756644044442x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 115,
+  "house_key": "FFFFFFFFF4958167!40FBBD369B7444BBB5D5B9583238F4",
+  "url": "http://qd.58.com/shangpu/38330964139295x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37720044180495x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 116,
+  "house_key": "FFFFFFFFF4958167!FC37C52F172F4439AA05C456088B9D",
+  "url": "http://sz.58.com/shangpu/38330982947852x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37811861685394x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 117,
+  "house_key": "FFFFFFFFF4958167!E4CB23DBF74545A4B292381FCE9347",
+  "url": "http://zz.58.com/shangpu/38331010712736x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37919890280970x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 118,
+  "house_key": "FFFFFFFFF4958167!6748F97C9FD24B83B78540D2EA5B3D",
+  "url": "http://cd.58.com/shangpu/38331025204998x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37679317416065x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 119,
+  "house_key": "FFFFFFFFF4958167!1291B7D9B6314FC6A05DCB048FFFAD",
+  "url": "http://sjz.58.com/shangpu/38331085047700x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37732099093534x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 120,
+  "house_key": "FFFFFFFFF4958167!9931016A0E564480A19E0012BD0253",
+  "url": "http://cc.58.com/shangpu/38331092986021x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37512939275800x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 121,
+  "house_key": "FFFFFFFFF4958167!F2288173CD0743B8936F7FB1978F27",
+  "url": "http://hrb.58.com/shangpu/38331117904807x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/37966370551685x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 122,
+  "house_key": "120593",
+  "url": "http://sh.58.com/shangpu/38331131312911x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37932103419266x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 123,
+  "house_key": "FFFFFFFFF4958167!D4B7C5CA959B4C0787870814901448",
+  "url": "http://sy.58.com/shangpu/38331137198725x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37809122968840x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 124,
+  "house_key": "FFFFFFFFF4958167!D647E34470994FFA94A5AE78936658",
+  "url": "http://tj.58.com/shangpu/38331165497869x.shtml",
+  "old_url": "https://tj.58.com/shangpu/37889753059999x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 125,
+  "house_key": "FFFFFFFFF4958167!D35F94ADCC584827B270A74EFCE6E6",
+  "url": "http://sz.58.com/shangpu/38331189443871x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37910747019664x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 126,
+  "house_key": "FFFFFFFFF4958167!BCACF93DBB7D4C8D875A6422E3D86C",
+  "url": "http://zz.58.com/shangpu/38331218058639x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37842281094674x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 127,
+  "house_key": "134370",
+  "url": "http://cq.58.com/shangpu/38331241695255x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37963767613582x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 128,
+  "house_key": "FFFFFFFFF4958167!F4A6325DB0984E4DB617F9D9AFA1C1",
+  "url": "http://sy.58.com/shangpu/38331246398213x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37965632870415x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 129,
+  "house_key": "FFFFFFFFF4958167!2A21351E393A4F78957C71390A66D2",
+  "url": "http://xa.58.com/shangpu/38331277041540x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37908137685397x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 130,
+  "house_key": "FFFFFFFFF4958167!B7F4AEC0ADD74A90A5C5ACE30B9301",
+  "url": "http://wh.58.com/shangpu/38331285667978x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37911083677088x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 131,
+  "house_key": "FFFFFFFFF4958167!1C44E79B7D714E698BD3E3DD72CE33",
+  "url": "http://wh.58.com/shangpu/38331296684834x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37932434919692x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 132,
+  "house_key": "FFFFFFFFF4958167!4CF86EBDEB0342698C63B27DE8CB59",
+  "url": "http://zz.58.com/shangpu/38331337769757x.shtml",
+  "old_url": "http://zz.58.com/shangpu/37576577473950x.shtml",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 133,
+  "house_key": "FFFFFFFFF4958167!151B810052AC4B4D8D9B45107E8758",
+  "url": "http://sjz.58.com/shangpu/38331342899341x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37943559406361x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 134,
+  "house_key": "FFFFFFFFF4958167!3086E92F5B6B418D9AEDEF1B63EC24",
+  "url": "http://zz.58.com/shangpu/38331348359563x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37877440307361x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 135,
+  "house_key": "FFFFFFFFF4958167!E3347DCA6B5A45E18EB264F02C927C",
+  "url": "http://sjz.58.com/shangpu/38331355716380x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37601445447303x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 136,
+  "house_key": "146551",
+  "url": "http://sh.58.com/shangpu/38331366156695x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37954094308507x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 137,
+  "house_key": "FFFFFFFFF4958167!5DC13349EBDA4E4789BFEBC69CFB8B",
+  "url": "http://sy.58.com/shangpu/38331388195207x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37921425027985x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 138,
+  "house_key": "FFFFFFFFF4958167!0601B289554B40149A6565D67FA985",
+  "url": "http://sy.58.com/shangpu/38331395443594x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37656469639584x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 139,
+  "house_key": "FFFFFFFFF4958167!62434DA5944A4EA5966F798272B4B2",
+  "url": "http://zz.58.com/shangpu/38331405882120x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37765858870145x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 140,
+  "house_key": "FFFFFFFFF4958167!FDBFC2A2383F4320980A06DBEDD5ED",
+  "url": "http://zz.58.com/shangpu/38331426508435x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37886961266051x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 141,
+  "house_key": "FFFFFFFFF4958167!11A03FC9170F4ECA9A5FF59D651352",
+  "url": "http://sy.58.com/shangpu/38331463410961x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37943180130830x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 142,
+  "house_key": "FFFFFFFFF4958167!2EF0240143E14D59A276166B4E96AC",
+  "url": "http://zz.58.com/shangpu/38331472520208x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37897869893280x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 143,
+  "house_key": "78975",
+  "url": "http://sh.58.com/shangpu/38331479616407x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37767577475236x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 144,
+  "house_key": "FFFFFFFFF4958167!80B1C6E4BB90479C9267E63DF43AFF",
+  "url": "http://sjz.58.com/shangpu/38331484224518x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37952951693452x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 145,
+  "house_key": "FFFFFFFFF4958167!4FFA885F114C486DBE3AC1C7DD124E",
+  "url": "http://sy.58.com/shangpu/38331488839433x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37734703358466x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 146,
+  "house_key": "136215",
+  "url": "http://cq.58.com/shangpu/38331496560414x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37965335982092x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 147,
+  "house_key": "FFFFFFFFF4958167!C3478207BA574BB1B95462485074ED",
+  "url": "http://sjz.58.com/shangpu/38334070170386x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37822166453794x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 148,
+  "house_key": "FFFFFFFFF4958167!DB5727B3D8A1496F8C6198826F6365",
+  "url": "http://cq.58.com/shangpu/38334082722055x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37942190007208x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 149,
+  "house_key": "FFFFFFFFF4958167!3F10F35F1E4F4426A1BA96CCCD3E75",
+  "url": "http://cq.58.com/shangpu/38334094410003x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37963625081859x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 150,
+  "house_key": "78817",
+  "url": "http://sh.58.com/shangpu/38334099969320x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37942017052289x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 151,
+  "house_key": "FFFFFFFFF4958167!82A82704D9044494BEF5176F53692F",
+  "url": "http://sjz.58.com/shangpu/38334118328869x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37965811163673x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 152,
+  "house_key": "FFFFFFFFF4958167!349BAABB9A58444192A0133BC9F3BE",
+  "url": "http://cq.58.com/shangpu/38334123608724x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37922634149001x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 153,
+  "house_key": "FFFFFFFFF4958167!27901E020E05404CA0878823D69E88",
+  "url": "http://zz.58.com/shangpu/38334129642015x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37510602919842x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 154,
+  "house_key": "FFFFFFFFF4958167!8253EFA932284CDEBBE12AD666E7B5",
+  "url": "http://wh.58.com/shangpu/38334164173462x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37797635887649x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 155,
+  "house_key": "FFFFFFFFF4958167!5F0CA5BD4F2A496085020FDAA14053",
+  "url": "http://wh.58.com/shangpu/38334175920406x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37953898656277x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 156,
+  "house_key": "FFFFFFFFF4958167!F9494229F11F47978F09D19A6E3093",
+  "url": "http://sh.58.com/shangpu/38334324092422x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37500534368668x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 157,
+  "house_key": "FFFFFFFFF4958167!931AE88D822B4DF5BF9CA5100E0162",
+  "url": "http://tj.58.com/shangpu/38334372098216x.shtml",
+  "old_url": "https://tj.58.com/shangpu/37888476729110x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 158,
+  "house_key": "93172",
+  "url": "http://sh.58.com/shangpu/38334376923044x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37797646659593x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 159,
+  "house_key": "FFFFFFFFF4958167!8B6EBB46B7FA499E88167FD7EA6028",
+  "url": "http://sy.58.com/shangpu/38334404657315x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37921424880922x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 160,
+  "house_key": "FFFFFFFFF4958167!EBBCC0F2628943BFAD2F79ABE05738",
+  "url": "http://sjz.58.com/shangpu/38334409822469x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37775266676006x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 161,
+  "house_key": "FFFFFFFFF4958167!F6520E4054AE4199ACEBEE6F317C38",
+  "url": "http://sjz.58.com/shangpu/38334425993628x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37921786001554x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 162,
+  "house_key": "FFFFFFFFF4958167!AD2BF5654C464993865826E22D8CC4",
+  "url": "http://sjz.58.com/shangpu/38334432573341x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37712492349469x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 163,
+  "house_key": "FFFFFFFFF4958167!E4A42CBF7DDC4A748DE0EF725045DD",
+  "url": "http://xa.58.com/shangpu/38334453593119x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37952467235095x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 164,
+  "house_key": "FFFFFFFFF4958167!158C41DB41974C46A0878D057E8F20",
+  "url": "http://sjz.58.com/shangpu/38334458477191x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37734137549833x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 165,
+  "house_key": "FFFFFFFFF4958167!546D0FF0A70A427BBAED6FAD41BE9B",
+  "url": "http://xa.58.com/shangpu/38334473379086x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37886705758231x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 166,
+  "house_key": "FFFFFFFFF4958167!2852AB9177D748C79A9FC6A22AED42",
+  "url": "http://zz.58.com/shangpu/38334505662110x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37930592601384x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 167,
+  "house_key": "FFFFFFFFF4958167!48D8A42E66094C9585383C9A411087",
+  "url": "http://zz.58.com/shangpu/38334531684481x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37954824607886x.shtml?",
+  "create_date": "2019-06-01T16:00:00.000Z"
+}, {
+  "id": 168,
+  "house_key": "FFFFFFFFF4958167!2D5E865A1CDD45358AB7DBAC600ED8",
+  "url": "http://cq.58.com/shangpu/38338592760086x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37756782438554x.shtml",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 169,
+  "house_key": "FFFFFFFFF4958167!3C3C0851B777413D979DB29B84BEE6",
+  "url": "http://sjz.58.com/shangpu/38338616393602x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37967318585608x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 170,
+  "house_key": "FFFFFFFFF4958167!D43F30E4A072438681237E5FD07A73",
+  "url": "http://sjz.58.com/shangpu/38338628984451x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37731936632851x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 171,
+  "house_key": "FFFFFFFFF4958167!0E59385CEFF546168E33BF402C546F",
+  "url": "http://zz.58.com/shangpu/38338634791321x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37943973584283x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 172,
+  "house_key": "FFFFFFFFF4958167!1693F12ED84548C5A11EDF569C32B5",
+  "url": "http://cq.58.com/shangpu/38338749356556x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37944807004436x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 173,
+  "house_key": "FFFFFFFFF4958167!2BC68AC8C7AA4B96ABB9EC6E6F2130",
+  "url": "http://wh.58.com/shangpu/38338772554258x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37933508116631x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 174,
+  "house_key": "FFFFFFFFF4958167!70A25B2401EE47A1951F6C54F38308",
+  "url": "http://zz.58.com/shangpu/38338903751059x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37932200300702x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 175,
+  "house_key": "FFFFFFFFF4958167!AA3E2D64D9F3406C87E128D60413D2",
+  "url": "http://zz.58.com/shangpu/38338912224796x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37954266587424x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 176,
+  "house_key": "FFFFFFFFF4958167!0FA14AC8E7224317AF108790382F26",
+  "url": "http://sh.58.com/shangpu/38338976334473x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37577941736200x.shtml",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 177,
+  "house_key": "FFFFFFFFF4958167!3CEA06B447B24D27B7C091CC6EAF51",
+  "url": "http://wh.58.com/shangpu/38338988313364x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37611066096918x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 178,
+  "house_key": "FFFFFFFFF4958167!E244BBE0CC194CECAC783CE9907D7F",
+  "url": "http://sy.58.com/shangpu/38339003728129x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37919917894164x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 179,
+  "house_key": "FFFFFFFFF4958167!324287A12E514DAFA0C923365A734F",
+  "url": "http://zz.58.com/shangpu/38339009973123x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37965322965644x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 180,
+  "house_key": "69451",
+  "url": "http://sh.58.com/shangpu/38339060333585x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37908987775248x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 181,
+  "house_key": "FFFFFFFFF4958167!74527653B17444548553902D44746C",
+  "url": "http://zz.58.com/shangpu/38339097474448x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37676399137034x.shtml",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 182,
+  "house_key": "99803",
+  "url": "http://sh.58.com/shangpu/38339106086053x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37879140405001x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 183,
+  "house_key": "FFFFFFFFF4958167!20B5BA159C0E457B97E1A7133BB79A",
+  "url": "http://zz.58.com/shangpu/38339356363045x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37941268862473x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 184,
+  "house_key": "FFFFFFFFF4958167!98B43BA445244EFDA5A502F865B60B",
+  "url": "http://cq.58.com/shangpu/38339365769110x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37945207549200x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 185,
+  "house_key": "FFFFFFFFF4958167!2591D178D39348DB96A7588EB3EA74",
+  "url": "http://cd.58.com/shangpu/38339382322586x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37854431141769x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 186,
+  "house_key": "FFFFFFFFF4958167!D63349B0D8A34BAC9E8A2002242E51",
+  "url": "http://wh.58.com/shangpu/38339396392341x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37933896203137x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 187,
+  "house_key": "FFFFFFFFF4958167!8352D8B2F50740AAB23492B978F5BF",
+  "url": "http://cd.58.com/shangpu/38339405359236x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37931752506516x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 188,
+  "house_key": "FFFFFFFFF4958167!B45D40933C4C44499A3BB65281EC21",
+  "url": "http://sy.58.com/shangpu/38339413411610x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966877234327x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 189,
+  "house_key": "FFFFFFFFF4958167!218ADF21D4F94AF8B1C49842298ED4",
+  "url": "http://cq.58.com/shangpu/38339430006671x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37967443713696x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 190,
+  "house_key": "FFFFFFFFF4958167!26A91B9EF548403D822AE30E7112F8",
+  "url": "http://sjz.58.com/shangpu/38339434796950x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37833122072103x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 191,
+  "house_key": "73473",
+  "url": "http://cq.58.com/shangpu/38339472645900x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37875217600897x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 192,
+  "house_key": "FFFFFFFFF4958167!B34C0962AB1440B893435BB0B67927",
+  "url": "http://zz.58.com/shangpu/38339496819971x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37930836792450x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 193,
+  "house_key": "75615",
+  "url": "http://cq.58.com/shangpu/38339517445788x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37952653601942x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 194,
+  "house_key": "FFFFFFFFF4958167!F569A21A39B643968418ADEC287942",
+  "url": "http://zz.58.com/shangpu/38339535250471x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37888932507019x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 195,
+  "house_key": "FFFFFFFFF4958167!C630431169E54AAB91614788915602",
+  "url": "http://cc.58.com/shangpu/38339617172743x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37456303790370x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 196,
+  "house_key": "FFFFFFFFF4958167!9CDC829FF33341778AC687E87B1274",
+  "url": "http://zz.58.com/shangpu/38339634410123x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37889526744740x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 197,
+  "house_key": "132049",
+  "url": "http://cq.58.com/shangpu/38339639015946x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37952741054366x.shtml?",
+  "create_date": "2019-06-02T16:00:00.000Z"
+}, {
+  "id": 198,
+  "house_key": "FFFFFFFFF4958167!2C2A7562D781475C871CBE46886A94",
+  "url": "http://sy.58.com/shangpu/38356228911106x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37568750209061x.shtml",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 199,
+  "house_key": "FFFFFFFFF4958167!2415042301BD4E5BA17EF5B8EACCF2",
+  "url": "http://qd.58.com/shangpu/38356302101899x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37821321300369x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 200,
+  "house_key": "FFFFFFFFF4958167!4E903A6BEF2646C494BDEF1AA22CC1",
+  "url": "http://sy.58.com/shangpu/38356326729486x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37831031306519x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 201,
+  "house_key": "FFFFFFFFF4958167!26A91B9EF548403D822AE30E7112F8",
+  "url": "http://sjz.58.com/shangpu/38356639414280x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37833122072103x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 202,
+  "house_key": "FFFFFFFFF4958167!36FF6D69E532468E801789C7FB4D6D",
+  "url": "http://sz.58.com/shangpu/38356696295693x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37579008814753x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 203,
+  "house_key": "FFFFFFFFF4958167!525C216B550F420DBC98C22AD8C7A3",
+  "url": "http://sh.58.com/shangpu/38356715120001x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37543760343171x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 204,
+  "house_key": "FFFFFFFFF4958167!C9340886DAF6415BA8652AE09EDFD2",
+  "url": "http://sh.58.com/shangpu/38356720747796x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37588126740774x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 205,
+  "house_key": "FFFFFFFFF4958167!474098542879471498DC96096E9A32",
+  "url": "http://sh.58.com/shangpu/38356738464533x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37589546116109x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 206,
+  "house_key": "FFFFFFFFF4958167!0E407DDBCFBB4D90AA8D13C171C9E4",
+  "url": "http://sjz.58.com/shangpu/38356757381643x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38008059163523x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 207,
+  "house_key": "FFFFFFFFF4958167!131189706EEB4F8287B4E080D08584",
+  "url": "http://wh.58.com/shangpu/38356850286486x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37720749872398x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 208,
+  "house_key": "FFFFFFFFF4958167!4B3DB4D7BF584AD69A3C4673527935",
+  "url": "http://sjz.58.com/shangpu/38356910169254x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37821832892804x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 209,
+  "house_key": "FFFFFFFFF4958167!CC767DBDE9DF4CF78FB00D291EDE41",
+  "url": "http://qd.58.com/shangpu/38356930143784x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37644975298073x.shtml",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 210,
+  "house_key": "FFFFFFFFF4958167!6EC58B0E63C043178423F1ECE1260E",
+  "url": "http://sh.58.com/shangpu/38356969407875x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37767391939238x.shtml?",
+  "create_date": "2019-06-03T16:00:00.000Z"
+}, {
+  "id": 211,
+  "house_key": "FFFFFFFFF4958167!AD2BF5654C464993865826E22D8CC4",
+  "url": "http://sjz.58.com/shangpu/38356996155941x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37712492349469x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 212,
+  "house_key": "FFFFFFFFF4958167!35C1CDC1C5E74C9CACC146161F3489",
+  "url": "http://cq.58.com/shangpu/38357029483424x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37723313811209x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 213,
+  "house_key": "FFFFFFFFF4958167!E7A26FAE3F244FAD804683C554D7DF",
+  "url": "http://sjz.58.com/shangpu/38357054377219x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37435970124810x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 214,
+  "house_key": "FFFFFFFFF4958167!7521288C5F7144FE93EE84DBF85347",
+  "url": "http://zz.58.com/shangpu/38357141467787x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37753287348901x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 215,
+  "house_key": "146544",
+  "url": "http://sh.58.com/shangpu/38357147309833x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38010304162700x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 216,
+  "house_key": "FFFFFFFFF4958167!AB8DE95D3E1C49299FFBC1C79B79BA",
+  "url": "http://wh.58.com/shangpu/38357156248201x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37834310199172x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 217,
+  "house_key": "FFFFFFFFF4958167!FB82CCFCABBA42A8A8C9DDDB9CB89A",
+  "url": "http://sy.58.com/shangpu/38357167121931x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021744454667x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 218,
+  "house_key": "FFFFFFFFF4958167!D35F94ADCC584827B270A74EFCE6E6",
+  "url": "http://sz.58.com/shangpu/38357172772495x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37910747019664x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 219,
+  "house_key": "FFFFFFFFF4958167!FDF7FECA19CB4B088D3160AA34794F",
+  "url": "http://sy.58.com/shangpu/38357201066128x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37490444850440x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 220,
+  "house_key": "FFFFFFFFF4958167!421F7C124C2A48BAB6FA6AC0BDAF4D",
+  "url": "http://xa.58.com/shangpu/38357206847523x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38010432043158x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 221,
+  "house_key": "FFFFFFFFF4958167!49DD6DD44B4C4AD09D7605E3953A1F",
+  "url": "http://cd.58.com/shangpu/38357212701349x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37534729431689x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 222,
+  "house_key": "FFFFFFFFF4958167!24684D583BB742A4841199C16D2406",
+  "url": "http://zz.58.com/shangpu/38357221500825x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37899605580681x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 223,
+  "house_key": "FFFFFFFFF4958167!7C52290D32E742A59891D697C62725",
+  "url": "http://cd.58.com/shangpu/38357231827857x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37510470915985x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 224,
+  "house_key": "FFFFFFFFF4958167!F57AA3E9A4604BC79D5EEF11310BE7",
+  "url": "http://sjz.58.com/shangpu/38357237603732x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37801137615108x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 225,
+  "house_key": "FFFFFFFFF4958167!74527653B17444548553902D44746C",
+  "url": "http://zz.58.com/shangpu/38357252732960x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37676399137034x.shtml",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 226,
+  "house_key": "FFFFFFFFF4958167!C3AE11EE29B540B0916692F9180F36",
+  "url": "http://zz.58.com/shangpu/38357269150876x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37954579672333x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 227,
+  "house_key": "FFFFFFFFF4958167!162CD0319DEA4C508387B8AFE2EE24",
+  "url": "http://sjz.58.com/shangpu/38357275195555x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37800389892487x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 228,
+  "house_key": "FFFFFFFFF4958167!B577FFC4F3CD4135A3B1294CB1F687",
+  "url": "http://zz.58.com/shangpu/38357292940825x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38007744781961x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 229,
+  "house_key": "FFFFFFFFF4958167!A9003EAA0F814C82AEC395B7C400D0",
+  "url": "http://sy.58.com/shangpu/38357314379430x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37656444641797x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 230,
+  "house_key": "FFFFFFFFF4958167!CD6879D8996B4B19928D6BCE84DC74",
+  "url": "http://cd.58.com/shangpu/38357328501267x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37413787579533x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 231,
+  "house_key": "FFFFFFFFF4958167!A1B1B9EE9A774134B5F59C9D2FBB35",
+  "url": "http://cq.58.com/shangpu/38357354770598x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37777747660045x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 232,
+  "house_key": "FFFFFFFFF4958167!0C7E313FDAA14F89BEE87272DB195A",
+  "url": "http://cd.58.com/shangpu/38357371073297x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37777356582309x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 233,
+  "house_key": "FFFFFFFFF4958167!D15C9BE414EC4AAA85D648D1262F77",
+  "url": "http://sy.58.com/shangpu/38357384803974x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37656384589705x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 234,
+  "house_key": "FFFFFFFFF4958167!4509BDEEC4E34D3C90678EE8287B70",
+  "url": "http://sjz.58.com/shangpu/38357403394694x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37576468752399x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 235,
+  "house_key": "FFFFFFFFF4958167!15693FE5FED94B5EAD3E8D4C352A79",
+  "url": "http://zz.58.com/shangpu/38357651784323x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37510338265892x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 236,
+  "house_key": "FFFFFFFFF4958167!57BAAF96929A471799E1FC5A3D57B3",
+  "url": "http://sjz.58.com/shangpu/38357677087256x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37933777000854x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 237,
+  "house_key": "FFFFFFFFF4958167!B2D9F4AF17694196A71183AAEEE1ED",
+  "url": "http://cd.58.com/shangpu/38357685526547x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38018962925979x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 238,
+  "house_key": "FFFFFFFFF4958167!465946A0493644168688A0E0B2801F",
+  "url": "http://cd.58.com/shangpu/38357712136615x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37756868168962x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 239,
+  "house_key": "FFFFFFFFF4958167!E63621CEA16940DD8412495D458E6E",
+  "url": "http://sh.58.com/shangpu/38357720929940x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37821438289541x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 240,
+  "house_key": "FFFFFFFFF4958167!9BA5AD38B4C64EB284DE53F8D3D540",
+  "url": "http://sy.58.com/shangpu/38357743542184x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37733482120478x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 241,
+  "house_key": "FFFFFFFFF4958167!F4C9ED302D594DD89F8988C284D224",
+  "url": "http://sy.58.com/shangpu/38357757861513x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37568338479269x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 242,
+  "house_key": "FFFFFFFFF4958167!49F8E68D5681466BB48EB97715CECF",
+  "url": "http://sy.58.com/shangpu/38357777184019x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37678776386459x.shtml",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 243,
+  "house_key": "FFFFFFFFF4958167!91F4972C51434D8A8BC731CD069382",
+  "url": "http://sy.58.com/shangpu/38357812038529x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021954430722x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 244,
+  "house_key": "FFFFFFFFF4958167!1A40A10C8E90428DB5EDEB201D55AB",
+  "url": "http://sjz.58.com/shangpu/38361171120539x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37900676251910x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 245,
+  "house_key": "FFFFFFFFF4958167!227B5892C0974C43BA697C691B98B4",
+  "url": "http://wh.58.com/shangpu/38361185361946x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38021710107660x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 246,
+  "house_key": "FFFFFFFFF4958167!8CC6D25B22774FFBAC230D119C01B7",
+  "url": "http://sjz.58.com/shangpu/38361194885138x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37944290488198x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 247,
+  "house_key": "FFFFFFFFF4958167!E5FEC71BD0C0443FBC20102FFC5DB3",
+  "url": "http://cd.58.com/shangpu/38361204160391x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37466468478242x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 248,
+  "house_key": "FFFFFFFFF4958167!8D1E92EF37A745D68651C7F24D708E",
+  "url": "http://cq.58.com/shangpu/38361232907535x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38022195178499x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 249,
+  "house_key": "FFFFFFFFF4958167!548967D55565403B88D1C8473C60B7",
+  "url": "http://zz.58.com/shangpu/38361268509331x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37877638131227x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 250,
+  "house_key": "FFFFFFFFF4958167!4C5316C4BA6D4F6F9587A13711EA28",
+  "url": "http://zz.58.com/shangpu/38361274461061x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38008444465938x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 251,
+  "house_key": "FFFFFFFFF4958167!0601B289554B40149A6565D67FA985",
+  "url": "http://sy.58.com/shangpu/38361282264473x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37656469639584x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 252,
+  "house_key": "73473",
+  "url": "http://cq.58.com/shangpu/38361290033420x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37875217600897x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 253,
+  "house_key": "FFFFFFFFF4958167!401788E3FFC848058A12AB341C8760",
+  "url": "http://tj.58.com/shangpu/38361296976532x.shtml",
+  "old_url": "https://tj.58.com/shangpu/37821435846930x.shtml",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 254,
+  "house_key": "FFFFFFFFF4958167!646E0B5C806E47F1A547287919A925",
+  "url": "http://cc.58.com/shangpu/38361310646785x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37755859919510x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 255,
+  "house_key": "FFFFFFFFF4958167!C084C984734B4485B240B6D606AC5B",
+  "url": "http://cq.58.com/shangpu/38361332218257x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37812603257749x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 256,
+  "house_key": "FFFFFFFFF4958167!160FAC3FF3C44AD4B22CA5B2E5EAE1",
+  "url": "http://sh.58.com/shangpu/38361358593294x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37576583645474x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 257,
+  "house_key": "FFFFFFFFF4958167!FC37C52F172F4439AA05C456088B9D",
+  "url": "http://sz.58.com/shangpu/38361372559252x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37811861685394x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 258,
+  "house_key": "FFFFFFFFF4958167!F811B1515FA7486EB5B98C71ADCA19",
+  "url": "http://sjz.58.com/shangpu/38361385796128x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37756691278855x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 259,
+  "house_key": "FFFFFFFFF4958167!D82775A8ED1D4C2FA522CDE8045A57",
+  "url": "http://cd.58.com/shangpu/38361391530115x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37952437170049x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 260,
+  "house_key": "FFFFFFFFF4958167!7A3004EB95564C8CB1199F6F03E476",
+  "url": "http://wh.58.com/shangpu/38361404759198x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38020407222551x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 261,
+  "house_key": "FFFFFFFFF4958167!8F84831447D74991A4F9A6FBE4ECD6",
+  "url": "http://sjz.58.com/shangpu/38361409819404x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37565646257421x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 262,
+  "house_key": "FFFFFFFFF4958167!062452CC9A124A4CB87E962C3849BB",
+  "url": "http://cq.58.com/shangpu/38361420010642x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37510767771686x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 263,
+  "house_key": "FFFFFFFFF4958167!158C41DB41974C46A0878D057E8F20",
+  "url": "http://sjz.58.com/shangpu/38361435167361x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37734137549833x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 264,
+  "house_key": "FFFFFFFFF4958167!DA41720310984179A8C587384DED7C",
+  "url": "http://xa.58.com/shangpu/38361447180564x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37941740042920x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 265,
+  "house_key": "FFFFFFFFF4958167!F2F138392FD94CFBA53A25BF1DA463",
+  "url": "http://sy.58.com/shangpu/38361454406661x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966386031130x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 266,
+  "house_key": "FFFFFFFFF4958167!6294A716ACAC48B989507655A54B18",
+  "url": "http://sy.58.com/shangpu/38361467332517x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966452926243x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 267,
+  "house_key": "FFFFFFFFF4958167!C97D253FA5D148D8A9505D3127114F",
+  "url": "http://sjz.58.com/shangpu/38361480869403x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38009260594820x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 268,
+  "house_key": "FFFFFFFFF4958167!5CAC56CA974B4506884826FBEACB92",
+  "url": "http://cd.58.com/shangpu/38361514742439x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37821459017350x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 269,
+  "house_key": "FFFFFFFFF4958167!FBF4BD08980D4858838EA26FC1F560",
+  "url": "http://qd.58.com/shangpu/38361522059666x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38011283805219x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 270,
+  "house_key": "FFFFFFFFF4958167!A09E9B78B619481BBAB4D36AA73CA5",
+  "url": "http://cq.58.com/shangpu/38361542183462x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37944299498510x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 271,
+  "house_key": "104905",
+  "url": "http://sh.58.com/shangpu/38361546634651x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38019374564239x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 272,
+  "house_key": "FFFFFFFFF4958167!BD915B64D34E4B37BD217D19E593E8",
+  "url": "http://xa.58.com/shangpu/38361555333392x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37899597196839x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 273,
+  "house_key": "FFFFFFFFF4958167!F33EA6C87E524118A006B76427BAFD",
+  "url": "http://sjz.58.com/shangpu/38361562805926x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37845111980185x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 274,
+  "house_key": "141610",
+  "url": "http://sh.58.com/shangpu/38361614251393x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37942073005478x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 275,
+  "house_key": "FFFFFFFFF4958167!6F563A950EE9477E8DE7AAB27A89A7",
+  "url": "http://sz.58.com/shangpu/38361642293775x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37823155149223x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 276,
+  "house_key": "FFFFFFFFF4958167!0E7A43A863F54D978C5D2653785584",
+  "url": "http://wh.58.com/shangpu/38361661087123x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37833771523856x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 277,
+  "house_key": "FFFFFFFFF4958167!98B43BA445244EFDA5A502F865B60B",
+  "url": "http://cq.58.com/shangpu/38361668246289x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37945207549200x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 278,
+  "house_key": "FFFFFFFFF4958167!D0C67B169E354989B6A99341B2C498",
+  "url": "http://cq.58.com/shangpu/38361685086338x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37900635586194x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 279,
+  "house_key": "FFFFFFFFF4958167!CB76E868AFBD4142B7E7B0965C7BEA",
+  "url": "http://sh.58.com/shangpu/38361696288516x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37443320501281x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 280,
+  "house_key": "FFFFFFFFF4958167!C610EB4B349F4661BDF9CE870FF05F",
+  "url": "http://cq.58.com/shangpu/38361714822311x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37598858697863x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 281,
+  "house_key": "FFFFFFFFF4958167!D5ED3A67E0F442469FFFF5A1E8FCF1",
+  "url": "http://zz.58.com/shangpu/38361728985886x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37744189793448x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 282,
+  "house_key": "FFFFFFFFF4958167!4834B368178B4A84A3F7A1EAB0591D",
+  "url": "http://zz.58.com/shangpu/38361743522205x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38019334775681x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 283,
+  "house_key": "FFFFFFFFF4958167!AFC3C517F8DD4654AC17103CBD864D",
+  "url": "http://cq.58.com/shangpu/38361758273807x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38011575342338x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 284,
+  "house_key": "FFFFFFFFF4958167!B72F3D6F1AA14BC498AFB4E2A678FF",
+  "url": "http://zz.58.com/shangpu/38361767421459x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38009430030632x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 285,
+  "house_key": "105045",
+  "url": "http://sh.58.com/shangpu/38361774340640x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37823044870555x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 286,
+  "house_key": "FFFFFFFFF4958167!567D0DD7D0AB457AB7B9A091741D73",
+  "url": "http://wh.58.com/shangpu/38361798622989x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37756337090443x.shtml",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 287,
+  "house_key": "FFFFFFFFF4958167!B5C2CF027C9440D6B1552261EC1F6B",
+  "url": "http://sh.58.com/shangpu/38361808396421x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37766794102531x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 288,
+  "house_key": "FFFFFFFFF4958167!964D9EAFA44240C0994E5250965580",
+  "url": "http://sy.58.com/shangpu/38361820227457x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38019035313952x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 289,
+  "house_key": "FFFFFFFFF4958167!27901E020E05404CA0878823D69E88",
+  "url": "http://zz.58.com/shangpu/38361828456980x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37510602919842x.shtml?",
+  "create_date": "2019-06-04T16:00:00.000Z"
+}, {
+  "id": 290,
+  "house_key": "FFFFFFFFF4958167!04E3E8F123854E2F883FB165595AB5",
+  "url": "http://wh.58.com/shangpu/38376392980514x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38030139766933x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 291,
+  "house_key": "FFFFFFFFF4958167!34408F2FF9024B3B8DB009944BBE8B",
+  "url": "http://sy.58.com/shangpu/38376423252481x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38022025421205x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 292,
+  "house_key": "FFFFFFFFF4958167!0472895BB9934D3F8FACC1764BE4C8",
+  "url": "http://zz.58.com/shangpu/38376444681606x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37645391492635x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 293,
+  "house_key": "FFFFFFFFF4958167!FAA440F24A36424CA298E5D90AA9D5",
+  "url": "http://sz.58.com/shangpu/38376488339731x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37966249712773x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 294,
+  "house_key": "FFFFFFFFF4958167!ECB71968D60744C8AB7ED2451BF1FB",
+  "url": "http://sy.58.com/shangpu/38376493661954x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37413408276637x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 295,
+  "house_key": "FFFFFFFFF4958167!D4B7C5CA959B4C0787870814901448",
+  "url": "http://sy.58.com/shangpu/38376507216023x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37809122968840x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 296,
+  "house_key": "FFFFFFFFF4958167!B8019A95D2BE4DD7B6077A29CB2D62",
+  "url": "http://sh.58.com/shangpu/38376532204709x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38033719720729x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 297,
+  "house_key": "FFFFFFFFF4958167!737696EF51CC4A28A488AC9A0C5451",
+  "url": "http://cq.58.com/shangpu/38376564234141x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37521028300419x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 298,
+  "house_key": "FFFFFFFFF4958167!E418503FB9794DCBA03E914832118F",
+  "url": "http://sz.58.com/shangpu/38376575575681x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37830754507917x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 299,
+  "house_key": "FFFFFFFFF4958167!51932D14042944249B0B5D93215574",
+  "url": "http://zz.58.com/shangpu/38376582054282x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37712699994118x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 300,
+  "house_key": "FFFFFFFFF4958167!44C5BF9AE87E4582BF1379E1CD7D56",
+  "url": "http://cq.58.com/shangpu/38376601709185x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37764533290272x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 301,
+  "house_key": "FFFFFFFFF4958167!42EF0F29B19A4EEB9B44E34D5A0E77",
+  "url": "http://cd.58.com/shangpu/38376615803139x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37731984807062x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 302,
+  "house_key": "FFFFFFFFF4958167!273759AEC6134113AADA4703BEA55E",
+  "url": "http://sy.58.com/shangpu/38376638795938x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37756644044442x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 303,
+  "house_key": "FFFFFFFFF4958167!A9C41AD5D5664A80AC75D5028B706C",
+  "url": "http://wh.58.com/shangpu/38376658804134x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37964013133829x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 304,
+  "house_key": "FFFFFFFFF4958167!6CF9CEB8C0E147D1BB8B5BBB00CEAD",
+  "url": "http://cq.58.com/shangpu/38376679172742x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38019119922318x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 305,
+  "house_key": "FFFFFFFFF4958167!A99F5960F7644CE2A1DD310E35007A",
+  "url": "http://zz.58.com/shangpu/38378800146308x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38008071656841x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 306,
+  "house_key": "FFFFFFFFF4958167!5BDBE8613D6B46DBA8F6D46164EC10",
+  "url": "http://sjz.58.com/shangpu/38378815673490x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021190737674x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 307,
+  "house_key": "FFFFFFFFF4958167!E92251D70E2144D897054748D87BA0",
+  "url": "http://sjz.58.com/shangpu/38378841153949x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37777223042307x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 308,
+  "house_key": "FFFFFFFFF4958167!D11051DD9FC84710BD5AC574EA23DC",
+  "url": "http://sh.58.com/shangpu/38378852625174x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37565400961683x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 309,
+  "house_key": "FFFFFFFFF4958167!E5F0FA4D23AD4AE88AFC2A87679CBA",
+  "url": "http://cq.58.com/shangpu/38378878362144x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031903867300x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 310,
+  "house_key": "FFFFFFFFF4958167!9B1BF0C088294CBFAB7E13805A4AED",
+  "url": "http://sjz.58.com/shangpu/38378895367444x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37899070387866x.shtml?",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 311,
+  "house_key": "FFFFFFFFF4958167!D190DCD1688B4B05A5900E1624056B",
+  "url": "http://qd.58.com/shangpu/38379100382209x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37821229363087x.shtml",
+  "create_date": "2019-06-05T16:00:00.000Z"
+}, {
+  "id": 312,
+  "house_key": "FFFFFFFFF4958167!0C7E313FDAA14F89BEE87272DB195A",
+  "url": "http://cd.58.com/shangpu/38379115998606x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37777356582309x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 313,
+  "house_key": "FFFFFFFFF4958167!C91E0F48F0F249D085584E89BE34D3",
+  "url": "http://sy.58.com/shangpu/38379132735106x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37579000404638x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 314,
+  "house_key": "FFFFFFFFF4958167!75EBCC5E7DDA4085A46F7DF3F13558",
+  "url": "http://zz.58.com/shangpu/38379148084996x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37457056034708x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 315,
+  "house_key": "FFFFFFFFF4958167!14CC89FC4049414191C1660964E85F",
+  "url": "http://xa.58.com/shangpu/38379174443415x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38030356419112x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 316,
+  "house_key": "FFFFFFFFF4958167!F63643EFD0F24A918F14CDA3FE2D06",
+  "url": "http://sjz.58.com/shangpu/38379187026693x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37722920898464x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 317,
+  "house_key": "FFFFFFFFF4958167!11ABA29740F24990A4681BF546F4B6",
+  "url": "http://wh.58.com/shangpu/38379195915814x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38020308107302x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 318,
+  "house_key": "FFFFFFFFF4958167!F22C2A6C89CD4B579AAB6D28016D95",
+  "url": "http://sjz.58.com/shangpu/38379208266534x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021351361694x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 319,
+  "house_key": "FFFFFFFFF4958167!21C04B66F5A24BB6B0D16A3E5BD462",
+  "url": "http://sh.58.com/shangpu/38379282207257x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37521757502085x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 320,
+  "house_key": "FFFFFFFFF4958167!D0C85257DED84E978F809472D1D46D",
+  "url": "http://wh.58.com/shangpu/38379329256613x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37734614493343x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 321,
+  "house_key": "FFFFFFFFF4958167!E63621CEA16940DD8412495D458E6E",
+  "url": "http://sh.58.com/shangpu/38379337888663x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37821438289541x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 322,
+  "house_key": "FFFFFFFFF4958167!EF7DDB217CD245609A408F40B95670",
+  "url": "http://sy.58.com/shangpu/38379347013398x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37889655892117x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 323,
+  "house_key": "FFFFFFFFF4958167!F9494229F11F47978F09D19A6E3093",
+  "url": "http://sh.58.com/shangpu/38379358587654x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37500534368668x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 324,
+  "house_key": "137915",
+  "url": "http://sh.58.com/shangpu/38379368114450x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37943332722337x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 325,
+  "house_key": "FFFFFFFFF4958167!F805C061E6C34229AA1C2C3A420D41",
+  "url": "http://sjz.58.com/shangpu/38379386749351x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37712346709893x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 326,
+  "house_key": "FFFFFFFFF4958167!F9887EDE34F4427F9EF65EA1A5A9E0",
+  "url": "http://sy.58.com/shangpu/38379531245452x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37501648030341x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 327,
+  "house_key": "FFFFFFFFF4958167!D35FF957588C47C79BEA4A2282E5EB",
+  "url": "http://xa.58.com/shangpu/38379543254403x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38043179714575x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 328,
+  "house_key": "FFFFFFFFF4958167!98EAA9585AEE484EBFE1063F264767",
+  "url": "http://cq.58.com/shangpu/38379566896263x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031674374915x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 329,
+  "house_key": "FFFFFFFFF4958167!82A82704D9044494BEF5176F53692F",
+  "url": "http://sjz.58.com/shangpu/38380000832418x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37965811163673x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 330,
+  "house_key": "FFFFFFFFF4958167!5DC13349EBDA4E4789BFEBC69CFB8B",
+  "url": "http://sy.58.com/shangpu/38380010653224x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38319781217308x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 331,
+  "house_key": "FFFFFFFFF4958167!85A3D5A5172B49A68D301DF5EE061E",
+  "url": "http://sjz.58.com/shangpu/38380031226888x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37777944609317x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 332,
+  "house_key": "146544",
+  "url": "http://sh.58.com/shangpu/38380164577445x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38010304162700x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 333,
+  "house_key": "FFFFFFFFF4958167!F9888BEBAE6F4B68803179B724AD9B",
+  "url": "http://sy.58.com/shangpu/38380173758853x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37587618492712x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 334,
+  "house_key": "FFFFFFFFF4958167!829772D2E5C345B1A82B95E4A541B8",
+  "url": "http://sh.58.com/shangpu/38380202396173x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37522848688155x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 335,
+  "house_key": "FFFFFFFFF4958167!3D2D583A2E3045C380550564E5E9C0",
+  "url": "http://qd.58.com/shangpu/38380208726914x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38044015315464x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 336,
+  "house_key": "FFFFFFFFF4958167!32D8AA6316924D45871674A5E91BFC",
+  "url": "http://sjz.58.com/shangpu/38380226088847x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37411126133659x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 337,
+  "house_key": "FFFFFFFFF4958167!9CE6934BC6B6458DB95B343FB54270",
+  "url": "http://zz.58.com/shangpu/38380236651149x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37821563793049x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 338,
+  "house_key": "FFFFFFFFF4958167!951504D778A94F62B54A047C8A48F6",
+  "url": "http://sy.58.com/shangpu/38380244521107x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38022287199755x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 339,
+  "house_key": "FFFFFFFFF4958167!6DBCB6FAE6C649B5AE09B819830F98",
+  "url": "http://sh.58.com/shangpu/38380253061543x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37744592611202x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 340,
+  "house_key": "FFFFFFFFF4958167!7437BA7493724BA9864B9197A31A69",
+  "url": "http://zz.58.com/shangpu/38380266907555x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37943211325206x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 341,
+  "house_key": "FFFFFFFFF4958167!334BB6C82D524D5998F4363647A00A",
+  "url": "http://sy.58.com/shangpu/38380276289164x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37942170536451x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 342,
+  "house_key": "FFFFFFFFF4958167!32F9235CEB0E4152818BE4374C102D",
+  "url": "http://sjz.58.com/shangpu/38380281726502x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38008409851281x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 343,
+  "house_key": "FFFFFFFFF4958167!79BC4ED45159494495615EE1D43426",
+  "url": "http://sjz.58.com/shangpu/38380288221446x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37566024047133x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 344,
+  "house_key": "172888",
+  "url": "http://cq.58.com/shangpu/38385393107599x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38041348965155x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 345,
+  "house_key": "FFFFFFFFF4958167!8352D8B2F50740AAB23492B978F5BF",
+  "url": "http://cd.58.com/shangpu/38385405445148x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37931752506516x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 346,
+  "house_key": "FFFFFFFFF4958167!FB82CCFCABBA42A8A8C9DDDB9CB89A",
+  "url": "http://sy.58.com/shangpu/38385444514195x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021744454667x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 347,
+  "house_key": "FFFFFFFFF4958167!A2A2E60797CE4A53A43DB509372382",
+  "url": "http://cc.58.com/shangpu/38385458929804x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37623985835147x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 348,
+  "house_key": "133346",
+  "url": "http://sh.58.com/shangpu/38385498700821x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38018543602340x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 349,
+  "house_key": "FFFFFFFFF4958167!F1460C32981D4682B4E0A408270091",
+  "url": "http://wh.58.com/shangpu/38385530766504x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37833991680285x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 350,
+  "house_key": "FFFFFFFFF4958167!F577E28CE3714722AD2E28376BE8B4",
+  "url": "http://wh.58.com/shangpu/38385539333665x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38030462450178x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 351,
+  "house_key": "FFFFFFFFF4958167!67015BE1A279479999FBF7F1945B58",
+  "url": "http://qd.58.com/shangpu/38385566305425x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38009655289100x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 352,
+  "house_key": "FFFFFFFFF4958167!7A3004EB95564C8CB1199F6F03E476",
+  "url": "http://wh.58.com/shangpu/38385644955149x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38020407222551x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 353,
+  "house_key": "FFFFFFFFF4958167!EDC85B382FCD443680700A89D3A39C",
+  "url": "http://sjz.58.com/shangpu/38385652798722x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37623566911780x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 354,
+  "house_key": "FFFFFFFFF4958167!04FB0634BC8D4D9191CA9198C9C8D4",
+  "url": "http://sz.58.com/shangpu/38385660190225x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37413711465481x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 355,
+  "house_key": "133451",
+  "url": "http://sh.58.com/shangpu/38385679375142x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38030614189185x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 356,
+  "house_key": "FFFFFFFFF4958167!6E15F1DE2D224EA5AFD348B8DA8C3A",
+  "url": "http://sjz.58.com/shangpu/38385688402582x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37932440423169x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 357,
+  "house_key": "FFFFFFFFF4958167!F62525876B074573B9D75415FAA2B9",
+  "url": "http://sy.58.com/shangpu/38385712538881x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966317731111x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 358,
+  "house_key": "FFFFFFFFF4958167!05CB723038B3405599BAFE8F295103",
+  "url": "http://cd.58.com/shangpu/38385761663119x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38010178699266x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 359,
+  "house_key": "FFFFFFFFF4958167!603BAD1FBDB048F195DFD053FF77F5",
+  "url": "http://sjz.58.com/shangpu/38385767330700x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38018838724359x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 360,
+  "house_key": "FFFFFFFFF4958167!0E7A43A863F54D978C5D2653785584",
+  "url": "http://wh.58.com/shangpu/38385785079820x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37833771523856x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 361,
+  "house_key": "149604",
+  "url": "http://cq.58.com/shangpu/38385808685970x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38019014703385x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 362,
+  "house_key": "FFFFFFFFF4958167!2852AB9177D748C79A9FC6A22AED42",
+  "url": "http://zz.58.com/shangpu/38385817409417x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37930592601384x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 363,
+  "house_key": "FFFFFFFFF4958167!35267BA04A1B42558BBCC32964EA50",
+  "url": "http://cq.58.com/shangpu/38385828934179x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37731159823130x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 364,
+  "house_key": "FFFFFFFFF4958167!B577FFC4F3CD4135A3B1294CB1F687",
+  "url": "http://zz.58.com/shangpu/38385848566029x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38007744781961x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 365,
+  "house_key": "FFFFFFFFF4958167!50AC9D67DD0046BBA86019493B2005",
+  "url": "http://xa.58.com/shangpu/38385859093770x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37733207542294x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 366,
+  "house_key": "FFFFFFFFF4958167!2FF674D0F4CF495DBDF12C02B9B661",
+  "url": "http://wh.58.com/shangpu/38385864816934x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38033588381974x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 367,
+  "house_key": "FFFFFFFFF4958167!494EFE1F5C0944FBA7E3374D16CE0B",
+  "url": "http://sh.58.com/shangpu/38385893986562x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37432931719184x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 368,
+  "house_key": "FFFFFFFFF4958167!15E59621D03949A39D2B96444E6A06",
+  "url": "http://sh.58.com/shangpu/38385926590240x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37534781327136x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 369,
+  "house_key": "FFFFFFFFF4958167!AE117DD3C57849BE81FE97B84A47E0",
+  "url": "http://sjz.58.com/shangpu/38385951993510x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38009429119372x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 370,
+  "house_key": "FFFFFFFFF4958167!8158365632E44D32B9A649CF7C2FFD",
+  "url": "http://xa.58.com/shangpu/38385969193879x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37966277208962x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 371,
+  "house_key": "FFFFFFFFF4958167!3B155AA8DBA14B3AB6FA447F60DEDE",
+  "url": "http://sy.58.com/shangpu/38385983489681x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021759743510x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 372,
+  "house_key": "FFFFFFFFF4958167!0FEF7AECD34F4B8981EB2E6B9CD0B0",
+  "url": "http://zz.58.com/shangpu/38385993673635x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37899478614050x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 373,
+  "house_key": "FFFFFFFFF4958167!EFADF72A73D24739AB8A59AD482BDA",
+  "url": "http://zz.58.com/shangpu/38386032383503x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38043003896710x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 374,
+  "house_key": "FFFFFFFFF4958167!08678F03281F43AC848615AD5F0D5E",
+  "url": "http://wh.58.com/shangpu/38386041773316x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38021609931160x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 375,
+  "house_key": "FFFFFFFFF4958167!80E0FCC9955D4492AE134CF780B531",
+  "url": "http://wh.58.com/shangpu/38386065919899x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38042635571084x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 376,
+  "house_key": "FFFFFFFFF4958167!22F7DEB27A8E4BEEADF9757B8BA07F",
+  "url": "http://zz.58.com/shangpu/38386078541327x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38008564527122x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 377,
+  "house_key": "FFFFFFFFF4958167!B3F0BD89800F4B8B907C7C8A14AB85",
+  "url": "http://cc.58.com/shangpu/38386097112083x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37756087239574x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 378,
+  "house_key": "FFFFFFFFF4958167!2FA320BDB2224C15A2AAD3CCB85750",
+  "url": "http://wh.58.com/shangpu/38386183136273x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37954485754403x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 379,
+  "house_key": "FFFFFFFFF4958167!5DFB7B884C5240B3AD35DA9C8A12D4",
+  "url": "http://qd.58.com/shangpu/38386193260453x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38030576961445x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 380,
+  "house_key": "FFFFFFFFF4958167!79F3E3008E8D4DBBAE6F651B38EECE",
+  "url": "http://sjz.58.com/shangpu/38386206778628x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37952259542676x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 381,
+  "house_key": "80371",
+  "url": "http://sh.58.com/shangpu/38386218265220x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38020312342815x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 382,
+  "house_key": "FFFFFFFFF4958167!F8972E5EBDDE4785B48E1BB0652576",
+  "url": "http://cc.58.com/shangpu/38386242484620x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37888981538592x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 383,
+  "house_key": "FFFFFFFFF4958167!EE9B80EA1780497F80710B1481D452",
+  "url": "http://sjz.58.com/shangpu/38386258650401x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37778104806308x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 384,
+  "house_key": "FFFFFFFFF4958167!833809A447BE4744837BE59809D957",
+  "url": "http://sy.58.com/shangpu/38386266954250x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37964996114338x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 385,
+  "house_key": "FFFFFFFFF4958167!B3BD3B66384243B0ADE0A0177E5836",
+  "url": "http://wh.58.com/shangpu/38386273697415x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38021844975773x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 386,
+  "house_key": "FFFFFFFFF4958167!2CDFF6F4FB8E4641AA3DB34C93391B",
+  "url": "http://cd.58.com/shangpu/38386307372806x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37732918759579x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 387,
+  "house_key": "FFFFFFFFF4958167!1CC00CE835A0489DB4CA50D17EE941",
+  "url": "http://sjz.58.com/shangpu/38386330935970x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38032863968658x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 388,
+  "house_key": "FFFFFFFFF4958167!BD1BE9994F3045CCA5FA9D7A578FCE",
+  "url": "http://sjz.58.com/shangpu/38386339421607x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37920802445717x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 389,
+  "house_key": "FFFFFFFFF4958167!DC9C03FD777B4A88B634AF706EEE94",
+  "url": "http://cq.58.com/shangpu/38386347467675x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37609535715342x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 390,
+  "house_key": "FFFFFFFFF4958167!B975F0D662FB49118626E920DC361D",
+  "url": "http://sjz.58.com/shangpu/38386457819410x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37544009023008x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 391,
+  "house_key": "FFFFFFFFF4958167!89C5EA7437B0475F8F99269F81AD29",
+  "url": "http://qd.58.com/shangpu/38386474675876x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38019382241934x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 392,
+  "house_key": "FFFFFFFFF4958167!E305B3D976864255AB3711457A7482",
+  "url": "http://xa.58.com/shangpu/38386513912470x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37676190471847x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 393,
+  "house_key": "FFFFFFFFF4958167!98B5C9AC3FB542358A413B215C0C06",
+  "url": "http://sy.58.com/shangpu/38386548636944x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37513355305496x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 394,
+  "house_key": "FFFFFFFFF4958167!0828A84F6337404792FDA79DA38A50",
+  "url": "http://hrb.58.com/shangpu/38386561897869x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38042851289240x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 395,
+  "house_key": "169677",
+  "url": "http://cq.58.com/shangpu/38386606556820x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38029830985477x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 396,
+  "house_key": "FFFFFFFFF4958167!8253EFA932284CDEBBE12AD666E7B5",
+  "url": "http://wh.58.com/shangpu/38386635886501x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37797635887649x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 397,
+  "house_key": "FFFFFFFFF4958167!187C2B4579C84C6FA3E216CBCC400E",
+  "url": "http://sjz.58.com/shangpu/38386696873224x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38009683668097x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 398,
+  "house_key": "FFFFFFFFF4958167!068147062A0D4FB6BAB8B93521A855",
+  "url": "http://sy.58.com/shangpu/38389275094915x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38022382322969x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 399,
+  "house_key": "FFFFFFFFF4958167!BEB9ED16ACF2455C821380737BBDC3",
+  "url": "http://sh.58.com/shangpu/38389316315162x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37532173001226x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 400,
+  "house_key": "FFFFFFFFF4958167!964D9EAFA44240C0994E5250965580",
+  "url": "http://sy.58.com/shangpu/38389323957524x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38019035313952x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 401,
+  "house_key": "FFFFFFFFF4958167!AA032E2F83C54BBDA17F9B8178B0D8",
+  "url": "http://cd.58.com/shangpu/38389335468683x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38020552936865x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 402,
+  "house_key": "FFFFFFFFF4958167!4E4F51DD873045379D06FAC983854C",
+  "url": "http://wh.58.com/shangpu/38389379036940x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37610993677335x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 403,
+  "house_key": "FFFFFFFFF4958167!A9003EAA0F814C82AEC395B7C400D0",
+  "url": "http://sy.58.com/shangpu/38389428624015x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37656444641797x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 404,
+  "house_key": "FFFFFFFFF4958167!5B80E85F386B41A2BB0BAFFBB7F5D7",
+  "url": "http://zz.58.com/shangpu/38389443847590x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37875585935748x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 405,
+  "house_key": "FFFFFFFFF4958167!2F9F8F43A9C94DE3A8091D801FB167",
+  "url": "http://wh.58.com/shangpu/38389490235522x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37601952973971x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 406,
+  "house_key": "FFFFFFFFF4958167!0871DA4388F145DC8EED3B4F4B7205",
+  "url": "http://sjz.58.com/shangpu/38389498258849x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37620593790085x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 407,
+  "house_key": "FFFFFFFFF4958167!5D8E065F19944EB8A58A845C516F3A",
+  "url": "http://sy.58.com/shangpu/38389505426443x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38032813013768x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 408,
+  "house_key": "FFFFFFFFF4958167!3142674CA35C4754B7C1C1DCCA118E",
+  "url": "http://cd.58.com/shangpu/38389520878113x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38010063192862x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 409,
+  "house_key": "FFFFFFFFF4958167!98FE9F3730FC4735BE9AFA840C7D30",
+  "url": "http://wh.58.com/shangpu/38389526785689x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37819989644168x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 410,
+  "house_key": "FFFFFFFFF4958167!FA3E124E5CD14209B04A43FE8A5DC8",
+  "url": "http://sjz.58.com/shangpu/38389571930131x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38030531458851x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 411,
+  "house_key": "75615",
+  "url": "http://cq.58.com/shangpu/38389598972295x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37952653601942x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 412,
+  "house_key": "FFFFFFFFF4958167!C778A2BE472249EF9869501413AC72",
+  "url": "http://cq.58.com/shangpu/38389625676050x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38043263700750x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 413,
+  "house_key": "FFFFFFFFF4958167!7CB5793F368A4EFF94858AEDEE2814",
+  "url": "http://wh.58.com/shangpu/38389978279077x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37643296498856x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 414,
+  "house_key": "FFFFFFFFF4958167!CC22C29592B1409F9393DE41FFCE27",
+  "url": "http://xa.58.com/shangpu/38389995794817x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37545141181592x.shtml?PGTID",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 415,
+  "house_key": "FFFFFFFFF4958167!347DF8C599274942AD69B93943DF91",
+  "url": "http://sjz.58.com/shangpu/38390019571092x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38020510250015x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 416,
+  "house_key": "FFFFFFFFF4958167!4B3DB4D7BF584AD69A3C4673527935",
+  "url": "http://sjz.58.com/shangpu/38390025674656x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37821832892804x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 417,
+  "house_key": "FFFFFFFFF4958167!463BDCA5630842608BF6F0C9CD2F7A",
+  "url": "http://sjz.58.com/shangpu/38390044672011x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37731570146825x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 418,
+  "house_key": "FFFFFFFFF4958167!FB2DA62FB40045498C411865023187",
+  "url": "http://cq.58.com/shangpu/38390051812613x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37811615820426x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 419,
+  "house_key": "FFFFFFFFF4958167!BCACF93DBB7D4C8D875A6422E3D86C",
+  "url": "http://zz.58.com/shangpu/38390062654758x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37842281094674x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 420,
+  "house_key": "FFFFFFFFF4958167!A1D1F00B4F9E443D9DD745CDDDC74D",
+  "url": "http://sz.58.com/shangpu/38390070857118x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37844379949337x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 421,
+  "house_key": "FFFFFFFFF4958167!8FFDA67059F040A9BE2260824B5DEF",
+  "url": "http://sy.58.com/shangpu/38390086086302x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37833946193686x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 422,
+  "house_key": "FFFFFFFFF4958167!EDF93B55AB1D4C0E89062D98CEAA49",
+  "url": "http://cq.58.com/shangpu/38390101540875x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37834200979229x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 423,
+  "house_key": "FFFFFFFFF4958167!411EC67846254900ABCF0CDDEC1CE5",
+  "url": "http://sz.58.com/shangpu/38390108469261x.shtml",
+  "old_url": "https://sz.58.com/shangpu/38043442801160x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 424,
+  "house_key": "FFFFFFFFF4958167!87CC726194EF4BF3A4BDF900A049F1",
+  "url": "http://sjz.58.com/shangpu/38390125983903x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38043171345044x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 425,
+  "house_key": "FFFFFFFFF4958167!1809B20894C5409599326492AACC69",
+  "url": "http://wh.58.com/shangpu/38390135835656x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37734027398036x.shtml",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 426,
+  "house_key": "FFFFFFFFF4958167!BF76FEC0D50948E8968DBDA78D7998",
+  "url": "http://cq.58.com/shangpu/38390153731975x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37941296227467x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 427,
+  "house_key": "FFFFFFFFF4958167!41C32B20D8464B4AB4077273992BEB",
+  "url": "http://sjz.58.com/shangpu/38390167052551x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37898922092044x.shtml?",
+  "create_date": "2019-06-06T16:00:00.000Z"
+}, {
+  "id": 428,
+  "house_key": "FFFFFFFFF4958167!51382FF1F21C4FCA9F011134B59305",
+  "url": "http://cq.58.com/shangpu/38390175750168x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37899230118039x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 429,
+  "house_key": "FFFFFFFFF4958167!C3C0C62E6E4C4B7B9791C6D9716D6C",
+  "url": "http://sjz.58.com/shangpu/38390181306881x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38055317000837x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 430,
+  "house_key": "FFFFFFFFF4958167!443C6A92B6FD4C75808255C206E937",
+  "url": "http://sjz.58.com/shangpu/38390188015910x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38055763221773x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 431,
+  "house_key": "FFFFFFFFF4958167!91F4972C51434D8A8BC731CD069382",
+  "url": "http://sy.58.com/shangpu/38390197175070x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021954430722x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 432,
+  "house_key": "FFFFFFFFF4958167!20B5BA159C0E457B97E1A7133BB79A",
+  "url": "http://zz.58.com/shangpu/38390206099364x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37941268862473x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 433,
+  "house_key": "FFFFFFFFF4958167!4004FEA9E81D431DB88B3881B0B82A",
+  "url": "http://tj.58.com/shangpu/38390219766159x.shtml",
+  "old_url": "https://tj.58.com/shangpu/38018554842522x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 434,
+  "house_key": "FFFFFFFFF4958167!7267AEDF87D840EBA75CC88D435612",
+  "url": "http://cq.58.com/shangpu/38390239281168x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37897382589703x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 435,
+  "house_key": "FFFFFFFFF4958167!9453893BA3EC40B8ADBEA77205BF68",
+  "url": "http://cd.58.com/shangpu/38390248084887x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37965041688967x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 436,
+  "house_key": "FFFFFFFFF4958167!CDA29532A9C3465B90D3ADED28973C",
+  "url": "http://hrb.58.com/shangpu/38390267997061x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38019408848283x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 437,
+  "house_key": "FFFFFFFFF4958167!227FB416433F4D8E8373DE7E83D2FF",
+  "url": "http://cq.58.com/shangpu/38390282108070x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38043298596363x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 438,
+  "house_key": "FFFFFFFFF4958167!6AC47D97DDC9441D85AE8DAC319F1D",
+  "url": "http://xa.58.com/shangpu/38390298092679x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37952618301451x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 439,
+  "house_key": "FFFFFFFFF4958167!2772CDC0D137444786C52A24A3C693",
+  "url": "http://sy.58.com/shangpu/38390318283679x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38010941817241x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 440,
+  "house_key": "FFFFFFFFF4958167!68E5827DBF7E46CE93DC4AAC080F2E",
+  "url": "http://zz.58.com/shangpu/38390326568727x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37965511776146x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 441,
+  "house_key": "FFFFFFFFF4958167!7F8A5AA304474A0BAA9AD8BA52F328",
+  "url": "http://sy.58.com/shangpu/38390331988506x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37412758676101x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 442,
+  "house_key": "FFFFFFFFF4958167!B4BB27DD357B4DC1AE87D349F06523",
+  "url": "http://wh.58.com/shangpu/38390360641794x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38054604103958x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 443,
+  "house_key": "FFFFFFFFF4958167!F6FC98645CE04D0D918D9B017E48B8",
+  "url": "http://zz.58.com/shangpu/38390379524873x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38052542992263x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 444,
+  "house_key": "FFFFFFFFF4958167!3B90F1F24E314318996181DE986E78",
+  "url": "http://wh.58.com/shangpu/38390391113220x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37952312811537x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 445,
+  "house_key": "FFFFFFFFF4958167!49680EB2622848FE8DC2FF694BF223",
+  "url": "http://cq.58.com/shangpu/38390399249948x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37897998001928x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 446,
+  "house_key": "FFFFFFFFF4958167!927D679383CA42869A0D9D293B28DD",
+  "url": "http://sh.58.com/shangpu/38390412446116x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37900186010653x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 447,
+  "house_key": "FFFFFFFFF4958167!AE71F2DDA99C42ACBEB5F650DF4DBA",
+  "url": "http://sjz.58.com/shangpu/38390417958796x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37677550151058x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 448,
+  "house_key": "FFFFFFFFF4958167!1DED2A217AA94C529EC7E4928E74EE",
+  "url": "http://sjz.58.com/shangpu/38390432071573x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37645917964689x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 449,
+  "house_key": "FFFFFFFFF4958167!662952DC3A694BE5AFD7151AE526FC",
+  "url": "http://zz.58.com/shangpu/38390437932557x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37712727656356x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 450,
+  "house_key": "FFFFFFFFF4958167!5DE3353DC78D4498BE4721902CE2CD",
+  "url": "http://cd.58.com/shangpu/38390472513433x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37732057390730x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 451,
+  "house_key": "FFFFFFFFF4958167!6ADCDD0B067B44079D0972CC03164D",
+  "url": "http://sh.58.com/shangpu/38390478243721x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37611323475609x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 452,
+  "house_key": "FFFFFFFFF4958167!0A760C4A1F894E23A2EB487FF54E09",
+  "url": "http://xa.58.com/shangpu/38390596114317x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38032701127590x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 453,
+  "house_key": "FFFFFFFFF4958167!6F4424DC8C424D9DB7DE1FC6A7BD24",
+  "url": "http://zz.58.com/shangpu/38390606392862x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37601997003930x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 454,
+  "house_key": "FFFFFFFFF4958167!DA41720310984179A8C587384DED7C",
+  "url": "http://xa.58.com/shangpu/38390611705241x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37941740042920x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 455,
+  "house_key": "FFFFFFFFF4958167!96B0559285784B6182548B127D25DF",
+  "url": "http://sjz.58.com/shangpu/38390619416213x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37919365025187x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 456,
+  "house_key": "FFFFFFFFF4958167!7A30DAEBB4DD4E8F8AE5476939953A",
+  "url": "http://sy.58.com/shangpu/38390645583381x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37777787794958x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 457,
+  "house_key": "157325",
+  "url": "http://sh.58.com/shangpu/38390659930509x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38042876335902x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 458,
+  "house_key": "FFFFFFFFF4958167!EE602CB6054C49B08A725A27E9599D",
+  "url": "http://sh.58.com/shangpu/38390664902792x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37877535860998x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 459,
+  "house_key": "FFFFFFFFF4958167!BF680B5701C54B14BAA01E60D15A35",
+  "url": "http://qd.58.com/shangpu/38390686605330x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38029908069523x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 460,
+  "house_key": "FFFFFFFFF4958167!D638D028B4A444BD9C2F483FEF7B3D",
+  "url": "http://sjz.58.com/shangpu/38390694051352x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37766416954884x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 461,
+  "house_key": "78975",
+  "url": "http://sh.58.com/shangpu/38390704292240x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37767577475236x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 462,
+  "house_key": "FFFFFFFFF4958167!4B00F60485AA43EB853D972DE29998",
+  "url": "http://xa.58.com/shangpu/38397425714698x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37953027391779x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 463,
+  "house_key": "FFFFFFFFF4958167!D647E34470994FFA94A5AE78936658",
+  "url": "http://tj.58.com/shangpu/38397446142729x.shtml",
+  "old_url": "https://tj.58.com/shangpu/37889753059999x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 464,
+  "house_key": "FFFFFFFFF4958167!D077066FE3694CB3A87A466BB14BD6",
+  "url": "http://sjz.58.com/shangpu/38397460458398x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38029933153812x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 465,
+  "house_key": "FFFFFFFFF4958167!CE1A79EA2EA5406AB212A990A07A73",
+  "url": "http://sh.58.com/shangpu/38397466762791x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37654634749067x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 466,
+  "house_key": "FFFFFFFFF4958167!0AE74CFFF29A459A82BB8255F926DA",
+  "url": "http://sh.58.com/shangpu/38397472718758x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37589518432011x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 467,
+  "house_key": "FFFFFFFFF4958167!29166921A71C42CCA748E6C7AB3C03",
+  "url": "http://zz.58.com/shangpu/38397488511012x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38019152790177x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 468,
+  "house_key": "FFFFFFFFF4958167!E65F1BAE9806406495AAF7F83A4260",
+  "url": "http://sh.58.com/shangpu/38397529435417x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38051762633735x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 469,
+  "house_key": "FFFFFFFFF4958167!5FCA236081084A5FA03B91C99B702E",
+  "url": "http://xa.58.com/shangpu/38397552935178x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38044369214496x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 470,
+  "house_key": "FFFFFFFFF4958167!C468AAD3A4AA441FA8462C7BC26377",
+  "url": "http://xa.58.com/shangpu/38397575948057x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38043027094674x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 471,
+  "house_key": "FFFFFFFFF4958167!100275F9B02A46D491A24DBFB955F2",
+  "url": "http://zz.58.com/shangpu/38397591406615x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38030408581005x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 472,
+  "house_key": "FFFFFFFFF4958167!30943B3DFD0D4E7FB7A84607C0C27A",
+  "url": "http://cd.58.com/shangpu/38397646135206x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38054456283279x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 473,
+  "house_key": "FFFFFFFFF4958167!2C0056D5FB974587B41A4AA01588D1",
+  "url": "http://xa.58.com/shangpu/38397658478981x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38010078761360x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 474,
+  "house_key": "FFFFFFFFF4958167!9A4A7D2C4C5C40959F61F2E222EBCE",
+  "url": "http://cd.58.com/shangpu/38397668521995x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38033783275431x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 475,
+  "house_key": "FFFFFFFFF4958167!15693FE5FED94B5EAD3E8D4C352A79",
+  "url": "http://zz.58.com/shangpu/38397679795623x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37510338265892x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 476,
+  "house_key": "FFFFFFFFF4958167!2415042301BD4E5BA17EF5B8EACCF2",
+  "url": "http://qd.58.com/shangpu/38397696541735x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37821321300369x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 477,
+  "house_key": "FFFFFFFFF4958167!C64288D008D84406BCEA14BC9A9E5F",
+  "url": "http://zz.58.com/shangpu/38397702795530x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38032470678033x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 478,
+  "house_key": "FFFFFFFFF4958167!B834CF24B3964F90B9E4766AD66802",
+  "url": "http://sjz.58.com/shangpu/38397731649174x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37820497488678x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 479,
+  "house_key": "FFFFFFFFF4958167!A4A3D4E7B2C44ED1B85C24F04298A6",
+  "url": "http://xa.58.com/shangpu/38397739071620x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38055362119061x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 480,
+  "house_key": "FFFFFFFFF4958167!C0F1241118734662BF798AE40594AE",
+  "url": "http://xa.58.com/shangpu/38397749609090x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38009401407766x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 481,
+  "house_key": "FFFFFFFFF4958167!653158567BF94008A4C68F0933EE1A",
+  "url": "http://sjz.58.com/shangpu/38397757498886x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37742721438350x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 482,
+  "house_key": "FFFFFFFFF4958167!48D8A42E66094C9585383C9A411087",
+  "url": "http://zz.58.com/shangpu/38397763455514x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37954824607886x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 483,
+  "house_key": "FFFFFFFFF4958167!2B9DA4B6CE5D4AC7ACF7BBF2CA8FA7",
+  "url": "http://cq.58.com/shangpu/38397795104933x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38009155612827x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 484,
+  "house_key": "FFFFFFFFF4958167!93DB04A8AB3C44CF9433D7FA09A605",
+  "url": "http://sy.58.com/shangpu/38397800717085x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37967306283289x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 485,
+  "house_key": "FFFFFFFFF4958167!DDC999AF6C074487A8B3586B1C6410",
+  "url": "http://zz.58.com/shangpu/38397813785639x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37942967607580x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 486,
+  "house_key": "FFFFFFFFF4958167!2509E405DA9E4FC89FCC3CEDA7C209",
+  "url": "http://wh.58.com/shangpu/38397834517256x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37432648075908x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 487,
+  "house_key": "FFFFFFFFF4958167!7D6A453E9018426B85E14C87D22A35",
+  "url": "http://hrb.58.com/shangpu/38397839792789x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38044691817510x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 488,
+  "house_key": "FFFFFFFFF4958167!A093A5F4B4B64B869F9D03B7E38774",
+  "url": "http://sjz.58.com/shangpu/38397845719822x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37545816764304x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 489,
+  "house_key": "FFFFFFFFF4958167!B5C2CF027C9440D6B1552261EC1F6B",
+  "url": "http://sh.58.com/shangpu/38397858005910x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37766794102531x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 490,
+  "house_key": "FFFFFFFFF4958167!0911AD7D21794DF49F9FFA87EC38EC",
+  "url": "http://sy.58.com/shangpu/38397863411351x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38055175836555x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 491,
+  "house_key": "FFFFFFFFF4958167!85C09B29D966461B956BED77BF76ED",
+  "url": "http://sy.58.com/shangpu/38397877462163x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37644850549031x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 492,
+  "house_key": "FFFFFFFFF4958167!465946A0493644168688A0E0B2801F",
+  "url": "http://cd.58.com/shangpu/38397884668549x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37756868168962x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 493,
+  "house_key": "FFFFFFFFF4958167!9DE0A548B53848B5904A6B72A811E6",
+  "url": "http://sh.58.com/shangpu/38397899964559x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38055490288914x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 494,
+  "house_key": "FFFFFFFFF4958167!5935E8DD429145889D6E1C2B6F26AD",
+  "url": "http://cq.58.com/shangpu/38397913083936x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38018862030096x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 495,
+  "house_key": "FFFFFFFFF4958167!99A254E7115C4285A8590299961F9C",
+  "url": "http://sh.58.com/shangpu/38397920548372x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37491591805207x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 496,
+  "house_key": "FFFFFFFFF4958167!04FD2F75F97A49F9AF46EFE8B106B8",
+  "url": "http://wh.58.com/shangpu/38397926154780x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38021751831578x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 497,
+  "house_key": "FFFFFFFFF4958167!CB09839F87894A17A71563A3DEB46B",
+  "url": "http://cq.58.com/shangpu/38397953127206x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38043930058888x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 498,
+  "house_key": "75241",
+  "url": "http://sh.58.com/shangpu/38397965169561x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38031858335245x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 499,
+  "house_key": "FFFFFFFFF4958167!624D93F14B194453959EBD76C9B38D",
+  "url": "http://wh.58.com/shangpu/38397985813506x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38351271334042x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 500,
+  "house_key": "FFFFFFFFF4958167!E1E4BD4177AA44D1AB8536D200AC63",
+  "url": "http://cq.58.com/shangpu/38398004816021x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38055176556434x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 501,
+  "house_key": "FFFFFFFFF4958167!CCBEA40005364DCE9A3FE8F6706F5C",
+  "url": "http://zz.58.com/shangpu/38398021111069x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37932604584333x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 502,
+  "house_key": "FFFFFFFFF4958167!1693F12ED84548C5A11EDF569C32B5",
+  "url": "http://cq.58.com/shangpu/38398035888138x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37944807004436x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 503,
+  "house_key": "FFFFFFFFF4958167!86A8F547A51F4B56AEBFE44682E480",
+  "url": "http://wh.58.com/shangpu/38398043507204x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37733070916110x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 504,
+  "house_key": "FFFFFFFFF4958167!40FBBD369B7444BBB5D5B9583238F4",
+  "url": "http://qd.58.com/shangpu/38398067978636x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37720044180495x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 505,
+  "house_key": "FFFFFFFFF4958167!3F7603BE8264405CA4E6BD2B60C561",
+  "url": "http://wh.58.com/shangpu/38398092783768x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37943578847261x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 506,
+  "house_key": "FFFFFFFFF4958167!EE9D957E87E943808A06B303A38D07",
+  "url": "http://zz.58.com/shangpu/38398099552282x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37854774088073x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 507,
+  "house_key": "FFFFFFFFF4958167!A9BB832D26514E239B0FB6101504D1",
+  "url": "http://xa.58.com/shangpu/38398109814038x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38033009992069x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 508,
+  "house_key": "FFFFFFFFF4958167!A52E4ABB00C247C98B46694E72336E",
+  "url": "http://zz.58.com/shangpu/38398123175682x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37900672245159x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 509,
+  "house_key": "FFFFFFFFF4958167!6613D8699E0147A2A892CEC5A00B86",
+  "url": "http://cq.58.com/shangpu/38398139519879x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37546935838105x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 510,
+  "house_key": "FFFFFFFFF4958167!E48AC0863FC649AE9C3DC5E1D95AF4",
+  "url": "http://sjz.58.com/shangpu/38398147791640x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37900708376851x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 511,
+  "house_key": "FFFFFFFFF4958167!9DC07632DB054974A2C185E095AF3C",
+  "url": "http://wh.58.com/shangpu/38398169978015x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37943797450515x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 512,
+  "house_key": "FFFFFFFFF4958167!B0C3D36FCF294907817CAB456A5341",
+  "url": "http://sh.58.com/shangpu/38398175812744x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37534360561801x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 513,
+  "house_key": "FFFFFFFFF4958167!B74796ED91B34CC18F6D481E6716B1",
+  "url": "http://sy.58.com/shangpu/38398181444880x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37897950519065x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 514,
+  "house_key": "FFFFFFFFF4958167!21B810F73FDF45BF9A7C334DDE058E",
+  "url": "http://sy.58.com/shangpu/38398191487651x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37833851265942x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 515,
+  "house_key": "FFFFFFFFF4958167!01BA491DEE764B5CA1E3CC8160F52D",
+  "url": "http://sy.58.com/shangpu/38398196695049x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021934399493x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 516,
+  "house_key": "FFFFFFFFF4958167!2B6F5EA4FC2C45F4B2FA002244FAF3",
+  "url": "http://sh.58.com/shangpu/38398202269338x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37500857121809x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 517,
+  "house_key": "FFFFFFFFF4958167!293F0758613B4C9FB2C8774BB4A120",
+  "url": "http://sy.58.com/shangpu/38398235965333x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38055125853084x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 518,
+  "house_key": "FFFFFFFFF4958167!9972D69B8AE449FEA21EEB69C4078B",
+  "url": "http://cd.58.com/shangpu/38398245345571x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38042687183000x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 519,
+  "house_key": "FFFFFFFFF4958167!A6CCED6809684B41932A2ADDC07DA8",
+  "url": "http://cq.58.com/shangpu/38398255915524x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37844032522917x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 520,
+  "house_key": "FFFFFFFFF4958167!1DC829BB42D948CE8E38155E21A725",
+  "url": "http://qd.58.com/shangpu/38398280273303x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37932655292951x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 521,
+  "house_key": "FFFFFFFFF4958167!4FC904A112974E1FA493B84FF09733",
+  "url": "http://cd.58.com/shangpu/38398288477188x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37765273259152x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 522,
+  "house_key": "FFFFFFFFF4958167!C2484C4E5FFE4430B3D9A5A2864A7A",
+  "url": "http://sy.58.com/shangpu/38398295112850x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37732865573254x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 523,
+  "house_key": "FFFFFFFFF4958167!6BF65C9D682F43EA87A2584DDF5370",
+  "url": "http://cd.58.com/shangpu/38398300589086x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37833706120733x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 524,
+  "house_key": "FFFFFFFFF4958167!9931016A0E564480A19E0012BD0253",
+  "url": "http://cc.58.com/shangpu/38398306312872x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37512939275800x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 525,
+  "house_key": "FFFFFFFFF4958167!9BCCDD2411564C49BA1A0F7C5E7638",
+  "url": "http://wh.58.com/shangpu/38398329419426x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38054140348683x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 526,
+  "house_key": "FFFFFFFFF4958167!2F5818EB5BBA4B639D73FD7B45414A",
+  "url": "http://wh.58.com/shangpu/38398338798737x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37811975160074x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 527,
+  "house_key": "FFFFFFFFF4958167!780DD535B28643AEBCA2A9B038D499",
+  "url": "http://wh.58.com/shangpu/38398347909514x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37942300245411x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 528,
+  "house_key": "FFFFFFFFF4958167!7A3D57DC9B994342BDFF2FF8532C37",
+  "url": "http://sjz.58.com/shangpu/38398358238475x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38043798893192x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 529,
+  "house_key": "FFFFFFFFF4958167!EDC123C2B18249BB8B112405FD7603",
+  "url": "http://sjz.58.com/shangpu/38398364065947x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37853652725789x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 530,
+  "house_key": "FFFFFFFFF4958167!D12ABC07DA974570ABE966FD3DF6DC",
+  "url": "http://cd.58.com/shangpu/38398377789094x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37966219347216x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 531,
+  "house_key": "FFFFFFFFF4958167!17F4D51ECDD34A0CB66FAA680624A0",
+  "url": "http://cc.58.com/shangpu/38398387633188x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37734242431250x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 532,
+  "house_key": "FFFFFFFFF4958167!4B8CB7CE74B944A396146CC4C53468",
+  "url": "http://sjz.58.com/shangpu/38398397725711x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37810818366734x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 533,
+  "house_key": "FFFFFFFFF4958167!570D756185A94F468A694220F5B6F9",
+  "url": "http://sjz.58.com/shangpu/38398404613266x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37967043451029x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 534,
+  "house_key": "FFFFFFFFF4958167!12D9DA969A414A0798947E378FF8A5",
+  "url": "http://sh.58.com/shangpu/38398438745765x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37577307305481x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 535,
+  "house_key": "FFFFFFFFF4958167!A14B459D1541419699F656987F1977",
+  "url": "http://sjz.58.com/shangpu/38398446001925x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38055824579618x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 536,
+  "house_key": "FFFFFFFFF4958167!A9429FE5794A49FD84AC36C712A15E",
+  "url": "http://zz.58.com/shangpu/38398458368261x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37679366140066x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 537,
+  "house_key": "FFFFFFFFF4958167!1311E6D6DDE24B99B732C8BA19638B",
+  "url": "http://wh.58.com/shangpu/38398465196571x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37521819632930x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 538,
+  "house_key": "104904",
+  "url": "http://sh.58.com/shangpu/38398480192784x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38042839555361x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 539,
+  "house_key": "FFFFFFFFF4958167!00A34D84F5C248CBADE809A86D80FC",
+  "url": "http://zz.58.com/shangpu/38398487638178x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37941611231761x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 540,
+  "house_key": "FFFFFFFFF4958167!B3A5775A724E40F9832353BB85121C",
+  "url": "http://cq.58.com/shangpu/38398504408608x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38043876278663x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 541,
+  "house_key": "FFFFFFFFF4958167!63888A1790C3408EAD571F8B6B8CCF",
+  "url": "http://cc.58.com/shangpu/38398515472157x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37812635784476x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 542,
+  "house_key": "FFFFFFFFF4958167!FDECF073D7A54C7DA73430205B4598",
+  "url": "http://sy.58.com/shangpu/38398528051746x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38054954842521x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 543,
+  "house_key": "131365",
+  "url": "http://cq.58.com/shangpu/38398534174211x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38052531623298x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 544,
+  "house_key": "FFFFFFFFF4958167!20E26A6BD9DD492AA020DC07EF3A9E",
+  "url": "http://wh.58.com/shangpu/38398539376261x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38031885023375x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 545,
+  "house_key": "FFFFFFFFF4958167!5DA0BE724CCC44CF94A87C3F0BB3F2",
+  "url": "http://cq.58.com/shangpu/38398547738150x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38019573741718x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 546,
+  "house_key": "FFFFFFFFF4958167!C748AA529752432C924228016B282C",
+  "url": "http://wh.58.com/shangpu/38398553231510x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37966535970444x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 547,
+  "house_key": "FFFFFFFFF4958167!A09E9B78B619481BBAB4D36AA73CA5",
+  "url": "http://cq.58.com/shangpu/38398563087253x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37944299498510x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 548,
+  "house_key": "FFFFFFFFF4958167!9E36CB58C3304863BB8BCD464C44C4",
+  "url": "http://qd.58.com/shangpu/38398574156437x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38018770915345x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 549,
+  "house_key": "FFFFFFFFF4958167!E370D1A4C99648D89623AA205A4896",
+  "url": "http://xa.58.com/shangpu/38398579845533x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38042608237080x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 550,
+  "house_key": "FFFFFFFFF4958167!4DB5773239C043C497ADFF37E2E157",
+  "url": "http://sjz.58.com/shangpu/38398585359236x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021982245399x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 551,
+  "house_key": "FFFFFFFFF4958167!63CCBA4BB7884CEFA6C139FD170AA3",
+  "url": "http://sjz.58.com/shangpu/38398594571783x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37965850614051x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 552,
+  "house_key": "FFFFFFFFF4958167!60B286579C8C4DF48D4AF800AC62A5",
+  "url": "http://xa.58.com/shangpu/38398645255298x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37391079232413x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 553,
+  "house_key": "FFFFFFFFF4958167!519BACCA17674D59A1EA87CF7C6DF8",
+  "url": "http://zz.58.com/shangpu/38398677431077x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38043137466370x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 554,
+  "house_key": "FFFFFFFFF4958167!0ED8437625E5457488F780AF16966E",
+  "url": "http://sy.58.com/shangpu/38398683879201x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021714583952x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 555,
+  "house_key": "FFFFFFFFF4958167!89C007CD9F1A41CA917D66EDF27E8D",
+  "url": "http://sy.58.com/shangpu/38398692066979x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37468924195987x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 556,
+  "house_key": "FFFFFFFFF4958167!610079D23382494CB61B37DA1AC34A",
+  "url": "http://zz.58.com/shangpu/38398710447654x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37598775959183x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 557,
+  "house_key": "FFFFFFFFF4958167!1A40A10C8E90428DB5EDEB201D55AB",
+  "url": "http://sjz.58.com/shangpu/38398719864843x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37900676251910x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 558,
+  "house_key": "78691",
+  "url": "http://sh.58.com/shangpu/38398737581082x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37966586677519x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 559,
+  "house_key": "FFFFFFFFF4958167!90B6BCE31BD84ED0984572977CF627",
+  "url": "http://zz.58.com/shangpu/38398760611201x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37845265581704x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 560,
+  "house_key": "FFFFFFFFF4958167!E69C75F23FE84788AED3D62159122F",
+  "url": "http://sjz.58.com/shangpu/38398770140071x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37568638687258x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 561,
+  "house_key": "FFFFFFFFF4958167!066715D8830A4DF4A6CB52B41AABD6",
+  "url": "http://zz.58.com/shangpu/38398783953704x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37932766037414x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 562,
+  "house_key": "FFFFFFFFF4958167!D104B5356FD14564965EA165F876BA",
+  "url": "http://wh.58.com/shangpu/38398790483479x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38053774353181x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 563,
+  "house_key": "FFFFFFFFF4958167!813048A2C5D74EAC9A6E055A265FC5",
+  "url": "http://zz.58.com/shangpu/38398794866576x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38030053448216x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 564,
+  "house_key": "FFFFFFFFF4958167!864D85D5222F4FAE93BA74CE24FB19",
+  "url": "http://cq.58.com/shangpu/38398809950632x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37886286037155x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 565,
+  "house_key": "FFFFFFFFF4958167!E2FAFDBFF2304F6B8E352EB1224167",
+  "url": "http://sh.58.com/shangpu/38398816664322x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37522603718278x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 566,
+  "house_key": "FFFFFFFFF4958167!CB9F5A8DA5534785AF8432F45CFF30",
+  "url": "http://hrb.58.com/shangpu/38398923072020x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38030701247770x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 567,
+  "house_key": "FFFFFFFFF4958167!A90A76E76A914A3192AF45F43F0C00",
+  "url": "http://sjz.58.com/shangpu/38398931323154x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38054800187811x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 568,
+  "house_key": "FFFFFFFFF4958167!AF4E04063AF5418994E4CB804235A9",
+  "url": "http://zz.58.com/shangpu/38398936672537x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37742988709781x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 569,
+  "house_key": "FFFFFFFFF4958167!C187E28760A64EFD9F6C5044D6C649",
+  "url": "http://wh.58.com/shangpu/38398967114920x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38030101830048x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 570,
+  "house_key": "FFFFFFFFF4958167!7CD86D2FF3AC457FBF9F531AFD9476",
+  "url": "http://cq.58.com/shangpu/38398981561870x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031757390239x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 571,
+  "house_key": "FFFFFFFFF4958167!C55FD85ECA0E47F7A6B98C548275B4",
+  "url": "http://cq.58.com/shangpu/38398991381009x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38011396303244x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 572,
+  "house_key": "FFFFFFFFF4958167!A50ECD11BEB948FDA811CCC3B509A7",
+  "url": "http://sy.58.com/shangpu/38399011107729x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38011179122820x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 573,
+  "house_key": "FFFFFFFFF4958167!2B3E4CE0A4D74AAA92165B2DCC6096",
+  "url": "http://zz.58.com/shangpu/38399034891908x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37820163004051x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 574,
+  "house_key": "FFFFFFFFF4958167!F97F44BF54324813A1D41CD9318B5A",
+  "url": "http://sjz.58.com/shangpu/38399056829729x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38022157499402x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 575,
+  "house_key": "FFFFFFFFF4958167!5DF32B6EDD24414496742810D59724",
+  "url": "http://sjz.58.com/shangpu/38399061476631x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37567811283092x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 576,
+  "house_key": "FFFFFFFFF4958167!0EA0FF4128CE4102A856B9D79E22F4",
+  "url": "http://wh.58.com/shangpu/38399081306261x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37454708221959x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 577,
+  "house_key": "FFFFFFFFF4958167!AB8DE95D3E1C49299FFBC1C79B79BA",
+  "url": "http://wh.58.com/shangpu/38399095427862x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37834310199172x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 578,
+  "house_key": "FFFFFFFFF4958167!A8C5F54D56034B45B6B725036957B1",
+  "url": "http://cq.58.com/shangpu/38399101762969x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38020816846108x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 579,
+  "house_key": "FFFFFFFFF4958167!C72187E6B9F74C9EA6480FB7A593C4",
+  "url": "http://cd.58.com/shangpu/38399107296776x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38044194281241x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 580,
+  "house_key": "FFFFFFFFF4958167!0A3B3B4ABBF94927ABA9312282B0E7",
+  "url": "http://sh.58.com/shangpu/38399111718145x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37834305675784x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 581,
+  "house_key": "FFFFFFFFF4958167!EAA671E618194B47BCB926167BE2B9",
+  "url": "http://wh.58.com/shangpu/38399117510440x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38030392892953x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 582,
+  "house_key": "FFFFFFFFF4958167!256DCCEEC6844C05A91961BCEB6667",
+  "url": "http://sh.58.com/shangpu/38399125351698x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37734309184648x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 583,
+  "house_key": "FFFFFFFFF4958167!B9C4F8DA9F3343FEBC529C40A24A24",
+  "url": "http://wh.58.com/shangpu/38399132779687x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38010534960517x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 584,
+  "house_key": "FFFFFFFFF4958167!ED4F23959D8A430BADCCDA3B980973",
+  "url": "http://zz.58.com/shangpu/38399146142888x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38041217101717x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 585,
+  "house_key": "FFFFFFFFF4958167!4541ADB0681B4F7D87130326861CB4",
+  "url": "http://xa.58.com/shangpu/38399153778180x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38020996416164x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 586,
+  "house_key": "135971",
+  "url": "http://cq.58.com/shangpu/38399158095906x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38010518447381x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 587,
+  "house_key": "FFFFFFFFF4958167!D42E4B6E07F94D859FF7157E661F0D",
+  "url": "http://sy.58.com/shangpu/38399173406500x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38055284512039x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 588,
+  "house_key": "FFFFFFFFF4958167!0D262B98D6A34413B708E66069C648",
+  "url": "http://cq.58.com/shangpu/38399183359876x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37966047844505x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 589,
+  "house_key": "FFFFFFFFF4958167!49F8E68D5681466BB48EB97715CECF",
+  "url": "http://sy.58.com/shangpu/38399190191890x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37678776386459x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 590,
+  "house_key": "FFFFFFFFF4958167!DB37443667FA42A7B502989AB54D51",
+  "url": "http://cd.58.com/shangpu/38399194711685x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38042911794460x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 591,
+  "house_key": "FFFFFFFFF4958167!5F0E6ED8B80D444490CDE4E72A551B",
+  "url": "http://cd.58.com/shangpu/38399205957414x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37600240206993x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 592,
+  "house_key": "142570",
+  "url": "http://cc.58.com/shangpu/38399212784517x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38007683763848x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 593,
+  "house_key": "FFFFFFFFF4958167!4E9938E650FB478D857870C4F10601",
+  "url": "http://xa.58.com/shangpu/38399237112710x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38021491866888x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 594,
+  "house_key": "FFFFFFFFF4958167!2A5B91BDBF5047B0B96BAE938D8268",
+  "url": "http://wh.58.com/shangpu/38399265847838x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38041097446917x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 595,
+  "house_key": "FFFFFFFFF4958167!8D1E92EF37A745D68651C7F24D708E",
+  "url": "http://cq.58.com/shangpu/38399270784527x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38022195178499x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 596,
+  "house_key": "FFFFFFFFF4958167!F588F5A19D1047FA8114AC436C70F5",
+  "url": "http://sz.58.com/shangpu/38399286362407x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37967087493126x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 597,
+  "house_key": "FFFFFFFFF4958167!614A02CA8281494A87AC512EDE98C6",
+  "url": "http://wh.58.com/shangpu/38399299797535x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37954782347299x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 598,
+  "house_key": "FFFFFFFFF4958167!D0DCE4F901574A8CABD990B3844E52",
+  "url": "http://zz.58.com/shangpu/38399312980125x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38008277500958x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 599,
+  "house_key": "78817",
+  "url": "http://sh.58.com/shangpu/38399317540874x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37942017052289x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 600,
+  "house_key": "FFFFFFFFF4958167!3CCBA1857B334741B8E8EA1A9297D4",
+  "url": "http://zz.58.com/shangpu/38399322524570x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38030008927526x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 601,
+  "house_key": "FFFFFFFFF4958167!405BF609F6174198989CB508F60DD0",
+  "url": "http://qd.58.com/shangpu/38399334070295x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38010168182553x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 602,
+  "house_key": "FFFFFFFFF4958167!A6F7B2475AAF4176AAA511C6A5B9C6",
+  "url": "http://sjz.58.com/shangpu/38399340011417x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38030463258626x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 603,
+  "house_key": "FFFFFFFFF4958167!9F4B1DD8CCB74FEDB5318A19E83DF1",
+  "url": "http://zz.58.com/shangpu/38399349586855x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38019412774405x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 604,
+  "house_key": "FFFFFFFFF4958167!82FBB10642D64EE6AA4A74F1984FA1",
+  "url": "http://sh.58.com/shangpu/38399394114314x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37654460373127x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 605,
+  "house_key": "84288",
+  "url": "http://sh.58.com/shangpu/38399404603140x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38030241708045x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 606,
+  "house_key": "FFFFFFFFF4958167!C97D253FA5D148D8A9505D3127114F",
+  "url": "http://sjz.58.com/shangpu/38399411450884x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38009260594820x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 607,
+  "house_key": "FFFFFFFFF4958167!A5150C44C6354BBEB518162F3297C4",
+  "url": "http://cc.58.com/shangpu/38399423075878x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38043744488738x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 608,
+  "house_key": "FFFFFFFFF4958167!7E1171E2E845407CB0B881ED4B518D",
+  "url": "http://cq.58.com/shangpu/38399446717851x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37778898391067x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 609,
+  "house_key": "FFFFFFFFF4958167!C52D4A9455CF4CF189EC753477ADE1",
+  "url": "http://wh.58.com/shangpu/38399470766471x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37965329006351x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 610,
+  "house_key": "FFFFFFFFF4958167!9DFEEAAFCEE34446BE9CA2CAADA187",
+  "url": "http://cd.58.com/shangpu/38399485156373x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37577021990680x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 611,
+  "house_key": "FFFFFFFFF4958167!9BFA98C29EFB4B71BBDBAB52097E71",
+  "url": "http://wh.58.com/shangpu/38399490048029x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38042933999636x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 612,
+  "house_key": "FFFFFFFFF4958167!F30B6198FED847C3BCD5E8BBF3CEAA",
+  "url": "http://cd.58.com/shangpu/38399499915287x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37644812345482x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 613,
+  "house_key": "FFFFFFFFF4958167!81D0FB7201494A879C0B9E59562D67",
+  "url": "http://zz.58.com/shangpu/38399520609164x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37679244657298x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 614,
+  "house_key": "FFFFFFFFF4958167!4579F1F244094F80B20A45B8433170",
+  "url": "http://wh.58.com/shangpu/38399525324552x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37953185157278x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 615,
+  "house_key": "FFFFFFFFF4958167!3A0FCADDF9C74BB78861B273E7B2C3",
+  "url": "http://cq.58.com/shangpu/38399531457553x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38020611198873x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 616,
+  "house_key": "146551",
+  "url": "http://sh.58.com/shangpu/38399537905435x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37954094308507x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 617,
+  "house_key": "FFFFFFFFF4958167!989787EF0780403F8EBDDE022652E8",
+  "url": "http://zz.58.com/shangpu/38399546335648x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37767359387664x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 618,
+  "house_key": "FFFFFFFFF4958167!0FA14AC8E7224317AF108790382F26",
+  "url": "http://sh.58.com/shangpu/38399562484115x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37577941736200x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 619,
+  "house_key": "FFFFFFFFF4958167!D0C67B169E354989B6A99341B2C498",
+  "url": "http://cq.58.com/shangpu/38399571046425x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37900635586194x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 620,
+  "house_key": "FFFFFFFFF4958167!3E7D36CBDD6F430CAE4C67484E9761",
+  "url": "http://xa.58.com/shangpu/38399592729099x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38032968425239x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 621,
+  "house_key": "FFFFFFFFF4958167!399B6E892A8E4531AA12B33F33C4E4",
+  "url": "http://cd.58.com/shangpu/38399609343640x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37853687695772x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 622,
+  "house_key": "117410",
+  "url": "http://cq.58.com/shangpu/38399615044866x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38053876916254x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 623,
+  "house_key": "FFFFFFFFF4958167!E2E8E141F849419C9259C09A97F655",
+  "url": "http://sjz.58.com/shangpu/38399622996381x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37834666786208x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 624,
+  "house_key": "FFFFFFFFF4958167!BC702C7B364C46B296860995691578",
+  "url": "http://cq.58.com/shangpu/38399628011294x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031793921430x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 625,
+  "house_key": "FFFFFFFFF4958167!F4AE9E7EFED04BCAA4B42C9FBAA949",
+  "url": "http://xa.58.com/shangpu/38399659833361x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38041826018832x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 626,
+  "house_key": "FFFFFFFFF4958167!7919D402F0C14D0DADB2DFA180BA7C",
+  "url": "http://sjz.58.com/shangpu/38400139581205x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37965771666978x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 627,
+  "house_key": "FFFFFFFFF4958167!7AEC4B31A3A242E19773912BEE6D0F",
+  "url": "http://sy.58.com/shangpu/38400144622224x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37886669953028x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 628,
+  "house_key": "FFFFFFFFF4958167!A21F6F0F0AB94E6E8039F02C8BCD0D",
+  "url": "http://sjz.58.com/shangpu/38400152013838x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37532100357650x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 629,
+  "house_key": "FFFFFFFFF4958167!5A8687701E7E45679FA954B3F1C6CB",
+  "url": "http://cd.58.com/shangpu/38400159102724x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37900189384705x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 630,
+  "house_key": "FFFFFFFFF4958167!3C8EB66F2D2D40209CBFCF42F4A467",
+  "url": "http://sjz.58.com/shangpu/38400168922918x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38052599558542x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 631,
+  "house_key": "FFFFFFFFF4958167!2EEF61207A83414DA83F4F6B41AA3C",
+  "url": "http://cq.58.com/shangpu/38400189938206x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37899191925505x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 632,
+  "house_key": "FFFFFFFFF4958167!9E506DB67F434FE5BA0C88B0F1F557",
+  "url": "http://wh.58.com/shangpu/38400215928328x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38044050598147x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 633,
+  "house_key": "FFFFFFFFF4958167!477A5AB9D7BB4546863EB4356D1067",
+  "url": "http://cq.58.com/shangpu/38400222930215x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031850556563x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 634,
+  "house_key": "FFFFFFFFF4958167!8963BFD6AE594AF38D8148B872CEFA",
+  "url": "http://cd.58.com/shangpu/38400244869287x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37933346173207x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 635,
+  "house_key": "FFFFFFFFF4958167!794DD968954E4491A166FC6621408A",
+  "url": "http://wh.58.com/shangpu/38400252078233x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38054420212631x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 636,
+  "house_key": "FFFFFFFFF4958167!0ED0DDB617FB4B28A84464A3C77299",
+  "url": "http://sjz.58.com/shangpu/38400259505305x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37489607592608x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 637,
+  "house_key": "FFFFFFFFF4958167!27954F3A9CF74B12AFEDF295FA6EB0",
+  "url": "http://cq.58.com/shangpu/38400269556366x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37963544411175x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 638,
+  "house_key": "FFFFFFFFF4958167!59A3C3BCABE14C4A9FB7E68604D55F",
+  "url": "http://cc.58.com/shangpu/38400314337551x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37391694627479x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 639,
+  "house_key": "FFFFFFFFF4958167!3CEA06B447B24D27B7C091CC6EAF51",
+  "url": "http://wh.58.com/shangpu/38400329047684x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37611066096918x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 640,
+  "house_key": "FFFFFFFFF4958167!789D4F14B575423287B73B13461FDA",
+  "url": "http://cq.58.com/shangpu/38400334632992x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37588247693844x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 641,
+  "house_key": "FFFFFFFFF4958167!16D3A44A11EF401B912EF9895998C6",
+  "url": "http://wh.58.com/shangpu/38400339404306x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38010637156228x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 642,
+  "house_key": "FFFFFFFFF4958167!D63349B0D8A34BAC9E8A2002242E51",
+  "url": "http://wh.58.com/shangpu/38400357165338x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37933896203137x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 643,
+  "house_key": "FFFFFFFFF4958167!AA57683D62C246B3870A536C03D594",
+  "url": "http://wh.58.com/shangpu/38400365387785x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37966085189894x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 644,
+  "house_key": "FFFFFFFFF4958167!F5DDEA4C37834AE4BE7AB053008DF1",
+  "url": "http://sy.58.com/shangpu/38400370087080x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38054621545635x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 645,
+  "house_key": "FFFFFFFFF4958167!9CDC829FF33341778AC687E87B1274",
+  "url": "http://zz.58.com/shangpu/38400378540827x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37889526744740x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 646,
+  "house_key": "FFFFFFFFF4958167!EF25789A4EAD4BB2B36119DFBE401A",
+  "url": "http://sjz.58.com/shangpu/38400388566436x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37579200289574x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 647,
+  "house_key": "FFFFFFFFF4958167!39A15DA6183D4F26A379435FBF4612",
+  "url": "http://wh.58.com/shangpu/38400395216672x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37744488875296x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 648,
+  "house_key": "105202",
+  "url": "http://sh.58.com/shangpu/38400411311634x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37931816391556x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 649,
+  "house_key": "FFFFFFFFF4958167!43564A17E84F4B76A3669F04359087",
+  "url": "http://sz.58.com/shangpu/38400425569569x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37467565608203x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 650,
+  "house_key": "FFFFFFFFF4958167!4006F568F5CF4EC7AEC4226B9C8E06",
+  "url": "http://sy.58.com/shangpu/38400430231200x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37720963108750x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 651,
+  "house_key": "FFFFFFFFF4958167!F2ACBB68D46E4B4282BA475F09DEC3",
+  "url": "http://sy.58.com/shangpu/38400437844499x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37709395905832x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 652,
+  "house_key": "FFFFFFFFF4958167!F53B7CC9A9F14D29B3BCD55FDC3C6B",
+  "url": "http://xa.58.com/shangpu/38400454836116x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38041537065222x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 653,
+  "house_key": "FFFFFFFFF4958167!00DD2FC75BAB4674A665CA95D6D4C1",
+  "url": "http://xa.58.com/shangpu/38400459695768x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37589039797670x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 654,
+  "house_key": "FFFFFFFFF4958167!FBF9F91B2E4A43C08231B9087EC3C7",
+  "url": "http://sjz.58.com/shangpu/38400469748613x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38054314740106x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 655,
+  "house_key": "FFFFFFFFF4958167!286D6482030745D5B2C9D16752D50C",
+  "url": "http://cd.58.com/shangpu/38400483085732x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37544880296451x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 656,
+  "house_key": "FFFFFFFFF4958167!1C232EA82F44433195552D8FF67489",
+  "url": "http://wh.58.com/shangpu/38400490537628x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37578398141607x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 657,
+  "house_key": "FFFFFFFFF4958167!6CB0824A989D43AEA94673319EB87B",
+  "url": "http://sh.58.com/shangpu/38400514786586x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38043545084325x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 658,
+  "house_key": "FFFFFFFFF4958167!C79EB2921B3B4C378975639F7D7BB2",
+  "url": "http://tj.58.com/shangpu/38400519113866x.shtml",
+  "old_url": "https://tj.58.com/shangpu/38043056185768x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 659,
+  "house_key": "FFFFFFFFF4958167!EABAC456E9B545CCAB1D0A25C46AEF",
+  "url": "http://sjz.58.com/shangpu/38400531867018x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37810765294863x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 660,
+  "house_key": "FFFFFFFFF4958167!ED2019C8311645F68C0FFC701B40E1",
+  "url": "http://sh.58.com/shangpu/38400570269458x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37955036058144x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 661,
+  "house_key": "FFFFFFFFF4958167!D58C3B810949478080CEB6CE69513F",
+  "url": "http://zz.58.com/shangpu/38400593928984x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37966077307027x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 662,
+  "house_key": "FFFFFFFFF4958167!2D7C57853CA4413C891CD6558678B6",
+  "url": "http://cq.58.com/shangpu/38400600450071x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38043448400904x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 663,
+  "house_key": "FFFFFFFFF4958167!BE68864EA7AB449CA32C6C20981CE9",
+  "url": "http://sy.58.com/shangpu/38400608619301x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37875908032129x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 664,
+  "house_key": "FFFFFFFFF4958167!104B2DC95FE6403884EE117761F4AD",
+  "url": "http://zz.58.com/shangpu/38400620905349x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38019359603990x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 665,
+  "house_key": "FFFFFFFFF4958167!B95012610A194EC8ACC6FB7C157B2F",
+  "url": "http://cd.58.com/shangpu/38400625999525x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37709168759326x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 666,
+  "house_key": "FFFFFFFFF4958167!9BA5AD38B4C64EB284DE53F8D3D540",
+  "url": "http://sy.58.com/shangpu/38400644318113x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37733482120478x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 667,
+  "house_key": "FFFFFFFFF4958167!D7892A5F2F934A2BAEF61B56C804D8",
+  "url": "http://sh.58.com/shangpu/38400651294615x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37523502419727x.shtml",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 668,
+  "house_key": "FFFFFFFFF4958167!4FD3C907864B4F06B3CCE923752B39",
+  "url": "http://sy.58.com/shangpu/38400655860261x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38022005389719x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 669,
+  "house_key": "FFFFFFFFF4958167!C6850E8586704BC5A4CA78E4231121",
+  "url": "http://cd.58.com/shangpu/38400662813697x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38032077482884x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 670,
+  "house_key": "FFFFFFFFF4958167!73A7BCFDDE9149FA88A99E542737B9",
+  "url": "http://sh.58.com/shangpu/38400673024647x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37931926152727x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 671,
+  "house_key": "FFFFFFFFF4958167!4509BDEEC4E34D3C90678EE8287B70",
+  "url": "http://sjz.58.com/shangpu/38400682287126x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37576468752399x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 672,
+  "house_key": "FFFFFFFFF4958167!059F9DA0C77C40698AAF277D01B5E1",
+  "url": "http://sh.58.com/shangpu/38400688688785x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37933013899672x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 673,
+  "house_key": "FFFFFFFFF4958167!D3C5CA9B504046E59C348C354228AD",
+  "url": "http://sjz.58.com/shangpu/38400700832269x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37766901380239x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 674,
+  "house_key": "FFFFFFFFF4958167!7E366DE4FF094129B0D3C75C9019B5",
+  "url": "http://sh.58.com/shangpu/38400709967646x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37443942102786x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 675,
+  "house_key": "FFFFFFFFF4958167!2B649036FCBD47B8A60FBBF9F12457",
+  "url": "http://sh.58.com/shangpu/38400755596703x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37280624636164x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 676,
+  "house_key": "FFFFFFFFF4958167!E9FDB7C1A72E41BAA8AE5A740D5F22",
+  "url": "http://cd.58.com/shangpu/38400798436875x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37855182685987x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 677,
+  "house_key": "FFFFFFFFF4958167!15C02BACC06348DFAD697236A0194F",
+  "url": "http://sh.58.com/shangpu/38400808536484x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38052260880520x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 678,
+  "house_key": "FFFFFFFFF4958167!720E30F42918463BBCD6E5FF320224",
+  "url": "http://wh.58.com/shangpu/38400842392083x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37545499822502x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 679,
+  "house_key": "FFFFFFFFF4958167!D07CEE17F6C9444E9C5F6AB5D1CCC0",
+  "url": "http://tj.58.com/shangpu/38400849608732x.shtml",
+  "old_url": "https://tj.58.com/shangpu/38011124466317x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 680,
+  "house_key": "FFFFFFFFF4958167!12756B78B67B4707A76FC40894B533",
+  "url": "http://sjz.58.com/shangpu/38400858528920x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38008452373398x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 681,
+  "house_key": "FFFFFFFFF4958167!FDBFC2A2383F4320980A06DBEDD5ED",
+  "url": "http://zz.58.com/shangpu/38400869253777x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37886961266051x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 682,
+  "house_key": "FFFFFFFFF4958167!53BD8D544FBD44A0A53B5D317D2EDF",
+  "url": "http://xa.58.com/shangpu/38400883064450x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37967159679503x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 683,
+  "house_key": "FFFFFFFFF4958167!DA8A5AA5A5344BCDB2244B6B025B5C",
+  "url": "http://sh.58.com/shangpu/38400895635460x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37467552345759x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 684,
+  "house_key": "FFFFFFFFF4958167!EB39098A13734B209533BAFE2846DB",
+  "url": "http://hrb.58.com/shangpu/38401195342243x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38041653032985x.shtml?",
+  "create_date": "2019-06-07T16:00:00.000Z"
+}, {
+  "id": 685,
+  "house_key": "FFFFFFFFF4958167!8E4FDD732A0D43869660C08D7244A5",
+  "url": "http://cq.58.com/shangpu/38401332349460x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37877945145619x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 686,
+  "house_key": "FFFFFFFFF4958167!1ACA27A9AA954847A05FCF81351419",
+  "url": "http://sy.58.com/shangpu/38401996190362x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37745147666449x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 687,
+  "house_key": "FFFFFFFFF4958167!D4E08B01F77A41EFB4A196C8683475",
+  "url": "http://sjz.58.com/shangpu/38406182456207x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021219354913x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 688,
+  "house_key": "FFFFFFFFF4958167!764AFBE493134ECDA8345AEB336EE4",
+  "url": "http://qd.58.com/shangpu/38406193947284x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38044441800459x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 689,
+  "house_key": "171519",
+  "url": "http://cq.58.com/shangpu/38406212782887x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38062882657684x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 690,
+  "house_key": "FFFFFFFFF4958167!63CD4A7304464864A0D326CE7860D1",
+  "url": "http://sjz.58.com/shangpu/38406238118432x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37965870823702x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 691,
+  "house_key": "126948",
+  "url": "http://sh.58.com/shangpu/38406271666203x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37952952992805x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 692,
+  "house_key": "FFFFFFFFF4958167!F482CBC9C80D467193719546E75A58",
+  "url": "http://wh.58.com/shangpu/38406289633677x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37579815408013x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 693,
+  "house_key": "FFFFFFFFF4958167!E6F47F3F07EB46A882AC498C506A93",
+  "url": "http://cq.58.com/shangpu/38406297784578x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37731912572964x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 694,
+  "house_key": "FFFFFFFFF4958167!482B6B2F068E40FFB5C6231319AAE0",
+  "url": "http://sz.58.com/shangpu/38406310815502x.shtml",
+  "old_url": "https://sz.58.com/shangpu/38010984955811x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 695,
+  "house_key": "117214",
+  "url": "http://cq.58.com/shangpu/38406316842790x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37886856718098x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 696,
+  "house_key": "FFFFFFFFF4958167!3D8C083F8A8847C7892B5417C4E355",
+  "url": "http://wh.58.com/shangpu/38406350228879x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38063119921056x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 697,
+  "house_key": "FFFFFFFFF4958167!457A3CA6D6334D52BAFF8011A84623",
+  "url": "http://sh.58.com/shangpu/38406354961311x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37723572333453x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 698,
+  "house_key": "FFFFFFFFF4958167!8CC6D25B22774FFBAC230D119C01B7",
+  "url": "http://sjz.58.com/shangpu/38406361639208x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37944290488198x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 699,
+  "house_key": "FFFFFFFFF4958167!4834B368178B4A84A3F7A1EAB0591D",
+  "url": "http://zz.58.com/shangpu/38406367313315x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38019334775681x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 700,
+  "house_key": "FFFFFFFFF4958167!72802DF3C0584F3081FA1B4C7F93A4",
+  "url": "http://sh.58.com/shangpu/38406378508834x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37434360757660x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 701,
+  "house_key": "FFFFFFFFF4958167!A2D9FE436EB04122B888EFB0CFDD5B",
+  "url": "http://sh.58.com/shangpu/38406396797220x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37534181270694x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 702,
+  "house_key": "FFFFFFFFF4958167!693F0C0AAFF64FB396F2F360114E04",
+  "url": "http://zz.58.com/shangpu/38406412077094x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37579110662668x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 703,
+  "house_key": "FFFFFFFFF4958167!8123542B71194FDD8197330AFDE453",
+  "url": "http://cq.58.com/shangpu/38406432558084x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38063821007012x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 704,
+  "house_key": "FFFFFFFFF4958167!6DC9306E5D9F461A9F3F12130E9953",
+  "url": "http://sy.58.com/shangpu/38406438162722x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38022012228890x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 705,
+  "house_key": "FFFFFFFFF4958167!D7F7916CF2D74EF0A7A7D3DAB40F84",
+  "url": "http://cd.58.com/shangpu/38406460474884x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37588331954826x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 706,
+  "house_key": "FFFFFFFFF4958167!5BECFC13F4F84D80AEB3E38695524E",
+  "url": "http://cd.58.com/shangpu/38406468627854x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38044225624616x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 707,
+  "house_key": "FFFFFFFFF4958167!49DD6DD44B4C4AD09D7605E3953A1F",
+  "url": "http://cd.58.com/shangpu/38406518384026x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37534729431689x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 708,
+  "house_key": "FFFFFFFFF4958167!422D13E7B6B347389F505B567A3972",
+  "url": "http://sjz.58.com/shangpu/38406525026212x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37565708076949x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 709,
+  "house_key": "FFFFFFFFF4958167!3CAA2371459E4FBE9323DC0B54F933",
+  "url": "http://tj.58.com/shangpu/38406532511760x.shtml",
+  "old_url": "https://tj.58.com/shangpu/38024777792006x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 710,
+  "house_key": "FFFFFFFFF4958167!6FF1B3E1477145608385BF0EB7DF55",
+  "url": "http://sjz.58.com/shangpu/38406549252136x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021840783756x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 711,
+  "house_key": "FFFFFFFFF4958167!DB91B4B6D9004A2180C5489C53BD73",
+  "url": "http://cq.58.com/shangpu/38406554383650x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37745598151944x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 712,
+  "house_key": "FFFFFFFFF4958167!AB9BD522823E4F208E8A95CB38C91A",
+  "url": "http://cd.58.com/shangpu/38406563760901x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38044366293002x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 713,
+  "house_key": "FFFFFFFFF4958167!398BF9FD56FA4034BC259E5A6132D8",
+  "url": "http://cq.58.com/shangpu/38406592012200x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38043961388674x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 714,
+  "house_key": "FFFFFFFFF4958167!78080BBD246A4457B825634D943938",
+  "url": "http://cd.58.com/shangpu/38406600369179x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38055346693535x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 715,
+  "house_key": "FFFFFFFFF4958167!D46F496110FD45788643388D53D6A2",
+  "url": "http://sjz.58.com/shangpu/38406610278689x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37502485070616x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 716,
+  "house_key": "FFFFFFFFF4958167!F84CCAE1970247A498ECE40D13F955",
+  "url": "http://sz.58.com/shangpu/38406619071115x.shtml",
+  "old_url": "https://sz.58.com/shangpu/38033711010088x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 717,
+  "house_key": "FFFFFFFFF4958167!DE64470846EF486A8CFE281F6D5890",
+  "url": "http://sy.58.com/shangpu/38406727443487x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37512390259333x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 718,
+  "house_key": "FFFFFFFFF4958167!6E03D351A9394463ABCCCDCB73615D",
+  "url": "http://cq.58.com/shangpu/38406735482275x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37544665418528x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 719,
+  "house_key": "FFFFFFFFF4958167!3FD2580DCA9C4EB49C96763DE9EAAF",
+  "url": "http://cq.58.com/shangpu/38406760250886x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37412312933910x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 720,
+  "house_key": "FFFFFFFFF4958167!2354FBDD0B554DAC989658071AF8DE",
+  "url": "http://sjz.58.com/shangpu/38406765291664x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38052326598149x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 721,
+  "house_key": "FFFFFFFFF4958167!B2D9F4AF17694196A71183AAEEE1ED",
+  "url": "http://cd.58.com/shangpu/38406773081484x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38018962925979x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 722,
+  "house_key": "FFFFFFFFF4958167!151B810052AC4B4D8D9B45107E8758",
+  "url": "http://sjz.58.com/shangpu/38406778169993x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37943559406361x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 723,
+  "house_key": "FFFFFFFFF4958167!A84E22D693FA4504B6C7F91EC38B49",
+  "url": "http://sh.58.com/shangpu/38406785028130x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37754113363335x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 724,
+  "house_key": "FFFFFFFFF4958167!4C5316C4BA6D4F6F9587A13711EA28",
+  "url": "http://zz.58.com/shangpu/38406792518039x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38008444465938x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 725,
+  "house_key": "FFFFFFFFF4958167!CD6879D8996B4B19928D6BCE84DC74",
+  "url": "http://cd.58.com/shangpu/38406797821319x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37413787579533x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 726,
+  "house_key": "FFFFFFFFF4958167!622BCBAFC3614D259F197EDCD3CB63",
+  "url": "http://sy.58.com/shangpu/38406802894737x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37954015886210x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 727,
+  "house_key": "FFFFFFFFF4958167!FE432094E0A7414DAB2E5A122A545E",
+  "url": "http://sh.58.com/shangpu/38406813105428x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38021792723093x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 728,
+  "house_key": "FFFFFFFFF4958167!AA027049DB3F453691F43FA3967899",
+  "url": "http://cq.58.com/shangpu/38406818954905x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37800265745173x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 729,
+  "house_key": "FFFFFFFFF4958167!2BECE4350F5D4F38814DE3741014AC",
+  "url": "http://sh.58.com/shangpu/38406824399519x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37810174006557x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 730,
+  "house_key": "FFFFFFFFF4958167!5DA293FB97954859ADD67169CA8FAA",
+  "url": "http://sy.58.com/shangpu/38406830187269x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37944575783958x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 731,
+  "house_key": "FFFFFFFFF4958167!7E0A61654C0D4E16BE4F06AD599823",
+  "url": "http://cq.58.com/shangpu/38406844688259x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38044527959206x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 732,
+  "house_key": "FFFFFFFFF4958167!09521629859549BBAE199C2A05463A",
+  "url": "http://wh.58.com/shangpu/38406850525325x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37779115690148x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 733,
+  "house_key": "FFFFFFFFF4958167!F4A9E5583C6C4161BD6E61079094FE",
+  "url": "http://sy.58.com/shangpu/38406871433480x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37391148641669x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 734,
+  "house_key": "FFFFFFFFF4958167!EBBCC0F2628943BFAD2F79ABE05738",
+  "url": "http://sjz.58.com/shangpu/38406877565332x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37775266676006x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 735,
+  "house_key": "FFFFFFFFF4958167!D6BB766D185A4FF0ADFF128D97D022",
+  "url": "http://sy.58.com/shangpu/38406883145751x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37767262406304x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 736,
+  "house_key": "FFFFFFFFF4958167!A6648626E3C24F1CAC6B542E9A2557",
+  "url": "http://sjz.58.com/shangpu/38406891324839x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37543900974110x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 737,
+  "house_key": "FFFFFFFFF4958167!E638BE10CCFD468BA7CEAC664F5A35",
+  "url": "http://sjz.58.com/shangpu/38406899647651x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38033601989779x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 738,
+  "house_key": "80547",
+  "url": "http://sh.58.com/shangpu/38406904683530x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37965040600349x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 739,
+  "house_key": "FFFFFFFFF4958167!35C1CDC1C5E74C9CACC146161F3489",
+  "url": "http://cq.58.com/shangpu/38406916473103x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37723313811209x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 740,
+  "house_key": "FFFFFFFFF4958167!27D53E9455E24D5199337BA37FDA71",
+  "url": "http://zz.58.com/shangpu/38406949312931x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38009196554784x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 741,
+  "house_key": "FFFFFFFFF4958167!79D9055CF239427F813D2B324D684C",
+  "url": "http://cd.58.com/shangpu/38406957863194x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37468666225032x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 742,
+  "house_key": "FFFFFFFFF4958167!324287A12E514DAFA0C923365A734F",
+  "url": "http://zz.58.com/shangpu/38406969137434x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37965322965644x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 743,
+  "house_key": "FFFFFFFFF4958167!13A6A2FE4A21416C8F032A7D475D31",
+  "url": "http://sjz.58.com/shangpu/38406981398408x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021133337742x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 744,
+  "house_key": "FFFFFFFFF4958167!A2077EC884424CE3AB41D88DB879B2",
+  "url": "http://qd.58.com/shangpu/38406992374145x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38065214136994x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 745,
+  "house_key": "FFFFFFFFF4958167!6C0EB2252B7D43A7B639B993905E41",
+  "url": "http://cc.58.com/shangpu/38406998048002x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38065622286342x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 746,
+  "house_key": "FFFFFFFFF4958167!93BCD0FEC6C44E7EAD9F19FE6F8AD4",
+  "url": "http://xa.58.com/shangpu/38407004189316x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38009610940292x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 747,
+  "house_key": "FFFFFFFFF4958167!F6520E4054AE4199ACEBEE6F317C38",
+  "url": "http://sjz.58.com/shangpu/38407010088602x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37921786001554x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 748,
+  "house_key": "FFFFFFFFF4958167!E244BBE0CC194CECAC783CE9907D7F",
+  "url": "http://sy.58.com/shangpu/38407037518603x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37919917894164x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 749,
+  "house_key": "FFFFFFFFF4958167!A8DC5860AD114B948B62475C41F9FF",
+  "url": "http://cc.58.com/shangpu/38407048181636x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37844922500001x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 750,
+  "house_key": "FFFFFFFFF4958167!8D40B5E7674D429AB67C02DC8E9872",
+  "url": "http://sh.58.com/shangpu/38407052609049x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37423068966930x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 751,
+  "house_key": "FFFFFFFFF4958167!E0C65DEF22D04875BD2D8AA4C20599",
+  "url": "http://sjz.58.com/shangpu/38407058991270x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38054917403930x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 752,
+  "house_key": "FFFFFFFFF4958167!7DDA1C5C0B4747718F0D42D9EF5F0F",
+  "url": "http://wh.58.com/shangpu/38407076584582x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38053698212626x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 753,
+  "house_key": "141705",
+  "url": "http://sh.58.com/shangpu/38407090533016x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38053992310047x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 754,
+  "house_key": "FFFFFFFFF4958167!60BE9624D8934C2CB2012A39814466",
+  "url": "http://sjz.58.com/shangpu/38407102052891x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38066706431632x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 755,
+  "house_key": "FFFFFFFFF4958167!4C7AFFF870D24934A301E221D9E862",
+  "url": "http://sjz.58.com/shangpu/38407113502215x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38008184091796x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 756,
+  "house_key": "FFFFFFFFF4958167!DE6779F5C3F549FC93B33D870505CF",
+  "url": "http://sy.58.com/shangpu/38407118201369x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37967128558102x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 757,
+  "house_key": "FFFFFFFFF4958167!98B43BA445244EFDA5A502F865B60B",
+  "url": "http://cq.58.com/shangpu/38407126507524x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37945207549200x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 758,
+  "house_key": "FFFFFFFFF4958167!B151D1DCFD0D460C95E637A1C04757",
+  "url": "http://sjz.58.com/shangpu/38407133697297x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37921570309001x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 759,
+  "house_key": "FFFFFFFFF4958167!450F31C9D7184FB8A4D22297BBE8B8",
+  "url": "http://cc.58.com/shangpu/38407142649863x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38043787368217x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 760,
+  "house_key": "FFFFFFFFF4958167!811F6EC3316B49698F19F7D00F5EDB",
+  "url": "http://cc.58.com/shangpu/38407163351170x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37908825577243x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 761,
+  "house_key": "138621",
+  "url": "http://cq.58.com/shangpu/38407167930003x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37963833258902x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 762,
+  "house_key": "FFFFFFFFF4958167!E29C54641F40421CA80F9EADB689CC",
+  "url": "http://sy.58.com/shangpu/38407194043793x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38055325067152x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 763,
+  "house_key": "144768",
+  "url": "http://cq.58.com/shangpu/38407209539355x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38010586746776x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 764,
+  "house_key": "FFFFFFFFF4958167!707D7C66D7484A38AAEA2509B6184F",
+  "url": "http://sjz.58.com/shangpu/38407216378767x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37567220823332x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 765,
+  "house_key": "FFFFFFFFF4958167!DEA9F308AFA74B679552DB94184631",
+  "url": "http://zz.58.com/shangpu/38407230507791x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37587852827808x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 766,
+  "house_key": "FFFFFFFFF4958167!6294A716ACAC48B989507655A54B18",
+  "url": "http://sy.58.com/shangpu/38407237682837x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966452926243x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 767,
+  "house_key": "FFFFFFFFF4958167!709984E7450E4B1589143D2AE96D55",
+  "url": "http://lf.58.com/shangpu/38407256130720x.shtml",
+  "old_url": "https://lf.58.com/shangpu/37655880956298x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 768,
+  "house_key": "FFFFFFFFF4958167!A7B8ADBCAE934CD7977466A3BBFE90",
+  "url": "http://cq.58.com/shangpu/38407260850436x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38033295607951x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 769,
+  "house_key": "133487",
+  "url": "http://sh.58.com/shangpu/38407265056421x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37942114317334x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 770,
+  "house_key": "FFFFFFFFF4958167!7C5619399FBA42EA937CA158C97BA3",
+  "url": "http://sjz.58.com/shangpu/38407274478991x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38020553200803x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 771,
+  "house_key": "FFFFFFFFF4958167!162CD0319DEA4C508387B8AFE2EE24",
+  "url": "http://sjz.58.com/shangpu/38407280463894x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37800389892487x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 772,
+  "house_key": "FFFFFFFFF4958167!E1F259D8B99B457BB2E9DF99109E76",
+  "url": "http://cq.58.com/shangpu/38407284965388x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38033445266579x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 773,
+  "house_key": "FFFFFFFFF4958167!8625EF7FC3EB4BBC825528FBAD2821",
+  "url": "http://sjz.58.com/shangpu/38407290376354x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37646089689501x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 774,
+  "house_key": "FFFFFFFFF4958167!4828A225E1A048D8B060552AA465A7",
+  "url": "http://zz.58.com/shangpu/38407307824531x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37921155218710x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 775,
+  "house_key": "FFFFFFFFF4958167!5EEE8421583C4CBDB678E65C6B2267",
+  "url": "http://cq.58.com/shangpu/38407315210521x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38044086941211x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 776,
+  "house_key": "FFFFFFFFF4958167!955368DC3E3E47C8A62676D02DCAE7",
+  "url": "http://sh.58.com/shangpu/38407336296594x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38065906879618x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 777,
+  "house_key": "FFFFFFFFF4958167!E95DCBF108414072AB05922C5C99D7",
+  "url": "http://sjz.58.com/shangpu/38407358186905x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37822431335831x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 778,
+  "house_key": "FFFFFFFFF4958167!2FA909017B584112984CE92D213757",
+  "url": "http://cq.58.com/shangpu/38407382815268x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37942840278164x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 779,
+  "house_key": "FFFFFFFFF4958167!57FDE6336CBA454A965F5C6BFC9CA3",
+  "url": "http://sy.58.com/shangpu/38407387501343x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021114981510x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 780,
+  "house_key": "FFFFFFFFF4958167!0BE4D0A991D644768CE5D674F1AEA0",
+  "url": "http://sjz.58.com/shangpu/38407400286980x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37932303201424x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 781,
+  "house_key": "FFFFFFFFF4958167!421F7C124C2A48BAB6FA6AC0BDAF4D",
+  "url": "http://xa.58.com/shangpu/38407409970823x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38010432043158x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 782,
+  "house_key": "FFFFFFFFF4958167!6942DB032D164244859728E462FA3A",
+  "url": "http://xa.58.com/shangpu/38407420415124x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38055407213847x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 783,
+  "house_key": "129223",
+  "url": "http://cq.58.com/shangpu/38407424686210x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38029727457676x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 784,
+  "house_key": "FFFFFFFFF4958167!22AA525C870640DBB1130BAC501A7A",
+  "url": "http://wh.58.com/shangpu/38407429140489x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37965452503707x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 785,
+  "house_key": "FFFFFFFFF4958167!B6EFDC65A45B4A38A5164506538121",
+  "url": "http://zz.58.com/shangpu/38407446792858x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37665713309323x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 786,
+  "house_key": "FFFFFFFFF4958167!FC4CA8BA27164C25B8DF2F709C6ED7",
+  "url": "http://sz.58.com/shangpu/38407459627677x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37831228172700x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 787,
+  "house_key": "FFFFFFFFF4958167!77C4BE5398964EA59CDF5EF77AB807",
+  "url": "http://sjz.58.com/shangpu/38407468785680x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37888338907145x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 788,
+  "house_key": "FFFFFFFFF4958167!20B9B1D0F733443E9A0D5EC7CB6F43",
+  "url": "http://wh.58.com/shangpu/38407495730967x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37712665967236x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 789,
+  "house_key": "FFFFFFFFF4958167!1C85817D34C34F1EA7C4BB7FACCC1D",
+  "url": "http://sjz.58.com/shangpu/38407505621154x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37766547255682x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 790,
+  "house_key": "FFFFFFFFF4958167!D4A15834DCA74DB3873EF2274B5F47",
+  "url": "http://cq.58.com/shangpu/38407521202059x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38055738201354x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 791,
+  "house_key": "FFFFFFFFF4958167!C7F4F2443DC544528622D4ECCD426B",
+  "url": "http://xa.58.com/shangpu/38407526403093x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38042971982630x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 792,
+  "house_key": "FFFFFFFFF4958167!FA7CCBB82748471792F486455BAFAF",
+  "url": "http://wh.58.com/shangpu/38407548298762x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38022168205714x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 793,
+  "house_key": "85565",
+  "url": "http://sh.58.com/shangpu/38407553029636x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37722736392858x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 794,
+  "house_key": "FFFFFFFFF4958167!76A02E54F384427A87FD6A5791C873",
+  "url": "http://wh.58.com/shangpu/38407569162503x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38041745818126x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 795,
+  "house_key": "FFFFFFFFF4958167!36DE724F551040A78C383EEF085FFC",
+  "url": "http://sjz.58.com/shangpu/38407594486294x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38054082594310x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 796,
+  "house_key": "FFFFFFFFF4958167!4C5AD9EF67654F759ED886F961CBFB",
+  "url": "http://sy.58.com/shangpu/38407609074190x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37930210863237x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 797,
+  "house_key": "FFFFFFFFF4958167!C875B698BE614A4DA2E6E1A2D5B1D4",
+  "url": "http://cq.58.com/shangpu/38407619556867x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38019645190423x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 798,
+  "house_key": "148544",
+  "url": "http://sh.58.com/shangpu/38407623906467x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38042645222281x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 799,
+  "house_key": "FFFFFFFFF4958167!B72F3D6F1AA14BC498AFB4E2A678FF",
+  "url": "http://zz.58.com/shangpu/38407628819723x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38009430030632x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 800,
+  "house_key": "FFFFFFFFF4958167!20EA906FC06A4179BD7171DE2241B2",
+  "url": "http://wh.58.com/shangpu/38407637719693x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37422159965862x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 801,
+  "house_key": "FFFFFFFFF4958167!FC1A0BE523F14802B5DA499737C577",
+  "url": "http://sy.58.com/shangpu/38407647959569x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37897184255879x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 802,
+  "house_key": "FFFFFFFFF4958167!2D5E865A1CDD45358AB7DBAC600ED8",
+  "url": "http://cq.58.com/shangpu/38407666945677x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37756782438554x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 803,
+  "house_key": "FFFFFFFFF4958167!F1C2F645615143A0BF63EE3634D941",
+  "url": "http://xa.58.com/shangpu/38407671761158x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38030121442839x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 804,
+  "house_key": "FFFFFFFFF4958167!EC59552243D64D42BCD2FC4E9901B8",
+  "url": "http://sjz.58.com/shangpu/38407676054561x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38043307003908x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 805,
+  "house_key": "FFFFFFFFF4958167!B72B5B59BEF14FBBAD76AF9E084882",
+  "url": "http://hrb.58.com/shangpu/38407681130783x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38065772430733x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 806,
+  "house_key": "FFFFFFFFF4958167!1D05C4939BD541D3BEEF37E1730099",
+  "url": "http://xa.58.com/shangpu/38407690416645x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38032836127880x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 807,
+  "house_key": "FFFFFFFFF4958167!299274F20C15497680CE5484223607",
+  "url": "http://sjz.58.com/shangpu/38407694876827x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38041183183528x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 808,
+  "house_key": "FFFFFFFFF4958167!189894A55BC44D51B21652BC6EB467",
+  "url": "http://sz.58.com/shangpu/38407699657093x.shtml",
+  "old_url": "https://sz.58.com/shangpu/38066367241235x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 809,
+  "house_key": "FFFFFFFFF4958167!D86216A67F88462CA0C0FC772B3FE0",
+  "url": "http://sy.58.com/shangpu/38407728209821x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38054845460227x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 810,
+  "house_key": "FFFFFFFFF4958167!8CABC31B882B46698C733061477A77",
+  "url": "http://zz.58.com/shangpu/38407738728353x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38063064600486x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 811,
+  "house_key": "FFFFFFFFF4958167!5DE24B241023430087924743514E9E",
+  "url": "http://sh.58.com/shangpu/38407752684806x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37489753395489x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 812,
+  "house_key": "84238",
+  "url": "http://sh.58.com/shangpu/38407774367876x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37943054911904x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 813,
+  "house_key": "FFFFFFFFF4958167!236A8E58F30646B3952A6810A78672",
+  "url": "http://zz.58.com/shangpu/38407779194535x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37665284339099x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 814,
+  "house_key": "FFFFFFFFF4958167!2EF0240143E14D59A276166B4E96AC",
+  "url": "http://zz.58.com/shangpu/38407796168092x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37897869893280x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 815,
+  "house_key": "FFFFFFFFF4958167!956D1C95B4834B57BBC22A1979DA33",
+  "url": "http://sjz.58.com/shangpu/38407801251990x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38020627585060x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 816,
+  "house_key": "FFFFFFFFF4958167!3B61C98F817B453295806D38292BE6",
+  "url": "http://hrb.58.com/shangpu/38407819710472x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38044646270217x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 817,
+  "house_key": "FFFFFFFFF4958167!A94839C6980945448B7704F54C1AFA",
+  "url": "http://wh.58.com/shangpu/38407843836950x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37933697400992x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 818,
+  "house_key": "FFFFFFFFF4958167!F33EA6C87E524118A006B76427BAFD",
+  "url": "http://sjz.58.com/shangpu/38407857282973x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37845111980185x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 819,
+  "house_key": "FFFFFFFFF4958167!57BAAF96929A471799E1FC5A3D57B3",
+  "url": "http://sjz.58.com/shangpu/38407867226517x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37933777000854x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 820,
+  "house_key": "FFFFFFFFF4958167!3AAB4652761E446396ED0EAD2EA61A",
+  "url": "http://xa.58.com/shangpu/38407882146319x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38043151680781x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 821,
+  "house_key": "FFFFFFFFF4958167!BE26A7588F2E4FE9905F1B234AB7F3",
+  "url": "http://wh.58.com/shangpu/38407901649558x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38044279679652x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 822,
+  "house_key": "FFFFFFFFF4958167!062452CC9A124A4CB87E962C3849BB",
+  "url": "http://cq.58.com/shangpu/38407906478230x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37510767771686x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 823,
+  "house_key": "FFFFFFFFF4958167!57E57C1D4DAC4DF09D68E7BD77051D",
+  "url": "http://sy.58.com/shangpu/38407930771104x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38011286581006x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 824,
+  "house_key": "FFFFFFFFF4958167!35E397B96D5246E0B29EDB61723F25",
+  "url": "http://sjz.58.com/shangpu/38407946179214x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38052275523210x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 825,
+  "house_key": "FFFFFFFFF4958167!C1E1DAE2413B48DEA95B1A326E4FF2",
+  "url": "http://sjz.58.com/shangpu/38407951166500x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37900537540370x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 826,
+  "house_key": "FFFFFFFFF4958167!DFE91F0A1ED242E8BE771B73976F0D",
+  "url": "http://cq.58.com/shangpu/38407959458722x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37755853914243x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 827,
+  "house_key": "FFFFFFFFF4958167!40A1C9DCEC9B40EA91C47812BDC5C5",
+  "url": "http://sy.58.com/shangpu/38407966427793x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37930307203623x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 828,
+  "house_key": "FFFFFFFFF4958167!B0BB99A10C1241C1A2E361B5B11BE1",
+  "url": "http://wh.58.com/shangpu/38407981633154x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38030222910503x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 829,
+  "house_key": "FFFFFFFFF4958167!A1B1B9EE9A774134B5F59C9D2FBB35",
+  "url": "http://cq.58.com/shangpu/38407986435202x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37777747660045x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 830,
+  "house_key": "FFFFFFFFF4958167!A940F9FDE98A4A26B0577475865C8F",
+  "url": "http://sjz.58.com/shangpu/38408008801425x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38020715539488x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 831,
+  "house_key": "92998",
+  "url": "http://sh.58.com/shangpu/38408028505381x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37931743957012x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 832,
+  "house_key": "161262",
+  "url": "http://sh.58.com/shangpu/38408032734366x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38018739762316x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 833,
+  "house_key": "FFFFFFFFF4958167!47DE0027D04F478AB2E888610E4296",
+  "url": "http://cq.58.com/shangpu/38408037634054x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38052626296713x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 834,
+  "house_key": "FFFFFFFFF4958167!30E17C87A24C4D10ACF9C7ED1714E2",
+  "url": "http://zz.58.com/shangpu/38408049457938x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38043943408394x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 835,
+  "house_key": "FFFFFFFFF4958167!AA90BC82BEE343B88F7635C5B031A5",
+  "url": "http://sy.58.com/shangpu/38408053926306x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37766661645705x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 836,
+  "house_key": "143494",
+  "url": "http://sh.58.com/shangpu/38408065533210x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37941913257094x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 837,
+  "house_key": "FFFFFFFFF4958167!227B5892C0974C43BA697C691B98B4",
+  "url": "http://wh.58.com/shangpu/38408085008652x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38021710107660x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 838,
+  "house_key": "FFFFFFFFF4958167!39541BEBD3E74E7BAB06CBF5820CFF",
+  "url": "http://sy.58.com/shangpu/38408104546715x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37389930307743x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 839,
+  "house_key": "FFFFFFFFF4958167!9FDE2CF9229745D686C24C9FDC2646",
+  "url": "http://cq.58.com/shangpu/38408109229989x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031898717833x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 840,
+  "house_key": "FFFFFFFFF4958167!BFBA0933BB584073A65297062A109F",
+  "url": "http://cq.58.com/shangpu/38408123179425x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37678415320227x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 841,
+  "house_key": "FFFFFFFFF4958167!E21CAE42830648E0AA51F936B8044B",
+  "url": "http://sjz.58.com/shangpu/38408142965906x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38030679021063x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 842,
+  "house_key": "FFFFFFFFF4958167!A12B5071FEFA4182B95FB7297A0F59",
+  "url": "http://sjz.58.com/shangpu/38408163246996x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37578651513231x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 843,
+  "house_key": "FFFFFFFFF4958167!A348C6F8343F4E7393CAA59B2E2968",
+  "url": "http://sh.58.com/shangpu/38408168210951x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38065525706390x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 844,
+  "house_key": "FFFFFFFFF4958167!8B608881E45C437DB00C08322EA363",
+  "url": "http://sjz.58.com/shangpu/38408173087762x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37677457034385x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 845,
+  "house_key": "FFFFFFFFF4958167!BE9D194D1163478FA2B3E170EEF954",
+  "url": "http://cq.58.com/shangpu/38408192877829x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38022335011367x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 846,
+  "house_key": "FFFFFFFFF4958167!646E0B5C806E47F1A547287919A925",
+  "url": "http://cc.58.com/shangpu/38408208553377x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37755859919510x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 847,
+  "house_key": "FFFFFFFFF4958167!03319FE37DE846B897944A29B796C4",
+  "url": "http://sy.58.com/shangpu/38408213137425x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37576314743044x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 848,
+  "house_key": "FFFFFFFFF4958167!2A4549A5D6E34E73A7D257A85C6CAD",
+  "url": "http://wh.58.com/shangpu/38408230847272x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38010750932227x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 849,
+  "house_key": "FFFFFFFFF4958167!6F563A950EE9477E8DE7AAB27A89A7",
+  "url": "http://sz.58.com/shangpu/38408252604804x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37823155149223x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 850,
+  "house_key": "FFFFFFFFF4958167!2FFAD533E6864094A629F896514DE6",
+  "url": "http://sjz.58.com/shangpu/38408278639648x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021109707295x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 851,
+  "house_key": "FFFFFFFFF4958167!5AD000C24729472EB922797F8E0BF6",
+  "url": "http://sjz.58.com/shangpu/38408286092950x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38020764917414x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 852,
+  "house_key": "FFFFFFFFF4958167!315D8F5CFAAD46A0AA5EDAB8A68E9F",
+  "url": "http://sy.58.com/shangpu/38408291748483x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37502557192095x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 853,
+  "house_key": "178906",
+  "url": "http://cq.58.com/shangpu/38408300673545x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38063159981202x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 854,
+  "house_key": "FFFFFFFFF4958167!1456CFC6636540C29DAC78F401DCA1",
+  "url": "http://cq.58.com/shangpu/38408305749788x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38019612033565x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 855,
+  "house_key": "FFFFFFFFF4958167!E7471ADECFF44EE09D5203E66E8D12",
+  "url": "http://sh.58.com/shangpu/38408317242370x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37723609313189x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 856,
+  "house_key": "FFFFFFFFF4958167!3B51EDF4EC234FEEBA15D3DDC1E1F5",
+  "url": "http://cq.58.com/shangpu/38408321789342x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38066643838110x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 857,
+  "house_key": "FFFFFFFFF4958167!507851398CB944B0A78885350FEEB7",
+  "url": "http://sh.58.com/shangpu/38408350948616x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37413431464706x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 858,
+  "house_key": "FFFFFFFFF4958167!CC767DBDE9DF4CF78FB00D291EDE41",
+  "url": "http://qd.58.com/shangpu/38408358264205x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37644975298073x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 859,
+  "house_key": "FFFFFFFFF4958167!F0CF87053B104A27B4804C2E1C7E90",
+  "url": "http://wh.58.com/shangpu/38408366500114x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38062983230350x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 860,
+  "house_key": "FFFFFFFFF4958167!E91F438524C4443099007CEC10A372",
+  "url": "http://sjz.58.com/shangpu/38408377513766x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37721907053330x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 861,
+  "house_key": "FFFFFFFFF4958167!D08D1E43739E4396B8654F60C99BDB",
+  "url": "http://cq.58.com/shangpu/38408389801507x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38020862851487x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 862,
+  "house_key": "FFFFFFFFF4958167!800395FD232B4A96B2D7D5BC58F7E9",
+  "url": "http://cd.58.com/shangpu/38408394278288x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37922338222481x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 863,
+  "house_key": "FFFFFFFFF4958167!CD5231D579224C7DBCDE68EDFE45AC",
+  "url": "http://cq.58.com/shangpu/38408402279699x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37899843706781x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 864,
+  "house_key": "FFFFFFFFF4958167!C00DBDC007A24692BC6B4F0672ED26",
+  "url": "http://zz.58.com/shangpu/38408413318682x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37756470751770x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 865,
+  "house_key": "FFFFFFFFF4958167!E6C2380BEDA84D3984EE002E0D2CB6",
+  "url": "http://sh.58.com/shangpu/38408425055631x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37601251161765x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 866,
+  "house_key": "FFFFFFFFF4958167!1E15BB3801B149E0808E1213A85001",
+  "url": "http://sjz.58.com/shangpu/38408437251605x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38054239745687x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 867,
+  "house_key": "FFFFFFFFF4958167!9ADECB271727471EA2A393CF2B567F",
+  "url": "http://sy.58.com/shangpu/38408444849827x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38033190621328x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 868,
+  "house_key": "FFFFFFFFF4958167!7464FB6CB71D4D2ABFB8AEF54E3FA1",
+  "url": "http://cd.58.com/shangpu/38408449556241x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37943605684614x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 869,
+  "house_key": "FFFFFFFFF4958167!E02328977F8B4ED491AFF6AD1A6218",
+  "url": "http://zz.58.com/shangpu/38408454776708x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37943840973350x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 870,
+  "house_key": "FFFFFFFFF4958167!F2D3FF273912458894E3789D0FCCFA",
+  "url": "http://cq.58.com/shangpu/38408463027997x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38065996576795x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 871,
+  "house_key": "FFFFFFFFF4958167!DE260FEE70544B1B96091F8B676D7C",
+  "url": "http://sy.58.com/shangpu/38408476493840x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38043371664003x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 872,
+  "house_key": "FFFFFFFFF4958167!86E11E52C3EF41D3AAE7F02A5A65FA",
+  "url": "http://cd.58.com/shangpu/38408496036377x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38063104996486x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 873,
+  "house_key": "FFFFFFFFF4958167!C27A5B4BFF5646AC8F9103B5D73874",
+  "url": "http://sjz.58.com/shangpu/38408522971908x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38042761747078x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 874,
+  "house_key": "120593",
+  "url": "http://sh.58.com/shangpu/38408542933505x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37932103419266x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 875,
+  "house_key": "FFFFFFFFF4958167!CF994DB4C13647D29C62CED01B04CB",
+  "url": "http://sh.58.com/shangpu/38408553176992x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37611413334544x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 876,
+  "house_key": "FFFFFFFFF4958167!D002897306024FDB8A884FD10FC069",
+  "url": "http://sh.58.com/shangpu/38408559792777x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37413443038600x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 877,
+  "house_key": "FFFFFFFFF4958167!0958FEAC463D473CBE517CE14BFB60",
+  "url": "http://sjz.58.com/shangpu/38408568748550x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38030608869773x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 878,
+  "house_key": "FFFFFFFFF4958167!E5FEC71BD0C0443FBC20102FFC5DB3",
+  "url": "http://cd.58.com/shangpu/38408574133920x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37466468478242x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 879,
+  "house_key": "FFFFFFFFF4958167!D238B662525E47ACBFC948B26CBBCD",
+  "url": "http://cq.58.com/shangpu/38408579064449x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38065655263649x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 880,
+  "house_key": "FFFFFFFFF4958167!DA18363F6C5C4F4F9C5D348417B483",
+  "url": "http://sjz.58.com/shangpu/38408604181018x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37833221739289x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 881,
+  "house_key": "FFFFFFFFF4958167!860F360D448745F4812E17C7F03221",
+  "url": "http://sjz.58.com/shangpu/38408613922184x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37488496070412x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 882,
+  "house_key": "FFFFFFFFF4958167!AA34DBE2A14F4BCFB45494A54FB0EA",
+  "url": "http://sy.58.com/shangpu/38408634868357x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37644783812871x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 883,
+  "house_key": "FFFFFFFFF4958167!3E25ED3A6D7C4B7CA3B264D4DA3873",
+  "url": "http://wh.58.com/shangpu/38408644659091x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37713014863363x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 884,
+  "house_key": "FFFFFFFFF4958167!3A9CEDAD1C7C4464B5E86E4A546C0A",
+  "url": "http://cq.58.com/shangpu/38408667803426x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37734477636512x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 885,
+  "house_key": "FFFFFFFFF4958167!202C9D4B6B044C27895D68A971B6A2",
+  "url": "http://sy.58.com/shangpu/38408674941851x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38011093780875x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 886,
+  "house_key": "FFFFFFFFF4958167!7AEDFC2E5A0E4F83A96F933C5D5921",
+  "url": "http://sy.58.com/shangpu/38408690955559x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38054700260611x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 887,
+  "house_key": "FFFFFFFFF4958167!584B1A986E9B47EDB06389B29EEA9F",
+  "url": "http://sjz.58.com/shangpu/38408703483283x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38052654976770x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 888,
+  "house_key": "FFFFFFFFF4958167!36FF6D69E532468E801789C7FB4D6D",
+  "url": "http://sz.58.com/shangpu/38408708417701x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37579008814753x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 889,
+  "house_key": "FFFFFFFFF4958167!40863BA06FA74AE4A1AF98425A931C",
+  "url": "http://sjz.58.com/shangpu/38408738286473x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37842703354244x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 890,
+  "house_key": "FFFFFFFFF4958167!4E74B12124854EED85348F67E05FA8",
+  "url": "http://zz.58.com/shangpu/38408743179545x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37745221168542x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 891,
+  "house_key": "FFFFFFFFF4958167!BD13064F512A44479BD9CD0B4E1C3B",
+  "url": "http://sy.58.com/shangpu/38408750349217x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38054740757915x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 892,
+  "house_key": "FFFFFFFFF4958167!0E59385CEFF546168E33BF402C546F",
+  "url": "http://zz.58.com/shangpu/38408755609381x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37943973584283x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 893,
+  "house_key": "FFFFFFFFF4958167!66D3BD02E24A4D5F84141960E5FC8F",
+  "url": "http://wh.58.com/shangpu/38408760443287x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37823175105172x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 894,
+  "house_key": "FFFFFFFFF4958167!151350563A904FFDA99B5236E3253F",
+  "url": "http://sh.58.com/shangpu/38408767236647x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37943303929350x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 895,
+  "house_key": "FFFFFFFFF4958167!22AF89C9A13847048CF0D28F3CD798",
+  "url": "http://sjz.58.com/shangpu/38408810915841x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37944217057441x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 896,
+  "house_key": "FFFFFFFFF4958167!6202BAC50B094FA1BC7CBF593C4E56",
+  "url": "http://cq.58.com/shangpu/38408815437061x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37612517915012x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 897,
+  "house_key": "166611",
+  "url": "http://cc.58.com/shangpu/38408836270623x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38040723579277x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 898,
+  "house_key": "FFFFFFFFF4958167!B14ACF2077E14AAB916F45396F6D65",
+  "url": "http://cq.58.com/shangpu/38408843328420x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38019687236375x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 899,
+  "house_key": "137752",
+  "url": "http://sh.58.com/shangpu/38408847523341x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38018629327756x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 900,
+  "house_key": "FFFFFFFFF4958167!A0AECBF56F5343BEB4B600A795C244",
+  "url": "http://cq.58.com/shangpu/38408858872341x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37888563958053x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 901,
+  "house_key": "FFFFFFFFF4958167!7BB855074BCD40C882929C5336A259",
+  "url": "http://zz.58.com/shangpu/38408871777575x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38008498861465x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 902,
+  "house_key": "FFFFFFFFF4958167!09B476679F514DB0A2B5D56D6C0926",
+  "url": "http://sjz.58.com/shangpu/38408886257921x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38030734304025x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 903,
+  "house_key": "FFFFFFFFF4958167!D96C98C0865D470B80EC750741E547",
+  "url": "http://sh.58.com/shangpu/38408890953378x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37535612911520x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 904,
+  "house_key": "161263",
+  "url": "http://sh.58.com/shangpu/38408904220070x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38030774528777x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 905,
+  "house_key": "175224",
+  "url": "http://sh.58.com/shangpu/38408925848603x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38043015500420x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 906,
+  "house_key": "FFFFFFFFF4958167!23359D642DDC481586D8DD7A3C9CF8",
+  "url": "http://qd.58.com/shangpu/38408930507545x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38041555976716x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 907,
+  "house_key": "FFFFFFFFF4958167!076F81EC1CBF4DB68BD554F5C61770",
+  "url": "http://sh.58.com/shangpu/38408935422237x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37967118774940x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 908,
+  "house_key": "FFFFFFFFF4958167!F811B1515FA7486EB5B98C71ADCA19",
+  "url": "http://sjz.58.com/shangpu/38408955573273x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37756691278855x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 909,
+  "house_key": "104245",
+  "url": "http://sh.58.com/shangpu/38408965859084x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38030489330566x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 910,
+  "house_key": "FFFFFFFFF4958167!68E5A2D3234F4FB5B2CDCC6E826C4A",
+  "url": "http://zz.58.com/shangpu/38408980552712x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37656704345858x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 911,
+  "house_key": "FFFFFFFFF4958167!4A7113A75A264B6C925D18D025A4F0",
+  "url": "http://sh.58.com/shangpu/38408990694798x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38022132927271x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 912,
+  "house_key": "FFFFFFFFF4958167!349BAABB9A58444192A0133BC9F3BE",
+  "url": "http://cq.58.com/shangpu/38409011299596x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37922634149001x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 913,
+  "house_key": "FFFFFFFFF4958167!CF0C3BE5C0DC43F3859105BD648100",
+  "url": "http://cq.58.com/shangpu/38409017606275x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37900614079627x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 914,
+  "house_key": "FFFFFFFFF4958167!EA0D4CC667934610BF3EEBE1140013",
+  "url": "http://sjz.58.com/shangpu/38409023800732x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38054198297748x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 915,
+  "house_key": "FFFFFFFFF4958167!8EE331CD8391406E8BBDBF84D6876D",
+  "url": "http://sy.58.com/shangpu/38409032599720x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38021460435978x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 916,
+  "house_key": "FFFFFFFFF4958167!409B071A881E4D3FA6A0E7F2DF231D",
+  "url": "http://cd.58.com/shangpu/38409044296203x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37888683638935x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 917,
+  "house_key": "FFFFFFFFF4958167!D43F30E4A072438681237E5FD07A73",
+  "url": "http://sjz.58.com/shangpu/38409050551320x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37731936632851x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 918,
+  "house_key": "FFFFFFFFF4958167!39E8444828E34ED6A7CF753E6A85FA",
+  "url": "http://xa.58.com/shangpu/38409055263901x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38032640450693x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 919,
+  "house_key": "FFFFFFFFF4958167!2F62FA90E2D8486EA76280F191E293",
+  "url": "http://sy.58.com/shangpu/38409065158804x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966443323009x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 920,
+  "house_key": "94150",
+  "url": "http://sh.58.com/shangpu/38409070324882x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37777992967305x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 921,
+  "house_key": "FFFFFFFFF4958167!C0191E1CEA864C06A026F603FCFC0A",
+  "url": "http://sh.58.com/shangpu/38409090528394x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37755999358504x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 922,
+  "house_key": "FFFFFFFFF4958167!D5ED3A67E0F442469FFFF5A1E8FCF1",
+  "url": "http://zz.58.com/shangpu/38409096135826x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37744189793448x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 923,
+  "house_key": "FFFFFFFFF4958167!8F20616931D6411A8A0338AF50B423",
+  "url": "http://cd.58.com/shangpu/38409124081176x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38030474452260x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 924,
+  "house_key": "FFFFFFFFF4958167!A1AA7624C1E348248D12848942FB7D",
+  "url": "http://cq.58.com/shangpu/38409128677380x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38020716672666x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 925,
+  "house_key": "FFFFFFFFF4958167!1C56DAB2CCB04A3E87AC22A18102DC",
+  "url": "http://cq.58.com/shangpu/38409133518084x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38065800188037x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 926,
+  "house_key": "FFFFFFFFF4958167!A649AA0955B549F88DCC143BDE4860",
+  "url": "http://sjz.58.com/shangpu/38409141198338x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021087645071x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 927,
+  "house_key": "FFFFFFFFF4958167!B5EAA2F03C4A47DDBC7324B598F49E",
+  "url": "http://sjz.58.com/shangpu/38409145530502x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38021023323398x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 928,
+  "house_key": "165192",
+  "url": "http://sh.58.com/shangpu/38409161745551x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38031488377117x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 929,
+  "house_key": "FFFFFFFFF4958167!98F672B8529F4FF996B028468AA001",
+  "url": "http://xa.58.com/shangpu/38409173987864x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37731702384281x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 930,
+  "house_key": "FFFFFFFFF4958167!7F731F33969C4D31A9D331254B12EC",
+  "url": "http://sh.58.com/shangpu/38409188122892x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37598991581839x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 931,
+  "house_key": "FFFFFFFFF4958167!CB76E868AFBD4142B7E7B0965C7BEA",
+  "url": "http://sh.58.com/shangpu/38409200399271x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37443320501281x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 932,
+  "house_key": "133374",
+  "url": "http://sh.58.com/shangpu/38409213376013x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38031809511427x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 933,
+  "house_key": "FFFFFFFFF4958167!54705DFCB6AE4FBBACB8FE95985EAA",
+  "url": "http://wh.58.com/shangpu/38409222287516x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38040767242128x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 934,
+  "house_key": "FFFFFFFFF4958167!22DE6605CA54425FAC459F309F04B3",
+  "url": "http://wh.58.com/shangpu/38409244109859x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37952617240090x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 935,
+  "house_key": "FFFFFFFFF4958167!7251397ECD6F44FBB4061EAA119E9C",
+  "url": "http://qd.58.com/shangpu/38409256506658x.shtml",
+  "old_url": "https://qd.58.com/shangpu/38063091632424x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 936,
+  "house_key": "45438",
+  "url": "http://sh.58.com/shangpu/38409274150031x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38041127284120x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 937,
+  "house_key": "FFFFFFFFF4958167!8DF2CECDBB6C4EBFA78BD496C38F86",
+  "url": "http://wh.58.com/shangpu/38409281503510x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38043196363400x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 938,
+  "house_key": "FFFFFFFFF4958167!251675D20EF14DB7A1B615EDCBEF54",
+  "url": "http://wh.58.com/shangpu/38409292605992x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38065735736231x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 939,
+  "house_key": "FFFFFFFFF4958167!8440EB1F4A964DE595A35826FB9EAA",
+  "url": "http://sjz.58.com/shangpu/38409299274498x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38033667250439x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 940,
+  "house_key": "FFFFFFFFF4958167!3D63C069B71A4EE28EDC5F86150327",
+  "url": "http://sh.58.com/shangpu/38409304806298x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37734468740133x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 941,
+  "house_key": "FFFFFFFFF4958167!E490B648E401478B904CC0E598F853",
+  "url": "http://xa.58.com/shangpu/38409310631816x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38066107359619x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 942,
+  "house_key": "FFFFFFFFF4958167!D70384A68A3C4A5C8F8EAC5157D48F",
+  "url": "http://sy.58.com/shangpu/38409318198802x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37943660151458x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 943,
+  "house_key": "FFFFFFFFF4958167!6F3E7C8673104704B43D15A1D45B7D",
+  "url": "http://xa.58.com/shangpu/38409356299667x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38018894144148x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 944,
+  "house_key": "FFFFFFFFF4958167!FEFB6D68BD884AFE9DFBD2DAF36298",
+  "url": "http://cq.58.com/shangpu/38409405426955x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38065944354954x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 945,
+  "house_key": "165620",
+  "url": "http://sh.58.com/shangpu/38409427583748x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38021026816034x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 946,
+  "house_key": "FFFFFFFFF4958167!CACD927E9E8C4CC096BC75540A2A13",
+  "url": "http://wh.58.com/shangpu/38409448483336x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38032395349654x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 947,
+  "house_key": "175238",
+  "url": "http://sh.58.com/shangpu/38409466032024x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38044307103902x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 948,
+  "house_key": "128732",
+  "url": "http://sh.58.com/shangpu/38409470659352x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37952824672525x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 949,
+  "house_key": "FFFFFFFFF4958167!89C5960918944887B9C5D149075DE8",
+  "url": "http://cc.58.com/shangpu/38409475991683x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38044293079193x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 950,
+  "house_key": "FFFFFFFFF4958167!0CEF9A1C2A6045F3BDB2C609F1CE1F",
+  "url": "http://wh.58.com/shangpu/38410260301062x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37878520179731x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 951,
+  "house_key": "128701",
+  "url": "http://sh.58.com/shangpu/38410268923155x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37964995327397x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 952,
+  "house_key": "FFFFFFFFF4958167!9CAE79F282AB4BE599A4DA2543127D",
+  "url": "http://wh.58.com/shangpu/38410272647311x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37744030299782x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 953,
+  "house_key": "FFFFFFFFF4958167!2336E9A210BB46F09C9CE53AD4E4CB",
+  "url": "http://cq.58.com/shangpu/38410274981798x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37578801572904x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 954,
+  "house_key": "FFFFFFFFF4958167!4EF134BDA1E540DB9FB2D51F5BB3F9",
+  "url": "http://sh.58.com/shangpu/38410282975364x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37533937681957x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 955,
+  "house_key": "FFFFFFFFF4958167!40686D0F458448DBABD0134C2AE174",
+  "url": "http://zz.58.com/shangpu/38410291753768x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38018835788557x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 956,
+  "house_key": "FFFFFFFFF4958167!D28A196147AA4E4EB317646D8DCDA0",
+  "url": "http://sjz.58.com/shangpu/38410326274312x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37411308756508x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 957,
+  "house_key": "FFFFFFFFF4958167!C630431169E54AAB91614788915602",
+  "url": "http://cc.58.com/shangpu/38410335857167x.shtml",
+  "old_url": "https://cc.58.com/shangpu/37456303790370x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 958,
+  "house_key": "FFFFFFFFF4958167!E0D5B379D5D045488150F99171E1C6",
+  "url": "http://sy.58.com/shangpu/38410345636127x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37468983066882x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 959,
+  "house_key": "FFFFFFFFF4958167!2AF40CA052EC48E890CFF776A72B9A",
+  "url": "http://zz.58.com/shangpu/38410358048020x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37922487859346x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 960,
+  "house_key": "FFFFFFFFF4958167!41418163719B4F2DA1BDEF5B059A38",
+  "url": "http://sjz.58.com/shangpu/38410369360288x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37545947975042x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 961,
+  "house_key": "FFFFFFFFF4958167!79A4875E60014DD189DBB0C2B60793",
+  "url": "http://sh.58.com/shangpu/38410377915171x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37734343950758x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 962,
+  "house_key": "FFFFFFFFF4958167!146E7FF2475E499B9C557101149818",
+  "url": "http://sjz.58.com/shangpu/38410387719048x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37967384816532x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 963,
+  "house_key": "FFFFFFFFF4958167!11A6198991504BF08DC16F3944AEA9",
+  "url": "http://zz.58.com/shangpu/38410417248548x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37953890131474x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 964,
+  "house_key": "FFFFFFFFF4958167!A5C852F57D814F5D8C4A70C15DC62F",
+  "url": "http://wh.58.com/shangpu/38410435184642x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38053863770645x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 965,
+  "house_key": "FFFFFFFFF4958167!F26822F127B4421B96E31FBE5D51D3",
+  "url": "http://hrb.58.com/shangpu/38410440528015x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38067133380382x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 966,
+  "house_key": "FFFFFFFFF4958167!C9C5AC1AF65E44ABBA6F5167EFAC63",
+  "url": "http://cd.58.com/shangpu/38410459818888x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38021774633736x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 967,
+  "house_key": "FFFFFFFFF4958167!FDDC56BFB9EF40C893250B266BCBE9",
+  "url": "http://zz.58.com/shangpu/38410485234317x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38041552834335x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 968,
+  "house_key": "134370",
+  "url": "http://cq.58.com/shangpu/38410495498376x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37963767613582x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 969,
+  "house_key": "FFFFFFFFF4958167!3C3C0851B777413D979DB29B84BEE6",
+  "url": "http://sjz.58.com/shangpu/38410503455500x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37967318585608x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 970,
+  "house_key": "FFFFFFFFF4958167!1CA52D6101534B2AB7867F07CDC1B1",
+  "url": "http://xa.58.com/shangpu/38410515458945x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38032734642463x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 971,
+  "house_key": "FFFFFFFFF4958167!324344AE9C3C4340854FC1434660EE",
+  "url": "http://sh.58.com/shangpu/38410524323342x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37533027223688x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 972,
+  "house_key": "FFFFFFFFF4958167!35ADB9A967E8456BBA24DDD33EB593",
+  "url": "http://sjz.58.com/shangpu/38410535187978x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38043846336272x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 973,
+  "house_key": "117031",
+  "url": "http://cq.58.com/shangpu/38410540638370x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38007773504036x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 974,
+  "house_key": "FFFFFFFFF4958167!160FAC3FF3C44AD4B22CA5B2E5EAE1",
+  "url": "http://sh.58.com/shangpu/38410581568011x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37576583645474x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 975,
+  "house_key": "FFFFFFFFF4958167!C6DF78301E3A46798B8A683BAFD408",
+  "url": "http://zz.58.com/shangpu/38410590670980x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37569011821096x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 976,
+  "house_key": "FFFFFFFFF4958167!D35F94ADCC584827B270A74EFCE6E6",
+  "url": "http://sz.58.com/shangpu/38410596211218x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37910747019664x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 977,
+  "house_key": "FFFFFFFFF4958167!D9BF42314F59440DB23CE55B7627B7",
+  "url": "http://sh.58.com/shangpu/38410617078273x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37543760842372x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 978,
+  "house_key": "FFFFFFFFF4958167!80681FB81CEA4EE08B093AD9C98B76",
+  "url": "http://xa.58.com/shangpu/38410625756817x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37454907467549x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 979,
+  "house_key": "FFFFFFFFF4958167!4DBF175B3C4F42459C48388A7556EE",
+  "url": "http://sjz.58.com/shangpu/38410643685921x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37877642702242x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 980,
+  "house_key": "FFFFFFFFF4958167!0DD2081E2C1F4E768A21E141FDF560",
+  "url": "http://cd.58.com/shangpu/38410673414812x.shtml",
+  "old_url": "https://cd.58.com/shangpu/38021527451014x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 981,
+  "house_key": "174629",
+  "url": "http://cq.58.com/shangpu/38410688639379x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38065607540242x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 982,
+  "house_key": "FFFFFFFFF4958167!D0C78D9A5D34439F9E1D170F379DAB",
+  "url": "http://sy.58.com/shangpu/38410696947494x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37731345781146x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 983,
+  "house_key": "FFFFFFFFF4958167!A2BCB6DA12684C9198AE19EE77DAD5",
+  "url": "http://sjz.58.com/shangpu/38410711902607x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38055679108624x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 984,
+  "house_key": "FFFFFFFFF4958167!153FD9DE5BF243C3AA2E95B8C3C2D8",
+  "url": "http://sh.58.com/shangpu/38410719307684x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37545000825105x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 985,
+  "house_key": "FFFFFFFFF4958167!9FB4192843814CC5931341A6ADBCBF",
+  "url": "http://sh.58.com/shangpu/38410731410470x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37963188315656x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 986,
+  "house_key": "FFFFFFFFF4958167!DB5727B3D8A1496F8C6198826F6365",
+  "url": "http://cq.58.com/shangpu/38410743003297x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37942190007208x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 987,
+  "house_key": "FFFFFFFFF4958167!F2F138392FD94CFBA53A25BF1DA463",
+  "url": "http://sy.58.com/shangpu/38410768801420x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966386031130x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 988,
+  "house_key": "FFFFFFFFF4958167!27C0E5E43F514E46AFAA6BA6B1AEBB",
+  "url": "http://wh.58.com/shangpu/38410782537369x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37443566720789x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 989,
+  "house_key": "FFFFFFFFF4958167!9088EA0109D944A6B4F5BC33ACE2D7",
+  "url": "http://cd.58.com/shangpu/38410796074278x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37932819824134x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 990,
+  "house_key": "FFFFFFFFF4958167!9A09DBAC0BD8422583582582EAA1CB",
+  "url": "http://zz.58.com/shangpu/38410802076176x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37821611083909x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 991,
+  "house_key": "142303",
+  "url": "http://cq.58.com/shangpu/38410808244260x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38019319221255x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 992,
+  "house_key": "FFFFFFFFF4958167!54AB6EC98F944D3291187DBDD304E9",
+  "url": "http://xa.58.com/shangpu/38410820669472x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37922799353616x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 993,
+  "house_key": "FFFFFFFFF4958167!1ACC85A61E5249E09BE192CB6E3047",
+  "url": "http://sjz.58.com/shangpu/38410847646085x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37900146706183x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 994,
+  "house_key": "172886",
+  "url": "http://cc.58.com/shangpu/38410854959127x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38031621411725x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 995,
+  "house_key": "FFFFFFFFF4958167!B57B117FD195434EA80460566AF974",
+  "url": "http://sjz.58.com/shangpu/38410866071452x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37590977550723x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 996,
+  "house_key": "FFFFFFFFF4958167!6A3377C0FFB14622B4C93C9ACACF49",
+  "url": "http://cq.58.com/shangpu/38410876351256x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031925666208x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 997,
+  "house_key": "FFFFFFFFF4958167!7881FFCA9AE24850AF6C0E19B16F78",
+  "url": "http://zz.58.com/shangpu/38410898410396x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38021384964618x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 998,
+  "house_key": "FFFFFFFFF4958167!3C74CE9236DA43B387BB45C8149E12",
+  "url": "http://sy.58.com/shangpu/38410922215169x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37534730034583x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 999,
+  "house_key": "FFFFFFFFF4958167!46EFAA5719D144A5AB331478E2DF27",
+  "url": "http://sjz.58.com/shangpu/38410929405467x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37620924211730x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1000,
+  "house_key": "FFFFFFFFF4958167!EF13B84F3DAB441DAD5274A3DCB91F",
+  "url": "http://cd.58.com/shangpu/38410938124933x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37746044568195x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1001,
+  "house_key": "FFFFFFFFF4958167!26A91B9EF548403D822AE30E7112F8",
+  "url": "http://sjz.58.com/shangpu/38410951535654x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37833122072103x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1002,
+  "house_key": "FFFFFFFFF4958167!D81826137E874C9A9603A7845F3256",
+  "url": "http://xa.58.com/shangpu/38410964342412x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38064939018119x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1003,
+  "house_key": "FFFFFFFFF4958167!FFCA6029A6FD4634803BF2CA0A450E",
+  "url": "http://zz.58.com/shangpu/38410971477772x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37410868087074x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1004,
+  "house_key": "FFFFFFFFF4958167!02D569B9CCF146E298CEDA6A767AE1",
+  "url": "http://zz.58.com/shangpu/38410985294886x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38032005457419x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1005,
+  "house_key": "FFFFFFFFF4958167!B99FEFDD4B9B4D04ABE2187085B3CD",
+  "url": "http://wh.58.com/shangpu/38410994357541x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38040887142555x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1006,
+  "house_key": "FFFFFFFFF4958167!602D7287E6344A939C77924E390C9C",
+  "url": "http://sjz.58.com/shangpu/38411007628820x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38052721891857x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1007,
+  "house_key": "FFFFFFFFF4958167!AC9DE4EB4EB44B83B2F3BD2C401270",
+  "url": "http://sjz.58.com/shangpu/38411012364954x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37965507425688x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1008,
+  "house_key": "FFFFFFFFF4958167!6B32CF33898B4E62892ACAB2BB3BF9",
+  "url": "http://sy.58.com/shangpu/38411029011841x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37511542137877x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1009,
+  "house_key": "FFFFFFFFF4958167!ABCF808D869F4202A9332A8BA7C811",
+  "url": "http://sh.58.com/shangpu/38411065842842x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37767256393218x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1010,
+  "house_key": "FFFFFFFFF4958167!A7CA7023C02C46708483F796D455A6",
+  "url": "http://sjz.58.com/shangpu/38411082782238x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37546161670433x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1011,
+  "house_key": "FFFFFFFFF4958167!CD19F95F2ED1472D90D775475637B9",
+  "url": "http://cq.58.com/shangpu/38411088509461x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37800100584710x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1012,
+  "house_key": "FFFFFFFFF4958167!DFA9435BD75E4D8A9D77C4F51D6D14",
+  "url": "http://zz.58.com/shangpu/38411114655624x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37944233651224x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1013,
+  "house_key": "FFFFFFFFF4958167!DDF3205A164043FDB587F2FC7A8E9B",
+  "url": "http://xa.58.com/shangpu/38411116654734x.shtml",
+  "old_url": "https://xa.58.com/shangpu/37943684688034x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1014,
+  "house_key": "80184",
+  "url": "http://sh.58.com/shangpu/38411127935392x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38020248370469x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1015,
+  "house_key": "FFFFFFFFF4958167!D7388AF82B624FFC99B00CAC70C109",
+  "url": "http://cd.58.com/shangpu/38411133533084x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37943045597700x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1016,
+  "house_key": "FFFFFFFFF4958167!4AF0952FD5EA4EA3B0F2D54E420CB4",
+  "url": "http://xa.58.com/shangpu/38411143469984x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38010213923860x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1017,
+  "house_key": "FFFFFFFFF4958167!A9DF1882FF844AA88C86C4CFD5FEBC",
+  "url": "http://cq.58.com/shangpu/38411151650074x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37955943553690x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1018,
+  "house_key": "FFFFFFFFF4958167!19AC4E189B2549B48165604DAC747E",
+  "url": "http://zz.58.com/shangpu/38411165174559x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37566147276683x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1019,
+  "house_key": "FFFFFFFFF4958167!7686AEA44BC8490AA670BBCAB273A8",
+  "url": "http://zz.58.com/shangpu/38411190606373x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38007542176403x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1020,
+  "house_key": "FFFFFFFFF4958167!C6DCA8A3F91346A69CEA0F96442B20",
+  "url": "http://sh.58.com/shangpu/38411201374607x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38052672037149x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1021,
+  "house_key": "FFFFFFFFF4958167!4ACED039C7C043828C36F7F796E93F",
+  "url": "http://cd.58.com/shangpu/38411202549017x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37446532406541x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1022,
+  "house_key": "FFFFFFFFF4958167!1BB3C0D2E7694FE89B53531AF1C596",
+  "url": "http://cd.58.com/shangpu/38411218598789x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37834631873813x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1023,
+  "house_key": "FFFFFFFFF4958167!360035C7586C4EE0A7CD2C286B4304",
+  "url": "http://cq.58.com/shangpu/38411222487582x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38020747397412x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1024,
+  "house_key": "FFFFFFFFF4958167!4E903A6BEF2646C494BDEF1AA22CC1",
+  "url": "http://sy.58.com/shangpu/38411228416151x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37831031306519x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1025,
+  "house_key": "FFFFFFFFF4958167!474098542879471498DC96096E9A32",
+  "url": "http://sh.58.com/shangpu/38411229666445x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37589546116109x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1026,
+  "house_key": "FFFFFFFFF4958167!48CC870A85824C6EBF05D988C09A3F",
+  "url": "http://cq.58.com/shangpu/38411241348874x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38011358925725x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1027,
+  "house_key": "FFFFFFFFF4958167!C3AE11EE29B540B0916692F9180F36",
+  "url": "http://zz.58.com/shangpu/38411245181206x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37954579672333x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1028,
+  "house_key": "FFFFFFFFF4958167!35BC80970D414C758D11DCBFBAE37D",
+  "url": "http://xa.58.com/shangpu/38411248942595x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38051836684948x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1029,
+  "house_key": "FFFFFFFFF4958167!DE31D1CEFB3148F4A0B0712A150943",
+  "url": "http://sz.58.com/shangpu/38411249047586x.shtml",
+  "old_url": "https://sz.58.com/shangpu/38033647916815x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1030,
+  "house_key": "FFFFFFFFF4958167!DC30C626BC5F4BBDA19915266B85F1",
+  "url": "http://sjz.58.com/shangpu/38411261527319x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38019192723969x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1031,
+  "house_key": "FFFFFFFFF4958167!97B7111573284803BD12F31CFF43CE",
+  "url": "http://sh.58.com/shangpu/38411265396504x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38065980265880x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1032,
+  "house_key": "FFFFFFFFF4958167!F01D68AB91AE4C46A511606CBAA052",
+  "url": "http://cc.58.com/shangpu/38411296559906x.shtml",
+  "old_url": "https://cc.58.com/shangpu/38065578107040x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1033,
+  "house_key": "FFFFFFFFF4958167!5770CBECA2D34DC69C662EA71ACA48",
+  "url": "http://sjz.58.com/shangpu/38411300669083x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37899062274447x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1034,
+  "house_key": "FFFFFFFFF4958167!27D4BB998298430EAF45B382DC0448",
+  "url": "http://sjz.58.com/shangpu/38411313077275x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38033727676062x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1035,
+  "house_key": "FFFFFFFFF4958167!0601B289554B40149A6565D67FA985",
+  "url": "http://sy.58.com/shangpu/38411318330785x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37656469639584x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1036,
+  "house_key": "FFFFFFFFF4958167!46E01EAE143141D2AF7C720A56C578",
+  "url": "http://sy.58.com/shangpu/38411323071142x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37734106648994x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1037,
+  "house_key": "FFFFFFFFF4958167!FC37C52F172F4439AA05C456088B9D",
+  "url": "http://sz.58.com/shangpu/38411327010845x.shtml",
+  "old_url": "https://sz.58.com/shangpu/37811861685394x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1038,
+  "house_key": "FFFFFFFFF4958167!E130C8A8B1444DA5B0E8C4147B5D5B",
+  "url": "http://sjz.58.com/shangpu/38411351630624x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37678237282723x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1039,
+  "house_key": "FFFFFFFFF4958167!1FC5301804AF496F81D227F24CD7B4",
+  "url": "http://xa.58.com/shangpu/38411355489958x.shtml",
+  "old_url": "https://xa.58.com/shangpu/38010260237572x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1040,
+  "house_key": "FFFFFFFFF4958167!02721688DCD3414CBB3501F16794F3",
+  "url": "http://hrb.58.com/shangpu/38411360926610x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38067045016744x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1041,
+  "house_key": "FFFFFFFFF4958167!C74F93A164D4491A884C261257FBB3",
+  "url": "http://sy.58.com/shangpu/38411365599639x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38055634542093x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1042,
+  "house_key": "FFFFFFFFF4958167!C1452CB93E84483F828E80FA11322E",
+  "url": "http://sjz.58.com/shangpu/38411371171870x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37742664109725x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1043,
+  "house_key": "FFFFFFFFF4958167!E4A6EEA729A641269A3D5221C1A95F",
+  "url": "http://sh.58.com/shangpu/38411378852386x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37422464323586x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1044,
+  "house_key": "FFFFFFFFF4958167!CDA9292721754A8C9ECE72A354E4D9",
+  "url": "http://wh.58.com/shangpu/38411384655135x.shtml",
+  "old_url": "https://wh.58.com/shangpu/38030357223836x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1045,
+  "house_key": "FFFFFFFFF4958167!C1E276732BF5433EB9CC3B247B5143",
+  "url": "http://sjz.58.com/shangpu/38411400559141x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37668009769730x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1046,
+  "house_key": "FFFFFFFFF4958167!9A3FF1EC3B1E4D5A88D26DC6919119",
+  "url": "http://cq.58.com/shangpu/38411404829208x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38011780449161x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1047,
+  "house_key": "FFFFFFFFF4958167!A0FF9A37BAF3449EA601FCC0433FC8",
+  "url": "http://sh.58.com/shangpu/38411415826984x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37753467782435x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1048,
+  "house_key": "FFFFFFFFF4958167!39E6BD4804D14918AEF3535D45F017",
+  "url": "http://cd.58.com/shangpu/38411419317661x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37841868463748x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1049,
+  "house_key": "FFFFFFFFF4958167!56B9CDDA986C48C4ACEC6DD4B3DE48",
+  "url": "http://zz.58.com/shangpu/38411432269185x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38066531107078x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1050,
+  "house_key": "FFFFFFFFF4958167!B45D40933C4C44499A3BB65281EC21",
+  "url": "http://sy.58.com/shangpu/38411461154440x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37966877234327x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1051,
+  "house_key": "FFFFFFFFF4958167!06D0511D34734AA49BA19B44F76518",
+  "url": "http://sh.58.com/shangpu/38411476121372x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38066551809438x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1052,
+  "house_key": "FFFFFFFFF4958167!734B9789ACA440EE80D3F53F4B583E",
+  "url": "http://wh.58.com/shangpu/38411480701828x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37921701998365x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1053,
+  "house_key": "FFFFFFFFF4958167!E90E2848AEAF41D6A06EBD5BEB886F",
+  "url": "http://zz.58.com/shangpu/38411487407112x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37843777159704x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1054,
+  "house_key": "FFFFFFFFF4958167!AAE3087CB75C489E9AB6AF07456A83",
+  "url": "http://sh.58.com/shangpu/38411503874564x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37521487074447x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1055,
+  "house_key": "FFFFFFFFF4958167!28AD9FC616D94DE7842A5E32CC398A",
+  "url": "http://zz.58.com/shangpu/38411513185302x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38032410033806x.shtml",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1056,
+  "house_key": "141610",
+  "url": "http://sh.58.com/shangpu/38411516507395x.shtml",
+  "old_url": "https://sh.58.com/shangpu/37942073005478x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1057,
+  "house_key": "FFFFFFFFF4958167!5C3554700F644115B030CE980FA263",
+  "url": "http://zz.58.com/shangpu/38411524553000x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38020910336408x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1058,
+  "house_key": "FFFFFFFFF4958167!EB74DCA5A9D4479F9783FF1CC38AEE",
+  "url": "http://sjz.58.com/shangpu/38411531692447x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37777580163357x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1059,
+  "house_key": "FFFFFFFFF4958167!B28866A3A33D4B75B7D509E0B11863",
+  "url": "http://cq.58.com/shangpu/38411535525396x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38022110968474x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1060,
+  "house_key": "FFFFFFFFF4958167!1087F862E6E44185BE9755E0CD0A3F",
+  "url": "http://wh.58.com/shangpu/38411542141094x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37952395206425x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1061,
+  "house_key": "FFFFFFFFF4958167!DB8CC648D5E74F56A4FADA69732B4B",
+  "url": "http://hrb.58.com/shangpu/38411831869094x.shtml",
+  "old_url": "https://hrb.58.com/shangpu/38063258745761x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1062,
+  "house_key": "FFFFFFFFF4958167!9B6930E791964F9183BAA7F46016E8",
+  "url": "http://sjz.58.com/shangpu/38411838702465x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38009559493383x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1063,
+  "house_key": "FFFFFFFFF4958167!41019B4DDB70432DA10B26EF97AC82",
+  "url": "http://sy.58.com/shangpu/38411843150980x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38032889402790x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1064,
+  "house_key": "FFFFFFFFF4958167!452E2ECD58394BDF8FAD7CCBF59F86",
+  "url": "http://qd.58.com/shangpu/38411862670481x.shtml",
+  "old_url": "https://qd.58.com/shangpu/37655347090187x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1065,
+  "house_key": "FFFFFFFFF4958167!0E407DDBCFBB4D90AA8D13C171C9E4",
+  "url": "http://sjz.58.com/shangpu/38411868365459x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/38008059163523x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1066,
+  "house_key": "FFFFFFFFF4958167!5A29EB7EDE4F4012AA9708E7F81A06",
+  "url": "http://sy.58.com/shangpu/38411876659614x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37613030493590x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1067,
+  "house_key": "FFFFFFFFF4958167!4EE9502E273F483C8841172F984615",
+  "url": "http://zz.58.com/shangpu/38411883743503x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37943772949923x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1068,
+  "house_key": "FFFFFFFFF4958167!5981EE18E29243A7A449A20A131125",
+  "url": "http://sz.58.com/shangpu/38411892260634x.shtml",
+  "old_url": "https://sz.58.com/shangpu/38011140897669x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1069,
+  "house_key": "170527",
+  "url": "http://sh.58.com/shangpu/38411892415267x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38028271914780x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1070,
+  "house_key": "FFFFFFFFF4958167!0822E673CF414951A17CD14DBA9C0F",
+  "url": "http://cq.58.com/shangpu/38411900804107x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38063863640872x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1071,
+  "house_key": "FFFFFFFFF4958167!2CB6E52733AD4899965A6DFC6C47A6",
+  "url": "http://cq.58.com/shangpu/38411905097121x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38031962244133x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1072,
+  "house_key": "FFFFFFFFF4958167!C610EB4B349F4661BDF9CE870FF05F",
+  "url": "http://cq.58.com/shangpu/38411908011137x.shtml",
+  "old_url": "https://cq.58.com/shangpu/37598858697863x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1073,
+  "house_key": "FFFFFFFFF4958167!68F79F3EBD7F413D98E71A27D065B9",
+  "url": "http://zz.58.com/shangpu/38411914116739x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37966070850058x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1074,
+  "house_key": "FFFFFFFFF4958167!CADE4922FE1243AA9AF3CFB52C144F",
+  "url": "http://cq.58.com/shangpu/38411921345671x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38033258295058x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1075,
+  "house_key": "FFFFFFFFF4958167!B54E973BA9EA4EFDA36E620F30C364",
+  "url": "http://sjz.58.com/shangpu/38411928813480x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37920034701343x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1076,
+  "house_key": "FFFFFFFFF4958167!F2622EE48A9641538DAA6EE905DB42",
+  "url": "http://wh.58.com/shangpu/38411929850646x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37522790813461x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1077,
+  "house_key": "FFFFFFFFF4958167!24684D583BB742A4841199C16D2406",
+  "url": "http://zz.58.com/shangpu/38411933518594x.shtml",
+  "old_url": "https://zz.58.com/shangpu/37899605580681x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1078,
+  "house_key": "FFFFFFFFF4958167!D82775A8ED1D4C2FA522CDE8045A57",
+  "url": "http://cd.58.com/shangpu/38411941745695x.shtml",
+  "old_url": "https://cd.58.com/shangpu/37952437170049x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1079,
+  "house_key": "FFFFFFFFF4958167!E4B47A0505BE4B3EB8A7D6A7E6ADFC",
+  "url": "http://sjz.58.com/shangpu/38411947540875x.shtml",
+  "old_url": "https://sjz.58.com/shangpu/37612906328351x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1080,
+  "house_key": "FFFFFFFFF4958167!79199ADE57CA4537AEB7E2E66FF3A6",
+  "url": "http://zz.58.com/shangpu/38411949607056x.shtml",
+  "old_url": "https://zz.58.com/shangpu/38009254634504x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1081,
+  "house_key": "172908",
+  "url": "http://sh.58.com/shangpu/38411957490975x.shtml",
+  "old_url": "https://sh.58.com/shangpu/38065790525210x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1082,
+  "house_key": "FFFFFFFFF4958167!72CD492CE85E441A8734C7D53C4141",
+  "url": "http://sy.58.com/shangpu/38411959323813x.shtml",
+  "old_url": "https://sy.58.com/shangpu/38032710987148x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1083,
+  "house_key": "FFFFFFFFF4958167!4467088C254D47D289FBE946F09044",
+  "url": "http://sz.58.com/shangpu/38411968855455x.shtml",
+  "old_url": "https://sz.58.com/shangpu/38051905939863x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1084,
+  "house_key": "FFFFFFFFF4958167!61C1703C497A4A8BBD795A6E548511",
+  "url": "http://sy.58.com/shangpu/38411973690529x.shtml",
+  "old_url": "https://sy.58.com/shangpu/37965911147398x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1085,
+  "house_key": "FFFFFFFFF4958167!62DF64A24FE24ED2A00DB3EB458CFD",
+  "url": "http://wh.58.com/shangpu/38411978238730x.shtml",
+  "old_url": "https://wh.58.com/shangpu/37590010331545x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}, {
+  "id": 1086,
+  "house_key": "FFFFFFFFF4958167!31705702C2A34C13B69006311E16AE",
+  "url": "http://cq.58.com/shangpu/38411984701860x.shtml",
+  "old_url": "https://cq.58.com/shangpu/38020781644071x.shtml?",
+  "create_date": "2019-06-08T16:00:00.000Z"
+}]
+
+var index = 0;
+// updateHouseInfo('FFFFFFFFF4958167!115C4F0D8CAD41C6876D957C3E0BFC', 3503, 'https://sjz.58.com/shangpu/38054053110436x.shtml')
+function updateHouseInfo(key, status, houseUrl) {
+  index = index + 1
+  console.log('key:' + key);
+  console.log('status:' + status);
+  console.log('houseUrl:' + houseUrl);
+  let url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
+  let data = {
+    transfer_store_id: key
+  }
+  if (key.length > 20) {
+    url = `https://api.dianzhijia.com/api/open/changebjspgeneralizestatus`
+    data = {
+      pid: key
+    }
+  }
+  data.status = status;
+  if (houseUrl) {
+    data.wbUrl = houseUrl;
+    data.gjUrl = houseUrl.replace('58.com/shangpu/', 'ganji.com/wbdetail/shangpu/')
+  }
+
+  $.ajax({
+    url,
+    type: 'post',
+    headers: {
+      Accept: `application/vnd.dpexpo.v1+json`
+    },
+    data,
+    success: function (res) {
+      if (res && res.data) {
+        //更新成功
+        console.log('更新成功');
+      } else {
+        //更新失败
+        console.log('更新失败');
+      }
+      // setTimeout(() => {
+      //   var item = houseData[index]
+      //   updateHouseInfo(item.house_key, 3510, item.url)
+      // }, 200)
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  })
+}
+var item = houseData[index]
+updateHouseInfo(item.house_key, 3001)
