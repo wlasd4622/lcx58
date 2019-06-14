@@ -149,7 +149,7 @@ Function editHouseInfo(houseId)
     Do
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
-    length = find("$('.house-title h1').length", "查找登录窗口")
+    length = find("$('.house-title h1').length", "查找详情页标题")
     Call loadScript("58")
     Delay 100
     hosueDetailCode=""
@@ -591,7 +591,7 @@ End Function
 Function loadScript(name)
     Rem fLoadScript
     Call execjs("window.getHouseDetail=null;")
-    Call execjs("var script=document.createElement('script');script.type='text/javascript';script.async = true;script.defer = true;script.src='//wlasd4622.github.io/lcx58/common/58.js?v='+Date.now();document.getElementsByTagName('head')[0].appendChild(script); ")
+    Call execjs("var script=document.createElement('script');script.type='text/javascript';script.async = true;script.defer = true;script.src='https://wlasd4622.github.io/lcx58/common/58.js?v='+Date.now();document.getElementsByTagName('head')[0].appendChild(script); ")
     count=0
     Do
         Delay 100
@@ -617,12 +617,13 @@ Function addHouseInfo(houseId)
     addStatus=3511
     //获取详情
     url = "https://sy.58.com/shangpu/" + houseId + "x.shtml"
+    TracePrint url
     Call Plugin.chrome.load(id, url)
     // 等待载入完成
     Do
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
-    length = find("$('.house-title h1').length", "查找登录窗口")
+    length = find("$('.house-title h1').length", "查找详情页标题")
     Call loadScript("58")
     Delay 100
     hosueDetailCode=""
