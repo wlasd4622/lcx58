@@ -139,6 +139,7 @@ Function refresh(houseId)
     refresh=rHouseStatus
 End Function
 Function editHouseInfo(houseId)
+    editCount=0
     Rem rEditHouseInfo
     editStatus=3507
     //获取详情
@@ -255,6 +256,9 @@ Function editHouseInfo(houseId)
         Delay 2500
         Delay 2500
         length = execjs("$('.tip:contains(详细地址不能为空):visible').length||0")
+        If length = "" Then
+        	length=0
+        End If
         If cint(length) > 0 Then
             editStatus = 3507
             Goto rBreak
@@ -270,12 +274,18 @@ Function editHouseInfo(houseId)
             editStatus=3505
         Else
             TracePrint "重新编辑提交异常"
-            Goto rEditHouseInfo
+            editCount = editCount + 1
+            If editCount > 3 Then
+                editStatus=3507
+            Else
+                Goto rEditHouseInfo
+            End If
         End If
     Else
         Goto fEditDetailPage
     End If
     Rem rBreak
+    //MessageBox editStatus
     editHouseInfo=editStatus
 End Function
 Function houseList()
@@ -832,7 +842,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='15000656246' ORDER BY RAND( ) LIMIT 1"
+    //sql = "SELECT * FROM house_list WHERE `username`='17732826525' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
