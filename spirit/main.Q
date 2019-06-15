@@ -54,7 +54,13 @@ End Function
 Function main()
     Call mySqlConnect()
     Rem fLogin
-    newUrl=""
+    newUrl = ""
+    isSleep = sleep()
+    If isSleep = - 1  Then 
+        TracePrint "休眠中..."
+        Delay 60000
+        Goto fLogin
+    End If
     Call start()
     status = login()
     If status = 0 Then
@@ -62,6 +68,18 @@ Function main()
     End If
     call updateStatus(user,status)
     Goto fLogin
+End Function
+//休眠-1
+//非休眠 0
+Function sleep()
+    status=true
+    currHour = Hour(now)
+    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<20) Then 
+        status=false
+    Else  
+        status=true
+    End If
+    sleep=cint(status)
 End Function
 Function loadJquery()
     Rem fLoadJquery
@@ -627,9 +645,9 @@ Function addHouseInfo(houseId)
     length = find("$('.house-title h1').length", "查找详情页标题")
     errorPage = execjs("location.href.includes('404.htm')?1:0")
     If cint(errorPage) = 1 Then 
-    	//404
-    	addStatus=3404
-    	Goto rBreak
+        //404
+        addStatus=3404
+        Goto rBreak
     End If
     Call loadScript("58")
     Delay 100
@@ -880,7 +898,10 @@ Function getUser()
         houseInfo = Array(houseId)
         userInfo=Array(userName, password,houseListId,key,url,cookie)
         getUser =userInfo
-    Else
+    Else 
+        sql = "commit"
+        TracePrint sql
+        Call Plugin.Super_MySQL.mysql_query(mysql, sql)
         //getUser=Array("-1")
         TracePrint "没有获取到数据"
         Delay 5000
