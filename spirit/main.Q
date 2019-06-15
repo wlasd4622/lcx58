@@ -154,7 +154,8 @@ Function editHouseInfo(houseId)
     Delay 100
     hosueDetailCode=""
     hosueDetailCode = execjs("getHouseDetail();")
-    If hosueDetailCode = "" Then
+    If hosueDetailCode = "" Then 
+        MessageBox "未处理异常1146"
         Goto rEditHouseInfo
     End If
     Call execjs("var editData={};"&_
@@ -257,7 +258,7 @@ Function editHouseInfo(houseId)
         Delay 2500
         length = execjs("$('.tip:contains(详细地址不能为空):visible').length||0")
         If length = "" Then
-        	length=0
+            length=0
         End If
         If cint(length) > 0 Then
             editStatus = 3507
