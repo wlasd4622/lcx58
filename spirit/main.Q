@@ -625,6 +625,12 @@ Function addHouseInfo(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找详情页标题")
+    errorPage = execjs("location.href.includes('404.htm')?1:0")
+    If cint(errorPage) = 1 Then 
+    	//404
+    	addStatus=3404
+    	Goto rBreak
+    End If
     Call loadScript("58")
     Delay 100
     hosueDetailCode=""
