@@ -169,11 +169,11 @@ Function editHouseInfo(houseId)
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找详情页标题")
     Call loadScript("58")
-    Delay 100
+    Delay 1000
     hosueDetailCode=""
     hosueDetailCode = execjs("getHouseDetail();")
     If hosueDetailCode = "" Then 
-        MessageBox "未处理异常1146"
+        TracePrint "未处理异常1146"
         Goto rEditHouseInfo
     End If
     Call execjs("var editData={};"&_
