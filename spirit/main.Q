@@ -56,7 +56,7 @@ Function main()
     Rem fLogin
     newUrl = ""
     isSleep = sleep()
-    If isSleep = - 1  Then 
+    If isSleep = - 1  Then
         TracePrint "休眠中..."
         Delay 60000
         Goto fLogin
@@ -74,9 +74,9 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<20) Then 
+    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<20) Then
         status=false
-    Else  
+    Else
         status=true
     End If
     sleep=cint(status)
@@ -172,7 +172,7 @@ Function editHouseInfo(houseId)
     Delay 1000
     hosueDetailCode=""
     hosueDetailCode = execjs("getHouseDetail();")
-    If hosueDetailCode = "" Then 
+    If hosueDetailCode = "" Then
         TracePrint "未处理异常1146"
         Goto rEditHouseInfo
     End If
@@ -182,7 +182,7 @@ Function editHouseInfo(houseId)
 				"editData.zuJInUnit=$('span.house_basic_title_money_num').length?$('span.house_basic_title_money_num').next().text():'';"&_
 				"editData.zuJIn=$('span.house_basic_title_money_num').text();"&_
 				"editData.status=$($('.house_basic_title_content').html().replace(/[\n\t]/g,'').replace(/\&nbsp\;/g,'')).find('span:contains(状态)').next().text().trim();"&_
-				"editData.title=$('.house-title h1').text().trim().substr(0,30);"&_
+				"editData.title=$('.house-title h1').text().replace(/\(转让\)/g,'').replace(/\(出租\)/g,'').replace(/\(出售\)/g,'').trim().substr(0,30);"&_
 				"editData.zrf=$('span.house_basic_title_money_zrf').length?$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[1]:'';"&_
 				"editData.zrfUnit=$('span.house_basic_title_money_zrf').length?$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[2]:'';")
     editData = execjs("JSON.stringify(editData)")
@@ -442,6 +442,7 @@ Function execjs(str)
     execjs=result
 End Function
 Function login()
+    messages=""
     Call clearAllCookie()
     user = getUser()
     cookie = user(5)
@@ -473,6 +474,7 @@ Function login()
             result = execjs("$('.password_msg.msg:visible').text().trim()||$('.validcode_msgtext:visible').text().trim()")
             If result <>"" Then
                 TracePrint result
+                messages=execjs("encodeURIComponent('"+result+"');")
                 If result="该用户名与密码不符" Then
                     loginStatus = 4000
                     TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
@@ -482,11 +484,11 @@ Function login()
                     TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
                     Goto fBreakDo
                 ElseIf result = "请输入图片验证码" Then
-                    loginStatus =4004
+                    loginStatus = 4004
                     TracePrint result
                     Goto fBreakDo
                 Else
-                    loginStatus =4004
+                    loginStatus = 4004
                     TracePrint "登录，未处理异常"
                     Goto fBreakDo
                 End If
@@ -497,7 +499,8 @@ Function login()
             End If
             TracePrint result1
             If CInt(result1) = 1 Then
-                loginStatus =4004
+                loginStatus = 4004
+                messages=execjs("encodeURIComponent('您的账户存在安全风险');")
                 TracePrint "您的账户存在安全风险"
                 Goto fBreakDo
             End If
@@ -567,7 +570,13 @@ Function updateStatus(userInfo, status)
         TracePrint sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
-        call Plugin.Super_MySQL.num_rows(store)
+        Call Plugin.Super_MySQL.num_rows(store)
+        //update messages
+        sql = "UPDATE log SET `messages`='" + cstr(messages) + "' WHERE id=" + maxId
+        TracePrint sql
+        Call Plugin.Super_MySQL.mysql_query(mysql, sql)
+        store = Plugin.Super_MySQL.store_result(mysql)
+        Call Plugin.Super_MySQL.num_rows(store)
         //update create_date
         sql = "UPDATE log SET `create_date`=now() WHERE id=" + maxId
         TracePrint sql
@@ -644,7 +653,7 @@ Function addHouseInfo(houseId)
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找详情页标题")
     errorPage = execjs("location.href.includes('404.htm')?1:0")
-    If cint(errorPage) = 1 Then 
+    If cint(errorPage) = 1 Then
         //404
         addStatus=3404
         Goto rBreak
@@ -868,7 +877,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='17732826525' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='13473995709' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -898,7 +907,7 @@ Function getUser()
         houseInfo = Array(houseId)
         userInfo=Array(userName, password,houseListId,key,url,cookie)
         getUser =userInfo
-    Else 
+    Else
         sql = "commit"
         TracePrint sql
         Call Plugin.Super_MySQL.mysql_query(mysql, sql)
