@@ -133,7 +133,7 @@ function getHouseDetail() {
 }
 
 function getTitle() {
-    let title = houseDetailData.title.replace(/\(.*?\)/, '').trim();
+  let title = houseDetailData.title.replace(/\(转让\)/g, '').replace(/\(出租\)/g, '').replace(/\(出售\)/g, '').trim();
     if (title.length < 10) {
         title = houseDetailData.address3 + ' ' + title
     }
