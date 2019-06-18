@@ -108,6 +108,7 @@ class GanJi {
     return cookie
   }
 
+
   async task1(user) {
     console.log(`>>>task1`);
     await this.runPuppeteer();
@@ -209,15 +210,38 @@ class GanJi {
     }
   }
 
+
+  async clearTable() {
+    let sql = `delete FROM gj_push;`
+    try {
+      await this.execSql(sql)
+    } catch (err) {
+      console.error(err)
+    }
+    sql = `delete FROM gj_service;`
+    try {
+      await this.execSql(sql)
+    } catch (err) {
+      console.error(err)
+    }
+    sql = `delete FROM gj_extension;`
+    try {
+      await this.execSql(sql)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   async eachUser() {
     console.log(`>>>eachUser`);
     let list = ['W15810915325'];
+    await this.clearTable()
     await this.getUserList()
     if (this.userList.length) {
       for (let index = 0; index < this.userList.length; index++) {
         const user = this.userList[index];
         // if (user.session && list.includes(user.username)) {
-        if (user.session) {
+          if (user.session) {
           try {
             await this.task1(user);
           } catch (err) {
