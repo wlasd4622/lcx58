@@ -442,6 +442,7 @@ Function execjs(str)
     execjs=result
 End Function
 Function login()
+    loginCount=0
     messages=""
     Call clearAllCookie()
     user = getUser()
@@ -515,6 +516,10 @@ Function login()
         End If
         Rem fBreakDo
     Else
+        Goto fLoadLogin
+    End If
+    If loginStatus=4000 and loginCount < 4 Then 
+        loginCount=loginCount+1
         Goto fLoadLogin
     End If
     login=loginStatus
@@ -877,7 +882,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='13473995709' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='18602431993' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
