@@ -168,6 +168,17 @@ Function editHouseInfo(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找详情页标题")
+    If length = "" Then
+        length=0
+    End If
+    If cint(length) = 0 Then
+        //页面异常
+        length = execjs("$('h1:visible:contains(您访问的页面居然不存在)').length")
+        If cint(length) > 0 Then
+            editStatus = 3507
+            Goto rBreak
+        End If
+    End If
     Call loadScript("58")
     Delay 1000
     hosueDetailCode=""
@@ -518,7 +529,7 @@ Function login()
     Else
         Goto fLoadLogin
     End If
-    If loginStatus=4000 and loginCount < 4 Then 
+    If loginStatus=4000 and loginCount < 4 Then
         loginCount=loginCount+1
         Goto fLoadLogin
     End If
