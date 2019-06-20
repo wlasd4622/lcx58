@@ -215,8 +215,8 @@ function addHouseInfoData(code, userName) {
     });
     //商铺位置
     $('[name=localArea01] .optiondef li:contains(' + houseDetailData.address1.replace('区', '') + ')').click();
-    if (!houseDetailData.address2 && $('[name=localDiduan01] .title .seled').length == 1) {
-      houseDetailData.address2 = $('[name=localDiduan01] .title .seled:eq(0)').text().trim()
+    if (!houseDetailData.address2 && $('[name=localDiduan01] .optiondef li').length == 2) {
+      houseDetailData.address2 = $('[name=localDiduan01] .title .seled:eq(1)').text().trim()
     } else if(!houseDetailData.address2) {
       alert('待处理异常5685')
     }
