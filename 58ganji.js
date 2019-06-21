@@ -1,8 +1,11 @@
 let puppeteer = require('puppeteer');
 let schedule = require('node-schedule');
 var mysql = require('mysql');
+let fs = require('fs')
+const moment = require('moment');
 class GanJi {
   constructor() {
+    this.log('>>>constructor');
     this.userList = [];
     this.page = null;
     this.browser = null;
@@ -14,42 +17,64 @@ class GanJi {
       database: 'datarefresh',
       useConnectionPooling: true,
     }
+    this.pool = mysql.createPool(this.dbConfig);
+  }
+  log(T) {
+    let info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
+    if (info.length > 200) {
+      info = info.substr(0, 200) + '...'
+    }
+    info=moment().format('YYYY-MM-DD HH:mm:ss')+' '+info
+    console.log(info);
+    fs.appendFileSync('./debug.log', info+'\n')
   }
 
-  handleDisconnect() {
-    console.log(`>>>handleDisconnect`);
+  getConnection() {
+    this.log(`>>>getConnection`);
     return new Promise((resolve, reject) => {
-      this.connection = mysql.createConnection(this.dbConfig);
-      this.connection.connect(async function (err) {
+      this.pool.getConnection(function (err, connection) {
         if (err) {
-          console.log('error when connecting to db:', err);
-          reject()
+          this.log(err);
+          reject(err)
         } else {
-          resolve();
+          resolve(connection)
         }
       });
-      this.connection.on('error', function (err) {
-        console.log('db error', err);
-        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-          reject()
-        } else {
-          throw err;
-        }
-      });
+      // this.pool = mysql.createPool(this.dbConfig);
+      // this.connection = mysql.createConnection(this.dbConfig);
+      // this.connection.connect(async function (err) {
+      //   if (err) {
+      //     this.log('error when connecting to db:', err);
+      //     reject()
+      //   } else {
+      //     resolve();
+      //   }
+      // });
+      // this.connection.on('error', function (err) {
+      //   this.log('db error', err);
+      //   if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      //     reject()
+      //   } else {
+      //     throw err;
+      //   }
+      // });
     })
   }
 
-  execSql(sql) {
-    console.log(sql);
+  async execSql(sql) {
+    this.log('>>>execSql');
+    this.log(sql);
+    let connection = await this.getConnection()
     return new Promise((resolve, reject) => {
       try {
-        this.connection.query(sql, function (err, value) {
+        connection.query(sql, function (err, value) {
           if (err) {
             reject(err)
           } else {
             resolve(value)
           }
         })
+        connection.release();
       } catch (err) {
         reject(err)
       }
@@ -57,11 +82,11 @@ class GanJi {
   }
 
   async runPuppeteer() {
-    console.log(`>>>runPuppeteer`);
+    this.log(`>>>runPuppeteer`);
     try {
       this.close()
     } catch (err) {
-      console.log(err);
+      this.log(err);
     }
     this.browser = await puppeteer.launch({
       headless: true,
@@ -82,11 +107,12 @@ class GanJi {
     })
   }
   async close() {
+    this.log('>>>close');
     if (this.browser) await this.browser.close()
   }
 
   async setCookie(cookies_str = "", domain, page) {
-    console.log(`>>>setCookie`);
+    this.log(`>>>setCookie`);
     let cookies = cookies_str.split(';').map(pair => {
       let name = pair.trim().slice(0, pair.trim().indexOf('='))
       let value = pair.trim().slice(pair.trim().indexOf('=') + 1)
@@ -101,7 +127,7 @@ class GanJi {
     }));
   }
   async getCookie() {
-    console.log(`>>>getCookie`);
+    this.log(`>>>getCookie`);
     let cookie = await this.page.evaluate(() => {
       return document.cookie
     })
@@ -110,7 +136,7 @@ class GanJi {
 
 
   async task1(user) {
-    console.log(`>>>task1`);
+    this.log(`>>>task1`);
     await this.runPuppeteer();
     let url = `http://vip.58ganji.com/user/brokerhomeV2`
     url = `http://vip.58ganji.com/broker/balancedetail/generalize`
@@ -157,7 +183,7 @@ class GanJi {
     await this.close()
   }
   async updateUser(user, blanceHbg58, cookie, nickName, status = 0) {
-    console.log(`>>>updateUser`);
+    this.log(`>>>updateUser`);
     if (user && user.id) {
       cookie = encodeURIComponent(cookie)
       let sql = "update `gj_user` set `status`=" + status + ", `nickName`='" + nickName + "',`account`=" + (blanceHbg58.replace(/\,/g, '') || 0) + ",`session`='" + cookie + "',`update_time`=NOW() where id=" + user.id
@@ -171,13 +197,13 @@ class GanJi {
       }
     } else {
       console.error('未处理异常')
-      console.log(nickName);
-      console.log(JSON.stringify(user));
+      this.log(nickName);
+      this.log(JSON.stringify(user));
     }
 
   }
   async getUserList() {
-    console.log(`>>>getUserList`);
+    this.log(`>>>getUserList`);
     await this.sleep()
     this.userList = [];
     let result = await this.execSql("select * from `gj_user`")
@@ -192,12 +218,13 @@ class GanJi {
         }
         return user0.update_time.getTime() - user1.update_time.getTime()
       })
-      console.log(this.userList);
+      this.log(this.userList);
     } else {
       throw "获取用户信息异常"
     }
   }
   async login(user) {
+    this.log('>>>login');
     let loginName = await this.page.$('#loginName')
     if (loginName) {
       await this.page.click('span.login-switch.bar-code.iconfont')
@@ -206,12 +233,13 @@ class GanJi {
       await this.page.type('#loginPwd', user.password)
       await this.sleep(1000);
       await this.page.click('#loginSubmit')
-      console.log(666);
+      this.log(666);
     }
   }
 
 
   async clearTable() {
+    this.log('>>>clearTable');
     let sql = `delete FROM gj_push;`
     try {
       await this.execSql(sql)
@@ -233,7 +261,7 @@ class GanJi {
   }
 
   async eachUser() {
-    console.log(`>>>eachUser`);
+    this.log(`>>>eachUser`);
     let list = ['W15810915325'];
     await this.clearTable()
     await this.getUserList()
@@ -241,11 +269,11 @@ class GanJi {
       for (let index = 0; index < this.userList.length; index++) {
         const user = this.userList[index];
         // if (user.session && list.includes(user.username)) {
-          if (user.session) {
+        if (user.session) {
           try {
             await this.task1(user);
           } catch (err) {
-            console.log(JSON.stringify(user));
+            this.log(JSON.stringify(user));
             console.error(err)
             //user, blanceHbg58, cookie, nickName
             // await this.login(user);
@@ -258,34 +286,29 @@ class GanJi {
     }
   }
   async mainTask() {
-    console.log(`>>>mainTask`);
-    try {
-      await this.handleDisconnect()
-    } catch (err) {
-      await this.mainTask()
-      return false;
-    }
+    this.log(`>>>mainTask`);
     try {
       await this.eachUser();
     } catch (err) {
-      console.log(err);
+      this.log(err);
       await this.sleep(10000)
       await this.mainTask()
     }
   }
   async main() {
-    console.log(`>>>main`);
+    this.log(`>>>main`);
     let that = this;
     await that.mainTask()
-    console.log("-Start-");
+    this.log("-Start-");
     schedule.scheduleJob('30 1 * * * *', async function () {
-      console.log('scheduleCronstyle:' + new Date());
+      that.log('scheduleCronstyle:' + new Date());
       await that.mainTask()
-      console.log("-END-");
+      that.log("-END-");
     });
   }
 
   async getUserInfo() {
+    this.log('>>>getUserInfo');
     let url = `http://vip.58ganji.com/broker/brokerinfo`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -299,14 +322,14 @@ class GanJi {
 
   //服务中及预约中的套餐开通及到期时间
   async myService(user) {
-    console.log(`>>>myService`);
+    this.log(`>>>myService`);
     let url = "http://vip.58ganji.com/thirdredirect/?logintype=wuba&dialog=1/&redirecturl=http://vip.58.com/app/fuwu#/app/wltdingdan/"
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('#ContainerFrame')
     url = await this.page.$eval('#ContainerFrame', ele => ele.src)
-    console.log(url);
+    this.log(url);
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
@@ -349,7 +372,7 @@ class GanJi {
   }
   //推送中，在线购买，还可推送，今日推送到期数量
   async yxtgsp58(user) {
-    console.log(`>>>yxtgsp58`);
+    this.log(`>>>yxtgsp58`);
     let url = `http://vip.58ganji.com/jp58/yxtgsp58`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
@@ -384,14 +407,14 @@ class GanJi {
 
   // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
   async myperiod(user) {
-    console.log(`>>>myperiod`);
+    this.log(`>>>myperiod`);
     let url = `https://my.58.com/pro/tuiguangbi/myperiod/`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('#ContainerFrame')
     url = await this.page.$eval('#ContainerFrame', ele => ele.src)
-    console.log(url);
+    this.log(url);
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
@@ -415,7 +438,7 @@ class GanJi {
       }
       return format()
     })
-    console.log(JSON.stringify(data))
+    this.log(JSON.stringify(data))
     if (data && data.length) {
       for (let index = 0; index < data.length; index++) {
         const element = data[index];
