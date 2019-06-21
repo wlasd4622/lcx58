@@ -110,7 +110,7 @@ Function refresh(houseId)
     rHouseStatus=-456
     If length > 0 Then
         execjs ("$('a[href$=immediate]')[0].click()")
-        Delay 500
+        Delay 1500
         Call execjs("var wContent=$('form.form-container.immediate').text().trim().replace(/[\n\s]/g,'')||$('form.yyset').text().trim().replace(/[\s\n]/g,'');")
         Call execjs("function getStatus() {"&_
     					"if (wContent.indexOf('近7天免费刷新已到上限') > -1||wContent.indexOf('帖子浏览量大于') > -1) {"&_
@@ -123,7 +123,7 @@ Function refresh(houseId)
         					"return -793"&_
     					"}"&_
 					"}")
-        rHouseStatus=execjs("getStatus();")
+        rHouseStatus = execjs("getStatus();")
         If rHouseStatus = "" Then
             rHouseStatus=-7642
         End If
@@ -893,7 +893,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='18602431993' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='15310911572' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
