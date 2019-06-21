@@ -14,3 +14,4 @@ yarn-error.log*
 *.sln
 bjhyty.sql
 dianzhijia.sql
+debug.log
