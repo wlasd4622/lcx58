@@ -187,9 +187,7 @@ function addHouseInfoData(code, userName) {
         $('[name=mianJi] input').val(houseDetailData.area);
         //楼层
         $('[name=zongLouCeng] input').val(houseDetailData.totalFloot)
-        if (houseDetailData.curFloor == 0) {
-            houseDetailData.curFloor = 1
-        }
+
         if (houseDetailData.curFloor.replace(/^-/, '').includes('-') && houseDetailData.curFloor.replace(/^-/, '').split('-')[1] > houseDetailData.curFloor.replace(/^-/, '').split('-')[0]) {
             //多层
             $('[name=params_109] .optiondef li:contains(多层)').click()
