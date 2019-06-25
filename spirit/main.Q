@@ -568,7 +568,8 @@ Function updateStatus(userInfo, status)
         If maxId = "" Then
             maxId=1
         End If
-        maxId = cstr(cint(maxId)+1)
+        maxId = cstr(clng(maxId) + 1)
+
         //insert id
         sql = "INSERT into log (id) value(" + maxId + ")"
         TracePrint sql
@@ -893,7 +894,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='15310911572' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='13418845040' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     TracePrint sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
