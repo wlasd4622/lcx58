@@ -57,7 +57,7 @@ Function main()
     newUrl = ""
     isSleep = sleep()
     If isSleep = - 1  Then
-        TracePrint "休眠中..."
+        log "休眠中..."
         Delay 60000
         Goto fLogin
     End If
@@ -74,7 +74,7 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<20) Then
+    If (currHour >= 0 and currHour<3) or (currHour >= 8 and currHour<20) Then
         status=false
     Else
         status=true
@@ -93,7 +93,7 @@ Function loadJquery()
         count=count+1
     Loop While flag and count < 10 * 5
     If flag Then
-        TracePrint "jquery加载失败！重试中..."
+        log "jquery加载失败！重试中..."
         Goto fLoadJquery
     End If
 End Function
@@ -184,7 +184,7 @@ Function editHouseInfo(houseId)
     hosueDetailCode=""
     hosueDetailCode = execjs("getHouseDetail();")
     If hosueDetailCode = "" Then
-        TracePrint "未处理异常1146"
+        log "未处理异常1146"
         Goto rEditHouseInfo
     End If
     Call execjs("var editData={};"&_
@@ -197,7 +197,7 @@ Function editHouseInfo(houseId)
 				"editData.zrf=$('span.house_basic_title_money_zrf').length?$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[1]:'';"&_
 				"editData.zrfUnit=$('span.house_basic_title_money_zrf').length?$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[2]:'';")
     editData = execjs("JSON.stringify(editData)")
-    TracePrint editData
+    log editData
     length = find("editData&&editData.title?editData.title.length:0","获取title长度")
     If length = "" Then
         length=0
@@ -217,12 +217,12 @@ Function editHouseInfo(houseId)
     Delay 1000
     Call execjs("$('#update" + houseId + "').click();")
     url = "http://post.58.com/fang/update/" + cstr(houseId) + "?PGTID=${window.getGTID()}&ClickID=2"
-    TracePrint url
+    log url
     Call Plugin.chrome.exec_js(id,"$(function(){window.location.href=`"+url+"`})")
     Delay 3000
     length = find("$('#postForm div').length", "获取form下面的div个数，以证明页面渲染完成")
     If length > 0 Then
-        TracePrint "var editData="&editData&";"
+        log "var editData="&editData&";"
         Call execjs("var editData=" & editData & ";")
         Call execjs("$('[name=title] input').val(editData['title']);"&_
 					"$('[name=params_205] label:contains(' + editData['status'] + ')').parent().click();"&_
@@ -241,7 +241,7 @@ Function editHouseInfo(houseId)
 							"$('[name=params_109] li:eq(1)').click();"&_
 						"}"&_
         			"}"
-        TracePrint js
+        log js
         Call execjs(js)
         Call execjs("changeStatus()")
         Call execjs("window.houseDetailData = JSON.parse(decodeURIComponent(`"+hosueDetailCode+"`));")
@@ -303,7 +303,7 @@ Function editHouseInfo(houseId)
             //MessageBox "发布成功"
             editStatus=3505
         Else
-            TracePrint "重新编辑提交异常"
+            log "重新编辑提交异常"
             editCount = editCount + 1
             If editCount > 3 Then
                 editStatus=3507
@@ -320,7 +320,7 @@ Function editHouseInfo(houseId)
 End Function
 Function houseList()
     Rem fHouseList
-    TracePrint "func:houseList"
+    log "func:houseList"
     //订单列表
     houseStatus=-44
     url = "https://fangmypost.58.com/fang/infoall/notabs"
@@ -332,7 +332,7 @@ Function houseList()
     length = find("$('body .rightside-publish-content .my-item-item').length","个人中心房产列表")
     If length > 0 Then
         houseId = houseInfo(0)
-        TracePrint "houseId:"+houseId
+        log "houseId:"+houseId
         length = find("$('.my-item-item-header-code:contains(" + houseId + ")').length", "查找是否存在指定房屋id的信息")
         If length > 0 Then
             Call execjs("var houseItem=$('.my-item-item-header-code:contains(" + houseId + ")').parents('.my-item-item-tb:eq(0)')")
@@ -353,7 +353,7 @@ Function houseList()
                 houseStatus = 4001
             ElseIf state = - 1  Then
                 houseStatus=3502
-                TracePrint "未处理异常4564"
+                log "未处理异常4564"
                 Goto fHouseList
             Else
                 Call execjs("var statusContent=houseItem.find('.my-item-item-tb-content-states').text().trim().replace(/\n/g,'').replace(/\s/g,'').substr(0,20)")
@@ -391,24 +391,24 @@ Function houseList()
             End If
         Else
             houseStatus=3504
-            TracePrint "未查找到此条记录"
+            log "未查找到此条记录"
         End If
     Else
         houseStatus=-1
         length = execjs("$('div.tip-none:contains(您还没有发布信息):visible').length||0")
         If cint(length) > 0 Then
-            TracePrint "订单不存在"
+            log "订单不存在"
             houseStatus = 3504
         Else
-            TracePrint "个人中心房产列表获取失败"
+            log "个人中心房产列表获取失败"
             Goto fHouseList
         End If
     End If
     houseList=houseStatus
 End Function
 Function find(str,c)
-    TracePrint "find   "+c
-    TracePrint str
+    log "find   "+c
+    log str
     count = 0
     length=0
     Do
@@ -419,13 +419,13 @@ Function find(str,c)
         End If
         length = CInt(length)
         count = count + 1
-        TracePrint count
+        log count
     Loop While length = 0 and count < 100
     find=length
 End Function
 Function findp2(str,c,pageId)
-    TracePrint "find   "+c
-    TracePrint str
+    log "find   "+c
+    log str
     count = 0
     length=0
     Do
@@ -436,20 +436,20 @@ Function findp2(str,c,pageId)
         End If
         length = CInt(length)
         count = count + 1
-        TracePrint count
+        log count
     Loop While length = 0 and count < 200
     findp2=length
 End Function
 Function execjsp2(str,pageid)
-    TracePrint "execjs: "& str
+    log "execjs: "& str
     result = Plugin.chrome.exec_js(pageid, str)
-    TracePrint "result:"&result
+    log "result:"&result
     execjsp2=result
 End Function
 Function execjs(str)
-    TracePrint "execjs: "& str
+    log "execjs: "& str
     result = Plugin.chrome.exec_js(id, str)
-    TracePrint "result:"&result
+    log "result:"&result
     execjs=result
 End Function
 Function login()
@@ -485,23 +485,23 @@ Function login()
             Delay 500
             result = execjs("$('.password_msg.msg:visible').text().trim()||$('.validcode_msgtext:visible').text().trim()")
             If result <>"" Then
-                TracePrint result
+                log result
                 messages=execjs("encodeURIComponent('"+result+"');")
                 If result="该用户名与密码不符" Then
                     loginStatus = 4000
-                    TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
+                    log Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
                     Goto fBreakDo
                 ElseIf result = "该用户不存在" Then
                     loginStatus = 4003
-                    TracePrint Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
+                    log Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
                     Goto fBreakDo
                 ElseIf result = "请输入图片验证码" Then
                     loginStatus = 4004
-                    TracePrint result
+                    log result
                     Goto fBreakDo
                 Else
                     loginStatus = 4004
-                    TracePrint "登录，未处理异常"
+                    log "登录，未处理异常"
                     Goto fBreakDo
                 End If
             End If
@@ -509,15 +509,15 @@ Function login()
             If result1 = "" Then
                 result1=0
             End If
-            TracePrint result1
+            log result1
             If CInt(result1) = 1 Then
                 loginStatus = 4004
                 messages=execjs("encodeURIComponent('您的账户存在安全风险');")
-                TracePrint "您的账户存在安全风险"
+                log "您的账户存在安全风险"
                 Goto fBreakDo
             End If
             url = Plugin.chrome.get_url(id)
-            TracePrint url
+            log url
             count=count+1
         Loop While InStr(url, "my.58.com/index") = 0 and count < 20
         url = Plugin.chrome.get_url(id)
@@ -555,11 +555,11 @@ Function updateStatus(userInfo, status)
         MessageBox "更新错误"
     End If
     Rem fUpdateStatus
-    TracePrint  "updateStatus:"&status
+    log  "updateStatus:"&status
     //每次只能更新一个字段
     //获取待插入的id
     sql = "select max(id) as id from `log`"
-    TracePrint sql
+    log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
@@ -569,39 +569,38 @@ Function updateStatus(userInfo, status)
             maxId=1
         End If
         maxId = cstr(clng(maxId) + 1)
-
         //insert id
         sql = "INSERT into log (id) value(" + maxId + ")"
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         Call Plugin.Super_MySQL.num_rows(store)
         //update house_key
         sql = "UPDATE log SET `house_key`='" + userInfo(3) + "' WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         call Plugin.Super_MySQL.num_rows(store)
         //update status
         sql = "UPDATE log SET `status`=" + cstr(status) + " WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         Call Plugin.Super_MySQL.num_rows(store)
         //update messages
         sql = "UPDATE log SET `messages`='" + cstr(messages) + "' WHERE id=" + maxId
-        TracePrint sql
+        log sql
         Call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         Call Plugin.Super_MySQL.num_rows(store)
         //update create_date
         sql = "UPDATE log SET `create_date`=now() WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         call Plugin.Super_MySQL.num_rows(store)
     Else
-        TracePrint "更新数据失败"
+        log "更新数据失败"
         Goto fUpdateStatus
     End if
 End Function
@@ -609,7 +608,7 @@ Function start()
     Call Plugin.chrome.quit()
     // 启动浏览器
     If Plugin.chrome.launch(chromeSrc, "--user-data-dir") = False Then
-        TracePrint "启动失败"
+        log "启动失败"
         Call start()
     Else
         // 获取启动浏览器后的默认标签
@@ -646,10 +645,10 @@ Function loadScript(name)
         End If
         flag = CBool(flag)
         count = count + 1
-        TracePrint "count:"&count
+        log "count:"&count
     Loop While flag = 0 and count < 30
     If flag=0 Then
-        TracePrint "script加载失败！重试中..."
+        log "script加载失败！重试中..."
         Goto fLoadScript
     End If
 End Function
@@ -662,7 +661,7 @@ Function addHouseInfo(houseId)
     addStatus=3511
     //获取详情
     url = "https://sy.58.com/shangpu/" + houseId + "x.shtml"
-    TracePrint url
+    log url
     Call Plugin.chrome.load(id, url)
     // 等待载入完成
     Do
@@ -701,7 +700,7 @@ Function addHouseInfo(houseId)
     //发布信息
     Rem fJsAddpage
     js = "window.location.href=`https://post.58.com/fang/" + cstr(code) + "/14/s5?PGTID=${window.getGTID()}&ClickID=2`"
-    TracePrint js
+    log js
     Call Plugin.chrome.exec_js(id,js)
     // 等待载入完成
     Delay 1500
@@ -732,7 +731,7 @@ Function addHouseInfo(houseId)
             Goto rPostPage
         ElseIf cint(addStatus) = 3522 Then
             //js发帖正常
-            TracePrint "js发帖正常"
+            log "js发帖正常"
         ElseIf cint(addStatus) = 3523 Then
             //租金为空
             Goto fMoneyNumEmit
@@ -749,19 +748,19 @@ Function addHouseInfo(houseId)
         If length > 0 Then
             Rem rSubmit
             imageCount = execjs("$('.img_box[draggable=true]').length")
-            TracePrint "图片总数:"&imageCount
+            log "图片总数:"&imageCount
             Delay 2000
             execjs ("$('.submit_wrap span').trigger('click');")
             Delay 1000
             resultMsg = execjs("$('[name=yzm]:visible').prev().text()||''")
             resultMsg1=execjs("$('h2:contains(完成实名认证):visible').length||0")
             If resultMsg = "电话校验回填验证码" Then
-                TracePrint "电话校验回填验证码"
+                log "电话校验回填验证码"
                 editStatus = 3524
                 Goto rBreak
             End If
             If cint(resultMsg1) > 0 Then
-                TracePrint "未实名认证"
+                log "未实名认证"
                 editStatus = 4001
                 Goto rBreak
             End If
@@ -776,7 +775,7 @@ Function addHouseInfo(houseId)
                 length = find("$('.p_active_btn').length", "查找查看信息按钮")
                 If length = 0 Then
                     //没有获取到新发布的帖子编号，重试中...
-                    TracePrint "没有获取到新发布的帖子编号，重试中..."
+                    log "没有获取到新发布的帖子编号，重试中..."
                     call Plugin.chrome.stop(id)
                     Delay 500
                     Call Plugin.chrome.reload(id)
@@ -790,7 +789,7 @@ Function addHouseInfo(houseId)
                 End If
                 Call addNewHouseInfo(newUrl)
             Else
-                TracePrint "发布失败"
+                log "发布失败"
                 Goto rAddHouseInfo
             End If
         Else
@@ -802,16 +801,16 @@ Function addHouseInfo(houseId)
             Goto fUpdaaImage
         End If
     ElseIf cint(addStatus) = 3513 Then
-        TracePrint addStatus
-        TracePrint "发帖权限已用尽"
+        log addStatus
+        log "发帖权限已用尽"
     Else
-        TracePrint addStatus
-        TracePrint "状态异常"
+        log addStatus
+        log "状态异常"
         Goto rPostPage
     End If
     Rem fMoneyNumEmit
     Rem rBreak
-    TracePrint houseInfo(0)
+    log houseInfo(0)
     //MessageBox addStatus
     addHouseInfo=addStatus
 End Function
@@ -820,7 +819,7 @@ Function addNewHouseInfo(url)
     //每次只能更新一个字段
     //获取待插入的id
     sql = "select max(id) as id from `house_info`"
-    TracePrint sql
+    log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
@@ -832,36 +831,36 @@ Function addNewHouseInfo(url)
         maxId = cstr(cint(maxId)+1)
         //insert id
         sql = "INSERT into house_info (id) value(" + maxId + ")"
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         Call Plugin.Super_MySQL.num_rows(store)
         //update url
         sql = "UPDATE house_info SET `url`='" + url + "' WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         call Plugin.Super_MySQL.num_rows(store)
         //update house_key
         sql = "UPDATE house_info SET `house_key`='" + cstr(userInfo(3)) + "' WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         Call Plugin.Super_MySQL.num_rows(store)
         //update old_url
         sql = "UPDATE house_info SET `old_url`='" + cstr(userInfo(4)) + "' WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         call Plugin.Super_MySQL.num_rows(store)
         //update create_date
         sql = "UPDATE house_info SET `create_date`=now() WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         call Plugin.Super_MySQL.num_rows(store)
     Else
-        TracePrint "更新数据失败"
+        log "更新数据失败"
         Goto fAddNewHouseInfo
     End if
 End Function
@@ -890,12 +889,12 @@ Function getUser()
     Rem fGetUser
     //获取一条没有被锁定，没有被忽略的房屋信息
     sql = "START TRANSACTION"
-    TracePrint sql
+    log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     //sql = "SELECT * FROM house_list WHERE `username`='13418845040' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    TracePrint sql
+    log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
@@ -903,33 +902,33 @@ Function getUser()
         //读字段
         houseListId = Plugin.Super_MySQL.fetch_text(store, "id")
         userName = Plugin.Super_MySQL.fetch_text(store, "username")
-        TracePrint "userName:" + userName
+        log "userName:" + userName
         password = Plugin.Super_MySQL.fetch_text(store, "password")
-        TracePrint "parrword:" + parrword
+        log "parrword:" + parrword
         key = Plugin.Super_MySQL.fetch_text(store, "key")
         url = Plugin.Super_MySQL.fetch_text(store, "url")
         //锁定这条数据
         sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
-        TracePrint sql
+        log sql
         Call Plugin.Super_MySQL.mysql_query(mysql, sql)
         sql = "commit"
-        TracePrint sql
+        log sql
         Call Plugin.Super_MySQL.mysql_query(mysql, sql)
         If password = "" Then
             Goto fGetUser
         End If
         cookie = getCookie(userName)
-        TracePrint "cookie:" + cookie
+        log "cookie:" + cookie
         houseId = getHouseId(url)
         houseInfo = Array(houseId)
         userInfo=Array(userName, password,houseListId,key,url,cookie)
         getUser =userInfo
     Else
         sql = "commit"
-        TracePrint sql
+        log sql
         Call Plugin.Super_MySQL.mysql_query(mysql, sql)
         //getUser=Array("-1")
-        TracePrint "没有获取到数据"
+        log "没有获取到数据"
         Delay 5000
         Goto fGetUser
     End If
@@ -947,16 +946,16 @@ Function getCookie(userName)
             i=i+1
         Next
     End If
-    TracePrint cookieValue
+    log cookieValue
     getCookie = cookieValue
 End Function
 Function setCookie(value)
     Call Plugin.chrome.activate(page2)
-    TracePrint "setCookie"
+    log "setCookie"
     Call execjsp2("$('#pasteButton').click()", page2)
     Call findp2("$('#pasteCookie textarea:visible').length", "find textarea", page2)
     value = Replace(value, "\""","\\""")
-    TracePrint value
+    log value
     Call execjsp2("$('#pasteCookie textarea:visible').val(`"+value+"`)", page2)
     Delay 300
     Call execjsp2("$('#submitButton').click()", page2)
@@ -988,9 +987,9 @@ End Function
 Function queryCode(key)
     Rem fQueryCode
     code=-1
-    TracePrint "queryCode:" & key
+    log "queryCode:" & key
     sql = "SELECT * FROM `code` WHERE `key`='"+key+"'"
-    TracePrint sql
+    log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
@@ -1004,7 +1003,7 @@ Function queryCode(key)
         Call Plugin.chrome.activate(page2)
         Rem fGetCodePage
         url = "https://" & key
-        TracePrint url
+        log url
         Call Plugin.chrome.load(page2,url)
         // 等待载入完成
         Do
@@ -1031,11 +1030,11 @@ Function queryCode(key)
     queryCode=code
 End Function
 Function addCode(key, code)
-    TracePrint "addCode:"&key&"-"&code
+    log "addCode:"&key&"-"&code
     //每次只能更新一个字段
     //获取待插入的id
     sql = "select max(id) as id from `code`"
-    TracePrint sql
+    log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     rows = Plugin.Super_MySQL.num_rows(store)
@@ -1047,17 +1046,17 @@ Function addCode(key, code)
         maxId = cstr(cint(maxId)+1)
         //insert id
         sql = "INSERT into `code` (id) value(" + maxId + ")"
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         store = Plugin.Super_MySQL.store_result(mysql)
         Call Plugin.Super_MySQL.num_rows(store)
         //update key
         sql = "UPDATE `code` SET `key`='" + key + "' WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
         //update code
         sql = "UPDATE `code` SET `code`='" + code + "' WHERE id=" + maxId
-        TracePrint sql
+        log sql
         call Plugin.Super_MySQL.mysql_query(mysql, sql)
     End if
 End Function
@@ -1069,7 +1068,7 @@ Function getPicStr(list)
     Next
     length=len(resultStr)
     resultStr=Mid(resultStr,1,length-2)
-    TracePrint resultStr
+    log resultStr
     getPicStr=resultStr
 End Function
 Function dowloadImage(list)
@@ -1087,4 +1086,15 @@ Function dowloadImage(list)
         obj2.SaveToFile "d:\58images\"+fileName+".png",2 //2的意思是已有则覆盖,后面是保存路径。
         obj2.Close
     Next
+End Function
+Function log(info)
+    sDate = Plugin.Sys.GetDateTime()
+    logName = split(sDate, " ")(0)
+    info=cstr(info)
+    If len(info) > 100 Then
+        info=mid(info,1,100)+"..."
+    End If
+    info = cstr(sDate) + " " +info
+    TracePrint info
+    Call Plugin.File.WriteFileEx("d:\logs\"+logName+".log",info)
 End Function
