@@ -74,7 +74,7 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<3) or (currHour >= 8 and currHour<20) Then
+    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<20) Then
         status=false
     Else
         status=true
