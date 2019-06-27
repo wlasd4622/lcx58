@@ -1,0 +1,826 @@
+2019-06-27 11:18:59 >>>constructor
+2019-06-27 11:19:00 >>>main
+2019-06-27 11:19:01 >>>mainTask
+2019-06-27 11:19:02 >>>eachUser
+2019-06-27 11:19:04 >>>clearTable
+2019-06-27 11:19:04 >>>execSql
+2019-06-27 11:19:04 delete FROM gj_push;
+2019-06-27 11:19:04 >>>getConnection
+2019-06-27 11:19:04 >>>execSql
+2019-06-27 11:19:04 delete FROM gj_service;
+2019-06-27 11:19:04 >>>getConnection
+2019-06-27 11:19:04 >>>execSql
+2019-06-27 11:19:04 delete FROM gj_extension;
+2019-06-27 11:19:04 >>>getConnection
+2019-06-27 11:19:04 >>>getUserList
+2019-06-27 11:19:05 >>>execSql
+2019-06-27 11:19:05 select * from `gj_user`
+2019-06-27 11:19:05 >>>getConnection
+2019-06-27 11:19:05 [{"id":43,"nickname":null,"username":null,"password":null,"account":null,"create_time":null,"update_time":"2018-01-01T00:00:00.000Z","status":null,"session":null},{"id":7,"nickname":"李洋","username":"m...
+2019-06-27 11:19:05 >>>task1
+2019-06-27 11:19:05 >>>runPuppeteer
+2019-06-27 11:19:05 >>>close
+2019-06-27 11:19:05 >>>setCookie
+2019-06-27 11:19:05 >>>setCookie
+2019-06-27 11:19:06 >>>setCookie
+2019-06-27 11:19:06 >>>setCookie
+2019-06-27 11:19:06 >>>setCookie
+2019-06-27 11:19:06 >>>getUserInfo
+2019-06-27 11:19:07 >>>getCookie
+2019-06-27 11:19:10 >>>myService
+2019-06-27 11:19:10 https://apply.vip.58.com/myservice/list?r=0.4174159885969255
+2019-06-27 11:19:11 >>>execSql
+2019-06-27 11:19:11 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (7,'maigebaoma2','服务中','2019年04月10日','2019年07月10日',14,NOW())
+2019-06-27 11:19:11 >>>getConnection
+2019-06-27 11:19:11 >>>yxtgsp58
+2019-06-27 11:19:12 >>>execSql
+2019-06-27 11:19:12 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(7,'maigebaoma2','51','0','1','31',NOW())
+2019-06-27 11:19:12 >>>getConnection
+2019-06-27 11:19:12 >>>myperiod
+2019-06-27 11:19:13 https://paycenter.58.com/wb/myperiod?transType=2&r=0.6145581694053855
+2019-06-27 11:19:16 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-07-10 00:00:00\",\"剩余可用数量\":\"1,219.13\"},{\"推广币\":\"7.31\",\"到期时间\":\"2019-10-12 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"700.00\",\"到期时间\":\"2020-07-10 00:00...
+2019-06-27 11:19:16 >>>execSql
+2019-06-27 11:19:16 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(7,'maigebaoma2','5,400.00','2019-07-10 00:00:00','1,219.13',NOW())
+2019-06-27 11:19:16 >>>getConnection
+2019-06-27 11:19:16 >>>execSql
+2019-06-27 11:19:16 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(7,'maigebaoma2','7.31','2019-10-12 00:00:00','0.00',NOW())
+2019-06-27 11:19:16 >>>getConnection
+2019-06-27 11:19:16 >>>execSql
+2019-06-27 11:19:16 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(7,'maigebaoma2','700.00','2020-07-10 00:00:00','0.12',NOW())
+2019-06-27 11:19:16 >>>getConnection
+2019-06-27 11:19:16 >>>getCookie
+2019-06-27 11:19:16 >>>updateUser
+2019-06-27 11:19:16 >>>execSql
+2019-06-27 11:19:16 update `gj_user` set `status`=0, `nickName`='李洋',`account`=1219.39,`session`='HUOKE_STATUS%3D1%3B%20sessid%3D1D4EF5E5-6833-AC77-66AF-4593B6580F48%3B%20aQQ_brokerguid%3DFD482E98-051C-DCE4-9055-7B35E85A...
+2019-06-27 11:19:16 >>>getConnection
+2019-06-27 11:19:17 >>>close
+2019-06-27 11:19:18 >>>task1
+2019-06-27 11:19:18 >>>runPuppeteer
+2019-06-27 11:19:18 >>>close
+2019-06-27 11:19:18 >>>setCookie
+2019-06-27 11:19:18 >>>setCookie
+2019-06-27 11:19:18 >>>setCookie
+2019-06-27 11:19:18 >>>setCookie
+2019-06-27 11:19:18 >>>setCookie
+2019-06-27 11:19:19 >>>getUserInfo
+2019-06-27 11:19:20 >>>getCookie
+2019-06-27 11:19:22 >>>myService
+2019-06-27 11:19:23 https://apply.vip.58.com/myservice/list?r=0.7443108935398581
+2019-06-27 11:19:23 >>>execSql
+2019-06-27 11:19:23 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (1,'1atom1331','服务中','2019年06月06日','2019年09月05日',71,NOW())
+2019-06-27 11:19:23 >>>getConnection
+2019-06-27 11:19:23 >>>yxtgsp58
+2019-06-27 11:19:24 >>>execSql
+2019-06-27 11:19:24 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(1,'1atom1331','10','10','0','0',NOW())
+2019-06-27 11:19:24 >>>getConnection
+2019-06-27 11:19:24 >>>myperiod
+2019-06-27 11:19:25 https://paycenter.58.com/wb/myperiod?transType=2&r=0.19644483182223116
+2019-06-27 11:19:27 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-09-05 00:00:00\",\"剩余可用数量\":\"2,532.62\"},{\"推广币\":\"4.92\",\"到期时间\":\"2019-10-12 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"700.00\",\"到期时间\":\"2020-06-30 00:00...
+2019-06-27 11:19:27 >>>execSql
+2019-06-27 11:19:27 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(1,'1atom1331','5,400.00','2019-09-05 00:00:00','2,532.62',NOW())
+2019-06-27 11:19:27 >>>getConnection
+2019-06-27 11:19:27 >>>execSql
+2019-06-27 11:19:27 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(1,'1atom1331','4.92','2019-10-12 00:00:00','0.00',NOW())
+2019-06-27 11:19:27 >>>getConnection
+2019-06-27 11:19:27 >>>execSql
+2019-06-27 11:19:27 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(1,'1atom1331','700.00','2020-06-30 00:00:00','0.05',NOW())
+2019-06-27 11:19:27 >>>getConnection
+2019-06-27 11:19:28 >>>getCookie
+2019-06-27 11:19:28 >>>updateUser
+2019-06-27 11:19:28 >>>execSql
+2019-06-27 11:19:28 update `gj_user` set `status`=0, `nickName`='李洋',`account`=2532.73,`session`='HUOKE_STATUS%3D1%3B%20__xsptplus8%3D8.3.1559022704.1559022704.1%25234%257C%257C%257C%257C%257C%2523%2523suYk50rgp5bfcjHNBv...
+2019-06-27 11:19:28 >>>getConnection
+2019-06-27 11:19:28 >>>close
+2019-06-27 11:19:29 >>>task1
+2019-06-27 11:19:29 >>>runPuppeteer
+2019-06-27 11:19:29 >>>close
+2019-06-27 11:19:30 >>>setCookie
+2019-06-27 11:19:30 >>>setCookie
+2019-06-27 11:19:30 >>>setCookie
+2019-06-27 11:19:30 >>>setCookie
+2019-06-27 11:19:30 >>>setCookie
+2019-06-27 11:19:30 >>>getUserInfo
+2019-06-27 11:19:31 >>>getCookie
+2019-06-27 11:19:34 >>>myService
+2019-06-27 11:19:35 https://apply.vip.58.com/myservice/list?r=0.6822307043344035
+2019-06-27 11:19:35 >>>execSql
+2019-06-27 11:19:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (27,'重庆老账号','服务中','2019年05月16日','2019年08月15日',50,NOW())
+2019-06-27 11:19:35 >>>getConnection
+2019-06-27 11:19:35 >>>execSql
+2019-06-27 11:19:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (27,'重庆老账号','服务中','2019年04月16日','2019年07月16日',20,NOW())
+2019-06-27 11:19:35 >>>getConnection
+2019-06-27 11:19:35 >>>execSql
+2019-06-27 11:19:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (27,'重庆老账号','服务中','2019年04月16日','2019年07月16日',20,NOW())
+2019-06-27 11:19:35 >>>getConnection
+2019-06-27 11:19:35 >>>yxtgsp58
+2019-06-27 11:19:36 >>>execSql
+2019-06-27 11:19:36 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(27,'重庆老账号','64','25','2','29',NOW())
+2019-06-27 11:19:36 >>>getConnection
+2019-06-27 11:19:36 >>>myperiod
+2019-06-27 11:19:37 https://paycenter.58.com/wb/myperiod?transType=2&r=0.6544399493538857
+2019-06-27 11:19:39 [{\"推广币\":\"5,000.00\",\"到期时间\":\"2019-08-15 00:00:00\",\"剩余可用数量\":\"2,520.80\"},{\"推广币\":\"5,000.00\",\"到期时间\":\"2019-07-16 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"5,000.00\",\"到期时间\":\"2019-07-16...
+2019-06-27 11:19:39 >>>execSql
+2019-06-27 11:19:39 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(27,'重庆老账号','5,000.00','2019-08-15 00:00:00','2,520.80',NOW())
+2019-06-27 11:19:39 >>>getConnection
+2019-06-27 11:19:39 >>>execSql
+2019-06-27 11:19:39 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(27,'重庆老账号','5,000.00','2019-07-16 00:00:00','0.00',NOW())
+2019-06-27 11:19:39 >>>getConnection
+2019-06-27 11:19:39 >>>execSql
+2019-06-27 11:19:39 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(27,'重庆老账号','5,000.00','2019-07-16 00:00:00','0.00',NOW())
+2019-06-27 11:19:39 >>>getConnection
+2019-06-27 11:19:40 >>>getCookie
+2019-06-27 11:19:40 >>>updateUser
+2019-06-27 11:19:40 >>>execSql
+2019-06-27 11:19:40 update `gj_user` set `status`=0, `nickName`='张梦姣',`account`=8713.10,`session`='HUOKE_STATUS%3D1%3B%20sessid%3DDE82E7DD-C1C3-83ED-DA04-D3A140225922%3B%20aQQ_brokerguid%3DC67BE5BF-0107-612F-7511-FE476FA...
+2019-06-27 11:19:40 >>>getConnection
+2019-06-27 11:19:40 >>>close
+2019-06-27 11:19:41 >>>task1
+2019-06-27 11:19:41 >>>runPuppeteer
+2019-06-27 11:19:41 >>>close
+2019-06-27 11:19:42 >>>setCookie
+2019-06-27 11:19:42 >>>setCookie
+2019-06-27 11:19:42 >>>setCookie
+2019-06-27 11:19:42 >>>setCookie
+2019-06-27 11:19:42 >>>setCookie
+2019-06-27 11:19:42 >>>getUserInfo
+2019-06-27 11:19:43 >>>getCookie
+2019-06-27 11:19:45 >>>myService
+2019-06-27 11:19:46 https://apply.vip.58.com/myservice/list?r=0.17744123744845475
+2019-06-27 11:19:46 >>>execSql
+2019-06-27 11:19:46 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (34,'W15810915325','服务中','2019年04月10日','2019年07月10日',14,NOW())
+2019-06-27 11:19:46 >>>getConnection
+2019-06-27 11:19:46 >>>yxtgsp58
+2019-06-27 11:19:47 >>>execSql
+2019-06-27 11:19:47 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(34,'W15810915325','77','9','22','46',NOW())
+2019-06-27 11:19:47 >>>getConnection
+2019-06-27 11:19:48 >>>myperiod
+2019-06-27 11:19:48 https://paycenter.58.com/wb/myperiod?transType=2&r=0.4626251099433881
+2019-06-27 11:19:51 [{\"推广币\":\"2,700.00\",\"到期时间\":\"2021-05-25 00:00:00\",\"剩余可用数量\":\"961.59\"},{\"推广币\":\"55.00\",\"到期时间\":\"2021-05-18 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"1.00\",\"到期时间\":\"2021-05-16 00:00:00...
+2019-06-27 11:19:51 >>>execSql
+2019-06-27 11:19:51 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(34,'W15810915325','2,700.00','2021-05-25 00:00:00','961.59',NOW())
+2019-06-27 11:19:51 >>>getConnection
+2019-06-27 11:19:51 >>>execSql
+2019-06-27 11:19:51 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(34,'W15810915325','55.00','2021-05-18 00:00:00','0.00',NOW())
+2019-06-27 11:19:51 >>>getConnection
+2019-06-27 11:19:51 >>>execSql
+2019-06-27 11:19:51 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(34,'W15810915325','1.00','2021-05-16 00:00:00','0.00',NOW())
+2019-06-27 11:19:51 >>>getConnection
+2019-06-27 11:19:51 >>>getCookie
+2019-06-27 11:19:51 >>>updateUser
+2019-06-27 11:19:51 >>>execSql
+2019-06-27 11:19:51 update `gj_user` set `status`=0, `nickName`='王洪峰',`account`=961.59,`session`='sessid%3D5041CAB1-C2BE-F1C1-ABDC-0DFF1C517548%3B%20aQQ_brokerguid%3D2874C0F1-A67D-2703-DC92-06D70EEF695E%3B%2058tj_uuid%3D...
+2019-06-27 11:19:51 >>>getConnection
+2019-06-27 11:19:51 >>>close
+2019-06-27 11:19:53 >>>task1
+2019-06-27 11:19:53 >>>runPuppeteer
+2019-06-27 11:19:53 >>>close
+2019-06-27 11:19:53 >>>setCookie
+2019-06-27 11:19:53 >>>setCookie
+2019-06-27 11:19:53 >>>setCookie
+2019-06-27 11:19:53 >>>setCookie
+2019-06-27 11:19:53 >>>setCookie
+2019-06-27 11:19:54 >>>getUserInfo
+2019-06-27 11:19:54 >>>getCookie
+2019-06-27 11:19:57 >>>myService
+2019-06-27 11:19:57 https://apply.vip.58.com/myservice/list?r=0.9185295560939937
+2019-06-27 11:19:57 >>>execSql
+2019-06-27 11:19:57 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (35,'ww15810915325','服务中','2019年05月15日','2019年08月14日',49,NOW())
+2019-06-27 11:19:57 >>>getConnection
+2019-06-27 11:19:57 >>>execSql
+2019-06-27 11:19:57 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (35,'ww15810915325','服务中','2019年04月11日','2019年07月11日',15,NOW())
+2019-06-27 11:19:57 >>>getConnection
+2019-06-27 11:19:57 >>>yxtgsp58
+2019-06-27 11:19:59 >>>execSql
+2019-06-27 11:19:59 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(35,'ww15810915325','72','8','1','0',NOW())
+2019-06-27 11:19:59 >>>getConnection
+2019-06-27 11:19:59 >>>myperiod
+2019-06-27 11:19:59 https://paycenter.58.com/wb/myperiod?transType=2&r=0.31431212715966983
+2019-06-27 11:20:01 [{\"推广币\":\"172.00\",\"到期时间\":\"2021-05-18 00:00:00\",\"剩余可用数量\":\"125.83\"},{\"推广币\":\"39.00\",\"到期时间\":\"2021-05-16 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"1,350.00\",\"到期时间\":\"2019-08-14 00:00:...
+2019-06-27 11:20:01 >>>execSql
+2019-06-27 11:20:01 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(35,'ww15810915325','172.00','2021-05-18 00:00:00','125.83',NOW())
+2019-06-27 11:20:01 >>>getConnection
+2019-06-27 11:20:01 >>>execSql
+2019-06-27 11:20:01 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(35,'ww15810915325','39.00','2021-05-16 00:00:00','0.00',NOW())
+2019-06-27 11:20:01 >>>getConnection
+2019-06-27 11:20:02 >>>execSql
+2019-06-27 11:20:02 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(35,'ww15810915325','1,350.00','2019-08-14 00:00:00','0.00',NOW())
+2019-06-27 11:20:02 >>>getConnection
+2019-06-27 11:20:02 >>>getCookie
+2019-06-27 11:20:02 >>>updateUser
+2019-06-27 11:20:02 >>>execSql
+2019-06-27 11:20:02 update `gj_user` set `status`=0, `nickName`='王洪峰',`account`=125.83,`session`='sessid%3D466260AF-083C-7BE0-BD58-1B378A3D4AF8%3B%20aQQ_brokerguid%3DA4827B55-9573-0D23-A1E8-5D7140D6FD54%3B%2058tj_uuid%3D...
+2019-06-27 11:20:02 >>>getConnection
+2019-06-27 11:20:02 >>>close
+2019-06-27 11:20:03 >>>task1
+2019-06-27 11:20:03 >>>runPuppeteer
+2019-06-27 11:20:03 >>>close
+2019-06-27 11:20:03 >>>setCookie
+2019-06-27 11:20:03 >>>setCookie
+2019-06-27 11:20:03 >>>setCookie
+2019-06-27 11:20:03 >>>setCookie
+2019-06-27 11:20:04 >>>setCookie
+2019-06-27 11:20:04 >>>getUserInfo
+2019-06-27 11:20:05 >>>getCookie
+2019-06-27 11:20:07 >>>myService
+2019-06-27 11:20:08 https://apply.vip.58.com/myservice/list?r=0.5165653442438757
+2019-06-27 11:20:08 >>>execSql
+2019-06-27 11:20:08 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (36,'www18411009557','服务中','2019年05月15日','2019年08月14日',49,NOW())
+2019-06-27 11:20:08 >>>getConnection
+2019-06-27 11:20:08 >>>execSql
+2019-06-27 11:20:08 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (36,'www18411009557','服务中','2019年04月11日','2019年07月11日',15,NOW())
+2019-06-27 11:20:08 >>>getConnection
+2019-06-27 11:20:08 >>>yxtgsp58
+2019-06-27 11:20:09 >>>execSql
+2019-06-27 11:20:09 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(36,'www18411009557','71','9','7','0',NOW())
+2019-06-27 11:20:09 >>>getConnection
+2019-06-27 11:20:09 >>>myperiod
+2019-06-27 11:20:10 https://paycenter.58.com/wb/myperiod?transType=2&r=0.935055297602778
+2019-06-27 11:20:12 [{\"推广币\":\"1,350.00\",\"到期时间\":\"2019-08-14 00:00:00\",\"剩余可用数量\":\"17.96\"},{\"推广币\":\"1,150.00\",\"到期时间\":\"2019-07-11 00:00:00\",\"剩余可用数量\":\"0.00\"}]
+2019-06-27 11:20:12 >>>execSql
+2019-06-27 11:20:12 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(36,'www18411009557','1,350.00','2019-08-14 00:00:00','17.96',NOW())
+2019-06-27 11:20:12 >>>getConnection
+2019-06-27 11:20:12 >>>execSql
+2019-06-27 11:20:12 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(36,'www18411009557','1,150.00','2019-07-11 00:00:00','0.00',NOW())
+2019-06-27 11:20:12 >>>getConnection
+2019-06-27 11:20:13 >>>getCookie
+2019-06-27 11:20:13 >>>updateUser
+2019-06-27 11:20:13 >>>execSql
+2019-06-27 11:20:13 update `gj_user` set `status`=0, `nickName`='王洪峰',`account`=17.96,`session`='sessid%3DF6F733C1-EEF2-9791-C623-6E76B7E894FB%3B%20aQQ_brokerguid%3DB9E37CCF-9F13-6ABB-BE4E-98B5812579C0%3B%2058tj_uuid%3D4...
+2019-06-27 11:20:13 >>>getConnection
+2019-06-27 11:20:13 >>>close
+2019-06-27 11:20:14 >>>task1
+2019-06-27 11:20:14 >>>runPuppeteer
+2019-06-27 11:20:14 >>>close
+2019-06-27 11:20:14 >>>setCookie
+2019-06-27 11:20:14 >>>setCookie
+2019-06-27 11:20:14 >>>setCookie
+2019-06-27 11:20:14 >>>setCookie
+2019-06-27 11:20:15 >>>setCookie
+2019-06-27 11:20:15 >>>getUserInfo
+2019-06-27 11:20:16 >>>getCookie
+2019-06-27 11:20:18 >>>myService
+2019-06-27 11:20:19 https://apply.vip.58.com/myservice/list?r=0.9418179812970794
+2019-06-27 11:20:19 >>>execSql
+2019-06-27 11:20:19 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (37,'成都2号','预约服务','2019年06月30日','2019年09月29日',92,NOW())
+2019-06-27 11:20:19 >>>getConnection
+2019-06-27 11:20:19 >>>execSql
+2019-06-27 11:20:19 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (37,'成都2号','服务中','2019年05月26日','2019年08月25日',60,NOW())
+2019-06-27 11:20:19 >>>getConnection
+2019-06-27 11:20:19 >>>execSql
+2019-06-27 11:20:19 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (37,'成都2号','服务中','2019年05月05日','2019年08月04日',39,NOW())
+2019-06-27 11:20:19 >>>getConnection
+2019-06-27 11:20:19 >>>execSql
+2019-06-27 11:20:19 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (37,'成都2号','服务中','2019年04月25日','2019年07月25日',29,NOW())
+2019-06-27 11:20:19 >>>getConnection
+2019-06-27 11:20:19 >>>execSql
+2019-06-27 11:20:19 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (37,'成都2号','服务中','2019年04月07日','2019年07月07日',11,NOW())
+2019-06-27 11:20:19 >>>getConnection
+2019-06-27 11:20:19 >>>execSql
+2019-06-27 11:20:19 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (37,'成都2号','服务中','2019年03月31日','2019年06月30日',4,NOW())
+2019-06-27 11:20:19 >>>getConnection
+2019-06-27 11:20:19 >>>yxtgsp58
+2019-06-27 11:20:21 >>>execSql
+2019-06-27 11:20:21 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(37,'成都2号','66','114','17','0',NOW())
+2019-06-27 11:20:21 >>>getConnection
+2019-06-27 11:20:21 >>>myperiod
+2019-06-27 11:20:21 https://paycenter.58.com/wb/myperiod?transType=2&r=0.06787783763028254
+2019-06-27 11:20:24 [{\"推广币\":\"3,200.00\",\"到期时间\":\"2019-08-04 00:00:00\",\"剩余可用数量\":\"0.02\"},{\"推广币\":\"2,600.00\",\"到期时间\":\"2019-07-25 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"2,900.00\",\"到期时间\":\"2019-09-29 00:...
+2019-06-27 11:20:24 >>>execSql
+2019-06-27 11:20:24 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(37,'成都2号','3,200.00','2019-08-04 00:00:00','0.02',NOW())
+2019-06-27 11:20:24 >>>getConnection
+2019-06-27 11:20:24 >>>execSql
+2019-06-27 11:20:24 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(37,'成都2号','2,600.00','2019-07-25 00:00:00','0.00',NOW())
+2019-06-27 11:20:24 >>>getConnection
+2019-06-27 11:20:24 >>>execSql
+2019-06-27 11:20:24 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(37,'成都2号','2,900.00','2019-09-29 00:00:00','0.00',NOW())
+2019-06-27 11:20:24 >>>getConnection
+2019-06-27 11:20:24 >>>getCookie
+2019-06-27 11:20:24 >>>updateUser
+2019-06-27 11:20:24 >>>execSql
+2019-06-27 11:20:24 update `gj_user` set `status`=0, `nickName`='陈薪',`account`=0.05,`session`='HUOKE_STATUS%3D1%3B%20sessid%3D88997242-3993-869D-CAE5-F45761A505D4%3B%20aQQ_brokerguid%3DCBBF6EFB-E930-E831-5F5C-AE98CF116FB...
+2019-06-27 11:20:24 >>>getConnection
+2019-06-27 11:20:24 >>>close
+2019-06-27 11:20:25 >>>task1
+2019-06-27 11:20:25 >>>runPuppeteer
+2019-06-27 11:20:25 >>>close
+2019-06-27 11:20:26 >>>setCookie
+2019-06-27 11:20:26 >>>setCookie
+2019-06-27 11:20:26 >>>setCookie
+2019-06-27 11:20:26 >>>setCookie
+2019-06-27 11:20:26 >>>setCookie
+2019-06-27 11:20:26 >>>getUserInfo
+2019-06-27 11:20:27 >>>getCookie
+2019-06-27 11:20:30 >>>myService
+2019-06-27 11:20:30 https://apply.vip.58.com/myservice/list?r=0.7233767870859874
+2019-06-27 11:20:30 >>>execSql
+2019-06-27 11:20:30 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (8,'anjuke5','服务中','2019年06月05日','2019年09月04日',70,NOW())
+2019-06-27 11:20:30 >>>getConnection
+2019-06-27 11:20:30 >>>execSql
+2019-06-27 11:20:30 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (8,'anjuke5','服务中','2019年05月21日','2019年08月20日',55,NOW())
+2019-06-27 11:20:30 >>>getConnection
+2019-06-27 11:20:30 >>>execSql
+2019-06-27 11:20:30 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (8,'anjuke5','服务中','2019年05月07日','2019年08月06日',41,NOW())
+2019-06-27 11:20:30 >>>getConnection
+2019-06-27 11:20:31 >>>execSql
+2019-06-27 11:20:31 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (8,'anjuke5','服务中','2019年04月22日','2019年07月22日',26,NOW())
+2019-06-27 11:20:31 >>>getConnection
+2019-06-27 11:20:31 >>>yxtgsp58
+2019-06-27 11:20:32 >>>execSql
+2019-06-27 11:20:32 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(8,'anjuke5','130','0','0','50',NOW())
+2019-06-27 11:20:32 >>>getConnection
+2019-06-27 11:20:32 >>>myperiod
+2019-06-27 11:20:32 https://paycenter.58.com/wb/myperiod?transType=2&r=0.967206038184371
+2019-06-27 11:20:35 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-09-04 00:00:00\",\"剩余可用数量\":\"2,943.86\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-08-20 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"240.00\",\"到期时间\":\"2021-05-22 0...
+2019-06-27 11:20:35 >>>execSql
+2019-06-27 11:20:35 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(8,'anjuke5','5,400.00','2019-09-04 00:00:00','2,943.86',NOW())
+2019-06-27 11:20:35 >>>getConnection
+2019-06-27 11:20:35 >>>execSql
+2019-06-27 11:20:35 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(8,'anjuke5','5,400.00','2019-08-20 00:00:00','0.00',NOW())
+2019-06-27 11:20:35 >>>getConnection
+2019-06-27 11:20:35 >>>execSql
+2019-06-27 11:20:35 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(8,'anjuke5','240.00','2021-05-22 00:00:00','0.61',NOW())
+2019-06-27 11:20:35 >>>getConnection
+2019-06-27 11:20:35 >>>getCookie
+2019-06-27 11:20:35 >>>updateUser
+2019-06-27 11:20:35 >>>execSql
+2019-06-27 11:20:35 update `gj_user` set `status`=0, `nickName`='李洋',`account`=2944.47,`session`='HUOKE_STATUS%3D1%3B%20sessid%3DECA03263-5552-170A-C143-58538849EEDA%3B%20aQQ_brokerguid%3DEE592A5F-C263-188B-26E7-5325173C...
+2019-06-27 11:20:35 >>>getConnection
+2019-06-27 11:20:35 >>>close
+2019-06-27 11:20:36 >>>task1
+2019-06-27 11:20:36 >>>runPuppeteer
+2019-06-27 11:20:36 >>>close
+2019-06-27 11:20:37 >>>setCookie
+2019-06-27 11:20:37 >>>setCookie
+2019-06-27 11:20:37 >>>setCookie
+2019-06-27 11:20:37 >>>setCookie
+2019-06-27 11:20:37 >>>setCookie
+2019-06-27 11:20:37 >>>getUserInfo
+2019-06-27 11:20:38 >>>getCookie
+2019-06-27 11:20:40 >>>myService
+2019-06-27 11:20:41 https://apply.vip.58.com/myservice/list?r=0.7211674694252328
+2019-06-27 11:20:41 >>>execSql
+2019-06-27 11:20:41 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (9,'think999','服务中','2019年05月21日','2019年08月20日',55,NOW())
+2019-06-27 11:20:41 >>>getConnection
+2019-06-27 11:20:41 >>>execSql
+2019-06-27 11:20:41 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (9,'think999','服务中','2019年04月10日','2019年07月10日',14,NOW())
+2019-06-27 11:20:41 >>>getConnection
+2019-06-27 11:20:41 >>>yxtgsp58
+2019-06-27 11:20:42 >>>execSql
+2019-06-27 11:20:42 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(9,'think999','39','4','4','3',NOW())
+2019-06-27 11:20:42 >>>getConnection
+2019-06-27 11:20:42 >>>myperiod
+2019-06-27 11:20:43 https://paycenter.58.com/wb/myperiod?transType=2&r=0.03023021476179688
+2019-06-27 11:20:45 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-08-20 00:00:00\",\"剩余可用数量\":\"4,738.77\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-07-10 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"8.72\",\"到期时间\":\"2019-10-12 00:...
+2019-06-27 11:20:45 >>>execSql
+2019-06-27 11:20:45 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(9,'think999','5,400.00','2019-08-20 00:00:00','4,738.77',NOW())
+2019-06-27 11:20:45 >>>getConnection
+2019-06-27 11:20:45 >>>execSql
+2019-06-27 11:20:45 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(9,'think999','5,400.00','2019-07-10 00:00:00','0.00',NOW())
+2019-06-27 11:20:45 >>>getConnection
+2019-06-27 11:20:45 >>>execSql
+2019-06-27 11:20:45 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(9,'think999','8.72','2019-10-12 00:00:00','8.72',NOW())
+2019-06-27 11:20:45 >>>getConnection
+2019-06-27 11:20:46 >>>getCookie
+2019-06-27 11:20:46 >>>updateUser
+2019-06-27 11:20:46 >>>execSql
+2019-06-27 11:20:46 update `gj_user` set `status`=0, `nickName`='李洋',`account`=4747.49,`session`='HUOKE_STATUS%3D1%3B%20sessid%3DE3ED91D1-BDF7-0032-800C-6EA1B46DEDA0%3B%20aQQ_brokerguid%3D0D97C4FA-2213-3658-3C3C-EF7EC1E5...
+2019-06-27 11:20:46 >>>getConnection
+2019-06-27 11:20:46 >>>close
+2019-06-27 11:20:47 >>>task1
+2019-06-27 11:20:47 >>>runPuppeteer
+2019-06-27 11:20:47 >>>close
+2019-06-27 11:20:47 >>>setCookie
+2019-06-27 11:20:47 >>>setCookie
+2019-06-27 11:20:47 >>>setCookie
+2019-06-27 11:20:47 >>>setCookie
+2019-06-27 11:20:47 >>>setCookie
+2019-06-27 11:20:48 >>>getUserInfo
+2019-06-27 11:20:49 >>>getCookie
+2019-06-27 11:20:51 >>>myService
+2019-06-27 11:20:52 https://apply.vip.58.com/myservice/list?r=0.8268842977946121
+2019-06-27 11:20:52 >>>execSql
+2019-06-27 11:20:52 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (18,'hduasdhoad2','服务中','2019年06月27日','2019年09月26日',92,NOW())
+2019-06-27 11:20:52 >>>getConnection
+2019-06-27 11:20:52 >>>execSql
+2019-06-27 11:20:52 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (18,'hduasdhoad2','服务中','2019年04月10日','2019年07月10日',14,NOW())
+2019-06-27 11:20:52 >>>getConnection
+2019-06-27 11:20:52 >>>yxtgsp58
+2019-06-27 11:20:53 >>>execSql
+2019-06-27 11:20:53 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(18,'hduasdhoad2','49','20','0','29',NOW())
+2019-06-27 11:20:53 >>>getConnection
+2019-06-27 11:20:53 >>>myperiod
+2019-06-27 11:20:54 https://paycenter.58.com/wb/myperiod?transType=2&r=0.7195250409871247
+2019-06-27 11:20:56 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-09-26 00:00:00\",\"剩余可用数量\":\"5,400.00\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-07-10 00:00:00\",\"剩余可用数量\":\"124.48\"},{\"推广币\":\"3.75\",\"到期时间\":\"2019-10-12 0...
+2019-06-27 11:20:56 >>>execSql
+2019-06-27 11:20:56 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(18,'hduasdhoad2','5,400.00','2019-09-26 00:00:00','5,400.00',NOW())
+2019-06-27 11:20:56 >>>getConnection
+2019-06-27 11:20:56 >>>execSql
+2019-06-27 11:20:56 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(18,'hduasdhoad2','5,400.00','2019-07-10 00:00:00','124.48',NOW())
+2019-06-27 11:20:56 >>>getConnection
+2019-06-27 11:20:56 >>>execSql
+2019-06-27 11:20:56 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(18,'hduasdhoad2','3.75','2019-10-12 00:00:00','0.00',NOW())
+2019-06-27 11:20:56 >>>getConnection
+2019-06-27 11:20:57 >>>getCookie
+2019-06-27 11:20:57 >>>updateUser
+2019-06-27 11:20:57 >>>execSql
+2019-06-27 11:20:57 update `gj_user` set `status`=0, `nickName`='谢任雯',`account`=5541.44,`session`='HUOKE_STATUS%3D1%3B%20sessid%3D3D6790A8-9DFB-7746-464C-FB657B280A07%3B%20aQQ_brokerguid%3D9B37D293-BDF9-1DE9-529D-7FC5F76...
+2019-06-27 11:20:57 >>>getConnection
+2019-06-27 11:20:57 >>>close
+2019-06-27 11:20:58 >>>task1
+2019-06-27 11:20:58 >>>runPuppeteer
+2019-06-27 11:20:58 >>>close
+2019-06-27 11:20:58 >>>setCookie
+2019-06-27 11:20:58 >>>setCookie
+2019-06-27 11:20:58 >>>setCookie
+2019-06-27 11:20:58 >>>setCookie
+2019-06-27 11:20:58 >>>setCookie
+2019-06-27 11:20:59 >>>getUserInfo
+2019-06-27 11:20:59 >>>getCookie
+2019-06-27 11:21:02 >>>myService
+2019-06-27 11:21:02 https://apply.vip.58.com/myservice/list?r=0.12617313805972918
+2019-06-27 11:21:03 >>>execSql
+2019-06-27 11:21:03 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (19,'uhdahdoa2','服务中','2019年06月27日','2019年09月26日',92,NOW())
+2019-06-27 11:21:03 >>>getConnection
+2019-06-27 11:21:03 >>>execSql
+2019-06-27 11:21:03 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (19,'uhdahdoa2','服务中','2019年05月07日','2019年08月06日',41,NOW())
+2019-06-27 11:21:03 >>>getConnection
+2019-06-27 11:21:03 >>>yxtgsp58
+2019-06-27 11:21:04 >>>execSql
+2019-06-27 11:21:04 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(19,'uhdahdoa2','74','21','0','55',NOW())
+2019-06-27 11:21:04 >>>getConnection
+2019-06-27 11:21:04 >>>myperiod
+2019-06-27 11:21:05 https://paycenter.58.com/wb/myperiod?transType=2&r=0.03947149537402583
+2019-06-27 11:21:07 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-09-26 00:00:00\",\"剩余可用数量\":\"5,400.00\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-08-06 00:00:00\",\"剩余可用数量\":\"239.94\"},{\"推广币\":\"11.58\",\"到期时间\":\"2019-10-12 ...
+2019-06-27 11:21:07 >>>execSql
+2019-06-27 11:21:07 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(19,'uhdahdoa2','5,400.00','2019-09-26 00:00:00','5,400.00',NOW())
+2019-06-27 11:21:07 >>>getConnection
+2019-06-27 11:21:07 >>>execSql
+2019-06-27 11:21:07 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(19,'uhdahdoa2','5,400.00','2019-08-06 00:00:00','239.94',NOW())
+2019-06-27 11:21:07 >>>getConnection
+2019-06-27 11:21:07 >>>execSql
+2019-06-27 11:21:07 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(19,'uhdahdoa2','11.58','2019-10-12 00:00:00','11.58',NOW())
+2019-06-27 11:21:07 >>>getConnection
+2019-06-27 11:21:08 >>>getCookie
+2019-06-27 11:21:08 >>>updateUser
+2019-06-27 11:21:08 >>>execSql
+2019-06-27 11:21:08 update `gj_user` set `status`=0, `nickName`='谢任雯',`account`=5768.92,`session`='HUOKE_STATUS%3D1%3B%20sessid%3DA12A25A5-2247-A3D8-5499-CA36F31BA4A3%3B%20aQQ_brokerguid%3D2B09858D-FEA6-8673-07A3-12BFDE4...
+2019-06-27 11:21:08 >>>getConnection
+2019-06-27 11:21:08 >>>close
+2019-06-27 11:21:09 >>>task1
+2019-06-27 11:21:09 >>>runPuppeteer
+2019-06-27 11:21:09 >>>close
+2019-06-27 11:21:09 >>>setCookie
+2019-06-27 11:21:09 >>>setCookie
+2019-06-27 11:21:09 >>>setCookie
+2019-06-27 11:21:09 >>>setCookie
+2019-06-27 11:21:09 >>>setCookie
+2019-06-27 11:21:10 >>>getUserInfo
+2019-06-27 11:21:10 >>>getCookie
+2019-06-27 11:21:13 >>>myService
+2019-06-27 11:21:14 https://apply.vip.58.com/myservice/list?r=0.250515037104838
+2019-06-27 11:21:14 >>>execSql
+2019-06-27 11:21:14 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (20,'75mwf4','预约服务','2019年07月11日','2019年10月10日',92,NOW())
+2019-06-27 11:21:14 >>>getConnection
+2019-06-27 11:21:14 >>>execSql
+2019-06-27 11:21:14 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (20,'75mwf4','服务中','2019年06月27日','2019年09月26日',92,NOW())
+2019-06-27 11:21:14 >>>getConnection
+2019-06-27 11:21:14 >>>execSql
+2019-06-27 11:21:14 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (20,'75mwf4','服务中','2019年04月10日','2019年07月10日',14,NOW())
+2019-06-27 11:21:14 >>>getConnection
+2019-06-27 11:21:14 >>>yxtgsp58
+2019-06-27 11:21:15 >>>execSql
+2019-06-27 11:21:15 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(20,'75mwf4','44','20','1','24',NOW())
+2019-06-27 11:21:15 >>>getConnection
+2019-06-27 11:21:15 >>>myperiod
+2019-06-27 11:21:16 https://paycenter.58.com/wb/myperiod?transType=2&r=0.9090614024225981
+2019-06-27 11:21:18 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-09-26 00:00:00\",\"剩余可用数量\":\"5,383.56\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-10-10 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-07-10...
+2019-06-27 11:21:18 >>>execSql
+2019-06-27 11:21:18 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(20,'75mwf4','5,400.00','2019-09-26 00:00:00','5,383.56',NOW())
+2019-06-27 11:21:18 >>>getConnection
+2019-06-27 11:21:18 >>>execSql
+2019-06-27 11:21:18 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(20,'75mwf4','5,400.00','2019-10-10 00:00:00','0.00',NOW())
+2019-06-27 11:21:18 >>>getConnection
+2019-06-27 11:21:18 >>>execSql
+2019-06-27 11:21:18 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(20,'75mwf4','5,400.00','2019-07-10 00:00:00','0.00',NOW())
+2019-06-27 11:21:18 >>>getConnection
+2019-06-27 11:21:19 >>>getCookie
+2019-06-27 11:21:19 >>>updateUser
+2019-06-27 11:21:19 >>>execSql
+2019-06-27 11:21:19 update `gj_user` set `status`=0, `nickName`='谢任雯',`account`=5384.29,`session`='HUOKE_STATUS%3D1%3B%20sessid%3D765DBDDE-0DCC-5B2F-C562-BFD9D4F38205%3B%20aQQ_brokerguid%3D0A99CDCA-636E-CF70-72D5-F4B949A...
+2019-06-27 11:21:19 >>>getConnection
+2019-06-27 11:21:19 >>>close
+2019-06-27 11:21:20 >>>task1
+2019-06-27 11:21:20 >>>runPuppeteer
+2019-06-27 11:21:20 >>>close
+2019-06-27 11:21:20 >>>setCookie
+2019-06-27 11:21:20 >>>setCookie
+2019-06-27 11:21:20 >>>setCookie
+2019-06-27 11:21:20 >>>setCookie
+2019-06-27 11:21:20 >>>setCookie
+2019-06-27 11:21:21 >>>getUserInfo
+2019-06-27 11:21:22 >>>getCookie
+2019-06-27 11:21:24 >>>myService
+2019-06-27 11:21:25 https://apply.vip.58.com/myservice/list?r=0.3239132020893757
+2019-06-27 11:21:25 >>>execSql
+2019-06-27 11:21:25 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (21,'thinkid2','服务中','2019年06月10日','2019年09月09日',75,NOW())
+2019-06-27 11:21:25 >>>getConnection
+2019-06-27 11:21:25 >>>yxtgsp58
+2019-06-27 11:21:26 >>>execSql
+2019-06-27 11:21:26 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(21,'thinkid2','5','15','1','0',NOW())
+2019-06-27 11:21:26 >>>getConnection
+2019-06-27 11:21:26 >>>myperiod
+2019-06-27 11:21:26 https://paycenter.58.com/wb/myperiod?transType=2&r=0.7029806061506395
+2019-06-27 11:21:29 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-09-09 00:00:00\",\"剩余可用数量\":\"4,298.85\"},{\"推广币\":\"9.15\",\"到期时间\":\"2019-10-12 00:00:00\",\"剩余可用数量\":\"9.15\"},{\"推广币\":\"2,000.00\",\"到期时间\":\"2020-08-03 00:...
+2019-06-27 11:21:29 >>>execSql
+2019-06-27 11:21:29 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(21,'thinkid2','5,400.00','2019-09-09 00:00:00','4,298.85',NOW())
+2019-06-27 11:21:29 >>>getConnection
+2019-06-27 11:21:29 >>>execSql
+2019-06-27 11:21:29 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(21,'thinkid2','9.15','2019-10-12 00:00:00','9.15',NOW())
+2019-06-27 11:21:29 >>>getConnection
+2019-06-27 11:21:29 >>>execSql
+2019-06-27 11:21:29 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(21,'thinkid2','2,000.00','2020-08-03 00:00:00','213.07',NOW())
+2019-06-27 11:21:29 >>>getConnection
+2019-06-27 11:21:29 >>>getCookie
+2019-06-27 11:21:29 >>>updateUser
+2019-06-27 11:21:29 >>>execSql
+2019-06-27 11:21:29 update `gj_user` set `status`=0, `nickName`='王成',`account`=4599.73,`session`='HUOKE_STATUS%3D1%3B%20sessid%3D06D10EFF-AA66-DA2E-FBCF-3F5226DE978B%3B%20aQQ_brokerguid%3D87A134B6-516A-920B-932C-DE6F73D4...
+2019-06-27 11:21:29 >>>getConnection
+2019-06-27 11:21:29 >>>close
+2019-06-27 11:21:30 >>>task1
+2019-06-27 11:21:30 >>>runPuppeteer
+2019-06-27 11:21:30 >>>close
+2019-06-27 11:21:31 >>>setCookie
+2019-06-27 11:21:31 >>>setCookie
+2019-06-27 11:21:31 >>>setCookie
+2019-06-27 11:21:31 >>>setCookie
+2019-06-27 11:21:31 >>>setCookie
+2019-06-27 11:21:31 >>>getUserInfo
+2019-06-27 11:21:32 >>>getCookie
+2019-06-27 11:21:34 >>>myService
+2019-06-27 11:21:35 https://apply.vip.58.com/myservice/list?r=0.5556372475645179
+2019-06-27 11:21:35 >>>execSql
+2019-06-27 11:21:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:21:35 >>>getConnection
+2019-06-27 11:21:35 >>>execSql
+2019-06-27 11:21:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:21:35 >>>getConnection
+2019-06-27 11:21:35 >>>execSql
+2019-06-27 11:21:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:21:35 >>>getConnection
+2019-06-27 11:21:35 >>>execSql
+2019-06-27 11:21:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:21:35 >>>getConnection
+2019-06-27 11:21:35 >>>execSql
+2019-06-27 11:21:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:21:35 >>>getConnection
+2019-06-27 11:21:35 >>>execSql
+2019-06-27 11:21:35 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:21:35 >>>getConnection
+2019-06-27 11:21:35 >>>yxtgsp58
+2019-06-27 11:21:37 >>>execSql
+2019-06-27 11:21:37 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(25,'廊坊1号','19','41','0','0',NOW())
+2019-06-27 11:21:37 >>>getConnection
+2019-06-27 11:21:37 >>>myperiod
+2019-06-27 11:21:38 https://paycenter.58.com/wb/myperiod?transType=2&r=0.2225381798099174
+2019-06-27 11:21:40 [{\"推广币\":\"1,022.00\",\"到期时间\":\"2019-07-12 00:00:00\",\"剩余可用数量\":\"0.12\"}]
+2019-06-27 11:21:40 >>>execSql
+2019-06-27 11:21:40 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(25,'廊坊1号','1,022.00','2019-07-12 00:00:00','0.12',NOW())
+2019-06-27 11:21:40 >>>getConnection
+2019-06-27 11:21:40 >>>getCookie
+2019-06-27 11:21:40 >>>updateUser
+2019-06-27 11:21:40 >>>execSql
+2019-06-27 11:21:40 update `gj_user` set `status`=0, `nickName`='付开敏',`account`=0.12,`session`='sessid%3D637574CA-A39E-5466-80D6-6641C41F8B04%3B%20aQQ_brokerguid%3D2A25A0AF-549D-92C3-1CB8-56339AC4561E%3B%2058tj_uuid%3De5...
+2019-06-27 11:21:40 >>>getConnection
+2019-06-27 11:21:40 >>>close
+2019-06-27 11:21:41 >>>task1
+2019-06-27 11:21:41 >>>runPuppeteer
+2019-06-27 11:21:41 >>>close
+2019-06-27 11:21:42 >>>setCookie
+2019-06-27 11:21:42 >>>setCookie
+2019-06-27 11:21:42 >>>setCookie
+2019-06-27 11:21:42 >>>setCookie
+2019-06-27 11:21:42 >>>setCookie
+2019-06-27 11:21:43 >>>getUserInfo
+2019-06-27 11:21:44 >>>getCookie
+2019-06-27 11:21:46 >>>myService
+2019-06-27 11:21:47 https://apply.vip.58.com/myservice/list?r=0.7087692313421097
+2019-06-27 11:21:48 >>>execSql
+2019-06-27 11:21:48 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (5,'liu79921','服务中','2019年06月15日','2019年09月14日',80,NOW())
+2019-06-27 11:21:48 >>>getConnection
+2019-06-27 11:21:48 >>>execSql
+2019-06-27 11:21:48 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (5,'liu79921','服务中','2019年05月07日','2019年08月06日',41,NOW())
+2019-06-27 11:21:48 >>>getConnection
+2019-06-27 11:21:48 >>>execSql
+2019-06-27 11:21:48 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (5,'liu79921','服务中','2019年04月01日','2019年07月01日',5,NOW())
+2019-06-27 11:21:48 >>>getConnection
+2019-06-27 11:21:48 >>>yxtgsp58
+2019-06-27 11:21:49 >>>execSql
+2019-06-27 11:21:49 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(5,'liu79921','75','2','10','17',NOW())
+2019-06-27 11:21:49 >>>getConnection
+2019-06-27 11:21:49 >>>myperiod
+2019-06-27 11:21:50 https://paycenter.58.com/wb/myperiod?transType=2&r=0.2022928018656991
+2019-06-27 11:21:52 [{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-09-14 00:00:00\",\"剩余可用数量\":\"1,017.66\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-08-06 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"5,400.00\",\"到期时间\":\"2019-07-01...
+2019-06-27 11:21:52 >>>execSql
+2019-06-27 11:21:52 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(5,'liu79921','5,400.00','2019-09-14 00:00:00','1,017.66',NOW())
+2019-06-27 11:21:52 >>>getConnection
+2019-06-27 11:21:52 >>>execSql
+2019-06-27 11:21:52 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(5,'liu79921','5,400.00','2019-08-06 00:00:00','0.00',NOW())
+2019-06-27 11:21:52 >>>getConnection
+2019-06-27 11:21:52 >>>execSql
+2019-06-27 11:21:52 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(5,'liu79921','5,400.00','2019-07-01 00:00:00','0.00',NOW())
+2019-06-27 11:21:52 >>>getConnection
+2019-06-27 11:21:53 >>>getCookie
+2019-06-27 11:21:53 >>>updateUser
+2019-06-27 11:21:53 >>>execSql
+2019-06-27 11:21:53 update `gj_user` set `status`=0, `nickName`='王成',`account`=1017.76,`session`='HUOKE_STATUS%3D1%3B%20sessid%3DBE0B27A3-E5BE-49A7-BDAF-131219AA9835%3B%20aQQ_brokerguid%3DE4452F00-7DE4-46C5-0037-9C879A2D...
+2019-06-27 11:21:53 >>>getConnection
+2019-06-27 11:21:53 >>>close
+2019-06-27 11:35:08 >>>constructor
+2019-06-27 11:35:09 >>>main
+2019-06-27 11:35:09 >>>mainTask
+2019-06-27 11:35:09 >>>eachUser
+2019-06-27 11:35:09 >>>clearTable
+2019-06-27 11:35:09 >>>execSql
+2019-06-27 11:35:09 delete FROM gj_push;
+2019-06-27 11:35:09 >>>getConnection
+2019-06-27 11:35:09 >>>execSql
+2019-06-27 11:35:09 delete FROM gj_service;
+2019-06-27 11:35:09 >>>getConnection
+2019-06-27 11:35:09 >>>execSql
+2019-06-27 11:35:09 delete FROM gj_extension;
+2019-06-27 11:35:09 >>>getConnection
+2019-06-27 11:35:09 >>>getUserList
+2019-06-27 11:35:09 >>>execSql
+2019-06-27 11:35:09 select * from `gj_user`
+2019-06-27 11:35:09 >>>getConnection
+2019-06-27 11:35:09 [{"id":43,"nickname":null,"username":null,"password":null,"account":null,"create_time":null,"update_time":"2018-01-01T00:00:00.000Z","status":null,"session":null},{"id":22,"nickname":"王成","username":"...
+2019-06-27 11:35:36 >>>task1
+2019-06-27 11:35:36 >>>runPuppeteer
+2019-06-27 11:35:36 >>>close
+2019-06-27 11:35:38 >>>setCookie
+2019-06-27 11:35:38 >>>setCookie
+2019-06-27 11:35:38 >>>setCookie
+2019-06-27 11:35:38 >>>setCookie
+2019-06-27 11:35:38 >>>setCookie
+2019-06-27 11:35:39 >>>getUserInfo
+2019-06-27 11:35:40 >>>getCookie
+2019-06-27 11:35:42 >>>myService
+2019-06-27 11:35:43 https://apply.vip.58.com/myservice/list?r=0.3265939363332556
+2019-06-27 11:35:44 >>>execSql
+2019-06-27 11:35:44 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (2,'石家庄998','服务中','2019年06月01日','2019年08月31日',66,NOW())
+2019-06-27 11:35:44 >>>getConnection
+2019-06-27 11:35:44 >>>execSql
+2019-06-27 11:35:44 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (2,'石家庄998','服务中','2019年04月26日','2019年07月26日',30,NOW())
+2019-06-27 11:35:44 >>>getConnection
+2019-06-27 11:35:44 >>>yxtgsp58
+2019-06-27 11:35:45 >>>execSql
+2019-06-27 11:35:45 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(2,'石家庄998','undefined','undefined','undefined','undefined',NOW())
+2019-06-27 11:35:45 >>>getConnection
+2019-06-27 11:35:45 >>>myperiod
+2019-06-27 11:35:46 https://paycenter.58.com/wb/myperiod?transType=2&r=0.4081815184174551
+2019-06-27 11:35:49 [{\"推广币\":\"4,050.00\",\"到期时间\":\"2021-06-19 00:00:00\",\"剩余可用数量\":\"1,210.83\"},{\"推广币\":\"4,050.00\",\"到期时间\":\"2021-06-11 00:00:00\",\"剩余可用数量\":\"0.00\"},{\"推广币\":\"4,050.00\",\"到期时间\":\"2021-06-05...
+2019-06-27 11:35:49 >>>execSql
+2019-06-27 11:35:49 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(2,'石家庄998','4,050.00','2021-06-19 00:00:00','1,210.83',NOW())
+2019-06-27 11:35:49 >>>getConnection
+2019-06-27 11:35:49 >>>execSql
+2019-06-27 11:35:49 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(2,'石家庄998','4,050.00','2021-06-11 00:00:00','0.00',NOW())
+2019-06-27 11:35:49 >>>getConnection
+2019-06-27 11:35:50 >>>execSql
+2019-06-27 11:35:50 insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)values(2,'石家庄998','4,050.00','2021-06-05 00:00:00','0.00',NOW())
+2019-06-27 11:35:50 >>>getConnection
+2019-06-27 11:35:51 >>>getCookie
+2019-06-27 11:35:51 >>>updateUser
+2019-06-27 11:35:51 >>>execSql
+2019-06-27 11:35:51 update `gj_user` set `status`=0, `nickName`='王丽辉',`account`=1210.83,`session`='sessid%3DC8C07C82-B557-3FC0-FD9B-FD518205E790%3B%20aQQ_brokerguid%3D0D682E53-4387-4CBA-FC9A-832154C35E83%3B%2058tj_uuid%3...
+2019-06-27 11:35:51 >>>getConnection
+2019-06-27 11:35:51 >>>close
+2019-06-27 11:35:52 -Start-
+2019-06-27 11:36:31 >>>constructor
+2019-06-27 11:36:31 >>>main
+2019-06-27 11:36:31 >>>mainTask
+2019-06-27 11:36:31 >>>eachUser
+2019-06-27 11:36:31 >>>clearTable
+2019-06-27 11:36:31 >>>execSql
+2019-06-27 11:36:31 delete FROM gj_push;
+2019-06-27 11:36:31 >>>getConnection
+2019-06-27 11:36:31 >>>execSql
+2019-06-27 11:36:31 delete FROM gj_service;
+2019-06-27 11:36:31 >>>getConnection
+2019-06-27 11:36:31 >>>execSql
+2019-06-27 11:36:31 delete FROM gj_extension;
+2019-06-27 11:36:31 >>>getConnection
+2019-06-27 11:36:31 >>>getUserList
+2019-06-27 11:36:31 >>>execSql
+2019-06-27 11:36:31 select * from `gj_user`
+2019-06-27 11:36:31 >>>getConnection
+2019-06-27 11:36:31 [{"id":43,"nickname":null,"username":null,"password":null,"account":null,"create_time":null,"update_time":"2018-01-01T00:00:00.000Z","status":null,"session":null},{"id":22,"nickname":"王成","username":"...
+2019-06-27 11:36:31 >>>task1
+2019-06-27 11:36:31 >>>runPuppeteer
+2019-06-27 11:36:31 >>>close
+2019-06-27 11:36:33 >>>setCookie
+2019-06-27 11:36:33 >>>setCookie
+2019-06-27 11:36:33 >>>setCookie
+2019-06-27 11:36:33 >>>setCookie
+2019-06-27 11:36:33 >>>setCookie
+2019-06-27 11:36:34 >>>getUserInfo
+2019-06-27 11:36:34 >>>getCookie
+2019-06-27 11:36:37 >>>myService
+2019-06-27 11:36:38 https://apply.vip.58.com/myservice/list?r=0.20651190459121804
+2019-06-27 11:36:38 >>>execSql
+2019-06-27 11:36:38 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (2,'石家庄998','服务中','2019年06月01日','2019年08月31日',66,NOW())
+2019-06-27 11:36:38 >>>getConnection
+2019-06-27 11:36:38 >>>execSql
+2019-06-27 11:36:38 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (2,'石家庄998','服务中','2019年04月26日','2019年07月26日',30,NOW())
+2019-06-27 11:36:38 >>>getConnection
+2019-06-27 11:36:38 >>>yxtgsp58
+2019-06-27 11:39:36 >>>execSql
+2019-06-27 11:39:36 insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)values(2,'石家庄998','undefined','undefined','undefined','undefined',NOW())
+2019-06-27 11:39:36 >>>getConnection
+2019-06-27 11:49:44 >>>constructor
+2019-06-27 11:49:44 >>>main
+2019-06-27 11:49:44 >>>mainTask
+2019-06-27 11:49:44 >>>eachUser
+2019-06-27 11:49:44 >>>clearTable
+2019-06-27 11:49:44 >>>execSql
+2019-06-27 11:49:44 delete FROM gj_push;
+2019-06-27 11:49:44 >>>getConnection
+2019-06-27 11:49:44 >>>execSql
+2019-06-27 11:49:44 delete FROM gj_service;
+2019-06-27 11:49:44 >>>getConnection
+2019-06-27 11:49:44 >>>execSql
+2019-06-27 11:49:44 delete FROM gj_extension;
+2019-06-27 11:49:44 >>>getConnection
+2019-06-27 11:49:44 >>>getUserList
+2019-06-27 11:49:44 >>>execSql
+2019-06-27 11:49:44 select * from `gj_user`
+2019-06-27 11:49:44 >>>getConnection
+2019-06-27 11:49:44 [{"id":43,"nickname":null,"username":null,"password":null,"account":null,"create_time":null,"update_time":"2018-01-01T00:00:00.000Z","status":null,"session":null},{"id":22,"nickname":"王成","username":"...
+2019-06-27 11:49:44 >>>task1
+2019-06-27 11:49:44 >>>runPuppeteer
+2019-06-27 11:49:44 >>>close
+2019-06-27 11:49:46 >>>setCookie
+2019-06-27 11:49:46 >>>setCookie
+2019-06-27 11:49:46 >>>setCookie
+2019-06-27 11:49:46 >>>setCookie
+2019-06-27 11:49:46 >>>setCookie
+2019-06-27 11:49:46 >>>getUserInfo
+2019-06-27 11:49:47 >>>getCookie
+2019-06-27 11:49:49 >>>myService
+2019-06-27 11:49:50 https://apply.vip.58.com/myservice/list?r=0.3006591813775743
+2019-06-27 11:49:50 >>>execSql
+2019-06-27 11:49:50 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (2,'石家庄998','服务中','2019年06月01日','2019年08月31日',66,NOW())
+2019-06-27 11:49:50 >>>getConnection
+2019-06-27 11:49:50 >>>execSql
+2019-06-27 11:49:50 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (2,'石家庄998','服务中','2019年04月26日','2019年07月26日',30,NOW())
+2019-06-27 11:49:50 >>>getConnection
+2019-06-27 11:49:50 >>>yxtgsp58
+2019-06-27 11:50:22 >>>constructor
+2019-06-27 11:50:22 >>>main
+2019-06-27 11:50:22 >>>mainTask
+2019-06-27 11:50:22 >>>eachUser
+2019-06-27 11:50:22 >>>clearTable
+2019-06-27 11:50:22 >>>execSql
+2019-06-27 11:50:22 delete FROM gj_push;
+2019-06-27 11:50:22 >>>getConnection
+2019-06-27 11:50:22 >>>execSql
+2019-06-27 11:50:22 delete FROM gj_service;
+2019-06-27 11:50:22 >>>getConnection
+2019-06-27 11:50:22 >>>execSql
+2019-06-27 11:50:22 delete FROM gj_extension;
+2019-06-27 11:50:22 >>>getConnection
+2019-06-27 11:50:22 >>>getUserList
+2019-06-27 11:50:22 >>>execSql
+2019-06-27 11:50:22 select * from `gj_user`
+2019-06-27 11:50:22 >>>getConnection
+2019-06-27 11:50:22 [{"id":43,"nickname":null,"username":null,"password":null,"account":null,"create_time":null,"update_time":"2018-01-01T00:00:00.000Z","status":null,"session":null},{"id":22,"nickname":"王成","username":"...
+2019-06-27 11:50:22 >>>task1
+2019-06-27 11:50:22 >>>runPuppeteer
+2019-06-27 11:50:22 >>>close
+2019-06-27 11:50:24 >>>setCookie
+2019-06-27 11:50:24 >>>setCookie
+2019-06-27 11:50:24 >>>setCookie
+2019-06-27 11:50:24 >>>setCookie
+2019-06-27 11:50:24 >>>setCookie
+2019-06-27 11:50:25 >>>getUserInfo
+2019-06-27 11:50:25 >>>getCookie
+2019-06-27 11:50:28 >>>myService
+2019-06-27 11:50:28 https://apply.vip.58.com/myservice/list?r=0.050734554984653846
+2019-06-27 11:50:29 >>>execSql
+2019-06-27 11:50:29 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:50:29 >>>getConnection
+2019-06-27 11:50:29 >>>execSql
+2019-06-27 11:50:29 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:50:29 >>>getConnection
+2019-06-27 11:50:29 >>>execSql
+2019-06-27 11:50:29 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:50:29 >>>getConnection
+2019-06-27 11:50:29 >>>execSql
+2019-06-27 11:50:29 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:50:29 >>>getConnection
+2019-06-27 11:50:29 >>>execSql
+2019-06-27 11:50:29 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:50:29 >>>getConnection
+2019-06-27 11:50:29 >>>execSql
+2019-06-27 11:50:29 insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (25,'廊坊1号','服务中','2019年01月11日','2019年07月12日',16,NOW())
+2019-06-27 11:50:29 >>>getConnection
+2019-06-27 11:50:29 >>>yxtgsp58

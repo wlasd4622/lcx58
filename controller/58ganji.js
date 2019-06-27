@@ -24,9 +24,9 @@ class GanJi {
     if (info.length > 200) {
       info = info.substr(0, 200) + '...'
     }
-    info=moment().format('YYYY-MM-DD HH:mm:ss')+' '+info
+    info = moment().format('YYYY-MM-DD HH:mm:ss') + ' ' + info
     console.log(info);
-    fs.appendFileSync('./debug.log', info+'\n')
+    fs.appendFileSync(`./logs/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
   }
 
   getConnection() {
@@ -89,7 +89,7 @@ class GanJi {
       this.log(err);
     }
     this.browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       args: ['--start-maximized', '--disable-infobars']
     });
     this.page = await this.browser.newPage();
@@ -262,14 +262,20 @@ class GanJi {
 
   async eachUser() {
     this.log(`>>>eachUser`);
-    let list = ['W15810915325'];
+    let list = [];
+    list = ['廊坊1号'];
     await this.clearTable()
     await this.getUserList()
     if (this.userList.length) {
       for (let index = 0; index < this.userList.length; index++) {
         const user = this.userList[index];
-        // if (user.session && list.includes(user.username)) {
-        if (user.session) {
+        let flag = false;
+        if (list.length) {
+          flag = user.session && list.includes(user.username)
+        } else {
+          flag = user.session
+        }
+        if (flag) {
           try {
             await this.task1(user);
           } catch (err) {
@@ -389,6 +395,16 @@ class GanJi {
         if (在线购买) {
           在线购买 = parseInt(在线购买)
           data['在线购买'] = 在线购买;
+        }
+        //石家庄
+        let s = $('.layout-right dt:contains(58精选)')
+        if (s.length) {
+          data = {}
+          data['推送中'] = s.next().find('span:contains(推广中) em').text()
+          data['还可推送'] = s.next().find('span:contains(还可推广) em').text()
+          data['今日推送到期'] = ''
+          data['在线购买'] = ''
+
         }
         return data;
       }
