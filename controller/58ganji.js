@@ -264,7 +264,7 @@ class GanJi {
   async eachUser() {
     this.log(`>>>eachUser`);
     let list = [];
-    list = ['石家庄998账号三'];
+    // list = ['石家庄998账号三'];
     // await this.clearTable()
     await this.getUserList()
     if (this.userList.length) {
