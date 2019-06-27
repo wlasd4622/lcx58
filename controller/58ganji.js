@@ -163,7 +163,8 @@ class GanJi {
       let nickName = await this.page.evaluate(() => {
         return $('a:contains(您好)').text().replace('您好，', '').trim() || ''
       })
-
+      //先清除数据，再写入
+      await this.clearDate(user)
       //服务中及预约中的套餐开通及到期时间
       await this.myService(user);
       //推送中，在线购买，还可推送，今日推送到期数量
@@ -238,21 +239,21 @@ class GanJi {
   }
 
 
-  async clearTable() {
+  async clearDate(user) {
     this.log('>>>clearTable');
-    let sql = `delete FROM gj_push;`
+    let sql = `delete FROM gj_push WHERE user_id=${user.id};`
     try {
       await this.execSql(sql)
     } catch (err) {
       console.error(err)
     }
-    sql = `delete FROM gj_service;`
+    sql = `delete FROM gj_service WHERE user_id=${user.id};;`
     try {
       await this.execSql(sql)
     } catch (err) {
       console.error(err)
     }
-    sql = `delete FROM gj_extension;`
+    sql = `delete FROM gj_extension WHERE user_id=${user.id};`
     try {
       await this.execSql(sql)
     } catch (err) {
@@ -263,8 +264,8 @@ class GanJi {
   async eachUser() {
     this.log(`>>>eachUser`);
     let list = [];
-    list = ['廊坊1号'];
-    await this.clearTable()
+    list = ['石家庄998账号三'];
+    // await this.clearTable()
     await this.getUserList()
     if (this.userList.length) {
       for (let index = 0; index < this.userList.length; index++) {
@@ -379,37 +380,48 @@ class GanJi {
   //推送中，在线购买，还可推送，今日推送到期数量
   async yxtgsp58(user) {
     this.log(`>>>yxtgsp58`);
-    let url = `http://vip.58ganji.com/jp58/yxtgsp58`
-    await this.page.goto(url, {
-      waitUntil: 'domcontentloaded'
-    })
-    await this.page.waitForSelector('.layout-right')
-    let result = await this.page.evaluate(() => {
-      function foamat() {
-        var data = {}
-        $('dt:contains(优先推送)').next().find('>span').toArray().map(item => {
-          let info = $(item).text().split('：');
-          data[info[0]] = parseInt(info[1])
-        })
-        let 在线购买 = $('dt:contains(优先推送)').next().find('span:contains(在线购买)').length && $('dt:contains(优先推送)').next().find('span:contains(在线购买)').text().match(/在线购买(\d+)/)[1]
-        if (在线购买) {
-          在线购买 = parseInt(在线购买)
-          data['在线购买'] = 在线购买;
+    let result = {};
+    //石家庄用户区别
+    if (user.username.includes('石家庄')) {
+      let url = `http://vip.58ganji.com/sydchug/list/sydc`
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      })
+      await this.page.waitForSelector('.platform-data .bold')
+      result = await this.page.evaluate(() => {
+        function foamat() {
+          var data = {}
+          data['还可推送'] = $('.platform-data:eq(0) span:contains(剩余可推广) span').text()
+          data['推送中'] = $('.platform-data:eq(0) span:contains(推广中) span').text()
+          return data;
         }
-        //石家庄
-        let s = $('.layout-right dt:contains(58精选)')
-        if (s.length) {
-          data = {}
-          data['推送中'] = s.next().find('span:contains(推广中) em').text()
-          data['还可推送'] = s.next().find('span:contains(还可推广) em').text()
-          data['今日推送到期'] = ''
-          data['在线购买'] = ''
+        return foamat()
+      })
+      console.log(result);
+    } else {
+      let url = `http://vip.58ganji.com/jp58/yxtgsp58`
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      })
+      await this.page.waitForSelector('.layout-right')
+      result = await this.page.evaluate(() => {
+        function foamat() {
+          var data = {}
+          $('dt:contains(优先推送)').next().find('>span').toArray().map(item => {
+            let info = $(item).text().split('：');
+            data[info[0]] = parseInt(info[1])
+          })
+          let 在线购买 = $('dt:contains(优先推送)').next().find('span:contains(在线购买)').length && $('dt:contains(优先推送)').next().find('span:contains(在线购买)').text().match(/在线购买(\d+)/)[1]
+          if (在线购买) {
+            在线购买 = parseInt(在线购买)
+            data['在线购买'] = 在线购买;
+          }
+          return data;
+        }
+        return foamat()
+      })
+    }
 
-        }
-        return data;
-      }
-      return foamat()
-    })
     let sql = "insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)" +
       "values(" + user.id + ",'" + user.username + "','" + result['推送中'] + "','" + result['还可推送'] + "','" + result['今日推送到期'] + "','" + result['在线购买'] + "',NOW())"
 
