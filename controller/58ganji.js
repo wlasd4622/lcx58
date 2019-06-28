@@ -71,7 +71,7 @@ class GanJi {
       this.log(err);
     }
     this.browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ['--start-maximized', '--disable-infobars']
     });
     this.page = await this.browser.newPage();
@@ -119,51 +119,59 @@ class GanJi {
 
   async task1(user) {
     this.log(`>>>task1`);
-    await this.runPuppeteer();
-    let url = `http://vip.58ganji.com/user/brokerhomeV2`
-    url = `http://vip.58ganji.com/broker/balancedetail/generalize`
-    let session = decodeURIComponent(user.session)
-    await this.setCookie(session, '.58ganji.com', this.page);
-    await this.setCookie(session, '.58.com', this.page);
-    await this.setCookie(session, '.vip.58.com', this.page);
-    await this.setCookie(session, '.anjuke.com', this.page);
-    await this.setCookie(session, '.vip.58ganji.com', this.page);
-    await this.sleep(500)
-    let username = await this.getUserInfo();
-    let cookie = await this.getCookie()
-    if (username.toLocaleLowerCase() === user.username.toLocaleLowerCase()) {
+    try {
+      await this.runPuppeteer();
+      let url = `http://vip.58ganji.com/user/brokerhomeV2`
       url = `http://vip.58ganji.com/broker/balancedetail/generalize`
-      await this.page.goto(url);
-      await this.page.waitForSelector('.balance-detail .info-box-item .estate')
-      await this.sleep(2000)
-      //房产推广币
-      let blanceHbg58 = await this.page.evaluate(() => {
-        // return $('.account-mod li:eq(1) b').text();
-        return $('span:contains(房产推广币)').next('b').text() || ''
-      });
+      let session = decodeURIComponent(user.session)
+      await this.setCookie(session, '.58ganji.com', this.page);
+      await this.setCookie(session, '.58.com', this.page);
+      await this.setCookie(session, '.vip.58.com', this.page);
+      await this.setCookie(session, '.anjuke.com', this.page);
+      await this.setCookie(session, '.vip.58ganji.com', this.page);
+      await this.sleep(500)
+      let username = await this.getUserInfo();
+      if (username === -1) {
+        throw 'session失效'
+      }
+      let cookie = await this.getCookie()
+      if (username.toLocaleLowerCase() === user.username.toLocaleLowerCase()) {
+        url = `http://vip.58ganji.com/broker/balancedetail/generalize`
+        await this.page.goto(url);
+        await this.page.waitForSelector('.balance-detail .info-box-item .estate')
+        await this.sleep(2000)
+        //房产推广币
+        let blanceHbg58 = await this.page.evaluate(() => {
+          // return $('.account-mod li:eq(1) b').text();
+          return $('span:contains(房产推广币)').next('b').text() || ''
+        });
 
-      let nickName = await this.page.evaluate(() => {
-        return $('a:contains(您好)').text().replace('您好，', '').trim() || ''
-      })
-      //先清除数据，再写入
-      await this.clearDate(user)
-      //服务中及预约中的套餐开通及到期时间
-      await this.myService(user);
-      //推送中，在线购买，还可推送，今日推送到期数量
-      await this.yxtgsp58(user);
-      // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
-      await this.myperiod(user);
-      //回到首页 获取cookie
-      url = `http://vip.58ganji.com/user/brokerhomeV2`
-      url = `http://vip.58ganji.com/broker/balancedetail/generalize`
-      await this.page.goto(url);
-      await this.page.waitForSelector('.balance-detail .info-box-item .estate')
-      cookie = await this.getCookie()
-      await this.updateUser(user, blanceHbg58, cookie, nickName)
-    } else {
-      await this.updateUser(user, '', '', '', 5001)
+        let nickName = await this.page.evaluate(() => {
+          return $('a:contains(您好)').text().replace('您好，', '').trim() || ''
+        })
+        //先清除数据，再写入
+        await this.clearDate(user)
+        //服务中及预约中的套餐开通及到期时间
+        await this.myService(user);
+        //推送中，在线购买，还可推送，今日推送到期数量
+        await this.yxtgsp58(user);
+        // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
+        await this.myperiod(user);
+        //回到首页 获取cookie
+        url = `http://vip.58ganji.com/user/brokerhomeV2`
+        url = `http://vip.58ganji.com/broker/balancedetail/generalize`
+        await this.page.goto(url);
+        await this.page.waitForSelector('.balance-detail .info-box-item .estate')
+        cookie = await this.getCookie()
+        await this.updateUser(user, blanceHbg58, cookie, nickName)
+      } else {
+        await this.updateUser(user, '', '', '', 5001)
+      }
+      await this.close()
+    } catch (error) {
+      console.error(error);
+      this.log(error)
     }
-    await this.close()
   }
   async updateUser(user, blanceHbg58, cookie, nickName, status = 0) {
     this.log(`>>>updateUser`);
@@ -246,7 +254,7 @@ class GanJi {
   async eachUser() {
     this.log(`>>>eachUser`);
     let list = [];
-    // list = ['石家庄998账号三'];
+    // list = ['anjuke5'];
     // await this.clearTable()
     await this.getUserList()
     if (this.userList.length) {
@@ -302,10 +310,16 @@ class GanJi {
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
-    await this.page.waitForSelector('.info-header-username')
-    let username = await this.page.evaluate(() => {
-      return $('.info-header-username').text().trim() || ''
-    })
+    let username = '';
+    try {
+      await this.page.waitForSelector('.info-header-username')
+      username = await this.page.evaluate(() => {
+        return $('.info-header-username').text().trim() || ''
+      })
+    } catch (err) {
+      this.log(err)
+      username = -1
+    }
     return username || ''
   }
 

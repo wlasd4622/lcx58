@@ -686,6 +686,10 @@ Function addHouseInfo(houseId)
         Goto rAddHouseInfo
     End If
     codeKey=execjs("$('a.house_basic_title_content_item3.blue-link:eq(0)').attr('href').match(/\w*.*?\.com/)[0].replace('//','')")
+    If codeKey = "" Then
+    	log "codeKey为空"
+    	Goto rAddHouseInfo
+    End If
     code = queryCode(codeKey)
     Rem rNotabsPage
     //回到列表页面点击编辑进入详情编辑页面
