@@ -74,7 +74,7 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<20) Then
+    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<19) Then
         status=false
     Else
         status=true
@@ -537,6 +537,10 @@ Function login()
 End Function
 Function updateStatus(userInfo, status)
     Rem rUpdateStatus
+    If status = 3507 Then
+        Call loadJquery()
+        Delay 1000
+    End If
     Call loadScript("58")
     Delay 500
     flag = execjs("typeof window.updateHouseInfo==='undefined'?0:1")

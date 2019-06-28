@@ -40,24 +40,6 @@ class GanJi {
           resolve(connection)
         }
       });
-      // this.pool = mysql.createPool(this.dbConfig);
-      // this.connection = mysql.createConnection(this.dbConfig);
-      // this.connection.connect(async function (err) {
-      //   if (err) {
-      //     this.log('error when connecting to db:', err);
-      //     reject()
-      //   } else {
-      //     resolve();
-      //   }
-      // });
-      // this.connection.on('error', function (err) {
-      //   this.log('db error', err);
-      //   if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      //     reject()
-      //   } else {
-      //     throw err;
-      //   }
-      // });
     })
   }
 
