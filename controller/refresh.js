@@ -80,10 +80,14 @@ class Refresh {
 
   async task1() {
     this.log(`>>>task`);
-    for (let index = 0; index < this.userList.length; index++) {
+    for (let index = 8; index < this.userList.length; index++) {
       //TODO
-      // index = 3
+      // index = 7
+      this.log(`user.index:${index}`)
       let user = this.userList[index];
+      if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')) {
+        continue;
+      }
       this.log(user)
       let sql = `select * from gj_user where username='${user.user_name}'`
       try {
@@ -100,6 +104,7 @@ class Refresh {
   }
 
   sleep(ms = 300) {
+    this.log(`>>>sleep:${ms}`)
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve()
@@ -154,63 +159,120 @@ class Refresh {
   }
 
   async houseEditHandle(houseId, user) {
+    this.log(`>>>houseEditHandle`)
     let editPage = null;
     try {
-      await this.page.evaluate((houseId) => {
-        $(`tr[tid='${houseId}'] a:contains("编辑")`).attr('id', 'edit')
-      }, houseId)
-      await this.page.click(`tr[tid='${houseId}'] #edit`);
-      await this.sleep(1000)
-      let pages = await this.browser.pages()
-      editPage = pages[2];
-      await editPage.bringToFront()
-      let len = this.waitElement('#publish-jpshop-add', editPage);
-      if (len) {
-        await editPage.evaluate(() => {
-          window.scrollTo(0, 100000);
+      let jqueryExist = false;
+      let jqueryExistCount = 0;
+      do {
+        jqueryExist++;
+        this.log(`do:jqueryExist:${jqueryExist}`)
+        await this.sleep()
+        jqueryExist = await this.page.evaluate(() => {
+          return typeof window.jQuery === 'function'
         })
-        this.sleep(500);
-        let url = "";
-        do {
+      } while (!jqueryExist)
+      let editUrl = await this.page.evaluate((houseId) => {
+        return jQuery(`tr[tid='${houseId}'] a:contains("编辑")`).attr('href')
+      }, houseId)
+      this.log(editUrl)
+      // await this.page.click(`tr[tid='${houseId}'] #edit`);
+      // await this.sleep(1000)
+      let pages = await this.browser.pages()
+      editPage = pages[0];
+      await editPage.bringToFront()
+
+      let clickStatus = false
+      for (let index = 0; index < 5; index++) {
+        this.log(`for:${index}`)
+
+        let url = ""
+        await editPage.goto(editUrl, {
+          waitUntil: 'domcontentloaded'
+        })
+        await this.sleep(1000)
+
+        let submitBtnElement = await editPage.evaluate(() => {
+          let submitBtnElement = ''
           try {
-            len = await editPage.evaluate(() => {
-              return $('#publish-jpshop-add').length || 0
-            })
-            if (len) {
-              await editPage.click('#publish-jpshop-add');
-            }
-
+            window.scrollTo(0, 90000)
           } catch (error) {
-            this.log(error)
+            console.log(error);
           }
-          await this.sleep(500);
-          url = await editPage.evaluate(() => {
-            return location.href;
-          })
-          console.log(url);
-        } while (!url.includes('publish/result'))
-
-        len = await this.waitElement('.result-title:contains(保存成功)', editPage)
-        if (len) {
-          //保存成功
-          this.log('保存成功')
-        } else {
-          //保存失败
-          this.log('保存失败')
-
+          if ($('#publish-jpshop-add').length) {
+            submitBtnElement = '#publish-jpshop-add'
+          } else if ($('#publish-jpoffice-add').length) {
+            submitBtnElement = '#publish-jpoffice-add'
+          }
+          return submitBtnElement;
+        })
+        if (!submitBtnElement) {
+          throw "没找到编辑页面提交按钮"
         }
+        this.log('click:' + submitBtnElement)
+        await this.sleep(600);
+        let submitBtn = await editPage.$(submitBtnElement);
+        if (submitBtn) {
+          await submitBtn.click()
+        }
+        await this.sleep(1000);
+        url = editPage.url()
+        this.log(url)
+        if (url.includes('publish/result') || url.includes('house/result')) {
+          clickStatus = true;
+          break;
+        }
+        //判断提交是否异常
+        let message = '修改保存异常'
+        let submitMessage = await this.checkSaveDataHandle(editPage);
+        if (submitMessage) {
+          message = message + ':' + submitMessage
+          throw message
+        }
+      }
+      if (!clickStatus) {
+        let message = '修改保存异常'
+        let submitMessage = await this.checkSaveDataHandle(editPage);
+        if (submitMessage) {
+          message = message + ':' + submitMessage
+        }
+        throw message
+      }
+
+      let len = await this.waitElement('.result-title:contains(保存成功),dt:contains(编辑成功)', editPage)
+      if (len) {
+        //保存成功
+        this.log('保存成功')
       } else {
-        this.log('未处理异常:63453754')
+        //保存失败
+        this.log('保存失败')
       }
     } catch (error) {
-      this.log('未处理异常:23562')
       this.log(error)
+      if (error.message === '修改保存异常') {
+        console.log(666);
+      }
+      this.log('未处理异常:23562')
     }
     await this.sleep(600)
     await this.page.bringToFront()
-    if (editPage) {
-      await editPage.close()
+    // if (editPage) {
+    //   await editPage.close()
+    // }
+  }
+
+  async checkSaveDataHandle(editPage) {
+    let message = ""
+    let errArr = await editPage.evaluate(() => {
+      return $('.ui-tips-fail-noborder').toArray().map(item => {
+        return $(item).text().replace('', '') || []
+      })
+    })
+
+    if (errArr && errArr.length) {
+      message = errArr.toString();
     }
+    return message;
   }
 
   async houseHandle(houseId, user) {
@@ -221,7 +283,9 @@ class Refresh {
     };
     try {
       let url = `http://vip.58ganji.com/jp58/kcfysp58`
-      await this.page.goto(url);
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      });
       await this.page.waitForSelector('.ui-boxer-title')
       await this.page.evaluate(() => {
         $('#houselist').remove()
@@ -342,7 +406,9 @@ class Refresh {
       await this.setCookie(session, '.anjuke.com', this.page);
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
-      await this.page.goto(url);
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      });
       await this.page.waitForSelector('.ui-boxer-title')
       for (let index = 0; index < houseList.length; index++) {
         if (user.status === 306) {
@@ -358,39 +424,31 @@ class Refresh {
       }
       this.log(err)
     }
-    console.log('refresh-end');
+    // console.log('refresh-end');
   }
 
   async waitElement(selector, page) {
     let len = 0;
-    this.log('>>>waitElement');
-    this.log(selector)
-    if (!page) {
-      page = this.page
-    }
-
-    function wait(selector, page) {
-      return new Promise((reject, resolve) => {
-        setTimeout(async () => {
-          try {
-            let length = await page.evaluate(selector => {
-              return $(selector).length;
-            }, selector);
-            reject(length || 0);
-          } catch (error) {
-            //未处理  位置错误
-            // this.log(error)
-            // resolve(err)
-          }
-        }, 500)
-      })
-    }
-
-    for (let index = 0; index < 10; index++) {
-      len = await wait(selector, page)
-      if (len) {
-        break;
+    try {
+      this.log('>>>waitElement');
+      this.log(selector)
+      if (!page) {
+        page = this.page
       }
+      for (let index = 0; index < 10; index++) {
+        this.log(`waitElement第${index}次寻找...`)
+        await this.sleep(500)
+        len = await page.evaluate(selector => {
+          return jQuery(selector).length;
+        }, selector);
+        this.log(`寻找结果${len}`)
+        if (len) {
+          break;
+        }
+      }
+    } catch (error) {
+      console.error(error)
+      this.log(error)
     }
     return len;
   }

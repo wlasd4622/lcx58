@@ -687,8 +687,8 @@ Function addHouseInfo(houseId)
     End If
     codeKey=execjs("$('a.house_basic_title_content_item3.blue-link:eq(0)').attr('href').match(/\w*.*?\.com/)[0].replace('//','')")
     If codeKey = "" Then
-    	log "codeKey为空"
-    	Goto rAddHouseInfo
+        log "codeKey为空"
+        Goto rAddHouseInfo
     End If
     code = queryCode(codeKey)
     Rem rNotabsPage
@@ -901,7 +901,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='13418845040' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='15900500484' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -982,7 +982,11 @@ Function clearAllCookie()
     Call findp2("$('#cookieSearchCondition:visible').length", "查找页面元素",page2)
     Delay 1000
     Call execjsp2("$('#deleteAllButton')[0].click()",page2)
-    Call findp2("$('#noCookies:contains(没有cookie记录)').length", "没有cookie记录！",page2)
+    Call findp2("$('#noCookies:contains(没有cookie记录)').length", "没有cookie记录！", page2)
+    Plugin.chrome.clear_browser_cookies id
+    Plugin.chrome.clear_browser_cache id
+    Plugin.chrome.clear_browser_cookies page2
+    Plugin.chrome.clear_browser_cache page2
 End Function
 Function getHouseId(url)
     regstr = url
