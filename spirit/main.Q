@@ -114,7 +114,7 @@ Function refresh(houseId)
         Call execjs("var wContent=$('form.form-container.immediate').text().trim().replace(/[\n\s]/g,'')||$('form.yyset').text().trim().replace(/[\s\n]/g,'');")
         Call execjs("function getStatus() {"&_
     					"if (wContent.indexOf('近7天免费刷新已到上限') > -1||wContent.indexOf('帖子浏览量大于') > -1) {"&_
-        					"return 3070"&_
+        					"return 3030"&_
     					"} else if(wContent.indexOf('30天不享有免费刷新') > -1||wContent.indexOf('免费刷新次数已用完，您可尝试付费刷新') > -1) {"&_
         					"return 3030"&_
     					"} else if (wContent.indexOf('本次刷新免费') > -1||/账号剩余刷新资源[^0]/.test(wContent)) {"&_
