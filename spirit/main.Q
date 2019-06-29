@@ -529,7 +529,7 @@ Function login()
     Else
         Goto fLoadLogin
     End If
-    If loginStatus=4000 and loginCount < 4 Then
+    If loginStatus=4000 and loginCount < 6 Then
         loginCount=loginCount+1
         Goto fLoadLogin
     End If
