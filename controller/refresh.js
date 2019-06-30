@@ -68,6 +68,7 @@ class Refresh {
       if (T instanceof Error) {
         console.error(T)
         info = T.message
+        debugger;
       } else {
         info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
       }
@@ -272,7 +273,7 @@ class Refresh {
         result.msg = error.message
       }
       //更新数据库
-      await this.updateHouseStatus(Object.assign({}, JSON.parse(JSON.stringify(user)), result,{
+      await this.updateHouseStatus(Object.assign({}, JSON.parse(JSON.stringify(user)), result, {
         houseId
       }))
     }
@@ -302,6 +303,98 @@ class Refresh {
     return message;
   }
 
+  /**
+   * house push
+   * @param {*} houseId
+   * @param {*} user
+   */
+  async housePushHandle(houseId, user, result) {
+    //判断是否正常推送中
+    let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
+    if (grey) {
+      //正常推送中
+      this.log('正常推送中')
+      result = {
+        status: 200,
+        msg: '正常推送中'
+      }
+    } else {
+      //非正常推送中
+      this.log('非正常推送中')
+      if (user.status == 306) {
+        //余额不足
+        this.log('余额不足')
+        result = {
+          status: 306,
+          msg: '余额不足'
+        }
+      } else {
+        result = {
+          status: 300,
+          msg: '非正常推送中'
+        }
+        let batchproyx = await this.page.$(`tr[tid='${houseId}'] .opt-link.batchproyx`);
+        await batchproyx.click();
+        await this.sleep(500)
+        let timeContList = await this.page.$('.time-cont label:last-child')
+        if (timeContList) {
+          await timeContList.click();
+        }
+        await this.sleep(500)
+        await this.page.click('.ui-dialog-content .btn-ok');
+        //查找 点击确定推送反馈结果弹窗
+        let len = await this.waitElement('.ui-alert-mainMsg:visible')
+        if (len) {
+          len = await this.waitElement('.ui-alert-subMsg:visible')
+          if (len) {
+            let content = await this.page.evaluate(() => {
+              return $('.ui-alert-subMsg:visible').text();
+            })
+            if (content.includes('推送成功')) {
+              //推送成功
+              this.log('推送成功')
+              result = {
+                status: 202,
+                msg: '推送成功'
+              }
+            } else {
+              //推送失败
+              this.log(`推送失败:${content}`)
+              result = {
+                status: 303,
+                msg: `推送失败:${content}`
+              }
+            }
+          } else {
+            this.log('未处理异常，没有找到点击推送后消息内容')
+            result = {
+              status: 302,
+              msg: '未处理异常，没有找到点击推送后消息内容'
+            }
+          }
+        } else {
+          let len = await this.waitElement('span:contains(余额不足，请):visible')
+          if (len) {
+            user.status = 306;
+            this.log('余额不足')
+            result = {
+              status: 306,
+              msg: '余额不足'
+            }
+          } else {
+            this.log('未处理异常，没有找到点击推送后结果弹窗')
+            result = {
+              status: 301,
+              msg: '未处理异常，没有找到点击推送后结果弹窗'
+            }
+          }
+        }
+      }
+      await this.sleep(500)
+    }
+    return result;
+  }
+
   async houseRefreshHandle(houseId, user) {
     this.log(`houseId:${houseId}`);
     let result = {
@@ -328,91 +421,15 @@ class Refresh {
       await this.page.waitForSelector(this.userType(user) == 0 ? '#houselist' : 'table.ui-table.sydc-table')
       let houseElement = await this.page.$(this.userType(user) == 0 ? `tr[tid='${houseId}']` : `tr[data-unityinfoid='${houseId}']`);
       if (houseElement) {
-        await this.houseEditHandle(houseId, user);
-
-        //判断是否正常推送中
-        let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
-        if (grey) {
-          //正常推送中
-          this.log('正常推送中')
-          result = {
-            status: 200,
-            msg: '正常推送中'
-          }
-        } else {
-          //非正常推送中
-          this.log('非正常推送中')
-          if (user.status == 306) {
-            //余额不足
-            this.log('余额不足')
-            result = {
-              status: 306,
-              msg: '余额不足'
-            }
-          } else {
-            result = {
-              status: 300,
-              msg: '非正常推送中'
-            }
-            let batchproyx = await this.page.$(`tr[tid='${houseId}'] .opt-link.batchproyx`);
-            await batchproyx.click();
-            await this.sleep(500)
-            let timeContList = await this.page.$('.time-cont label:last-child')
-            if (timeContList) {
-              await timeContList.click();
-            }
-            await this.sleep(500)
-            await this.page.click('.ui-dialog-content .btn-ok');
-            //查找 点击确定推送反馈结果弹窗
-            let len = await this.waitElement('.ui-alert-mainMsg:visible')
-            if (len) {
-              len = await this.waitElement('.ui-alert-subMsg:visible')
-              if (len) {
-                let content = await this.page.evaluate(() => {
-                  return $('.ui-alert-subMsg:visible').text();
-                })
-                if (content.includes('推送成功')) {
-                  //推送成功
-                  this.log('推送成功')
-                  result = {
-                    status: 202,
-                    msg: '推送成功'
-                  }
-                } else {
-                  //推送失败
-                  this.log(`推送失败:${content}`)
-                  result = {
-                    status: 303,
-                    msg: `推送失败:${content}`
-                  }
-                }
-              } else {
-                this.log('未处理异常，没有找到点击推送后消息内容')
-                result = {
-                  status: 302,
-                  msg: '未处理异常，没有找到点击推送后消息内容'
-                }
-              }
-            } else {
-              let len = await this.waitElement('span:contains(余额不足，请):visible')
-              if (len) {
-                user.status = 306;
-                this.log('余额不足')
-                result = {
-                  status: 306,
-                  msg: '余额不足'
-                }
-              } else {
-                this.log('未处理异常，没有找到点击推送后结果弹窗')
-                result = {
-                  status: 301,
-                  msg: '未处理异常，没有找到点击推送后结果弹窗'
-                }
-              }
-            }
-          }
-          await this.sleep(500)
+        //重新发布信息
+        let isAdd = await this.addHouseInfo(houseId, user);
+        if (isAdd) {
+          return false;
         }
+        //编辑保存
+        await this.houseEditHandle(houseId, user);
+        //推送
+        result = await this.housePushHandle(houseId, user, result);
       } else {
         this.log('未找到此房源')
         result = {
@@ -648,6 +665,144 @@ class Refresh {
     houseList = this.unique(houseList)
     this.log(houseList)
     return houseList;
+  }
+
+  /**
+   * 超过十天的帖子 重新发布帖子
+   * @param {*} houseId
+   * @param {*} user
+   */
+  async addHouseInfo(houseId, user) {
+    this.log(`>>>addHouseInfo:${houseId}`);
+    let result = false;
+    try {
+      await this.waitJquery();
+      let status = await this.page.evaluate((houseId) => {
+        let status = -1
+        try {
+          function addDate(date, days) {
+            var d = new Date(date);
+            d.setDate(d.getDate() + days);
+            var m = d.getMonth() + 1;
+            return d.getFullYear() + '-' + m + '-' + d.getDate();
+          }
+          var houseTr = $(`tr[tid=${houseId}]`);
+          var time = $(houseTr).find('p:contains(发布)').text().split(' ')[0].replace('发布：', '')
+          var month = time.split('-')[0];
+          var day = time.split('-')[1];
+          var currYear = new Date().getFullYear()
+          var currMonth = new Date().getMonth() + 1
+          if (month > currMonth) {
+            currYear = currYear - 1
+          }
+          var publishDate = new Date(`${currYear}-${month}-${day}`)
+          if (new Date() > new Date(addDate(publishDate, 10))) {
+            //超过10天
+            console.log('超过10天');
+            status = 1400
+          } else {
+            //未超过10天
+            console.log('未超过10天');
+            status = 1000
+          }
+        } catch (error) {
+          setInterval(() => {
+            console.error(error)
+          }, 2000)
+          status = -1500
+        }
+        return status
+      }, houseId);
+      if (status === -1500) {
+        this.log('未处理异常56343')
+      } else if (status === 1000) {
+        //未超过10天
+        this.log('未超过10天');
+      } else if (status === 1400) {
+        //超过10天
+        this.log('超过10天');
+        result = true
+        let houseDetail = await this.getHouseDetail(houseId);
+        this.log(houseDetail)
+        await this.addHouseInfoPage(houseDetail,houseId,user)
+      }
+    } catch (error) {
+      this.log(error)
+    }
+    return result;
+  }
+
+  async addHouseInfoPage(houseDetail,houseId,user) {
+    this.log(`>>>addHouseInfoPage`)
+    try {
+      if (!houseDetail || !houseDetail.title) {
+        throw new Error('houseDetail对象异常')
+      }
+      let url = `http://vip.58ganji.com/house/publish/shop/?jpChooseType=2&chooseWeb%5B%5D=2`
+      let addHousePage = (await this.browser.pages())[0];
+      await addHousePage.bringToFront();
+      addHousePage.goto(url, {
+        waitUntil: 'domcontentloaded'
+      })
+      await addHousePage.waitForSelector('#publish_form')
+    } catch (error) {
+      this.log(error)
+    }
+  }
+
+  /**
+   * 等待jquery
+   */
+  async waitJquery() {
+    this.log(`>>>waitJquery`)
+    let jqueryExist = false;
+    do {
+      this.log(`do:jqueryExist:${jqueryExist}`)
+      await this.sleep()
+      jqueryExist = await this.page.evaluate(() => {
+        return typeof window.jQuery === 'function'
+      })
+    } while (!jqueryExist)
+  }
+
+  /**
+   * 获取房屋详情信息
+   */
+  async getHouseDetail(houseId) {
+    this.log(`>>>getHouseDetail:${houseId}`);
+    let houseDetailData = {}
+    try {
+      let houseUrl = await this.page.evaluate((houseId) => {
+        var houseTr = $(`tr[tid=${houseId}]`);
+        return houseTr.find('.f-cont a:last').attr('href');
+      }, houseId)
+      if (!houseUrl) {
+        throw `houseUrl为空`
+      }
+      this.log(houseUrl)
+      let detailPage = (await this.browser.pages())[0];
+      await detailPage.bringToFront();
+      detailPage.goto(houseUrl, {
+        waitUntil: 'domcontentloaded'
+      })
+      await detailPage.waitForSelector('.house-title')
+      await detailPage.addScriptTag({
+        url: 'https://wlasd4622.github.io/lcx58/common/58.js'
+      })
+      await this.sleep(1000)
+      houseDetailData = await detailPage.evaluate(() => {
+        try {
+          getHouseDetail();
+        } catch (error) {
+          console.lerror(error)
+        }
+        return window.houseDetailData;
+      })
+      console.log(houseDetailData);
+    } catch (error) {
+      this.log(error)
+    }
+    return houseDetailData;
   }
 
   unique(arr) {
