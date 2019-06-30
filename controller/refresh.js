@@ -17,7 +17,6 @@ class Refresh {
       let dbConfig = this.db[dbName]
       dbConfig.useConnectionPooling = true;
       this.db[dbName].pool = mysql.createPool(dbConfig);
-
     }
   }
 
@@ -62,30 +61,38 @@ class Refresh {
       }
     })
   }
+
   log(T) {
     let info = ''
-    if (T instanceof Error) {
-      console.error(T)
-      info = T.message
-    } else {
-      info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
+    try {
+      if (T instanceof Error) {
+        console.error(T)
+        info = T.message
+      } else {
+        info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
+      }
+      info = moment().format('YYYY-MM-DD HH:mm:ss') + ' ' + info
+      console.log(info);
+      if (info.length > 200) {
+        info = info.substr(0, 200) + '...'
+      }
+      fs.appendFileSync(`./logs/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
+
+    } catch (error) {
+      console.error(error);
     }
-    info = moment().format('YYYY-MM-DD HH:mm:ss') + ' ' + info
-    console.log(info);
-    if (info.length > 200) {
-      info = info.substr(0, 200) + '...'
-    }
-    fs.appendFileSync(`./logs/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
   }
 
+  /**
+   *  主任务
+   */
   async task1() {
     this.log(`>>>task`);
     for (let index = 8; index < this.userList.length; index++) {
-      //TODO
-      // index = 7
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')) {
+
+      if (this.userType(user) !== 0) {
         continue;
       }
       this.log(user)
@@ -98,7 +105,7 @@ class Refresh {
         this.log(err)
       }
       if (user.session) {
-        await this.refreshHandle(user);
+        await this.loopHouseHandle(user);
       }
     }
   }
@@ -148,24 +155,32 @@ class Refresh {
       args: ['--start-maximized', '--disable-infobars']
     });
     this.page = await this.browser.newPage();
-    await this.page.setViewport({
-      width: 1500,
-      height: 800
-    })
+    // await this.page.setViewport({
+    //   width: 1500,
+    //   height: 800
+    // })
   }
   async close() {
     this.log('>>>close');
-    if (this.browser) await this.browser.close()
+    try {
+      if (this.browser) await this.browser.close()
+    } catch (error) {
+      this.log(error)
+    }
   }
 
+  /**
+   * 房屋编辑保存
+   * @param {*} houseId
+   * @param {*} user
+   */
   async houseEditHandle(houseId, user) {
     this.log(`>>>houseEditHandle`)
+    let result = ''
     let editPage = null;
     try {
       let jqueryExist = false;
-      let jqueryExistCount = 0;
       do {
-        jqueryExist++;
         this.log(`do:jqueryExist:${jqueryExist}`)
         await this.sleep()
         jqueryExist = await this.page.evaluate(() => {
@@ -248,54 +263,73 @@ class Refresh {
         this.log('保存失败')
       }
     } catch (error) {
-      this.log(error)
-      if (error.message === '修改保存异常') {
-        console.log(666);
+      let result = {
+        status: 500
       }
-      this.log('未处理异常:23562')
+      if (typeof error == 'string') {
+        result.msg = error;
+      } else {
+        result.msg = error.message
+      }
+      //更新数据库
+      await this.updateHouseStatus(Object.assign({}, JSON.parse(JSON.stringify(user)), result,{
+        houseId
+      }))
     }
     await this.sleep(600)
     await this.page.bringToFront()
-    // if (editPage) {
-    //   await editPage.close()
-    // }
   }
 
+  /**
+   * 检查是否保存成功，并返回错误信息
+   * @param {*} editPage
+   */
   async checkSaveDataHandle(editPage) {
     let message = ""
-    let errArr = await editPage.evaluate(() => {
-      return $('.ui-tips-fail-noborder').toArray().map(item => {
-        return $(item).text().replace('', '') || []
+    try {
+      let errArr = await editPage.evaluate(() => {
+        return $('.ui-tips-fail-noborder').toArray().map(item => {
+          return $(item).text().replace('', '') || []
+        })
       })
-    })
 
-    if (errArr && errArr.length) {
-      message = errArr.toString();
+      if (errArr && errArr.length) {
+        message = errArr.toString();
+      }
+    } catch (error) {
+      this.log(error)
     }
     return message;
   }
 
-  async houseHandle(houseId, user) {
+  async houseRefreshHandle(houseId, user) {
     this.log(`houseId:${houseId}`);
     let result = {
       status: 0,
       msg: ''
     };
     try {
-      let url = `http://vip.58ganji.com/jp58/kcfysp58`
+      let url = this.userType(user) === 0 ? `http://vip.58ganji.com/jp58/kcfysp58` : `http://vip.58ganji.com/sydchug/list/sydc`
       await this.page.goto(url, {
         waitUntil: 'domcontentloaded'
       });
-      await this.page.waitForSelector('.ui-boxer-title')
+      if (this.userType(user) === 0) {
+        await this.page.waitForSelector('.ui-boxer-title')
+      } else {
+        await this.page.waitForSelector('table.ui-table.sydc-table')
+      }
+
       await this.page.evaluate(() => {
-        $('#houselist').remove()
+        $('#houselist').remove();
+        $('table.ui-table.sydc-table tbody tr').remove();
       })
-      await this.page.type('#search-name', houseId)
-      await this.page.click('input[type=submit]')
-      await this.page.waitForSelector('#houselist')
-      let houseElement = await this.page.$(`tr[tid='${houseId}']`);
+      await this.page.type(this.userType(user) === 0 ? '#search-name' : '#shop_search_num', houseId)
+      await this.page.click(this.userType(user) === 0 ? 'input[type=submit]' : 'button.ui-button.ui-button-small.search-btn')
+      await this.page.waitForSelector(this.userType(user) == 0 ? '#houselist' : 'table.ui-table.sydc-table')
+      let houseElement = await this.page.$(this.userType(user) == 0 ? `tr[tid='${houseId}']` : `tr[data-unityinfoid='${houseId}']`);
       if (houseElement) {
         await this.houseEditHandle(houseId, user);
+
         //判断是否正常推送中
         let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
         if (grey) {
@@ -308,64 +342,72 @@ class Refresh {
         } else {
           //非正常推送中
           this.log('非正常推送中')
-          result = {
-            status: 300,
-            msg: '非正常推送中'
-          }
-          let batchproyx = await this.page.$(`tr[tid='${houseId}'] .opt-link.batchproyx`);
-          await batchproyx.click();
-          await this.sleep(500)
-          let timeContList = await this.page.$('.time-cont label:last-child')
-          if (timeContList) {
-            await timeContList.click();
-          }
-          await this.sleep(500)
-          await this.page.click('.ui-dialog-content .btn-ok');
-          //查找 点击确定推送反馈结果弹窗
-          let len = await this.waitElement('.ui-alert-mainMsg:visible')
-          if (len) {
-            len = await this.waitElement('.ui-alert-subMsg:visible')
-            if (len) {
-              let content = await this.page.evaluate(() => {
-                return $('.ui-alert-subMsg:visible').text();
-              })
-              if (content.includes('推送成功')) {
-                //推送成功
-                this.log('推送成功')
-                result = {
-                  status: 202,
-                  msg: '推送成功'
-                }
-              } else {
-                //推送失败
-                this.log(`推送失败:${content}`)
-                result = {
-                  status: 303,
-                  msg: `推送失败:${content}`
-                }
-              }
-            } else {
-              this.log('未处理异常，没有找到点击推送后消息内容')
-              result = {
-                status: 302,
-                msg: '未处理异常，没有找到点击推送后消息内容'
-              }
+          if (user.status == 306) {
+            //余额不足
+            this.log('余额不足')
+            result = {
+              status: 306,
+              msg: '余额不足'
             }
           } else {
-            let len = await this.waitElement('span:contains(余额不足，请):visible')
+            result = {
+              status: 300,
+              msg: '非正常推送中'
+            }
+            let batchproyx = await this.page.$(`tr[tid='${houseId}'] .opt-link.batchproyx`);
+            await batchproyx.click();
+            await this.sleep(500)
+            let timeContList = await this.page.$('.time-cont label:last-child')
+            if (timeContList) {
+              await timeContList.click();
+            }
+            await this.sleep(500)
+            await this.page.click('.ui-dialog-content .btn-ok');
+            //查找 点击确定推送反馈结果弹窗
+            let len = await this.waitElement('.ui-alert-mainMsg:visible')
             if (len) {
-              user.status = 306;
-              this.log('余额不足')
-              result = {
-                status: 306,
-                msg: '余额不足'
+              len = await this.waitElement('.ui-alert-subMsg:visible')
+              if (len) {
+                let content = await this.page.evaluate(() => {
+                  return $('.ui-alert-subMsg:visible').text();
+                })
+                if (content.includes('推送成功')) {
+                  //推送成功
+                  this.log('推送成功')
+                  result = {
+                    status: 202,
+                    msg: '推送成功'
+                  }
+                } else {
+                  //推送失败
+                  this.log(`推送失败:${content}`)
+                  result = {
+                    status: 303,
+                    msg: `推送失败:${content}`
+                  }
+                }
+              } else {
+                this.log('未处理异常，没有找到点击推送后消息内容')
+                result = {
+                  status: 302,
+                  msg: '未处理异常，没有找到点击推送后消息内容'
+                }
               }
-
             } else {
-              this.log('未处理异常，没有找到点击推送后结果弹窗')
-              result = {
-                status: 301,
-                msg: '未处理异常，没有找到点击推送后结果弹窗'
+              let len = await this.waitElement('span:contains(余额不足，请):visible')
+              if (len) {
+                user.status = 306;
+                this.log('余额不足')
+                result = {
+                  status: 306,
+                  msg: '余额不足'
+                }
+              } else {
+                this.log('未处理异常，没有找到点击推送后结果弹窗')
+                result = {
+                  status: 301,
+                  msg: '未处理异常，没有找到点击推送后结果弹窗'
+                }
               }
             }
           }
@@ -386,10 +428,56 @@ class Refresh {
       }
     }
     this.log(result);
-    //更新数据库 TODO
+    //更新数据库
+    await this.updateHouseStatus(Object.assign({}, JSON.parse(JSON.stringify(user)), result, {
+      houseId
+    }))
   }
 
-  async refreshHandle(user) {
+  async updateHouseStatus(user) {
+    let sql = `INSERT INTO \`gj_refresh_house_log\` (
+              \`user_id\`,
+              \`user_name\`,
+              \`house_id\`,
+              \`status\`,
+              \`message\`,
+              \`create_time\`
+              )
+              VALUES
+                (
+                ${user.id},
+                '${user.user_name}',
+                '${user.houseId}',
+                '${user.status}',
+                '${user.msg}',
+                NOW()
+                )`;
+    try {
+      await this.execSql(0, sql)
+    } catch (error) {
+      this.log(error)
+    }
+  }
+
+  /**
+   * 获取用户类型
+   * 0：正常用户
+   * 1：石家庄，廊坊用户
+   * @param {*} user
+   */
+  userType(user) {
+    let type = 0
+    if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')) {
+      type = 1
+    }
+    return type;
+  }
+
+  /**
+   * 启动浏览器，setcookie,循环房屋信息
+   * @param {*} user
+   */
+  async loopHouseHandle(user) {
     this.log(user)
     try {
       let houseList = await this.queryHouseDate(user);
@@ -398,7 +486,7 @@ class Refresh {
         return false;
       }
       await this.runPuppeteer();
-      let url = `http://vip.58ganji.com/jp58/kcfysp58`
+      // let url = `http://vip.58ganji.com/jp58/kcfysp58`
       let session = decodeURIComponent(user.session)
       await this.setCookie(session, '.58ganji.com', this.page);
       await this.setCookie(session, '.58.com', this.page);
@@ -406,16 +494,21 @@ class Refresh {
       await this.setCookie(session, '.anjuke.com', this.page);
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
-      await this.page.goto(url, {
-        waitUntil: 'domcontentloaded'
-      });
-      await this.page.waitForSelector('.ui-boxer-title')
+      // await this.page.goto(url, {
+      //   waitUntil: 'domcontentloaded'
+      // });
+      // if (this.userType(user) === 0) {
+      //   await this.page.waitForSelector('.ui-boxer-title')
+      // } else {
+      //   await this.page.waitForSelector('table.ui-table.sydc-table')
+      // }
+
       for (let index = 0; index < houseList.length; index++) {
-        if (user.status === 306) {
-          //余额不足直接退出
-          break;
-        }
-        await this.houseHandle(houseList[index], user);
+        // if (user.status === 306) {
+        //余额不足直接退出
+        //   break;
+        // }
+        await this.houseRefreshHandle(houseList[index], user);
       }
     } catch (err) {
       let len = await this.waitElement('.login-mod')
@@ -427,6 +520,11 @@ class Refresh {
     // console.log('refresh-end');
   }
 
+  /**
+   * 查找等待元素出现
+   * @param {*} selector
+   * @param {*} page
+   */
   async waitElement(selector, page) {
     let len = 0;
     try {
@@ -435,6 +533,16 @@ class Refresh {
       if (!page) {
         page = this.page
       }
+
+      let jqueryExist = false;
+      do {
+        this.log(`do:jqueryExist:${jqueryExist}`)
+        await this.sleep()
+        jqueryExist = await this.page.evaluate(() => {
+          return typeof window.jQuery === 'function'
+        })
+      } while (!jqueryExist)
+
       for (let index = 0; index < 10; index++) {
         this.log(`waitElement第${index}次寻找...`)
         await this.sleep(500)
@@ -453,6 +561,10 @@ class Refresh {
     return len;
   }
 
+  /**
+   * 从数据库获取房屋信息
+   * @param {*} user
+   */
   async queryHouseDate(user) {
     console.log(user);
     let houseList = []

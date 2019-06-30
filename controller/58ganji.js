@@ -30,11 +30,13 @@ class GanJi {
   }
 
   getConnection() {
+    let that = this;
     this.log(`>>>getConnection`);
     return new Promise((resolve, reject) => {
       this.pool.getConnection(function (err, connection) {
         if (err) {
-          this.log(err);
+          // this.log(err);
+          console.log(err);
           reject(err)
         } else {
           resolve(connection)
@@ -90,7 +92,11 @@ class GanJi {
   }
   async close() {
     this.log('>>>close');
-    if (this.browser) await this.browser.close()
+    try {
+      if (this.browser) await this.browser.close()
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async setCookie(cookies_str = "", domain, page) {
