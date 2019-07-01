@@ -751,6 +751,7 @@ Function addHouseInfo(houseId)
         picStr = getPicStr(picList)
         //上传图片
         Call Plugin.chrome.set_file_input_files(id, ".imgUpload input", picStr)
+        fUpdaaImageCount=0
         Rem fUpdaaImage
         length = find("(houseDetailData.picList.split('|').length===$('.img_box[draggable=true]').length?1:0)", "检查图片是否上传完毕")
         If length > 0 Then
@@ -806,7 +807,13 @@ Function addHouseInfo(houseId)
                 addStatus = 3525
                 Goto rSubmit
             End If
-            Goto fUpdaaImage
+            fUpdaaImageCount = fUpdaaImageCount + 1
+            If fUpdaaImageCount > 3 Then
+                Goto rAddHouseInfo
+            Else
+                Goto fUpdaaImage
+            End If
+
         End If
     ElseIf cint(addStatus) = 3513 Then
         log addStatus
