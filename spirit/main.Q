@@ -661,6 +661,7 @@ Function addHouseInfo(houseId)
     //发布帖子成功 				3510
     //发布帖子失败 				3511
     //发布帖子异常 				3512
+    addHouseInfoCount=0
     Rem rAddHouseInfo
     newUrl=""
     addStatus=3511
@@ -800,7 +801,15 @@ Function addHouseInfo(houseId)
                 Call addNewHouseInfo(newUrl)
             Else
                 log "发布失败"
-                Goto rAddHouseInfo
+                addHouseInfoCount=addHouseInfoCount+1
+                If addHouseInfoCount > 4 Then 
+                    addStatus = 3511
+                    messages="addHouseInfoFail"
+                    Goto rBreak
+                Else 
+                    Goto rAddHouseInfo
+                End If
+                
             End If
         Else
             length = execjs("$('div:contains(上传的图片小于):visible').length||0")
