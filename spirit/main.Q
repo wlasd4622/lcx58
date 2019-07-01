@@ -463,6 +463,7 @@ Function login()
     End If
     Call Plugin.chrome.activate(id)
     Rem fLoadLogin
+    Plugin.chrome.stop id
     Call Plugin.chrome.load(id, "https://passport.58.com/logout")
     // 等待载入完成
     Do
