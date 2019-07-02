@@ -11,6 +11,12 @@ class Refresh {
   }
   async init() {
     this.log(`>>>init`);
+    this.userList && this.userList.map(user => {
+      if (user.db1 && !user.db4) {
+        user.db4 = user.db1
+      }
+      return user;
+    })
     let keys = Object.keys(this.db)
     for (let index = 0; index < keys.length; index++) {
       const dbName = keys[index];
@@ -41,6 +47,7 @@ class Refresh {
    * @param {*} sql
    */
   async execSql(nameIndex, sql) {
+    let that = this;
     let name = ['datarefresh', 'bjhyty', 'dianzhijia', 'bs'][nameIndex];
     this.log('>>>execSql');
     this.log(name);
@@ -52,6 +59,7 @@ class Refresh {
           if (err) {
             reject(err)
           } else {
+            that.log(`查询到${value.length}条数据`)
             resolve(value)
           }
         })
@@ -89,7 +97,7 @@ class Refresh {
    */
   async task1() {
     this.log(`>>>task`);
-    for (let index = 8; index < this.userList.length; index++) {
+    for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
 
@@ -395,8 +403,8 @@ class Refresh {
     return result;
   }
 
-  async houseRefreshHandle(houseId, user) {
-    this.log(`houseId:${houseId}`);
+  async houseRefreshHandle(houseId, user, houseType) {
+    this.log(`houseId:${houseId},type:${['刷新','重新推送','精选'][houseType]}`);
     let result = {
       status: 0,
       msg: ''
@@ -497,9 +505,9 @@ class Refresh {
   async loopHouseHandle(user) {
     this.log(user)
     try {
-      let houseList = await this.queryHouseDate(user);
-      //let houseList = ['38442889699469', '38365050411406', '38361927759267', '38361887896469', '38361852484389']
-      if (houseList.length === 0) {
+      let houseList = await this.getHouseListByDB(user); //0：刷新，1：重新推送，2：精选
+      this.log(houseList)
+      if (houseList[0] === 0 && houseList[1] === 0) {
         return false;
       }
       await this.runPuppeteer();
@@ -511,21 +519,13 @@ class Refresh {
       await this.setCookie(session, '.anjuke.com', this.page);
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
-      // await this.page.goto(url, {
-      //   waitUntil: 'domcontentloaded'
-      // });
-      // if (this.userType(user) === 0) {
-      //   await this.page.waitForSelector('.ui-boxer-title')
-      // } else {
-      //   await this.page.waitForSelector('table.ui-table.sydc-table')
-      // }
-
-      for (let index = 0; index < houseList.length; index++) {
-        // if (user.status === 306) {
-        //余额不足直接退出
-        //   break;
-        // }
-        await this.houseRefreshHandle(houseList[index], user);
+      //刷新
+      for (let index = 0; index < houseList[0].length; index++) {
+        await this.houseRefreshHandle(houseList[0][index], user, 0);
+      }
+      //重新推送
+      for (let index = 0; index < houseList[1].length; index++) {
+        await this.houseRefreshHandle(houseList[1][index], user, 1);
       }
     } catch (err) {
       let len = await this.waitElement('.login-mod')
@@ -577,77 +577,132 @@ class Refresh {
     }
     return len;
   }
-
   /**
    * 从数据库获取房屋信息
    * @param {*} user
    */
-  async queryHouseDate(user) {
-    console.log(user);
-    let houseList = []
-    try {
-      // if (user.db1) {
-      //   let sql = `SELECT
-      //               url
-      //             FROM
-      //               generalizes AS a
-      //               LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-      //             WHERE
-      //               (
-      //                 a.post_type = 8
-      //                 OR a.post_type = 17
-      //               )
-      //               AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
-      //               AND a.url IS NOT NULL`;
-      //   let list = await this.execSql(2, sql);
-      //   houseList.push(...(list || []));
-      //   sql = `SELECT
-      //           url
-      //         FROM
-      //           generalizes AS a
-      //           LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-      //         WHERE
-      //           (
-      //             a.post_type = 8
-      //             OR a.post_type = 17
-      //           )
-      //           AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
-      //           AND a.url IS NOT NULL`;
-      //   list = await this.execSql(3, sql);
-      //   houseList.push(...(list || []));
-      // }
-      if (user.db2) {
-        let sql = `SELECT
-                    url_58 as url
-                  FROM
-                    t_signing
-                  WHERE
-                    ( STATUS = 4 OR \`status\` = 2 )
-                    AND expiry_date > CURDATE( )
-                    AND promoted_accounts = ${user.db2}
-                  ORDER BY
-                    expiry_date`;
-        let list = await this.execSql(1, sql);
-        houseList.push(...(list || []));
-      }
-      //不进行刷新
-      // if (user.db3) {
-      //   let sql = `SELECT
-      //               url_58_choiceness AS url
-      //             FROM
-      //               t_signing
-      //             WHERE
-      //               ( STATUS = 4 OR \`status\` = 2 )
-      //               AND date_of_maturity > CURDATE( )
-      //               AND do_post_type = ${user.db3}
-      //             ORDER BY
-      //               date_of_maturity;`;
-      //   let list = await this.execSql(1, sql);
-      //   houseList.push(...(list || []));
-      // }
-    } catch (err) {
-      this.log(err)
+  async getHouseListByDB(user) {
+    let houseInfo = {
+      data0: [],
+      data1: [],
+      data2: []
     }
+    try {
+      this.log(`>>>getHouseListByDB`)
+      console.log(user);
+      let dataManager = {};
+      dataManager.db11 = {
+        msg: '数据库dianzhijia,刷新，重新推送',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              (
+                a.post_type = 8
+                OR a.post_type = 17
+              )
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 1] //0：刷新，1：重新推送，2：精选
+      }
+      dataManager.db12 = {
+        msg: '数据库dianzhijia,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              a.post_type = 9
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 2] //0：刷新，1：重新推送，2：精选
+      }
+      dataManager.db21 = {
+        msg: '数据库bjhyty,刷新，重新推送',
+        sql: `SELECT
+              url_58 as url
+            FROM
+              t_signing
+            WHERE
+              ( STATUS = 4 OR \`status\` = 2 )
+              AND expiry_date > CURDATE( )
+              AND promoted_accounts = ${user.db2}
+            ORDER BY
+              expiry_date`,
+        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 1] //0：刷新，1：重新推送，2：精选
+      };
+      dataManager.db31 = {
+        msg: '数据库bjhyty,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        sql: `SELECT
+              url_58_choiceness as url
+            FROM
+              t_signing
+            WHERE
+              ( STATUS = 4 OR \`status\` = 2 )
+              AND date_of_maturity > CURDATE( )
+              AND do_post_type = ${user.db3}
+            ORDER BY
+              date_of_maturity`,
+        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 2] //0：刷新，1：重新推送，2：精选
+      };
+      dataManager.db41 = {
+        msg: '数据库bs,刷新，重新推送',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              (
+                a.post_type = 8
+                OR a.post_type = 17
+              )
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 1] //0：刷新，1：重新推送，2：精选
+      };
+      dataManager.db42 = {
+        msg: '数据库bs,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              a.post_type = 9
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 2] //0：刷新，1：重新推送，2：精选
+      };
+      let keys = Object.keys(dataManager);
+      for (let i = 0; i < keys.length; i++) {
+        let obj = dataManager[keys[i]];
+        this.log(obj.msg)
+        let list = await this.execSql(obj.dbIndex, obj.sql)
+        obj.type.map(i => {
+          houseInfo[`data${i}`] = houseInfo[`data${i}`].concat(list || [])
+        })
+      }
+      houseInfo.data0 = this.getHouseIds(houseInfo.data0);
+      houseInfo.data1 = this.getHouseIds(houseInfo.data1);
+      houseInfo.data2 = this.getHouseIds(houseInfo.data2);
+
+    } catch (error) {
+      this.log(error)
+    }
+    return [houseInfo.data0, houseInfo.data1, houseInfo.data2];
+  }
+
+  getHouseIds(houseList = []) {
     if (houseList && houseList.length) {
       houseList = houseList.map(({
         url
@@ -666,7 +721,6 @@ class Refresh {
     this.log(houseList)
     return houseList;
   }
-
   /**
    * 超过十天的帖子 重新发布帖子
    * @param {*} houseId
@@ -724,7 +778,7 @@ class Refresh {
         result = true
         let houseDetail = await this.getHouseDetail(houseId);
         this.log(houseDetail)
-        await this.addHouseInfoPage(houseDetail,houseId,user)
+        await this.addHouseInfoPage(houseDetail, houseId, user)
       }
     } catch (error) {
       this.log(error)
@@ -732,7 +786,7 @@ class Refresh {
     return result;
   }
 
-  async addHouseInfoPage(houseDetail,houseId,user) {
+  async addHouseInfoPage(houseDetail, houseId, user) {
     this.log(`>>>addHouseInfoPage`)
     try {
       if (!houseDetail || !houseDetail.title) {

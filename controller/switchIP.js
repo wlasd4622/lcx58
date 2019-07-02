@@ -51,6 +51,18 @@ class SwitchIP {
     })
   }
 
+  /**
+   * 检查时间段
+   * 早上4点到8点需要不换Ip，其他时间每隔15分钟换Ip，路由器设置，
+   */
+  checkHandle() {
+    let currHours = new Date().getHours();
+    if (currHours >= 4 && currHours < 8) {
+      return false;
+    }
+    return true;
+  }
+
   async main() {
     u.log(`>>>main`);
     await u.runPuppeteer.call(this)
@@ -69,16 +81,5 @@ class SwitchIP {
   }
 }
 
-/**
- * 检查时间段
- * 早上4点到8点需要不换Ip，其他时间每隔15分钟换Ip，路由器设置，
- */
-checkHandle() {
-  let currHours = new Date().getHours();
-  if (currHours >= 4 && currHours < 8) {
-    return false;
-  }
-  return true;
-}
 
 new SwitchIP().main();
