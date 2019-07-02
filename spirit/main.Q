@@ -530,7 +530,7 @@ Function login()
     Else
         Goto fLoadLogin
     End If
-    If loginStatus=4000 and loginCount < 6 Then
+    If (loginStatus=4000 or loginStatus=4004) and loginCount < 6 Then
         loginCount=loginCount+1
         Goto fLoadLogin
     End If
@@ -802,14 +802,13 @@ Function addHouseInfo(houseId)
             Else
                 log "发布失败"
                 addHouseInfoCount=addHouseInfoCount+1
-                If addHouseInfoCount > 4 Then 
+                If addHouseInfoCount > 4 Then
                     addStatus = 3511
                     messages="addHouseInfoFail"
                     Goto rBreak
-                Else 
+                Else
                     Goto rAddHouseInfo
                 End If
-                
             End If
         Else
             length = execjs("$('div:contains(上传的图片小于):visible').length||0")
@@ -823,7 +822,6 @@ Function addHouseInfo(houseId)
             Else
                 Goto fUpdaaImage
             End If
-
         End If
     ElseIf cint(addStatus) = 3513 Then
         log addStatus
