@@ -50,7 +50,6 @@ class SwitchIP {
       })();
     })
   }
-
   /**
    * 检查时间段
    * 早上4点到8点需要不换Ip，其他时间每隔15分钟换Ip，路由器设置，
@@ -71,7 +70,7 @@ class SwitchIP {
     //早上4点到8点需要不换Ip，其他时间每隔15分钟换Ip，路由器设置，
     setInterval(() => {
       try {
-        if (checkHandle()) {
+        if (this.checkHandle()) {
           this.task1()
         }
       } catch (error) {
@@ -80,6 +79,7 @@ class SwitchIP {
     }, 1000 * 60 * 15);
   }
 }
+
 
 
 new SwitchIP().main();
