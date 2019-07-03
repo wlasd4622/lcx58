@@ -59,7 +59,7 @@ class Refresh {
           if (err) {
             reject(err)
           } else {
-            that.log(`查询到${value.length}条数据`)
+            // that.log(`查询到${value.length}条数据`)
             resolve(value)
           }
         })
@@ -403,8 +403,12 @@ class Refresh {
     return result;
   }
 
-  async houseRefreshHandle(houseId, user, houseType) {
-    this.log(`houseId:${houseId},type:${['刷新','重新推送','精选'][houseType]}`);
+  async houseRefreshHandle(houseObj, user) {
+    let houseId = houseObj.id
+    this.log(`houseId:${houseId},type:${houseObj.type.map(i => {
+      return ['刷新', '重新推送', '精选'][i]
+    })}`);
+
     let result = {
       status: 0,
       msg: ''
@@ -430,14 +434,21 @@ class Refresh {
       let houseElement = await this.page.$(this.userType(user) == 0 ? `tr[tid='${houseId}']` : `tr[data-unityinfoid='${houseId}']`);
       if (houseElement) {
         //重新发布信息
-        let isAdd = await this.addHouseInfo(houseId, user);
-        if (isAdd) {
-          return false;
+        // let isAdd = await this.addHouseInfo(houseId, user);
+        // if (isAdd) {
+        //   return false;
+        // }
+        if (houseObj.type.includes(0)) {
+          //编辑保存-->>刷新
+          this.log(`编辑保存-->>刷新`)
+          await this.houseEditHandle(houseId, user);
         }
-        //编辑保存
-        await this.houseEditHandle(houseId, user);
-        //推送
-        result = await this.housePushHandle(houseId, user, result);
+        if (houseObj.type.includes(1)) {
+          //推送--->重新推送
+          this.log(`推送--->重新推送`)
+          result = await this.housePushHandle(houseId, user, result);
+        }
+
       } else {
         this.log('未找到此房源')
         result = {
@@ -507,7 +518,8 @@ class Refresh {
     try {
       let houseList = await this.getHouseListByDB(user); //0：刷新，1：重新推送，2：精选
       this.log(houseList)
-      if (houseList[0] === 0 && houseList[1] === 0) {
+      let houseIdKeys = Object.keys(houseList);
+      if (!houseIdKeys.length) {
         return false;
       }
       await this.runPuppeteer();
@@ -520,12 +532,12 @@ class Refresh {
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
       //刷新
-      for (let index = 0; index < houseList[0].length; index++) {
-        await this.houseRefreshHandle(houseList[0][index], user, 0);
-      }
-      //重新推送
-      for (let index = 0; index < houseList[1].length; index++) {
-        await this.houseRefreshHandle(houseList[1][index], user, 1);
+      for (let index = 0; index < houseIdKeys.length; index++) {
+        await this.houseRefreshHandle(Object.assign({
+          id: houseIdKeys[index]
+        }, {
+          type: houseList[houseIdKeys[index]]
+        }), user);
       }
     } catch (err) {
       let len = await this.waitElement('.login-mod')
@@ -692,14 +704,31 @@ class Refresh {
           houseInfo[`data${i}`] = houseInfo[`data${i}`].concat(list || [])
         })
       }
-      houseInfo.data0 = this.getHouseIds(houseInfo.data0);
-      houseInfo.data1 = this.getHouseIds(houseInfo.data1);
-      houseInfo.data2 = this.getHouseIds(houseInfo.data2);
+      houseInfo.data0 = this.getHouseIds(houseInfo.data0) || [];
+      houseInfo.data1 = this.getHouseIds(houseInfo.data1) || [];
+      houseInfo.data2 = this.getHouseIds(houseInfo.data2) || [];
 
     } catch (error) {
       this.log(error)
     }
-    return [houseInfo.data0, houseInfo.data1, houseInfo.data2];
+    //-----------
+    let newHouseIdMap = {}
+    try {
+
+      houseInfo.data0.map(id => {
+        newHouseIdMap[id] = [0]
+      });
+      houseInfo.data1.map(id => {
+        if (newHouseIdMap[id]) {
+          newHouseIdMap[id].push(1)
+        } else {
+          newHouseIdMap[id] = [1]
+        }
+      })
+    } catch (error) {
+      this.log(error)
+    }
+    return newHouseIdMap;
   }
 
   getHouseIds(houseList = []) {
