@@ -497,11 +497,11 @@ Function login()
                     log Trim(execjs("$('.password_msg.msg:visible').parent().text()"))
                     Goto fBreakDo
                 ElseIf result = "请输入图片验证码" Then
-                    loginStatus = 4004
+                    loginStatus = 4006
                     log result
                     Goto fBreakDo
                 Else
-                    loginStatus = 4004
+                    loginStatus = 4006
                     log "登录，未处理异常"
                     Goto fBreakDo
                 End If
@@ -916,7 +916,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='15900500484' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='13766896058' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
