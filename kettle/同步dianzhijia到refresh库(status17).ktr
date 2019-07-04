@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>删除冗余数据</name>
+    <name>同步dianzhijia到refresh库(status17)</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -437,6 +437,61 @@
   <notepads>
   </notepads>
   <connection>
+    <name>58-2</name>
+    <server>rm-8vbi768p70fp32qv74o.mysql.zhangbei.rds.aliyuncs.com</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>dianzhijia</database>
+    <port>3306</port>
+    <username>readonly43</username>
+    <password>Encrypted 2be98afc86aa7f280b113ff228dc6fa8c</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>refresh</name>
     <server>101.201.49.69</server>
     <type>MYSQL</type>
@@ -493,14 +548,24 @@
   </connection>
   <order>
     <hop>
-      <from>执行SQL脚本</from>
+      <from>表输入</from>
+      <to>增加常量</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>增加常量</from>
+      <to>字段选择</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>字段选择</from>
       <to>表输出</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>执行SQL脚本</name>
-    <type>ExecSQL</type>
+    <name>增加常量</name>
+    <type>Constant</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -509,30 +574,160 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>refresh</connection>
+    <fields>
+      <field>
+        <name>password</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>999oo999</nullif>
+        <length>100</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>type</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>2</nullif>
+        <length>10</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>字段选择</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>area</name>
+        <rename/>
+      </field>
+      <field>
+        <name>platform</name>
+        <rename/>
+      </field>
+      <field>
+        <name>post_type</name>
+        <rename/>
+      </field>
+      <field>
+        <name>telephone</name>
+        <rename>username</rename>
+      </field>
+      <field>
+        <name>description</name>
+        <rename/>
+      </field>
+      <field>
+        <name>created_at</name>
+        <rename>create_date</rename>
+      </field>
+      <field>
+        <name>updated_at</name>
+        <rename/>
+      </field>
+      <field>
+        <name>transfer_store_id</name>
+        <rename>key</rename>
+      </field>
+      <field>
+        <name>url</name>
+        <rename/>
+      </field>
+      <field>
+        <name>url2</name>
+        <rename/>
+      </field>
+      <field>
+        <name>generalize_account</name>
+        <rename/>
+      </field>
+      <field>
+        <name>status</name>
+        <rename/>
+      </field>
+      <field>
+        <name>end_time</name>
+        <rename/>
+      </field>
+      <field>
+        <name>generalize_number</name>
+        <rename/>
+      </field>
+      <field>
+        <name>password</name>
+        <rename/>
+      </field>
+      <field>
+        <name>type</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>表输入</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>58-2</connection>
+    <sql>SELECT * from generalizes where post_type=7 and `status`=17 and url is not null</sql>
+    <limit>0</limit>
+    <lookup/>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>delete from house_list where create_date is null;
-delete from house_list  where id not in(select * from (SELECT
-    id
-FROM
-    house_list AS c
-        JOIN
-    (SELECT
-        `username`, MAX(create_date) as maxtime
-    FROM
-        house_list a
-    GROUP BY username) b ON c.username = b.username
-        AND c.create_date = b.maxtime) g);</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>Y</lazy_conversion_active>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -543,7 +738,7 @@ FROM
     </remotesteps>
     <GUI>
       <xloc>144</xloc>
-      <yloc>192</yloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -565,7 +760,7 @@ FROM
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -576,6 +771,30 @@ FROM
     <return_keys>N</return_keys>
     <return_field/>
     <fields>
+      <field>
+        <column_name>username</column_name>
+        <stream_name>username</stream_name>
+      </field>
+      <field>
+        <column_name>create_date</column_name>
+        <stream_name>create_date</stream_name>
+      </field>
+      <field>
+        <column_name>key</column_name>
+        <stream_name>key</stream_name>
+      </field>
+      <field>
+        <column_name>url</column_name>
+        <stream_name>url</stream_name>
+      </field>
+      <field>
+        <column_name>password</column_name>
+        <stream_name>password</stream_name>
+      </field>
+      <field>
+        <column_name>type</column_name>
+        <stream_name>type</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -586,8 +805,8 @@ FROM
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>192</yloc>
+      <xloc>832</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
