@@ -357,7 +357,7 @@ function updateHouseInfo(key, status, houseUrl, type) {
     data = {
       transfer_store_id: key
     }
-    urk = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
+    url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
   } else if (type == 3) {
     //bs
     url = `http://api.010shangpu.com/api/openchangegeneralizestatus`
@@ -398,12 +398,12 @@ function updateHouseInfo(key, status, houseUrl, type) {
       },
       error: function (err) {
         console.log(err);
-        window.updateHouseInfoMessate = err
+        window.updateHouseInfoMessage = err
         window.updateHouseInfoStatus = "更新错误"
       }
     });
   } else {
-    window.updateHouseInfoMessate = 'url为空'
+    window.updateHouseInfoMessage = 'url为空'
     window.updateHouseInfoStatus = "更新错误"
   }
 
