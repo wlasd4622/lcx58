@@ -114,7 +114,7 @@ Function refresh(houseId)
         Call execjs("var wContent=$('form.form-container.immediate').text().trim().replace(/[\n\s]/g,'')||$('form.yyset').text().trim().replace(/[\s\n]/g,'');")
         Call execjs("function getStatus() {"&_
     					"if (wContent.indexOf('近7天免费刷新已到上限') > -1||wContent.indexOf('帖子浏览量大于') > -1) {"&_
-        					"return 3030"&_
+        					"return 3070"&_
     					"} else if(wContent.indexOf('30天不享有免费刷新') > -1||wContent.indexOf('免费刷新次数已用完，您可尝试付费刷新') > -1) {"&_
         					"return 3030"&_
     					"} else if (wContent.indexOf('本次刷新免费') > -1||/账号剩余刷新资源[^0]/.test(wContent)) {"&_
@@ -551,8 +551,7 @@ Function updateStatus(userInfo, status)
     If cint(flag) = 0 Then
         Goto rUpdateStatus
     End If
-    js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"',"+userInfo(6)+")"
-    //MessageBox js
+    js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
     Call execjs(js)
     Delay 500
     result = execjs("window.updateHouseInfoStatus")
@@ -927,10 +926,13 @@ Function getUser()
         userName = Plugin.Super_MySQL.fetch_text(store, "username")
         log "userName:" + userName
         password = Plugin.Super_MySQL.fetch_text(store, "password")
-        log "parrword:" + parrword
+        log "password:" + password
         key = Plugin.Super_MySQL.fetch_text(store, "key")
+        log "key:" + key
         url = Plugin.Super_MySQL.fetch_text(store, "url")
-        type = Plugin.Super_MySQL.fetch_text(store, "type")
+        log "url:" + url
+        houseSource = Plugin.Super_MySQL.fetch_text(store, "type")
+
         //锁定这条数据
         sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
         log sql
@@ -945,7 +947,8 @@ Function getUser()
         log "cookie:" + cookie
         houseId = getHouseId(url)
         houseInfo = Array(houseId)
-        userInfo=Array(userName, password,houseListId,key,url,cookie,type)
+        log "houseSource:" + houseSource
+        userInfo = Array(userName, password, houseListId, key, url, cookie, houseSource)
         getUser =userInfo
     Else
         sql = "commit"
