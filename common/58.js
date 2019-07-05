@@ -344,27 +344,27 @@ function updateHouseInfo(key, status, houseUrl, type) {
   console.log('type:' + type);
   let url = ""
   let data = {}
-  if (type === 1) {
+  if (type == 1) {
     //readbihty
     //长
     data = {
       pid: key
     }
     url = `https://api.dianzhijia.com/api/open/changebjspgeneralizestatus`
-  } else if (type === 2) {
+  } else if (type == 2) {
     //dazhijia
     //短  数字
     data = {
       transfer_store_id: key
     }
     urk = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
-  } else if (type === 3) {
+  } else if (type == 3) {
     //bs
     url = `http://api.010shangpu.com/api/openchangegeneralizestatus`
     data = {
       transfer_store_id: key
     }
-  } else if (type === 4) {
+  } else if (type == 4) {
     //998
     url = `http://api.998pu.com/api/open/changegeneralizestatus`
     data = {
