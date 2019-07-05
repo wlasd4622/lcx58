@@ -177,6 +177,9 @@ class GanJi {
     } catch (error) {
       console.error(error);
       this.log(error)
+      if (error === 'session失效') {
+        throw new Error(error)
+      }
     }
   }
   async updateUser(user, blanceHbg58, cookie, nickName, status = 0) {
@@ -280,7 +283,7 @@ class GanJi {
             console.error(err)
             //user, blanceHbg58, cookie, nickName
             // await this.login(user);
-            this.updateUser(user, '', '', '', 500)
+            this.updateUser(user, '', '', '', 5000)
             this.close();
           }
           await this.sleep(1000)
