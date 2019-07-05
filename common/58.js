@@ -389,7 +389,8 @@ function updateHouseInfo(key, status, houseUrl, type) {
           //更新成功
           console.log('更新成功');
           window.updateHouseInfoStatus = '更新成功'
-        } else {
+        }
+        if (houseUrl && !res.data) {
           //更新失败
           console.log('更新失败');
           window.updateHouseInfoStatus = '更新失败'
