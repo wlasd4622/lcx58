@@ -551,12 +551,12 @@ Function updateStatus(userInfo, status)
     If cint(flag) = 0 Then
         Goto rUpdateStatus
     End If
-    js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"')"
+    js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"',"+userInfo(6)+")"
     //MessageBox js
     Call execjs(js)
     Delay 500
     result = execjs("window.updateHouseInfoStatus")
-    If result = "更新错误" Then
+    If result = "" or result = "更新错误" Then
         MessageBox "更新错误"
     End If
     Rem fUpdateStatus
@@ -930,6 +930,7 @@ Function getUser()
         log "parrword:" + parrword
         key = Plugin.Super_MySQL.fetch_text(store, "key")
         url = Plugin.Super_MySQL.fetch_text(store, "url")
+        type = Plugin.Super_MySQL.fetch_text(store, "type")
         //锁定这条数据
         sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
         log sql
@@ -944,7 +945,7 @@ Function getUser()
         log "cookie:" + cookie
         houseId = getHouseId(url)
         houseInfo = Array(houseId)
-        userInfo=Array(userName, password,houseListId,key,url,cookie)
+        userInfo=Array(userName, password,houseListId,key,url,cookie,type)
         getUser =userInfo
     Else
         sql = "commit"
