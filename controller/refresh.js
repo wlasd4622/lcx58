@@ -7,22 +7,32 @@ const moment = require('moment');
 class Refresh {
   constructor() {
     this.userList = config.user;
-    this.db = config.db
+    this.db = config.db;
+    this.houseMap = {};
   }
   async init() {
-    this.log(`>>>init`);
-    this.userList && this.userList.map(user => {
-      if (user.db1 && !user.db4) {
-        user.db4 = user.db1
+    try {
+      this.log(`>>>init`);
+      this.userList && this.userList.map(user => {
+        if (user.db1 && !user.db4) {
+          user.db4 = user.db1
+        }
+        return user;
+      })
+      let keys = Object.keys(this.db)
+      for (let index = 0; index < keys.length; index++) {
+        const dbName = keys[index];
+        let dbConfig = this.db[dbName]
+        dbConfig.useConnectionPooling = true;
+        this.db[dbName].pool = mysql.createPool(dbConfig);
       }
-      return user;
-    })
-    let keys = Object.keys(this.db)
-    for (let index = 0; index < keys.length; index++) {
-      const dbName = keys[index];
-      let dbConfig = this.db[dbName]
-      dbConfig.useConnectionPooling = true;
-      this.db[dbName].pool = mysql.createPool(dbConfig);
+      //
+      if (!fs.existsSync('./house.json')) {
+        fs.writeFileSync('./house.json', JSON.stringify({}));
+      }
+      this.houseMap = JSON.parse(fs.readFileSync('./house.json').toString());
+    } catch (error) {
+      this.log(error)
     }
   }
 
@@ -91,16 +101,145 @@ class Refresh {
       console.error(error);
     }
   }
+  /**
+   * 每天更新对应店铺id--58id
+   */
+  async task2() {
+    this.log(`>>>task2`);
+    for (let index = 0; index < this.userList.length; index++) {
+      this.log(`user.index:${index}`)
+      let user = this.userList[index];
+      if (user.user_name.includes('廊坊')) {
+        this.log(user)
+        let sql = `select * from gj_user where username='${user.user_name}'`
+        try {
+          let userList = await this.execSql(0, sql)
+          user = Object.assign(user, userList[0])
+        } catch (err) {
+          this.log(err)
+        }
+        if (user.session && user.status == 0) {
+          await this.get58HouseId(user);
+        }
+      }
+    }
+    this.log(`task2-END`)
+  }
+  /**
+   *  task2 获取house列表
+   */
+  async task2GetHouseList(page) {
+    let houseList = [];
+    try {
+      houseList = await page.evaluate(() => {
+        function getHouseList() {
+          return new Promise((resolve, reject) => {
+            try {
+              let houseList = []
+              $.ajax({
+                url: `http://vip.58ganji.com/separation/houselist/search?pageIndex=1&pageSize=500&cateId=20`,
+                contentType: 'applicaiton/json',
+                success: function (res) {
+                  let data = JSON.parse(res);
+                  if (data.data && data.data.infos && data.data.infos.length) {
+                    houseList = data.data.infos;
+                  }
+                  resolve(houseList)
+                },
+                error: function (err) {
+                  reject(err)
+                }
+              });
+            } catch (error) {
+              reject(error)
+            }
+          })
+        }
+        return getHouseList()
+      });
+    } catch (error) {
+      this.log(error)
+    }
+    return houseList;
+  }
 
+  async task2Get58HouseUrl(house, page) {
+    let detailUrl = '',
+      houseUrl = '';
+    try {
+      detailUrl = `http://vip.58ganji.com/sydchug/detail/sydc?houseId=${house.unityInfoId}`
+      await page.goto(detailUrl, {
+        waitUntil: 'domcontentloaded'
+      })
+      await page.waitForSelector('.status-part a')
+      houseUrl = await page.evaluate(() => {
+        return $('.status-part a:eq(0)').attr('href');
+      })
+    } catch (error) {
+      this.log(error)
+    }
+    return houseUrl;
+  }
+  /**
+   * 获取58店铺id
+   * @param {*} user
+   */
+  async get58HouseId(user) {
+    this.log(user)
+    let browser, page;
+    try {
+      let puppeteer = await this.runPuppeteer({
+        headless: false
+      });
+      browser = puppeteer.browser;
+      page = puppeteer.page;
+      let session = decodeURIComponent(user.session)
+      this.setPageCookie(session, page);
+      await this.sleep(10)
+      let url = `http://vip.58ganji.com/sydchug/list/sydc`;
+      await page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      });
+      await page.waitForSelector('table.ui-table.sydc-table');
+      let houseList = await this.task2GetHouseList(page);
+      if (houseList && houseList.length) {
+        for (let index = 0; index < houseList.length; index++) {
+          const house = houseList[index];
+          let shopId = house.unityInfoId
+          if (!this.houseMap[`b_${shopId}`]) {
+            let houseUrl = await this.task2Get58HouseUrl(house, page)
+            let houseId = houseUrl.match(/\d{8,}/)[0];
+            this.houseMap[`a_${houseId}`] = shopId;
+            this.houseMap[`b_${shopId}`] = houseId;
+            fs.writeFileSync('./house.json', JSON.stringify(this.houseMap));
+          }
+        }
+      }
+    } catch (err) {
+      let len = await this.waitElement('.login-mod', page)
+      if (len) {
+        this.log('账户session失效')
+      }
+      this.log(err)
+    }
+    await this.close(browser);
+  }
+
+  async setPageCookie(session, page = this.page) {
+    await this.setCookie(session, '.58ganji.com', page);
+    await this.setCookie(session, '.58.com', page);
+    await this.setCookie(session, '.vip.58.com', page);
+    await this.setCookie(session, '.anjuke.com', page);
+    await this.setCookie(session, '.vip.58ganji.com', page);
+  }
   /**
    *  主任务
    */
   async task1() {
-    this.log(`>>>task`);
+    this.log(`>>>task1`);
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-
       if (this.userType(user) !== 0) {
         continue;
       }
@@ -113,7 +252,7 @@ class Refresh {
       } catch (err) {
         this.log(err)
       }
-      if (user.session) {
+      if (user.session && user.status == 0) {
         await this.loopHouseHandle(user);
       }
     }
@@ -152,27 +291,26 @@ class Refresh {
   }
 
 
-  async runPuppeteer() {
+  async runPuppeteer(options = {}) {
     this.log(`>>>runPuppeteer`);
-    try {
-      this.close()
-    } catch (err) {
-      this.log(err);
-    }
-    this.browser = await puppeteer.launch({
+    let browser = await puppeteer.launch(Object.assign({}, {
       headless: false,
       args: ['--start-maximized', '--disable-infobars']
-    });
-    this.page = await this.browser.newPage();
+    }, options));
+    let page = await browser.newPage();
     // await this.page.setViewport({
     //   width: 1500,
     //   height: 800
     // })
+    return {
+      browser,
+      page
+    };
   }
-  async close() {
+  async close(browser = this.browser) {
     this.log('>>>close');
     try {
-      if (this.browser) await this.browser.close()
+      if (browser) await browser.close()
     } catch (error) {
       this.log(error)
     }
@@ -895,6 +1033,9 @@ class Refresh {
   async main() {
     this.log(`>>>main`);
     await this.init()
+    //店铺id对应58id
+    await this.task2()
+    //刷新，重新推送
     await this.task1()
   }
 }
