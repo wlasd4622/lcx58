@@ -31,6 +31,7 @@
 //用户名不存在				4003
 //账户异常					4004
 //账户需要设置cookie			4005
+//用户名密码不匹配			4006
 //--------------------------------------
 Dim id, chromeSrc, mysql,houseInfo,userInfo
 configStatus = config()
@@ -554,9 +555,13 @@ Function updateStatus(userInfo, status)
     End If
     js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
     Call execjs(js)
+    Rem rGetUpdateHouseInfoStatus
     Delay 500
     result = execjs("window.updateHouseInfoStatus")
-    If result = "" or result = "更新错误" Then
+    If result = "" Then
+        Goto rGetUpdateHouseInfoStatus
+    End If
+    If result = "更新错误" Then
         MessageBox "更新错误"
     End If
     Rem fUpdateStatus
@@ -933,7 +938,6 @@ Function getUser()
         url = Plugin.Super_MySQL.fetch_text(store, "url")
         log "url:" + url
         houseSource = Plugin.Super_MySQL.fetch_text(store, "type")
-
         //锁定这条数据
         sql = "UPDATE house_list SET `block`=1 WHERE id=" + houseListId
         log sql
