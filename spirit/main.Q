@@ -99,6 +99,7 @@ Function loadJquery()
     End If
 End Function
 Function refresh(houseId)
+    Rem rRefresh
     url = "https://refreshplus.vip.58.com/refreshplus/pc/normalrefreshpage?infoId=" + cstr(houseId) + "&source=1#/immediate"
     Call Plugin.chrome.load(id, url)
     // 等待载入完成
@@ -126,7 +127,9 @@ Function refresh(houseId)
 					"}")
         rHouseStatus = execjs("getStatus();")
         If rHouseStatus = "" Then
-            rHouseStatus=-7642
+            rHouseStatus = - 7642
+        ElseIf rHouseStatus = - 456  Then
+            Goto rRefresh
         End If
         rHouseStatus=cint(rHouseStatus)
         If rHouseStatus = 1000 Then
@@ -553,13 +556,20 @@ Function updateStatus(userInfo, status)
     If cint(flag) = 0 Then
         Goto rUpdateStatus
     End If
+    Rem rAjaxUpdateHouseInfo
+    ajaxCount=0
     js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
     Call execjs(js)
     Rem rGetUpdateHouseInfoStatus
     Delay 500
     result = execjs("window.updateHouseInfoStatus")
     If result = "" Then
-        Goto rGetUpdateHouseInfoStatus
+        ajaxCount = ajaxCount + 1
+        If ajaxCount < 10 Then
+            Goto rGetUpdateHouseInfoStatus
+        Else
+            Goto rAjaxUpdateHouseInfo
+        End If
     End If
     If result = "更新错误" Then
         MessageBox "更新错误"
