@@ -2,13 +2,17 @@ let puppeteer = require('puppeteer');
 let schedule = require('node-schedule');
 var mysql = require('mysql');
 let fs = require('fs')
-let config = require('./../config.js')
+let config = require('../config.js')
 const moment = require('moment');
-class Refresh {
+let Util = require('../common/util')
+class Task1 extends Util {
   constructor() {
+    super();
+    this.taskName = "task1"
     this.userList = config.user;
     this.db = config.db;
     this.houseMap = {};
+    this.init();
   }
   async init() {
     try {
@@ -26,217 +30,17 @@ class Refresh {
         dbConfig.useConnectionPooling = true;
         this.db[dbName].pool = mysql.createPool(dbConfig);
       }
-      //
-      if (!fs.existsSync('./house.json')) {
-        fs.writeFileSync('./house.json', JSON.stringify({}));
-      }
       this.houseMap = JSON.parse(fs.readFileSync('./house.json').toString());
     } catch (error) {
       this.log(error)
     }
   }
 
-  getConnection(name) {
-    let that = this;
-    this.log(`>>>getConnection`);
-    return new Promise((resolve, reject) => {
-      this.db[name].pool.getConnection(function (err, connection) {
-        if (err) {
-          that.log(err);
-          reject(err)
-        } else {
-          resolve(connection)
-        }
-      });
-    })
-  }
-
-  /**
-   *
-   * @param {*} name 0:datarefresh,1:bjhyty,2:dianzhijia,3:bs
-   * @param {*} sql
-   */
-  async execSql(nameIndex, sql) {
-    let that = this;
-    let name = ['datarefresh', 'bjhyty', 'dianzhijia', 'bs'][nameIndex];
-    this.log('>>>execSql');
-    this.log(name);
-    this.log(sql)
-    let connection = await this.getConnection(name)
-    return new Promise((resolve, reject) => {
-      try {
-        connection.query(sql, function (err, value) {
-          if (err) {
-            reject(err)
-          } else {
-            // that.log(`查询到${value.length}条数据`)
-            resolve(value)
-          }
-        })
-        connection.release();
-      } catch (err) {
-        reject(err)
-      }
-    })
-  }
-
-  log(T) {
-    let info = ''
-    try {
-      if (T instanceof Error) {
-        console.error(T)
-        info = T.message
-        debugger;
-      } else {
-        info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
-      }
-      info = moment().format('YYYY-MM-DD HH:mm:ss') + ' ' + info
-      console.log(info);
-      if (info.length > 200) {
-        info = info.substr(0, 200) + '...'
-      }
-      fs.appendFileSync(`./logs/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
-
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  /**
-   * 每天更新对应店铺id--58id
-   */
-  async task2() {
-    this.log(`>>>task2`);
-    for (let index = 0; index < this.userList.length; index++) {
-      this.log(`user.index:${index}`)
-      let user = this.userList[index];
-      if (user.user_name.includes('廊坊')) {
-        this.log(user)
-        let sql = `select * from gj_user where username='${user.user_name}'`
-        try {
-          let userList = await this.execSql(0, sql)
-          user = Object.assign(user, userList[0])
-        } catch (err) {
-          this.log(err)
-        }
-        if (user.session && user.status == 0) {
-          await this.get58HouseId(user);
-        }
-      }
-    }
-    this.log(`task2-END`)
-  }
-  /**
-   *  task2 获取house列表
-   */
-  async task2GetHouseList(page) {
-    let houseList = [];
-    try {
-      houseList = await page.evaluate(() => {
-        function getHouseList() {
-          return new Promise((resolve, reject) => {
-            try {
-              let houseList = []
-              $.ajax({
-                url: `http://vip.58ganji.com/separation/houselist/search?pageIndex=1&pageSize=500&cateId=20`,
-                contentType: 'applicaiton/json',
-                success: function (res) {
-                  let data = JSON.parse(res);
-                  if (data.data && data.data.infos && data.data.infos.length) {
-                    houseList = data.data.infos;
-                  }
-                  resolve(houseList)
-                },
-                error: function (err) {
-                  reject(err)
-                }
-              });
-            } catch (error) {
-              reject(error)
-            }
-          })
-        }
-        return getHouseList()
-      });
-    } catch (error) {
-      this.log(error)
-    }
-    return houseList;
-  }
-
-  async task2Get58HouseUrl(house, page) {
-    let detailUrl = '',
-      houseUrl = '';
-    try {
-      detailUrl = `http://vip.58ganji.com/sydchug/detail/sydc?houseId=${house.unityInfoId}`
-      await page.goto(detailUrl, {
-        waitUntil: 'domcontentloaded'
-      })
-      await page.waitForSelector('.status-part a')
-      houseUrl = await page.evaluate(() => {
-        return $('.status-part a:eq(0)').attr('href');
-      })
-    } catch (error) {
-      this.log(error)
-    }
-    return houseUrl;
-  }
-  /**
-   * 获取58店铺id
-   * @param {*} user
-   */
-  async get58HouseId(user) {
-    this.log(user)
-    let browser, page;
-    try {
-      let puppeteer = await this.runPuppeteer({
-        headless: false
-      });
-      browser = puppeteer.browser;
-      page = puppeteer.page;
-      let session = decodeURIComponent(user.session)
-      this.setPageCookie(session, page);
-      await this.sleep(10)
-      let url = `http://vip.58ganji.com/sydchug/list/sydc`;
-      await page.goto(url, {
-        waitUntil: 'domcontentloaded'
-      });
-      await page.waitForSelector('table.ui-table.sydc-table');
-      let houseList = await this.task2GetHouseList(page);
-      if (houseList && houseList.length) {
-        for (let index = 0; index < houseList.length; index++) {
-          const house = houseList[index];
-          let shopId = house.unityInfoId
-          if (!this.houseMap[`b_${shopId}`]) {
-            let houseUrl = await this.task2Get58HouseUrl(house, page)
-            let houseId = houseUrl.match(/\d{8,}/)[0];
-            this.houseMap[`a_${houseId}`] = shopId;
-            this.houseMap[`b_${shopId}`] = houseId;
-            fs.writeFileSync('./house.json', JSON.stringify(this.houseMap));
-          }
-        }
-      }
-    } catch (err) {
-      let len = await this.waitElement('.login-mod', page)
-      if (len) {
-        this.log('账户session失效')
-      }
-      this.log(err)
-    }
-    await this.close(browser);
-  }
-
-  async setPageCookie(session, page = this.page) {
-    await this.setCookie(session, '.58ganji.com', page);
-    await this.setCookie(session, '.58.com', page);
-    await this.setCookie(session, '.vip.58.com', page);
-    await this.setCookie(session, '.anjuke.com', page);
-    await this.setCookie(session, '.vip.58ganji.com', page);
-  }
   /**
    *  主任务
    */
-  async task1() {
-    this.log(`>>>task1`);
+  async main() {
+    this.log(`>>>main`);
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
@@ -258,62 +62,12 @@ class Refresh {
     }
   }
 
-  sleep(ms = 300) {
-    this.log(`>>>sleep:${ms}`)
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-      }, ms);
-    })
-  }
-
-  async setCookie(cookies_str = "", domain, page) {
-    this.log(`>>>setCookie`);
-    let cookies = cookies_str.split(';').map(pair => {
-      let name = pair.trim().slice(0, pair.trim().indexOf('='))
-      let value = pair.trim().slice(pair.trim().indexOf('=') + 1)
-      return {
-        name,
-        value,
-        domain
-      }
-    });
-    return Promise.all(cookies.map(pair => {
-      return page.setCookie(pair)
-    }));
-  }
   async getCookie() {
     this.log(`>>>getCookie`);
     let cookie = await this.page.evaluate(() => {
       return document.cookie
     })
     return cookie
-  }
-
-
-  async runPuppeteer(options = {}) {
-    this.log(`>>>runPuppeteer`);
-    let browser = await puppeteer.launch(Object.assign({}, {
-      headless: false,
-      args: ['--start-maximized', '--disable-infobars']
-    }, options));
-    let page = await browser.newPage();
-    // await this.page.setViewport({
-    //   width: 1500,
-    //   height: 800
-    // })
-    return {
-      browser,
-      page
-    };
-  }
-  async close(browser = this.browser) {
-    this.log('>>>close');
-    try {
-      if (browser) await browser.close()
-    } catch (error) {
-      this.log(error)
-    }
   }
 
   /**
@@ -687,207 +441,9 @@ class Refresh {
     // console.log('refresh-end');
   }
 
-  /**
-   * 查找等待元素出现
-   * @param {*} selector
-   * @param {*} page
-   */
-  async waitElement(selector, page) {
-    let len = 0;
-    try {
-      this.log('>>>waitElement');
-      this.log(selector)
-      if (!page) {
-        page = this.page
-      }
 
-      let jqueryExist = false;
-      do {
-        this.log(`do:jqueryExist:${jqueryExist}`)
-        await this.sleep()
-        jqueryExist = await this.page.evaluate(() => {
-          return typeof window.jQuery === 'function'
-        })
-      } while (!jqueryExist)
 
-      for (let index = 0; index < 10; index++) {
-        this.log(`waitElement第${index}次寻找...`)
-        await this.sleep(500)
-        len = await page.evaluate(selector => {
-          return jQuery(selector).length;
-        }, selector);
-        this.log(`寻找结果${len}`)
-        if (len) {
-          break;
-        }
-      }
-    } catch (error) {
-      console.error(error)
-      this.log(error)
-    }
-    return len;
-  }
-  /**
-   * 从数据库获取房屋信息
-   * @param {*} user
-   */
-  async getHouseListByDB(user) {
-    let houseInfo = {
-      data0: [],
-      data1: [],
-      data2: []
-    }
-    try {
-      this.log(`>>>getHouseListByDB`)
-      console.log(user);
-      let dataManager = {};
-      dataManager.db11 = {
-        msg: '数据库dianzhijia,刷新，重新推送',
-        sql: `SELECT
-              url as url
-            FROM
-              generalizes AS a
-              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-            WHERE
-              (
-                a.post_type = 8
-                OR a.post_type = 17
-              )
-              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
-              AND a.url IS NOT NULL`,
-        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-        type: [0, 1] //0：刷新，1：重新推送，2：精选
-      }
-      dataManager.db12 = {
-        msg: '数据库dianzhijia,刷新，早上9点-10点点击精选，输入15元，确定即可',
-        sql: `SELECT
-              url as url
-            FROM
-              generalizes AS a
-              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-            WHERE
-              a.post_type = 9
-              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
-              AND a.url IS NOT NULL`,
-        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-        type: [0, 2] //0：刷新，1：重新推送，2：精选
-      }
-      dataManager.db21 = {
-        msg: '数据库bjhyty,刷新，重新推送',
-        sql: `SELECT
-              url_58 as url
-            FROM
-              t_signing
-            WHERE
-              ( STATUS = 4 OR \`status\` = 2 )
-              AND expiry_date > CURDATE( )
-              AND promoted_accounts = ${user.db2}
-            ORDER BY
-              expiry_date`,
-        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-        type: [0, 1] //0：刷新，1：重新推送，2：精选
-      };
-      dataManager.db31 = {
-        msg: '数据库bjhyty,刷新，早上9点-10点点击精选，输入15元，确定即可',
-        sql: `SELECT
-              url_58_choiceness as url
-            FROM
-              t_signing
-            WHERE
-              ( STATUS = 4 OR \`status\` = 2 )
-              AND date_of_maturity > CURDATE( )
-              AND do_post_type = ${user.db3}
-            ORDER BY
-              date_of_maturity`,
-        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-        type: [0, 2] //0：刷新，1：重新推送，2：精选
-      };
-      dataManager.db41 = {
-        msg: '数据库bs,刷新，重新推送',
-        sql: `SELECT
-              url as url
-            FROM
-              generalizes AS a
-              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-            WHERE
-              (
-                a.post_type = 8
-                OR a.post_type = 17
-              )
-              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
-              AND a.url IS NOT NULL`,
-        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-        type: [0, 1] //0：刷新，1：重新推送，2：精选
-      };
-      dataManager.db42 = {
-        msg: '数据库bs,刷新，早上9点-10点点击精选，输入15元，确定即可',
-        sql: `SELECT
-              url as url
-            FROM
-              generalizes AS a
-              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-            WHERE
-              a.post_type = 9
-              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
-              AND a.url IS NOT NULL`,
-        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-        type: [0, 2] //0：刷新，1：重新推送，2：精选
-      };
-      let keys = Object.keys(dataManager);
-      for (let i = 0; i < keys.length; i++) {
-        let obj = dataManager[keys[i]];
-        this.log(obj.msg)
-        let list = await this.execSql(obj.dbIndex, obj.sql)
-        obj.type.map(i => {
-          houseInfo[`data${i}`] = houseInfo[`data${i}`].concat(list || [])
-        })
-      }
-      houseInfo.data0 = this.getHouseIds(houseInfo.data0) || [];
-      houseInfo.data1 = this.getHouseIds(houseInfo.data1) || [];
-      houseInfo.data2 = this.getHouseIds(houseInfo.data2) || [];
 
-    } catch (error) {
-      this.log(error)
-    }
-    //-----------
-    let newHouseIdMap = {}
-    try {
-
-      houseInfo.data0.map(id => {
-        newHouseIdMap[id] = [0]
-      });
-      houseInfo.data1.map(id => {
-        if (newHouseIdMap[id]) {
-          newHouseIdMap[id].push(1)
-        } else {
-          newHouseIdMap[id] = [1]
-        }
-      })
-    } catch (error) {
-      this.log(error)
-    }
-    return newHouseIdMap;
-  }
-
-  getHouseIds(houseList = []) {
-    if (houseList && houseList.length) {
-      houseList = houseList.map(({
-        url
-      }) => {
-        let houseId = '';
-        if (url.includes('.58.com')) {
-          houseId = url.match(/\d{10,}/)
-        } else {
-          this.log('未处理异常：从数据库获取的url不是58.com')
-          this.log(url)
-        }
-        return houseId.toString();
-      })
-    }
-    houseList = this.unique(houseList)
-    this.log(houseList)
-    return houseList;
-  }
   /**
    * 超过十天的帖子 重新发布帖子
    * @param {*} houseId
@@ -971,20 +527,6 @@ class Refresh {
     }
   }
 
-  /**
-   * 等待jquery
-   */
-  async waitJquery() {
-    this.log(`>>>waitJquery`)
-    let jqueryExist = false;
-    do {
-      this.log(`do:jqueryExist:${jqueryExist}`)
-      await this.sleep()
-      jqueryExist = await this.page.evaluate(() => {
-        return typeof window.jQuery === 'function'
-      })
-    } while (!jqueryExist)
-  }
 
   /**
    * 获取房屋详情信息
@@ -1026,18 +568,6 @@ class Refresh {
     return houseDetailData;
   }
 
-  unique(arr) {
-    return Array.from(new Set(arr))
-  }
 
-  async main() {
-    this.log(`>>>main`);
-    await this.init()
-    //店铺id对应58id
-    await this.task2()
-    //刷新，重新推送
-    await this.task1()
-  }
 }
-
-new Refresh().main();
+module.exports = Task1

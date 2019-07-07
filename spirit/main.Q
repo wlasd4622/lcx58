@@ -109,7 +109,10 @@ Function refresh(houseId)
     Call find("document.querySelectorAll('div').length","查找div")
     Call loadJquery()
     length = find("$('a[href$=immediate]').length", "查找立即刷新a标签")
-    rHouseStatus=-456
+    rHouseStatus = -456
+    If length = "" Then
+        length=0
+    End If
     If length > 0 Then
         execjs ("$('a[href$=immediate]')[0].click()")
         Delay 1500
@@ -157,6 +160,8 @@ Function refresh(houseId)
             //重新发布
             rHouseStatus = addHouseInfo(houseId)
         End If
+    Else
+        Goto rRefresh
     End If
     refresh=rHouseStatus
 End Function
@@ -453,7 +458,7 @@ End Function
 Function execjs(str)
     log "execjs: "& str
     result = Plugin.chrome.exec_js(id, str)
-    log "result:"&result
+    log "result:"+cstr(result)
     execjs=result
 End Function
 Function login()
