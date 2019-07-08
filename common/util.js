@@ -3,13 +3,20 @@ let fs = require('fs')
 let moment = require('moment');
 let config = require('./../config.js')
 let mysql = require('mysql');
+
 class Util {
   constructor() {
     this.db = config.db;
     this.userList = config.user;
     this.getUserList();
     this.initDB();
+
   }
+
+  getHouseMap() {
+    this.houseMap = JSON.parse(fs.readFileSync('./house.json').toString());
+  }
+
   initDB() {
     let keys = Object.keys(this.db)
     for (let index = 0; index < keys.length; index++) {
@@ -84,7 +91,7 @@ class Util {
     this.log(`>>>runPuppeteer`);
     this.browser = await puppeteer.launch(Object.assign({}, {
       headless: false,
-      args: [ '--start-maximized', '--disable-infobars']
+      args: ['--start-maximized', '--disable-infobars']
     }, options));
     this.page = await this.browser.newPage();
     await this.page.setViewport({
@@ -228,6 +235,7 @@ class Util {
    * @param {*} user
    */
   async getHouseListByDB(user) {
+    this.getHouseMap();
     let houseInfo = {
       data0: [],
       data1: [],
@@ -237,52 +245,52 @@ class Util {
       this.log(`>>>getHouseListByDB`)
       console.log(user);
       let dataManager = {};
-      // dataManager.db11 = {
-      //   msg: '数据库dianzhijia,刷新，重新推送',
-      //   sql: `SELECT
-      //         url as url
-      //       FROM
-      //         generalizes AS a
-      //         LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-      //       WHERE
-      //         (
-      //           a.post_type = 8
-      //           OR a.post_type = 17
-      //         )
-      //         AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
-      //         AND a.url IS NOT NULL`,
-      //   dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-      //   type: [0, 1] //0：刷新，1：重新推送，2：精选
-      // }
-      // dataManager.db12 = {
-      //   msg: '数据库dianzhijia,刷新，早上9点-10点点击精选，输入15元，确定即可',
-      //   sql: `SELECT
-      //         url as url
-      //       FROM
-      //         generalizes AS a
-      //         LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-      //       WHERE
-      //         a.post_type = 9
-      //         AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
-      //         AND a.url IS NOT NULL`,
-      //   dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-      //   type: [0, 2] //0：刷新，1：重新推送，2：精选
-      // }
-      // dataManager.db21 = {
-      //   msg: '数据库bjhyty,刷新，重新推送',
-      //   sql: `SELECT
-      //         url_58 as url
-      //       FROM
-      //         t_signing
-      //       WHERE
-      //         ( STATUS = 4 OR \`status\` = 2 )
-      //         AND expiry_date > CURDATE( )
-      //         AND promoted_accounts = ${user.db2}
-      //       ORDER BY
-      //         expiry_date`,
-      //   dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-      //   type: [0, 1] //0：刷新，1：重新推送，2：精选
-      // };
+      dataManager.db11 = {
+        msg: '数据库dianzhijia,刷新，重新推送',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              (
+                a.post_type = 8
+                OR a.post_type = 17
+              )
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 1] //0：刷新，1：重新推送，2：精选
+      }
+      dataManager.db12 = {
+        msg: '数据库dianzhijia,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              a.post_type = 9
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 2] //0：刷新，1：重新推送，2：精选
+      }
+      dataManager.db21 = {
+        msg: '数据库bjhyty,刷新，重新推送',
+        sql: `SELECT
+              url_58 as url
+            FROM
+              t_signing
+            WHERE
+              ( STATUS = 4 OR \`status\` = 2 )
+              AND expiry_date > CURDATE( )
+              AND promoted_accounts = ${user.db2}
+            ORDER BY
+              expiry_date`,
+        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 1] //0：刷新，1：重新推送，2：精选
+      };
       dataManager.db31 = {
         msg: '数据库bjhyty,刷新，早上9点-10点点击精选，输入15元，确定即可',
         sql: `SELECT
@@ -298,37 +306,37 @@ class Util {
         dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
         type: [0, 2] //0：刷新，1：重新推送，2：精选
       };
-      // dataManager.db41 = {
-      //   msg: '数据库bs,刷新，重新推送',
-      //   sql: `SELECT
-      //         url as url
-      //       FROM
-      //         generalizes AS a
-      //         LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-      //       WHERE
-      //         (
-      //           a.post_type = 8
-      //           OR a.post_type = 17
-      //         )
-      //         AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
-      //         AND a.url IS NOT NULL`,
-      //   dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-      //   type: [0, 1] //0：刷新，1：重新推送，2：精选
-      // };
-      // dataManager.db42 = {
-      //   msg: '数据库bs,刷新，早上9点-10点点击精选，输入15元，确定即可',
-      //   sql: `SELECT
-      //         url as url
-      //       FROM
-      //         generalizes AS a
-      //         LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
-      //       WHERE
-      //         a.post_type = 9
-      //         AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
-      //         AND a.url IS NOT NULL`,
-      //   dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
-      //   type: [0, 2] //0：刷新，1：重新推送，2：精选
-      // };
+      dataManager.db41 = {
+        msg: '数据库bs,刷新，重新推送',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              (
+                a.post_type = 8
+                OR a.post_type = 17
+              )
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 1] //0：刷新，1：重新推送，2：精选
+      };
+      dataManager.db42 = {
+        msg: '数据库bs,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              a.post_type = 9
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        type: [0, 2] //0：刷新，1：重新推送，2：精选
+      };
       let keys = Object.keys(dataManager);
       for (let i = 0; i < keys.length; i++) {
         let obj = dataManager[keys[i]];
@@ -353,17 +361,30 @@ class Util {
     //-----------
     let newHouseIdMap = {}
     try {
-
       houseInfo.data0.map(id => {
-        newHouseIdMap[id] = [0]
+        newHouseIdMap[id] = {
+          type: [0]
+        }
       });
       houseInfo.data1.map(id => {
         if (newHouseIdMap[id]) {
-          newHouseIdMap[id].push(1)
+          newHouseIdMap[id].type.push(1)
         } else {
-          newHouseIdMap[id] = [1]
+          newHouseIdMap[id] = {
+            type: [1]
+          }
         }
-      })
+      });
+      //如果是石家庄或者廊坊账号需要转换id
+      if (this.userType(user) === 1) {
+        for (let key in newHouseIdMap) {
+          // this.houseMap[`a_${houseId}`] = shopId;
+          // this.houseMap[`b_${shopId}`] = houseId;
+          let houseId = key;
+          let shopId = this.houseMap[`a_${houseId}`]
+          newHouseIdMap[key].shopId = shopId;
+        }
+      }
     } catch (error) {
       this.log(error)
     }
@@ -387,6 +408,20 @@ class Util {
     houseList = this.unique(houseList)
     this.log(houseList)
     return houseList;
+  }
+
+  /**
+   * 获取用户类型
+   * 0：正常用户
+   * 1：石家庄，廊坊用户
+   * @param {*} user
+   */
+  userType(user) {
+    let type = 0
+    if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')) {
+      type = 1
+    }
+    return type;
   }
 }
 module.exports = Util;

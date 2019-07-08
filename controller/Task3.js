@@ -35,9 +35,10 @@ class Task3 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
-        let houseList = await this.getHouseListByDB(user)
-        if (houseList && houseList.length) {
-          await this.get58HouseId(user, houseList);
+        let houseIdMap = await this.getHouseListByDB(user)
+        let houseIdList = Object.keys(houseIdMap)
+        if (houseIdList && houseIdList.length) {
+          await this.setHighQuality(user, houseIdMap);
         }
       }
     }
@@ -45,10 +46,10 @@ class Task3 extends Util {
   }
 
   /**
-   * 获取58店铺id
+   * 设置精选
    * @param {*} user
    */
-  async get58HouseId(user) {
+  async setHighQuality(user) {
     this.log(user)
     try {
       await this.runPuppeteer({

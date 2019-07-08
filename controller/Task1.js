@@ -44,9 +44,9 @@ class Task1 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      if (this.userType(user) !== 0) {
-        continue;
-      }
+      // if (this.userType(user) !== 0) {
+      //   continue;
+      // }
       this.log(user)
       let sql = `select * from gj_user where username='${user.user_name}'`
       try {
@@ -387,19 +387,7 @@ class Task1 extends Util {
     }
   }
 
-  /**
-   * 获取用户类型
-   * 0：正常用户
-   * 1：石家庄，廊坊用户
-   * @param {*} user
-   */
-  userType(user) {
-    let type = 0
-    if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')) {
-      type = 1
-    }
-    return type;
-  }
+
 
   /**
    * 启动浏览器，setcookie,循环房屋信息
@@ -414,6 +402,7 @@ class Task1 extends Util {
       if (!houseIdKeys.length) {
         return false;
       }
+      await this.closePuppeteer();
       await this.runPuppeteer();
       // let url = `http://vip.58ganji.com/jp58/kcfysp58`
       let session = decodeURIComponent(user.session)
@@ -426,9 +415,9 @@ class Task1 extends Util {
       //刷新
       for (let index = 0; index < houseIdKeys.length; index++) {
         await this.houseRefreshHandle(Object.assign({
-          id: houseIdKeys[index]
-        }, {
-          type: houseList[houseIdKeys[index]]
+          id: houseIdKeys[index],
+          shopId: houseList[houseIdKeys[index]].shopId,
+          type: houseList[houseIdKeys[index]].type
         }), user);
       }
     } catch (err) {
