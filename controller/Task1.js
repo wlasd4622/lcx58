@@ -44,13 +44,16 @@ class Task1 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (this.userType(user) !== 0) {
-      //   continue;
-      // }
+      if (this.userType(user) === 0) {
+        continue;
+      }
       this.log(user)
       let sql = `select * from gj_user where username='${user.user_name}'`
       try {
         let userList = await this.execSql(0, sql)
+        if (!userList || userList.length == 0) {
+          throw new Error('获取用户信息异常')
+        }
         user = Object.assign(user, userList[0])
 
       } catch (err) {
@@ -75,7 +78,7 @@ class Task1 extends Util {
    * @param {*} houseId
    * @param {*} user
    */
-  async houseEditHandle(houseId, user) {
+  async houseEditHandle(houseId, user, shopId) {
     this.log(`>>>houseEditHandle`)
     let result = ''
     let editPage = null;
@@ -87,10 +90,24 @@ class Task1 extends Util {
         jqueryExist = await this.page.evaluate(() => {
           return typeof window.jQuery === 'function'
         })
-      } while (!jqueryExist)
-      let editUrl = await this.page.evaluate((houseId) => {
-        return jQuery(`tr[tid='${houseId}'] a:contains("编辑")`).attr('href')
-      }, houseId)
+      } while (!jqueryExist);
+      let editUrl = null;
+      if (this.userType(user) === 0) {
+        editUrl = await this.page.evaluate((houseId) => {
+          return jQuery(`tr[tid='${houseId}'] a:contains("编辑")`).attr('href')
+        }, houseId)
+      } else {
+        editUrl = await this.page.evaluate((shopId) => {
+          let url = $(`[data-unityinfoid=${shopId}] .edit-btn`).attr('data-href')
+          if (!url) {
+            return ''
+          }
+          return location.origin + url;
+        }, shopId)
+      }
+      if (!editUrl) {
+        throw new Error('未处理异常:editUrl为空');
+      }
       this.log(editUrl)
       // await this.page.click(`tr[tid='${houseId}'] #edit`);
       // await this.sleep(1000)
@@ -106,7 +123,13 @@ class Task1 extends Util {
         await editPage.goto(editUrl, {
           waitUntil: 'domcontentloaded'
         })
-        await this.sleep(1000)
+        await editPage.waitForSelector('#fieldTypeMod')
+        //商铺性质:默认选择二手商铺
+        await editPage.evaluate(() => {
+          if (!$('[name=params_122]').val()) {
+            $('[name=params_122]').val(2)
+          }
+        });
 
         let submitBtnElement = await editPage.evaluate(() => {
           let submitBtnElement = ''
@@ -204,11 +227,61 @@ class Task1 extends Util {
   }
 
   /**
+   * 廊坊地区上架
+   * @param {*} houseId
+   * @param {*} user
+   * @param {*} result
+   * @param {*} shopId
+   */
+  async LFHousePushHandle(houseId, user, result, shopId) {
+    try {
+      //判断是否正常推送中
+      let isPushIn = await this.page.evaluate((shopId) => {
+        return $(`[data-unityinfoid=${shopId}] td:eq(2)`).text().trim().replace('-', '') == '58'
+      }, shopId);
+      if (isPushIn) {
+        //正常推送中
+        this.log('正常推送中')
+        result = {
+          status: 200,
+          msg: '正常推送中'
+        }
+      } else {
+        //非正常推送中
+        //获取剩余推送时间
+        let surplusDays = await this.page.evaluate(() => {
+          return $('.taocanshengyu:visible:eq(0)').text().match(/\d+/)[0] || 0;
+        });
+        this.log('非正常推送中')
+        if (surplusDays > 0) {
+          result = {
+            status: 300,
+            msg: '非正常推送中'
+          }
+          await this.page.click(`[data-unityinfoid='${shopId}'] [original-title="上架"]`)
+          await this.sleep(500)
+        } else {
+          //余额不足
+          this.log('余额不足')
+          result = {
+            status: 306,
+            msg: '余额不足'
+          }
+        }
+
+        await this.sleep(500)
+      }
+    } catch (error) {
+      this.log(error)
+    }
+    return result;
+  }
+  /**
    * house push
    * @param {*} houseId
    * @param {*} user
    */
-  async housePushHandle(houseId, user, result) {
+  async housePushHandle(houseId, user, result, shopId) {
     //判断是否正常推送中
     let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
     if (grey) {
@@ -320,10 +393,21 @@ class Task1 extends Util {
         $('#houselist').remove();
         $('table.ui-table.sydc-table tbody tr').remove();
       })
-      await this.page.type(this.userType(user) === 0 ? '#search-name' : '#shop_search_num', houseId)
-      await this.page.click(this.userType(user) === 0 ? 'input[type=submit]' : 'button.ui-button.ui-button-small.search-btn')
-      await this.page.waitForSelector(this.userType(user) == 0 ? '#houselist' : 'table.ui-table.sydc-table')
-      let houseElement = await this.page.$(this.userType(user) == 0 ? `tr[tid='${houseId}']` : `tr[data-unityinfoid='${houseId}']`);
+      let houseElement = null;
+      if (this.userType(user) === 0) {
+        await this.page.type('#search-name', houseId)
+        await this.page.click('input[type=submit]')
+        await this.page.waitForSelector('#houselist')
+        houseElement = await this.page.$(`tr[tid='${houseId}']`);
+      } else {
+        await this.page.type('#shop_search_num', `${houseObj.shopId}`)
+        await this.sleep(1000)
+        await this.page.click('button.ui-button.ui-button-small.search-btn')
+        await this.sleep(300)
+        await this.page.waitForSelector('table.ui-table.sydc-table')
+        houseElement = await this.page.$(`tr[data-unityinfoid='${houseObj.shopId}']`);
+      }
+
       if (houseElement) {
         //重新发布信息
         // let isAdd = await this.addHouseInfo(houseId, user);
@@ -333,12 +417,17 @@ class Task1 extends Util {
         if (houseObj.type.includes(0)) {
           //编辑保存-->>刷新
           this.log(`编辑保存-->>刷新`)
-          await this.houseEditHandle(houseId, user);
+          await this.houseEditHandle(houseId, user, houseObj.shopId);
         }
         if (houseObj.type.includes(1)) {
           //推送--->重新推送
           this.log(`推送--->重新推送`)
-          result = await this.housePushHandle(houseId, user, result);
+          if (this.userType(user) === 0) {
+            result = await this.housePushHandle(houseId, user, result, houseObj.shopId);
+          } else {
+            result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
+          }
+
         }
 
       } else {

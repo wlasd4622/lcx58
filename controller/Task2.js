@@ -23,7 +23,7 @@ class Task2 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      if (user.user_name.includes('廊坊')) {
+      if (this.userType(user)===1) {
         this.log(user)
         let sql = `select * from gj_user where username='${user.user_name}'`
         try {

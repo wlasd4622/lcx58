@@ -418,7 +418,7 @@ class Util {
    */
   userType(user) {
     let type = 0
-    if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')) {
+    if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')|| user.user_name.includes('青岛')) {
       type = 1
     }
     return type;
