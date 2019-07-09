@@ -99,6 +99,7 @@ Function loadJquery()
     End If
 End Function
 Function refresh(houseId)
+    refreshCount=0
     Rem rRefresh
     url = "https://refreshplus.vip.58.com/refreshplus/pc/normalrefreshpage?infoId=" + cstr(houseId) + "&source=1#/immediate"
     Call Plugin.chrome.load(id, url)
@@ -161,8 +162,14 @@ Function refresh(houseId)
             rHouseStatus = addHouseInfo(houseId)
         End If
     Else
-        Goto rRefresh
+        refreshCount = refreshCount + 1
+        If refreshCount < 5 Then
+            Goto rRefresh
+        Else
+            Goto rRefreshBrack
+        End If
     End If
+    Rem rRefreshBrack
     refresh=rHouseStatus
 End Function
 Function editHouseInfo(houseId)
