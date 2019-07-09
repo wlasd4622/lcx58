@@ -384,7 +384,10 @@ Function houseList()
                 "return 3401"&_
                 "}"&_
                 "}")
-                houseStatus=execjs("getHouseStatusJs();")
+                houseStatus = execjs("getHouseStatusJs();")
+                If houseStatus="" Then
+                    Goto fHouseList
+                End If
             End If
             If houseStatus = 1 Then
                 Call execjs("function isToday(str) {"&_
