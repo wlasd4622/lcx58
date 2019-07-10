@@ -11,7 +11,6 @@ class Task3 extends Util {
   constructor() {
     super();
     this.taskName = 'task3'
-    this.init();
   }
   init() {
     if (!fs.existsSync('./house.json')) {

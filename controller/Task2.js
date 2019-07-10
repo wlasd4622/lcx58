@@ -8,7 +8,6 @@ class Task2 extends Util {
   constructor() {
     super();
     this.taskName = 'task2'
-    this.init();
   }
   init() {
     if (!fs.existsSync('./house.json')) {
@@ -48,7 +47,7 @@ class Task2 extends Util {
     this.log(user)
     try {
       await this.runPuppeteer({
-        headless: false
+        headless: true
       });
       let session = decodeURIComponent(user.session)
       this.setPageCookie(session, this.page);

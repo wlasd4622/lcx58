@@ -12,7 +12,7 @@ class Task1 extends Util {
     this.userList = config.user;
     this.db = config.db;
     this.houseMap = {};
-    this.init();
+
   }
   async init() {
     try {
@@ -41,6 +41,7 @@ class Task1 extends Util {
    */
   async main() {
     this.log(`>>>main`);
+    await this.init();
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
@@ -124,10 +125,22 @@ class Task1 extends Util {
           waitUntil: 'domcontentloaded'
         })
         await editPage.waitForSelector('#fieldTypeMod')
-        //商铺性质:默认选择二手商铺
+
         await editPage.evaluate(() => {
+          //商铺性质:默认选择二手商铺
           if (!$('[name=params_122]').val()) {
             $('[name=params_122]').val(2)
+          }
+          //相关费用
+          // 物业费
+          let value = $('[name="params_218"]').val()
+          if (value === '0.0') {
+            $('[name="params_218"]').val('')
+          }
+          //电费
+          value = $('[name="params_216"]').val()
+          if (value === '0.0') {
+            $('[name="params_216"]').val('')
           }
         });
 
@@ -209,6 +222,7 @@ class Task1 extends Util {
    * @param {*} editPage
    */
   async checkSaveDataHandle(editPage) {
+    this.log('>>>checkSaveDataHandle')
     let message = ""
     try {
       let errArr = await editPage.evaluate(() => {
@@ -260,16 +274,62 @@ class Task1 extends Util {
           }
           await this.page.click(`[data-unityinfoid='${shopId}'] [original-title="上架"]`)
           await this.sleep(500)
+          let selectList = [15, 7, 5, 3, 1];
+          let selectedDays = 0;
+          for (let i = 0; i < selectList.length; i++) {
+            let days = selectList[i];
+            if (surplusDays >= days) {
+              selectedDays = days;
+              break;
+            }
+          }
+          if (selectedDays) {
+            let trIndex = await this.page.evaluate((days) => {
+              let td = $('.on-shelf-table tbody td:contains(58):eq(0)');
+              td.parent().find(`[data-val=${days}]`).click();
+              // td.parent().find('[type="checkbox"]').click();
+              return td.parent().index();
+            }, selectedDays)
+            await this.sleep(200);
+            let checkboxArr = await this.page.$$('.onshelf-body tr.wb-platform [type="checkbox"]');
+            await checkboxArr[trIndex].click();
+            await this.sleep(300)
+            await this.page.click('[value="确认上架"]');
+            await this.sleep(1000)
+            let pushResult = await this.page.evaluate(() => {
+              return $('.iconfont.secc-icon:visible').length || 0
+            });
+            if (pushResult) {
+              //上架成功
+              result = {
+                status: 0,
+                msg: '上架成功'
+              }
+            } else {
+              //上架失败
+              let msg = await this.page.evaluate(() => {
+                let msg = $('td:contains("上架失败")').text() || ''
+                if (msg) {
+                  msg = msg.replace('：', '')
+                }
+                return msg;
+              })
+              result = {
+                status: 456,
+                msg: `上架失败${msg}`
+              }
+            }
+          } else {
+            throw new Error('剩余天数为空')
+          }
         } else {
-          //余额不足
-          this.log('余额不足')
+          //套餐天数不足
+          this.log('套餐天数不足')
           result = {
             status: 306,
-            msg: '余额不足'
+            msg: '套餐天数不足'
           }
         }
-
-        await this.sleep(500)
       }
     } catch (error) {
       this.log(error)
@@ -365,10 +425,14 @@ class Task1 extends Util {
       }
       await this.sleep(500)
     }
+    if (!['正常推送中', '非正常推送中', '推送成功', '推送失败', '余额不足'].includes(result.msg)) {
+      throw new Error('housePushHandle result 未处理异常')
+    }
     return result;
   }
 
   async houseRefreshHandle(houseObj, user) {
+    this.log(`>>>houseRefreshHandle`)
     let houseId = houseObj.id
     this.log(`houseId:${houseId},type:${houseObj.type.map(i => {
       return ['刷新', '重新推送', '精选'][i]
@@ -400,12 +464,15 @@ class Task1 extends Util {
         await this.page.waitForSelector('#houselist')
         houseElement = await this.page.$(`tr[tid='${houseId}']`);
       } else {
-        await this.page.type('#shop_search_num', `${houseObj.shopId}`)
-        await this.sleep(1000)
-        await this.page.click('button.ui-button.ui-button-small.search-btn')
-        await this.sleep(300)
-        await this.page.waitForSelector('table.ui-table.sydc-table')
-        houseElement = await this.page.$(`tr[data-unityinfoid='${houseObj.shopId}']`);
+        houseElement = null;
+        if (houseObj.shopId) {
+          await this.page.type('#shop_search_num', `${houseObj.shopId}`)
+          await this.sleep(1000)
+          await this.page.click('button.ui-button.ui-button-small.search-btn')
+          await this.sleep(300)
+          await this.page.waitForSelector('table.ui-table.sydc-table')
+          houseElement = await this.page.$(`tr[data-unityinfoid='${houseObj.shopId}']`);
+        }
       }
 
       if (houseElement) {
