@@ -45,7 +45,7 @@ class Task1 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      if (this.userType(user) === 0) {
+      if (this.userType(user) === 0 || user.user_name === '廊坊010号') {
         continue;
       }
       this.log(user)
@@ -272,6 +272,17 @@ class Task1 extends Util {
             status: 300,
             msg: '非正常推送中'
           }
+          //检查剩余可推广数
+          let surplusCount = await this.page.evaluate(() => {
+            return $('[original-title="套餐剩余可推广资源"]').text().match(/\d+/)[0];
+          })
+          if (surplusCount <= 0) {
+            result = {
+              status: 489,
+              msg: '套餐剩余可推广资源为0'
+            }
+            throw new Error(489)
+          }
           await this.page.click(`[data-unityinfoid='${shopId}'] [original-title="上架"]`)
           await this.sleep(500)
           let selectList = [15, 7, 5, 3, 1];
@@ -308,7 +319,7 @@ class Task1 extends Util {
             } else {
               //上架失败
               let msg = await this.page.evaluate(() => {
-                let msg = $('td:contains("上架失败")').text() || ''
+                let msg = $('td:contains("上架失败")').text() || $('.result-detail').text().trim().replace(/[\n\s]/g, '') || ''
                 if (msg) {
                   msg = msg.replace('：', '')
                 }
@@ -332,7 +343,11 @@ class Task1 extends Util {
         }
       }
     } catch (error) {
-      this.log(error)
+      if (!['489'].includes(error.message)) {
+        this.log(error)
+      } else {
+        console.log(666);
+      }
     }
     return result;
   }
@@ -467,9 +482,26 @@ class Task1 extends Util {
         houseElement = null;
         if (houseObj.shopId) {
           await this.page.type('#shop_search_num', `${houseObj.shopId}`)
-          await this.sleep(1000)
-          await this.page.click('button.ui-button.ui-button-small.search-btn')
-          await this.sleep(300)
+          await this.sleep(1000);
+          await this.page.evaluate(() => {
+            $('button.search-btn').trigger('click');
+
+            function searchDone() {
+              return new Promise((resolve, reject) => {
+                let trimer = setInterval(() => {
+                  if ($('td.no-list,[data-unityinfoid]').length && $('td.no-list,[data-unityinfoid]').length === 1) {
+                    clearInterval(trimer);
+                    resolve();
+                  } else {
+                    $('button.search-btn').trigger('click');
+                  }
+
+                }, 1000);
+              });
+            }
+            return searchDone();
+          })
+          // await this.page.click('button.ui-button.ui-button-small.search-btn')
           await this.page.waitForSelector('table.ui-table.sydc-table')
           houseElement = await this.page.$(`tr[data-unityinfoid='${houseObj.shopId}']`);
         }
