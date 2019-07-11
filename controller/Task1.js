@@ -573,7 +573,9 @@ class Task1 extends Util {
         msg: `未处理异常:${error.message}`
       }
     }
+    this.log(`------------------------------------`)
     this.log(result);
+    this.log(`------------------------------------`)
     //更新数据库
     await this.updateHouseStatus(Object.assign({}, JSON.parse(JSON.stringify(user)), result, {
       houseId

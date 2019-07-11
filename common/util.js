@@ -384,7 +384,7 @@ class Util {
           let result = await this.execSql(0, sql);
           let shopId = ''
           if (result && result.length) {
-            shopId = result[0].shop_id
+            shopId = result[0].gj_id
           }
           newHouseIdMap[key].shopId = shopId;
         }
