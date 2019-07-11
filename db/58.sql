@@ -204,6 +204,20 @@ create table `gj_refresh_house_log`(
    PRIMARY KEY ( id )
 );
 
+--gj_house_id
+drop table if exists `gj_house_id`;
+create table `gj_house_id`(
+   `id` INT NOT NULL AUTO_INCREMENT,
+   `user_id` int DEFAULT NULL COMMENT 'user_id',
+   `user_name` VARCHAR(100) DEFAULT NULL COMMENT 'user_name',
+   `house_id` VARCHAR(100) DEFAULT NULL COMMENT 'house_id',
+   `gj_id` VARCHAR(100) DEFAULT NULL COMMENT 'gj_id',
+   `create_time` timestamp COMMENT '创建时间',
+   PRIMARY KEY ( id )
+);
+-------------------------------------
+insert into `gj_house_id` (`house_id`,`gj_id`,`create_time`)
+values (1,1,now())
 -------------------------------------
 insert into `gj_refresh_house_log`(`user_id`,`user_name`,`house_id`,`status`,`message`,`create_time`)
 values(1,'1111','sdfsf','2','3',NOW())

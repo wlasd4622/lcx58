@@ -10,11 +10,6 @@ class Util {
     this.userList = config.user;
     this.getUserList();
     this.initDB();
-
-  }
-
-  getHouseMap() {
-    this.houseMap = JSON.parse(fs.readFileSync('./house.json').toString());
   }
 
   initDB() {
@@ -241,7 +236,6 @@ class Util {
    * @param {*} user
    */
   async getHouseListByDB(user) {
-    this.getHouseMap();
     let houseInfo = {
       data0: [],
       data1: [],
@@ -384,10 +378,14 @@ class Util {
       //如果是石家庄或者廊坊账号需要转换id
       if (this.userType(user) === 1) {
         for (let key in newHouseIdMap) {
-          // this.houseMap[`a_${houseId}`] = shopId;
-          // this.houseMap[`b_${shopId}`] = houseId;
           let houseId = key;
-          let shopId = this.houseMap[`a_${houseId}`]
+          let sql = `SELECT * from gj_house_id
+                      where house_id='${houseId}'`;
+          let result = await this.execSql(0, sql);
+          let shopId = ''
+          if (result && result.length) {
+            shopId = result[0].shop_id
+          }
           newHouseIdMap[key].shopId = shopId;
         }
       }

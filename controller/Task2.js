@@ -10,10 +10,6 @@ class Task2 extends Util {
     this.taskName = 'task2'
   }
   init() {
-    if (!fs.existsSync('./house.json')) {
-      fs.writeFileSync('./house.json', JSON.stringify({}));
-    }
-    this.houseMap = JSON.parse(fs.readFileSync('./house.json').toString());
   }
 
   async main() {
@@ -62,16 +58,19 @@ class Task2 extends Util {
         for (let index = 0; index < houseList.length; index++) {
           const house = houseList[index];
           let shopId = house.unityInfoId
-          if (!this.houseMap[`b_${shopId}`]) {
+          let sql = `SELECT * from gj_house_id
+                    where gj_id='${shopId}'`
+          let result = await this.execSql(0, sql)
+          if (!result.length) {
             let houseUrl = await this.task2Get58HouseUrl(house, this.page)
             let houseId = houseUrl.match(/\d{8,}/)[0];
-            this.houseMap[`a_${houseId}`] = `${shopId}`;
-            this.houseMap[`b_${shopId}`] = `${houseId}`;
+            sql = `insert into \`gj_house_id\` (\`house_id\`,\`gj_id\`,\`create_time\`,\`user_id\`,\`user_name\`)
+                 values ('${houseId}','${shopId}',now(),${user.id},'${user.user_name}')`
+            await this.execSql(0, sql)
           }
           await this.sleep(300);
         }
       }
-      fs.writeFileSync('./house.json', JSON.stringify(this.houseMap));
     } catch (err) {
       let len = await this.waitElement('.login-mod', this.page)
       if (len) {
@@ -114,6 +113,9 @@ class Task2 extends Util {
         }
         return getHouseList()
       });
+      if (houseList.length > 490) {
+        throw new Error('获取的数据超过490条，请确认是否还有下一页')
+      }
     } catch (error) {
       this.log(error)
     }

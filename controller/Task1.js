@@ -11,8 +11,6 @@ class Task1 extends Util {
     this.taskName = "task1"
     this.userList = config.user;
     this.db = config.db;
-    this.houseMap = {};
-
   }
   async init() {
     try {
@@ -30,7 +28,6 @@ class Task1 extends Util {
         dbConfig.useConnectionPooling = true;
         this.db[dbName].pool = mysql.createPool(dbConfig);
       }
-      this.houseMap = JSON.parse(fs.readFileSync('./house.json').toString());
     } catch (error) {
       this.log(error)
     }
@@ -548,11 +545,11 @@ class Task1 extends Util {
         // if (isAdd) {
         //   return false;
         // }
-        if (houseObj.type.includes(0)) {
-          //编辑保存-->>刷新
-          this.log(`编辑保存-->>刷新`)
-          await this.houseEditHandle(houseId, user, houseObj.shopId);
-        }
+        // if (houseObj.type.includes(0)) {
+        //   //编辑保存-->>刷新
+        //   this.log(`编辑保存-->>刷新`)
+        //   await this.houseEditHandle(houseId, user, houseObj.shopId);
+        // }
         if (houseObj.type.includes(1)) {
           //推送--->重新推送
           this.log(`推送--->重新推送`)
@@ -627,7 +624,7 @@ class Task1 extends Util {
       }
       await this.closePuppeteer();
       await this.runPuppeteer({
-        // headless:true
+        headless:true
       });
       // let url = `http://vip.58ganji.com/jp58/kcfysp58`
       let session = decodeURIComponent(user.session)
