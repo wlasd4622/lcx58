@@ -42,12 +42,24 @@ class Task1 extends Util {
   async main() {
     this.log(`>>>main`);
     await this.init();
-    for (let index = 0; index < this.userList.length; index++) {
+    let catchDate = this.readCatch();
+    if (!catchDate) {
+      catchDate = {};
+      this.writeCatch(catchDate)
+    }
+    let forIndex = catchDate['main_for_1_index'] || 0;
+    for (let index = forIndex; index < this.userList.length; index++) {
+      catchDate = this.readCatch();
+      if (catchDate['main_for_1_index'] != index) {
+        catchDate['loopHouseHandle_for_1_index'] = 0;
+      }
+      catchDate['main_for_1_index'] = index;
+      this.writeCatch(catchDate)
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      if (this.userType(user) === 0 || user.user_name === '廊坊010号') {
-        continue;
-      }
+      // if (this.userType(user) === 0 || user.user_name === '廊坊010号') {
+      //   continue;
+      // }
       this.log(user)
       let sql = `select * from gj_user where username='${user.user_name}'`
       try {
@@ -64,6 +76,7 @@ class Task1 extends Util {
         await this.loopHouseHandle(user);
       }
     }
+    this.log('END')
   }
 
   async getCookie() {
@@ -284,7 +297,24 @@ class Task1 extends Util {
             throw new Error(489)
           }
           await this.page.click(`[data-unityinfoid='${shopId}'] [original-title="上架"]`)
-          await this.sleep(500)
+          await this.sleep(1500)
+          let isSucc = await this.page.evaluate(() => {
+            return !!$('h2:contains(上架结果)').length
+          });
+          if (isSucc) {
+            //上架成功
+            result = {
+              status: 0,
+              msg: '上架成功'
+            }
+            throw new Error('0')
+          }
+          let dy = await this.page.evaluate(() => {
+            return !!$('td:contains(58):visible').length
+          })
+          if (!dy) {
+            throw new Error('未找到上架平台58端口')
+          }
           let selectList = [15, 7, 5, 3, 1];
           let selectedDays = 0;
           for (let i = 0; i < selectList.length; i++) {
@@ -303,7 +333,12 @@ class Task1 extends Util {
             }, selectedDays)
             await this.sleep(200);
             let checkboxArr = await this.page.$$('.onshelf-body tr.wb-platform [type="checkbox"]');
-            await checkboxArr[trIndex].click();
+            if (checkboxArr && checkboxArr[trIndex]) {
+              await checkboxArr[trIndex].click();
+            } else {
+              console.log();
+            }
+
             await this.sleep(300)
             await this.page.click('[value="确认上架"]');
             await this.sleep(1000)
@@ -343,7 +378,7 @@ class Task1 extends Util {
         }
       }
     } catch (error) {
-      if (!['489'].includes(error.message)) {
+      if (!['0', '489'].includes(error.message)) {
         this.log(error)
       } else {
         console.log(666);
@@ -526,9 +561,7 @@ class Task1 extends Util {
           } else {
             result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
           }
-
         }
-
       } else {
         this.log('未找到此房源')
         result = {
@@ -551,6 +584,7 @@ class Task1 extends Util {
   }
 
   async updateHouseStatus(user) {
+    this.log(`>>>updateHouseStatus`)
     let sql = `INSERT INTO \`gj_refresh_house_log\` (
               \`user_id\`,
               \`user_name\`,
@@ -582,6 +616,7 @@ class Task1 extends Util {
    * @param {*} user
    */
   async loopHouseHandle(user) {
+    this.log(`>>>loopHouseHandle`)
     this.log(user)
     try {
       let houseList = await this.getHouseListByDB(user); //0：刷新，1：重新推送，2：精选
@@ -591,7 +626,9 @@ class Task1 extends Util {
         return false;
       }
       await this.closePuppeteer();
-      await this.runPuppeteer();
+      await this.runPuppeteer({
+        // headless:true
+      });
       // let url = `http://vip.58ganji.com/jp58/kcfysp58`
       let session = decodeURIComponent(user.session)
       await this.setCookie(session, '.58ganji.com', this.page);
@@ -601,7 +638,12 @@ class Task1 extends Util {
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
       //刷新
-      for (let index = 0; index < houseIdKeys.length; index++) {
+      let catchData = this.readCatch();
+      let forIndex = catchData['loopHouseHandle_for_1_index'] || 0
+      for (let index = forIndex; index < houseIdKeys.length; index++) {
+        catchData = this.readCatch();
+        catchData['loopHouseHandle_for_1_index'] = index;
+        this.writeCatch(catchData);
         await this.houseRefreshHandle(Object.assign({
           id: houseIdKeys[index],
           shopId: houseList[houseIdKeys[index]].shopId,

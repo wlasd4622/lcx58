@@ -22,7 +22,7 @@ class Task2 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      if (this.userType(user)===1) {
+      if (this.userType(user) === 1) {
         this.log(user)
         let sql = `select * from gj_user where username='${user.user_name}'`
         try {
@@ -65,12 +65,13 @@ class Task2 extends Util {
           if (!this.houseMap[`b_${shopId}`]) {
             let houseUrl = await this.task2Get58HouseUrl(house, this.page)
             let houseId = houseUrl.match(/\d{8,}/)[0];
-            this.houseMap[`a_${houseId}`] = shopId;
-            this.houseMap[`b_${shopId}`] = houseId;
-            fs.writeFileSync('./house.json', JSON.stringify(this.houseMap));
+            this.houseMap[`a_${houseId}`] = `${shopId}`;
+            this.houseMap[`b_${shopId}`] = `${houseId}`;
           }
+          await this.sleep(300);
         }
       }
+      fs.writeFileSync('./house.json', JSON.stringify(this.houseMap));
     } catch (err) {
       let len = await this.waitElement('.login-mod', this.page)
       if (len) {
@@ -124,6 +125,7 @@ class Task2 extends Util {
       houseUrl = '';
     try {
       detailUrl = `http://vip.58ganji.com/sydchug/detail/sydc?houseId=${house.unityInfoId}`
+      this.log(detailUrl)
       await this.page.goto(detailUrl, {
         waitUntil: 'domcontentloaded'
       })

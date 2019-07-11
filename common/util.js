@@ -38,14 +38,19 @@ class Util {
     let that = this;
     this.log(`>>>getConnection`);
     return new Promise((resolve, reject) => {
-      this.db[name].pool.getConnection(function (err, connection) {
-        if (err) {
-          that.log(err);
-          reject(err)
-        } else {
-          resolve(connection)
-        }
-      });
+      try {
+        this.db[name].pool.getConnection(function (err, connection) {
+          if (err) {
+            that.log(err);
+            reject(err)
+          } else {
+            resolve(connection)
+          }
+        });
+      } catch (error) {
+        this.log(error)
+        reject(error)
+      }
     })
   }
 
@@ -189,6 +194,7 @@ class Util {
     this.log(name);
     this.log(sql)
     let connection = await this.getConnection(name)
+    this.log(`threadId:${connection.threadId}`)
     return new Promise((resolve, reject) => {
       try {
         connection.query(sql, function (err, value) {
@@ -417,11 +423,30 @@ class Util {
    * @param {*} user
    */
   userType(user) {
-    let type = 0
-    if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊')|| user.user_name.includes('青岛')) {
-      type = 1
+    // let type = 0
+    // if (user.user_name.includes('石家庄') || user.user_name.includes('廊坊') || user.user_name.includes('青岛')) {
+    //   type = 1
+    // }
+    return 1;
+  }
+  readCatch() {
+    try {
+      if (!this.taskName) {
+        throw new Error('taskName为空');
+      }
+      if (!fs.existsSync('./catch')) {
+        fs.mkdirSync('./catch')
+      }
+      if (!fs.existsSync(`./catch/${this.taskName}.json`)) {
+        fs.writeFileSync(`./catch/${this.taskName}.json`, JSON.stringify({}))
+      }
+    } catch (error) {
+      this.log(error)
     }
-    return type;
+    return JSON.parse(fs.readFileSync(`./catch/${this.taskName}.json`) || '""');
+  }
+  writeCatch(data) {
+    fs.writeFileSync(`./catch/${this.taskName}.json`, JSON.stringify(data))
   }
 }
 module.exports = Util;

@@ -24,4 +24,9 @@ let task3 = new Task3();
 //   task3.main();
 // });
 
+//shopID<-->houseid
+// task2.main();
+
+
+//刷新,推送
 task1.main();
