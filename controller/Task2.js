@@ -9,8 +9,7 @@ class Task2 extends Util {
     super();
     this.taskName = 'task2'
   }
-  init() {
-  }
+  init() {}
 
   async main() {
     this.log(`>>main`);
@@ -18,6 +17,9 @@ class Task2 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
+      // if (user.user_name != 'anjuke5') {
+      //   continue;
+      // }
       if (this.userType(user) === 1) {
         this.log(user)
         let sql = `select * from gj_user where username='${user.user_name}'`
@@ -53,16 +55,26 @@ class Task2 extends Util {
         waitUntil: 'domcontentloaded'
       });
       await this.page.waitForSelector('table.ui-table.sydc-table');
-      let houseList = await this.task2GetHouseList(this.page);
+      let houseList = [];
+      let nextDisabled = null;
+      do {
+        await this.sleep(1000)
+        let list = await this.task2GetHouseList(this.page);
+        houseList = houseList.concat(list)
+        let nextBtn = await this.page.$('#pager .next');
+        nextDisabled = await this.page.$('#pager .next.disabled');
+        await nextBtn.click()
+      } while (!nextDisabled)
+      houseList=this.unique(houseList)
       if (houseList && houseList.length) {
         for (let index = 0; index < houseList.length; index++) {
           const house = houseList[index];
-          let shopId = house.unityInfoId
+          let shopId = house
           let sql = `SELECT * from gj_house_id
                     where gj_id='${shopId}'`
           let result = await this.execSql(0, sql)
           if (!result.length) {
-            let houseUrl = await this.task2Get58HouseUrl(house, this.page)
+            let houseUrl = await this.task2Get58HouseUrl(shopId)
             let houseId = houseUrl.match(/\d{8,}/)[0];
             sql = `insert into \`gj_house_id\` (\`house_id\`,\`gj_id\`,\`create_time\`,\`user_id\`,\`user_name\`)
                  values ('${houseId}','${shopId}',now(),${user.id},'${user.user_name}')`
@@ -87,46 +99,52 @@ class Task2 extends Util {
   async task2GetHouseList() {
     let houseList = [];
     try {
+      // houseList = await this.page.evaluate(() => {
+      //   function getHouseList() {
+      //     return new Promise((resolve, reject) => {
+      //       try {
+      //         let houseList = []
+      //         $.ajax({
+      //           url: `http://vip.58ganji.com/separation/houselist/search?pageIndex=1&pageSize=20&cateId=20`,
+      //           contentType: 'applicaiton/json',
+      //           success: function (res) {
+      //             let data = JSON.parse(res);
+      //             if (data.data && data.data.infos && data.data.infos.length) {
+      //               houseList = data.data.infos;
+      //             }
+      //             resolve(houseList)
+      //           },
+      //           error: function (err) {
+      //             reject(err)
+      //           }
+      //         });
+      //       } catch (error) {
+      //         reject(error)
+      //       }
+      //     })
+      //   }
+      //   return getHouseList()
+      // });
+      // if (houseList.length > 490) {
+      //   throw new Error('获取的数据超过490条，请确认是否还有下一页')
+      // }
+      //获取HouseList
       houseList = await this.page.evaluate(() => {
-        function getHouseList() {
-          return new Promise((resolve, reject) => {
-            try {
-              let houseList = []
-              $.ajax({
-                url: `http://vip.58ganji.com/separation/houselist/search?pageIndex=1&pageSize=500&cateId=20`,
-                contentType: 'applicaiton/json',
-                success: function (res) {
-                  let data = JSON.parse(res);
-                  if (data.data && data.data.infos && data.data.infos.length) {
-                    houseList = data.data.infos;
-                  }
-                  resolve(houseList)
-                },
-                error: function (err) {
-                  reject(err)
-                }
-              });
-            } catch (error) {
-              reject(error)
-            }
-          })
-        }
-        return getHouseList()
-      });
-      if (houseList.length > 490) {
-        throw new Error('获取的数据超过490条，请确认是否还有下一页')
-      }
+        return $('.phase span:contains(编号)').toArray().map(s => {
+          return $(s).text().match(/\d+/)[0]
+        })
+      })
     } catch (error) {
       this.log(error)
     }
     return houseList;
   }
 
-  async task2Get58HouseUrl(house) {
+  async task2Get58HouseUrl(id) {
     let detailUrl = '',
       houseUrl = '';
     try {
-      detailUrl = `http://vip.58ganji.com/sydchug/detail/sydc?houseId=${house.unityInfoId}`
+      detailUrl = `http://vip.58ganji.com/sydchug/detail/sydc?houseId=${id}`
       this.log(detailUrl)
       await this.page.goto(detailUrl, {
         waitUntil: 'domcontentloaded'

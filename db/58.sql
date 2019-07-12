@@ -215,6 +215,22 @@ create table `gj_house_id`(
    `create_time` timestamp COMMENT '创建时间',
    PRIMARY KEY ( id )
 );
+
+--ip_white_list
+drop table if exists `ip_white_list`;
+create table `ip_white_list`(
+   `id` INT NOT NULL AUTO_INCREMENT,
+   `ip` VARCHAR(100) DEFAULT NULL COMMENT 'ip',
+   `remarks` VARCHAR(100) DEFAULT NULL COMMENT '备注',
+   `disabled` INT DEFAULT NULL COMMENT '是否禁用:0禁用，1启用',
+   PRIMARY KEY ( id )
+);
+-------------------------------------
+insert into `ip_white_list` (`ip`,`remarks`,`disabled`)
+values ('112.35.36.4','公司电脑',1);
+insert into `ip_white_list` (`ip`,`remarks`,`disabled`)
+values ('124.65.158.254','公司电脑',1);
+
 -------------------------------------
 insert into `gj_house_id` (`house_id`,`gj_id`,`create_time`)
 values (1,1,now())
