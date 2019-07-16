@@ -482,7 +482,6 @@ Function login()
     End If
     Call Plugin.chrome.activate(id)
     Rem fLoadLogin
-    messages=""
     Plugin.chrome.stop id
     Call Plugin.chrome.load(id, "https://passport.58.com/logout")
     // 等待载入完成
@@ -546,12 +545,15 @@ Function login()
             //登录页面未处理异常 重新开始
             Goto fLoadLogin
         End If
-        Rem fBreakDo
     Else
         Goto fLoadLogin
     End If
-    If (loginStatus=4000 or loginStatus=4004) and loginCount < 6 Then
+    Rem fBreakDo
+    If (loginStatus=4000 or loginStatus=4004) and loginCount < 10 Then
         loginCount=loginCount+1
+        messages=""
+        loginStatus=-312
+        Delay 3000
         Goto fLoadLogin
     End If
     login=loginStatus
