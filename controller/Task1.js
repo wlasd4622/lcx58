@@ -134,6 +134,7 @@ class Task1 extends Util {
         await editPage.goto(editUrl, {
           waitUntil: 'domcontentloaded'
         })
+        await this.sleep(1000)
         await editPage.waitForSelector('#fieldTypeMod')
 
         await editPage.evaluate(() => {
@@ -163,21 +164,26 @@ class Task1 extends Util {
           }
           if ($('#publish-jpshop-add').length) {
             submitBtnElement = '#publish-jpshop-add'
+            $('#publish-jpshop-add').trigger('click')
+            console.log();
           } else if ($('#publish-jpoffice-add').length) {
             submitBtnElement = '#publish-jpoffice-add'
+            $('#publish-jpoffice-add').trigger('click')
           }
+          window.submitStatus = `>>>>>>click:submitBtnElement`;
+          console.log('>>>>>>click:submitBtnElement');
           return submitBtnElement;
         })
-        if (!submitBtnElement) {
-          throw "没找到编辑页面提交按钮"
-        }
-        this.log('click:' + submitBtnElement)
-        await this.sleep(600);
-        let submitBtn = await editPage.$(submitBtnElement);
-        if (submitBtn) {
-          await submitBtn.click()
-        }
-        await this.sleep(1000);
+        // if (!submitBtnElement) {
+        //   throw "没找到编辑页面提交按钮"
+        // }
+        // this.log('click:' + submitBtnElement)
+        // await this.sleep(600);
+        // let submitBtn = await editPage.$(submitBtnElement);
+        // if (submitBtn) {
+        //   await submitBtn.click()
+        // }
+        await this.sleep(2000);
         url = editPage.url()
         this.log(url)
         if (url.includes('publish/result') || url.includes('house/result')) {
@@ -217,6 +223,9 @@ class Task1 extends Util {
         result.msg = error;
       } else {
         result.msg = error.message
+      }
+      if (result.msg === '修改保存异常') {
+        throw new Error('修改保存异常')
       }
       //更新数据库
       await this.updateHouseStatus(Object.assign({}, JSON.parse(JSON.stringify(user)), result, {
@@ -538,18 +547,20 @@ class Task1 extends Util {
           houseElement = await this.page.$(`tr[data-unityinfoid='${houseObj.shopId}']`);
         }
       }
-
+      // if (houseObj.shopId && !houseElement) {
+      //   throw new Error('未处理异常3431');
+      // }
       if (houseElement) {
         //重新发布信息
         // let isAdd = await this.addHouseInfo(houseId, user);
         // if (isAdd) {
         //   return false;
         // }
-        // if (houseObj.type.includes(0)) {
-        //   //编辑保存-->>刷新
-        //   this.log(`编辑保存-->>刷新`)
-        //   await this.houseEditHandle(houseId, user, houseObj.shopId);
-        // }
+        if (houseObj.type.includes(0)) {
+          //编辑保存-->>刷新
+          this.log(`编辑保存-->>刷新`)
+          await this.houseEditHandle(houseId, user, houseObj.shopId);
+        }
         if (houseObj.type.includes(1)) {
           //推送--->重新推送
           this.log(`推送--->重新推送`)
@@ -568,10 +579,10 @@ class Task1 extends Util {
       }
     } catch (error) {
       this.log(error)
-      result = {
-        status: 305,
-        msg: `未处理异常:${error.message}`
-      }
+      // result = {
+      //   status: 305,
+      //   msg: `未处理异常:${error.message}`
+      // }
     }
     this.log(`------------------------------------`)
     this.log(result);
@@ -584,6 +595,9 @@ class Task1 extends Util {
 
   async updateHouseStatus(user) {
     this.log(`>>>updateHouseStatus`)
+    if (['正常推送中','上架成功','','修改保存异常'].includes(user.msg)) {
+      return false;
+    }
     let sql = `INSERT INTO \`gj_refresh_house_log\` (
               \`user_id\`,
               \`user_name\`,
@@ -626,7 +640,7 @@ class Task1 extends Util {
       }
       await this.closePuppeteer();
       await this.runPuppeteer({
-        headless:true
+        headless: true
       });
       // let url = `http://vip.58ganji.com/jp58/kcfysp58`
       let session = decodeURIComponent(user.session)
@@ -643,11 +657,13 @@ class Task1 extends Util {
         catchData = this.readCatch();
         catchData['loopHouseHandle_for_1_index'] = index;
         this.writeCatch(catchData);
-        await this.houseRefreshHandle(Object.assign({
-          id: houseIdKeys[index],
-          shopId: houseList[houseIdKeys[index]].shopId,
-          type: houseList[houseIdKeys[index]].type
-        }), user);
+        if (houseList[houseIdKeys[index]].type.includes(0) || houseList[houseIdKeys[index]].type.includes(1)) {
+          await this.houseRefreshHandle(Object.assign({
+            id: houseIdKeys[index],
+            shopId: houseList[houseIdKeys[index]].shopId,
+            type: houseList[houseIdKeys[index]].type
+          }), user);
+        }
       }
     } catch (err) {
       let len = await this.waitElement('.login-mod')

@@ -49,11 +49,17 @@ class Task2 extends Util {
       });
       let session = decodeURIComponent(user.session)
       this.setPageCookie(session, this.page);
-      await this.sleep(10)
+      await this.sleep(1000)
       let url = `http://vip.58ganji.com/sydchug/list/sydc`;
       await this.page.goto(url, {
         waitUntil: 'domcontentloaded'
       });
+      await this.sleep(1000)
+      url = `http://vip.58ganji.com/sydchug/list/sydc`;
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      });
+      await this.sleep(1000)
       await this.page.waitForSelector('table.ui-table.sydc-table');
       let houseList = [];
       let nextDisabled = null;
@@ -65,7 +71,7 @@ class Task2 extends Util {
         nextDisabled = await this.page.$('#pager .next.disabled');
         await nextBtn.click()
       } while (!nextDisabled)
-      houseList=this.unique(houseList)
+      houseList = this.unique(houseList)
       if (houseList && houseList.length) {
         for (let index = 0; index < houseList.length; index++) {
           const house = houseList[index];

@@ -55,7 +55,9 @@ class Util {
       if (T instanceof Error) {
         console.error(T)
         info = T.message
-        debugger;
+        if (info != '修改保存异常') {
+          debugger;
+        }
       } else {
         info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
       }
