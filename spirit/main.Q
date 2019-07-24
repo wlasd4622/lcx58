@@ -62,7 +62,6 @@ Function main()
         Delay 60000
         Goto fLogin
     End If
-    Call start()
     status = login()
     If status = 0 Then
         status= houseList()
@@ -75,7 +74,7 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<4) or (currHour >= 8 and currHour<19) Then
+    If (currHour >= 0 and currHour<6) or (currHour >= 8 and currHour<19) Then
         status=false
     Else
         status=true
@@ -472,7 +471,9 @@ Function execjs(str)
     execjs=result
 End Function
 Function login()
-    loginCount=0
+    loginCount = 0
+    Rem fLoadLogin
+    Call start()
     messages=""
     Call clearAllCookie()
     user = getUser()
@@ -481,7 +482,6 @@ Function login()
         Call setCookie(cookie)
     End If
     Call Plugin.chrome.activate(id)
-    Rem fLoadLogin
     Plugin.chrome.stop id
     Call Plugin.chrome.load(id, "https://passport.58.com/logout")
     // 等待载入完成
@@ -549,7 +549,7 @@ Function login()
         Goto fLoadLogin
     End If
     Rem fBreakDo
-    If (loginStatus=4000 or loginStatus=4004) and loginCount < 10 Then
+    If (loginStatus=4000 or loginStatus=4004 or loginStatus= -312) and loginCount < 10 Then
         loginCount=loginCount+1
         messages=""
         loginStatus=-312

@@ -9,6 +9,7 @@ class GanJi {
     this.userList = [];
     this.page = null;
     this.browser = null;
+    this.taskName='58ganji';
     this.dbConfig = {
       host: '101.201.49.69',
       user: 'refresh',
@@ -26,7 +27,7 @@ class GanJi {
     }
     info = moment().format('YYYY-MM-DD HH:mm:ss') + ' ' + info
     console.log(info);
-    fs.appendFileSync(`./logs/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
+    fs.appendFileSync(`./logs/58ganji/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
   }
 
   getConnection() {

@@ -12,9 +12,13 @@ class SwitchIP {
   async task1() {
     u.log(`IP:${this.ip}`);
     u.log(`>>>task1:${new Date().getTime()}`)
-    await this.page.goto('http://192.168.0.1/', {
-      waitUntil: 'domcontentloaded'
-    })
+    try {
+      await this.page.goto('http://192.168.0.1/', {
+        waitUntil: 'domcontentloaded'
+      })
+    } catch (err) {
+      this.log(err)
+    }
     u.sleep(2000)
     await this.page.evaluate(() => {
       function doConnect(n) {
