@@ -321,7 +321,7 @@ class Task1 extends Util {
           if (!dy) {
             throw new Error('未找到上架平台58端口')
           }
-          let selectList = [15, 7, 5, 3, 1];
+          let selectList = [1]; //15, 7, 5, 3, 1
           let selectedDays = 0;
           for (let i = 0; i < selectList.length; i++) {
             let days = selectList[i];
@@ -398,91 +398,95 @@ class Task1 extends Util {
    * @param {*} user
    */
   async housePushHandle(houseId, user, result, shopId) {
-    //判断是否正常推送中
-    let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
-    if (grey) {
-      //正常推送中
-      this.log('正常推送中')
-      result = {
-        status: 200,
-        msg: '正常推送中'
-      }
-    } else {
-      //非正常推送中
-      this.log('非正常推送中')
-      if (user.status == 306) {
-        //余额不足
-        this.log('余额不足')
+    try {
+      //判断是否正常推送中
+      let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
+      if (grey) {
+        //正常推送中
+        this.log('正常推送中')
         result = {
-          status: 306,
-          msg: '余额不足'
+          status: 200,
+          msg: '正常推送中'
         }
       } else {
-        result = {
-          status: 300,
-          msg: '非正常推送中'
-        }
-        let batchproyx = await this.page.$(`tr[tid='${houseId}'] .opt-link.batchproyx`);
-        await batchproyx.click();
-        await this.sleep(500)
-        let timeContList = await this.page.$('.time-cont label:last-child')
-        if (timeContList) {
-          await timeContList.click();
-        }
-        await this.sleep(500)
-        await this.page.click('.ui-dialog-content .btn-ok');
-        //查找 点击确定推送反馈结果弹窗
-        let len = await this.waitElement('.ui-alert-mainMsg:visible')
-        if (len) {
-          len = await this.waitElement('.ui-alert-subMsg:visible')
-          if (len) {
-            let content = await this.page.evaluate(() => {
-              return $('.ui-alert-subMsg:visible').text();
-            })
-            if (content.includes('推送成功')) {
-              //推送成功
-              this.log('推送成功')
-              result = {
-                status: 202,
-                msg: '推送成功'
-              }
-            } else {
-              //推送失败
-              this.log(`推送失败:${content}`)
-              result = {
-                status: 303,
-                msg: `推送失败:${content}`
-              }
-            }
-          } else {
-            this.log('未处理异常，没有找到点击推送后消息内容')
-            result = {
-              status: 302,
-              msg: '未处理异常，没有找到点击推送后消息内容'
-            }
+        //非正常推送中
+        this.log('非正常推送中')
+        if (user.status == 306) {
+          //余额不足
+          this.log('余额不足')
+          result = {
+            status: 306,
+            msg: '余额不足'
           }
         } else {
-          let len = await this.waitElement('span:contains(余额不足，请):visible')
+          result = {
+            status: 300,
+            msg: '非正常推送中'
+          }
+          let batchproyx = await this.page.$(`tr[tid='${houseId}'] .opt-link.batchproyx`);
+          await batchproyx.click();
+          await this.sleep(500)
+          let timeContList = await this.page.$('.time-cont label:last-child')
+          if (timeContList) {
+            await timeContList.click();
+          }
+          await this.sleep(500)
+          await this.page.click('.ui-dialog-content .btn-ok');
+          //查找 点击确定推送反馈结果弹窗
+          let len = await this.waitElement('.ui-alert-mainMsg:visible')
           if (len) {
-            user.status = 306;
-            this.log('余额不足')
-            result = {
-              status: 306,
-              msg: '余额不足'
+            len = await this.waitElement('.ui-alert-subMsg:visible')
+            if (len) {
+              let content = await this.page.evaluate(() => {
+                return $('.ui-alert-subMsg:visible').text();
+              })
+              if (content.includes('推送成功')) {
+                //推送成功
+                this.log('推送成功')
+                result = {
+                  status: 202,
+                  msg: '推送成功'
+                }
+              } else {
+                //推送失败
+                this.log(`推送失败:${content}`)
+                result = {
+                  status: 303,
+                  msg: `推送失败:${content}`
+                }
+              }
+            } else {
+              this.log('未处理异常，没有找到点击推送后消息内容')
+              result = {
+                status: 302,
+                msg: '未处理异常，没有找到点击推送后消息内容'
+              }
             }
           } else {
-            this.log('未处理异常，没有找到点击推送后结果弹窗')
-            result = {
-              status: 301,
-              msg: '未处理异常，没有找到点击推送后结果弹窗'
+            let len = await this.waitElement('span:contains(余额不足，请):visible')
+            if (len) {
+              user.status = 306;
+              this.log('余额不足')
+              result = {
+                status: 306,
+                msg: '余额不足'
+              }
+            } else {
+              this.log('未处理异常，没有找到点击推送后结果弹窗')
+              result = {
+                status: 301,
+                msg: '未处理异常，没有找到点击推送后结果弹窗'
+              }
             }
           }
         }
+        await this.sleep(500)
       }
-      await this.sleep(500)
-    }
-    if (!['正常推送中', '非正常推送中', '推送成功', '推送失败', '余额不足'].includes(result.msg)) {
-      throw new Error('housePushHandle result 未处理异常')
+      if (!['正常推送中', '非正常推送中', '推送成功', '推送失败', '余额不足'].includes(result.msg)) {
+        throw new Error('housePushHandle result 未处理异常')
+      }
+    } catch (err) {
+      this.log(err)
     }
     return result;
   }
@@ -595,7 +599,7 @@ class Task1 extends Util {
 
   async updateHouseStatus(user) {
     this.log(`>>>updateHouseStatus`)
-    if (['正常推送中','上架成功','','修改保存异常'].includes(user.msg)) {
+    if (['正常推送中', '上架成功', '', '修改保存异常'].includes(user.msg)) {
       return false;
     }
     let sql = `INSERT INTO \`gj_refresh_house_log\` (
@@ -640,7 +644,7 @@ class Task1 extends Util {
       }
       await this.closePuppeteer();
       await this.runPuppeteer({
-        headless: true
+        headless: false
       });
       // let url = `http://vip.58ganji.com/jp58/kcfysp58`
       let session = decodeURIComponent(user.session)
