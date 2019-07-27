@@ -43,10 +43,10 @@ class Task3 extends Util {
     }
     this.log('END')
   }
-  async popularizeHandle(houseObj, user) {
+  async popularizeHandle(houseObj, user, sxShopIdList) {
     this.log(`>>>popularizeHandle`);
     try {
-      if (houseObj.type.includes(2)) {
+      if (houseObj.shopId && houseObj.type.includes(2) && !sxShopIdList.includes(houseObj.shopId)) {
         //跳转推广页面
         let url = `http://vip.58ganji.com/biz58/jinpai58/set/${houseObj.shopId}`;
         console.log(url);
@@ -54,10 +54,21 @@ class Task3 extends Util {
           waitUntil: 'domcontentloaded'
         });
         await this.sleep(1000);
-        let isPopularize = await this.page.evaluate(() => {
-          return !!$('[name="budget"]').length;
+        let popularizeCode = await this.page.evaluate(() => {
+          if ($('.result-dts-info:contains("房源已推广")').length) {
+            return 1
+          } else if ($('[name="budget"]').length) {
+            return 2
+          } else {
+            return 3
+          }
         });
-        if (isPopularize) {
+        if (popularizeCode === 1) {
+          //房源已推广
+          this.log('房源已推广');
+        } else if (popularizeCode === 3) {
+          //throw new Error('未处理异常')
+        } else if (popularizeCode === 2) {
           let budget = await this.page.$('[name="budget"]');
           await budget.type('15');
           await this.sleep(300);
@@ -93,6 +104,17 @@ class Task3 extends Util {
       await this.setCookie(session, '.anjuke.com', this.page);
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
+      let url = `http://vip.58ganji.com/jp58/list/sp`;
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      });
+      await this.page.waitForSelector('.ui-boxer.ui-boxer-default.ui-boxer-fang');
+      await this.sleep(500);
+      let sxShopIdList = await this.page.evaluate(() => {
+        return $('.date.date-jpzw:contains("编号")').toArray().map(t => {
+          return $(t).text().match(/\d+/)[0]
+        });
+      });
       //精选
       for (let index = 0; index < houseIdKeys.length; index++) {
         if (houseList[houseIdKeys[index]].type.includes(2)) {
@@ -100,7 +122,7 @@ class Task3 extends Util {
             id: houseIdKeys[index],
             shopId: houseList[houseIdKeys[index]].shopId,
             type: houseList[houseIdKeys[index]].type
-          }), user);
+          }), user, sxShopIdList);
         }
       }
     } catch (err) {

@@ -122,19 +122,23 @@ class Task4 extends Util {
             var infoid = shopList[i];
             var id = $('[tid="' + infoid + '"]').attr('tgid');
             var budget = $('[tid="' + infoid + '"] p:contains(今日预算)').text().match(/\d+/)[0];
+            if(parseInt(budget)>=25){
+                continue;
+            }
             budget = parseInt(budget) + 5;
+            if (budget > 25) {
+                budget=25;
+            }
             console.log(infoid);
             console.log(id);
-            if (budget > 25) {
-              continue;
-            }
+            console.log(budget);
             $.ajax({
               type: 'post',
               url: 'http://vip.58ganji.com/ajax/spread/houseinfo58',
               data: {
                 id,
                 infoid,
-                dailyBudget: parseInt(budget) + 5,
+                dailyBudget:budget,
                 cateId: 20,
                 act: 'reset_budget',
               }
@@ -144,6 +148,7 @@ class Task4 extends Util {
           }
         }
       });
+      await this.sleep(1000)
     } catch (err) {
       let len = await this.waitElement('.login-mod')
       if (len) {
