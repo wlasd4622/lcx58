@@ -7,10 +7,10 @@ let Util = require('../common/util.js')
 /**
  *精选
  */
-class Task3 extends Util {
+class Task4 extends Util {
   constructor() {
     super();
-    this.taskName = 'task3'
+    this.taskName = 'task4'
   }
   init() {
 
@@ -43,10 +43,10 @@ class Task3 extends Util {
     }
     this.log('END')
   }
-  async popularizeHandle(houseObj, user) {
+  async popularizeHandle(houseObj, user, sxShopIdList) {
     this.log(`>>>popularizeHandle`);
     try {
-      if (houseObj.type.includes(2)) {
+      if (houseObj.shopId && houseObj.type.includes(2) && !sxShopIdList.includes(houseObj.shopId)) {
         //跳转推广页面
         let url = `http://vip.58ganji.com/biz58/jinpai58/set/${houseObj.shopId}`;
         console.log(url);
@@ -54,10 +54,21 @@ class Task3 extends Util {
           waitUntil: 'domcontentloaded'
         });
         await this.sleep(1000);
-        let isPopularize = await this.page.evaluate(() => {
-          return !!$('[name="budget"]').length;
+        let popularizeCode = await this.page.evaluate(() => {
+          if ($('.result-dts-info:contains("房源已推广")').length) {
+            return 1
+          } else if ($('[name="budget"]').length) {
+            return 2
+          } else {
+            return 3
+          }
         });
-        if (isPopularize) {
+        if (popularizeCode === 1) {
+          //房源已推广
+          this.log('房源已推广');
+        } else if (popularizeCode === 3) {
+          //throw new Error('未处理异常')
+        } else if (popularizeCode === 2) {
           let budget = await this.page.$('[name="budget"]');
           await budget.type('15');
           await this.sleep(300);
@@ -93,16 +104,46 @@ class Task3 extends Util {
       await this.setCookie(session, '.anjuke.com', this.page);
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
-      //精选
-      for (let index = 0; index < houseIdKeys.length; index++) {
-        if (houseList[houseIdKeys[index]].type.includes(2)) {
-          await this.popularizeHandle(Object.assign({
-            id: houseIdKeys[index],
-            shopId: houseList[houseIdKeys[index]].shopId,
-            type: houseList[houseIdKeys[index]].type
-          }), user);
+      let url = `http://vip.58ganji.com/jp58/list/sp`;
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      });
+      await this.page.waitForSelector('.ui-boxer.ui-boxer-default.ui-boxer-fang');
+      await this.sleep(500);
+      //当预算已达上限修改  预算
+      await this.page.evaluate(() => {
+        var shopList = $('i:contains("预算已达上限")').toArray().map(t => {
+          return $(t).parents('[tid]')
+        }).map(tr => {
+          return $(tr).attr('tid');
+        });
+        for (let i = 0; i < shopList.length; i++) {
+          try {
+            var infoid = shopList[i];
+            var id = $('[tid="' + infoid + '"]').attr('tgid');
+            var budget = $('[tid="' + infoid + '"] p:contains(今日预算)').text().match(/\d+/)[0];
+            budget = parseInt(budget) + 5;
+            console.log(infoid);
+            console.log(id);
+            if (budget > 25) {
+              continue;
+            }
+            $.ajax({
+              type: 'post',
+              url: 'http://vip.58ganji.com/ajax/spread/houseinfo58',
+              data: {
+                id,
+                infoid,
+                dailyBudget: parseInt(budget) + 5,
+                cateId: 20,
+                act: 'reset_budget',
+              }
+            });
+          } catch (err) {
+            console.log(err);
+          }
         }
-      }
+      });
     } catch (err) {
       let len = await this.waitElement('.login-mod')
       if (len) {
@@ -112,4 +153,4 @@ class Task3 extends Util {
     }
   }
 }
-module.exports = Task3;
+module.exports = Task4;

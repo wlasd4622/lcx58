@@ -36,10 +36,12 @@ schedule.scheduleJob('1 1 2 * * *', async function () {
 (async function () {
   try {
     //店铺<-->houseid
-    await task2.main();
+    // await task2.main();
     //刷新,推送
-    fs.unlinkSync('./catch/task1.json');
-    await task1.main();
+    // fs.unlinkSync('./catch/task1.json');
+    // await task1.main();
+
+    await task3.main();
   } catch (err) {
     console.log(err);
   }

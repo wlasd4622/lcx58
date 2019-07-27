@@ -193,6 +193,11 @@ Function editHouseInfo(houseId)
             editStatus = 3507
             Goto rBreak
         End If
+        length=execjs("location.href.includes('404.html')?1:0")
+        If cint(length) > 0 Then
+            editStatus = 3507
+            Goto rBreak
+        End If
     End If
     Call loadScript("58")
     Delay 1000
