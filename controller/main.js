@@ -41,7 +41,7 @@ schedule.scheduleJob('1 1 2 * * *', async function () {
     // fs.unlinkSync('./catch/task1.json');
     // await task1.main();
 
-    await task3.main();
+    await task2.main();
   } catch (err) {
     console.log(err);
   }

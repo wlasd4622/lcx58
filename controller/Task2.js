@@ -37,6 +37,18 @@ class Task2 extends Util {
     this.log(`task2-END`)
   }
 
+  async getPushInfo(infoIdList = []) {
+    let pushMap = {};
+    pushMap = await this.page.evaluate((infoIdList) => {
+      let pushMap = {};
+      infoIdList.map(id => {
+        pushMap[id] = $(`[data-unityinfoid=${id}] td:eq(2)`).text().trim().includes('58');
+      })
+      return pushMap;
+    }, infoIdList)
+    return pushMap;
+  }
+
   /**
    * 获取58店铺id
    * @param {*} user
@@ -62,12 +74,17 @@ class Task2 extends Util {
       await this.sleep(1000)
       await this.page.waitForSelector('table.ui-table.sydc-table');
       let houseList = [];
+      let pushInfoMap = {};
       let nextDisabled = null;
       do {
         try {
           await this.sleep(900)
           let list = await this.task2GetHouseList(this.page);
-          houseList = houseList.concat(list)
+          houseList = houseList.concat(list);
+          pushInfoMap = {
+            ...pushInfoMap,
+            ...await this.getPushInfo(list)
+          }
           let nextBtn = await this.page.$('#pager .next');
           nextDisabled = await this.page.$('#pager .next.disabled');
           await nextBtn.click()
@@ -92,6 +109,18 @@ class Task2 extends Util {
           }
           await this.sleep(300);
         }
+      }
+      //更新 推送状态
+      let pushInfoIds = Object.keys(pushInfoMap || {});
+      for (let i = 0; i < pushInfoIds.length; i++) {
+        console.log(`>>>>>>>>>>>${i}`);
+        const infoId = pushInfoIds[i];
+        console.log(infoId);
+        let sql = `UPDATE gj_house_id
+                  SET is_push = ${pushInfoIds[i] ? 1 : 0}
+                  WHERE
+                    gj_id = '${infoId}'`;
+        await this.execSql(0, sql);
       }
     } catch (err) {
       let len = await this.waitElement('.login-mod', this.page)
