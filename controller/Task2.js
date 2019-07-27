@@ -45,7 +45,7 @@ class Task2 extends Util {
     this.log(user)
     try {
       await this.runPuppeteer({
-        headless: true
+        headless: false
       });
       let session = decodeURIComponent(user.session)
       this.setPageCookie(session, this.page);
@@ -54,7 +54,7 @@ class Task2 extends Util {
       await this.page.goto(url, {
         waitUntil: 'domcontentloaded'
       });
-      await this.sleep(1000)
+      await this.sleep(1100)
       url = `http://vip.58ganji.com/sydchug/list/sydc`;
       await this.page.goto(url, {
         waitUntil: 'domcontentloaded'
@@ -64,12 +64,16 @@ class Task2 extends Util {
       let houseList = [];
       let nextDisabled = null;
       do {
-        await this.sleep(1000)
-        let list = await this.task2GetHouseList(this.page);
-        houseList = houseList.concat(list)
-        let nextBtn = await this.page.$('#pager .next');
-        nextDisabled = await this.page.$('#pager .next.disabled');
-        await nextBtn.click()
+        try {
+          await this.sleep(900)
+          let list = await this.task2GetHouseList(this.page);
+          houseList = houseList.concat(list)
+          let nextBtn = await this.page.$('#pager .next');
+          nextDisabled = await this.page.$('#pager .next.disabled');
+          await nextBtn.click()
+        } catch (err) {
+          this.log(err)
+        }
       } while (!nextDisabled)
       houseList = this.unique(houseList)
       if (houseList && houseList.length) {
