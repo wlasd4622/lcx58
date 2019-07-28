@@ -38,7 +38,9 @@ class Task4 extends Util {
           throw new Error('获取用户信息异常')
         }
         user = Object.assign(user, userList[0])
-
+        if (!user.maximum) {
+          user.maximum = 25;
+        }
       } catch (err) {
         this.log(err)
       }
@@ -88,12 +90,12 @@ class Task4 extends Util {
             var infoid = shopList[i];
             var id = $('[tid="' + infoid + '"]').attr('tgid');
             var budget = $('[tid="' + infoid + '"] p:contains(今日预算)').text().match(/\d+/)[0];
-            if (parseInt(budget) >= 25) {
+            if (parseInt(budget) >= user.maximum) {
               continue;
             }
             budget = parseInt(budget) + 5;
-            if (budget > 25) {
-              budget = 25;
+            if (budget > user.maximum) {
+              budget = user.maximum;
             }
             console.log(infoid);
             console.log(id);

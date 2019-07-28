@@ -5,7 +5,7 @@ let config = require('../config.js')
 let mysql = require('mysql');
 let Util = require('../common/util.js')
 /**
- *精选
+ *设置成精选
  */
 class Task3 extends Util {
   constructor() {
@@ -33,6 +33,18 @@ class Task3 extends Util {
           throw new Error('获取用户信息异常')
         }
         user = Object.assign(user, userList[0])
+        var now = new Date();
+        var day = now.getDay();
+        if (day === 0) {
+          day = 7
+        }
+        //精选日期,空或者1,2,3,4,5,6,7  判断数据库是否设置了selected_date，如果设置再判断是否包含当天日期
+        if (!user.selected_date) {
+          user.selected_date = `1,2,3,4,5,6,7`;
+        }
+        if (!user.selected_date.includes(day.toString())) {
+          break;
+        }
 
       } catch (err) {
         this.log(err)
