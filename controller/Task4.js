@@ -16,15 +16,20 @@ class Task4 extends Util {
 
   }
 
+  checkTime() {
+    let currHours = new Date().getHours();
+    return (currHours >= 10 && currHours <= 18);
+  }
+
   async main() {
     this.log(`>>>main`);
+    if (!this.checkTime()) {
+      return false;
+    }
     await this.init();
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (this.userType(user) === 0 || user.user_name === '廊坊010号') {
-      //   continue;
-      // }
       this.log(user)
       let sql = `select * from gj_user where username='${user.user_name}'`
       try {
@@ -43,48 +48,9 @@ class Task4 extends Util {
     }
     this.log('END')
   }
-  async popularizeHandle(houseObj, user, sxShopIdList) {
-    this.log(`>>>popularizeHandle`);
-    try {
-      if (houseObj.shopId && houseObj.type.includes(2) && !sxShopIdList.includes(houseObj.shopId)) {
-        //跳转推广页面
-        let url = `http://vip.58ganji.com/biz58/jinpai58/set/${houseObj.shopId}`;
-        console.log(url);
-        await this.page.goto(url, {
-          waitUntil: 'domcontentloaded'
-        });
-        await this.sleep(1000);
-        let popularizeCode = await this.page.evaluate(() => {
-          if ($('.result-dts-info:contains("房源已推广")').length) {
-            return 1
-          } else if ($('[name="budget"]').length) {
-            return 2
-          } else {
-            return 3
-          }
-        });
-        if (popularizeCode === 1) {
-          //房源已推广
-          this.log('房源已推广');
-        } else if (popularizeCode === 3) {
-          //throw new Error('未处理异常')
-        } else if (popularizeCode === 2) {
-          let budget = await this.page.$('[name="budget"]');
-          await budget.type('15');
-          await this.sleep(300);
-          //点击立即推广
-          let submitBtn = await this.page.$('.ui-form #btnPromote');
-          await submitBtn.click();
-          await this.sleep(1000);
-          this.log('推广成功！');
-        }
-      }
-    } catch (error) {
-      this.log(error)
-    }
-  }
+
   async loopHouseHandle(user) {
-    this.log(`>>>popularizeHandle`);
+    this.log(`>>>loopHouseHandle`);
 
     try {
       let houseList = await this.getHouseListByDB(user); //0：刷新，1：重新推送，2：精选
@@ -122,12 +88,12 @@ class Task4 extends Util {
             var infoid = shopList[i];
             var id = $('[tid="' + infoid + '"]').attr('tgid');
             var budget = $('[tid="' + infoid + '"] p:contains(今日预算)').text().match(/\d+/)[0];
-            if(parseInt(budget)>=25){
-                continue;
+            if (parseInt(budget) >= 25) {
+              continue;
             }
             budget = parseInt(budget) + 5;
             if (budget > 25) {
-                budget=25;
+              budget = 25;
             }
             console.log(infoid);
             console.log(id);
@@ -138,7 +104,7 @@ class Task4 extends Util {
               data: {
                 id,
                 infoid,
-                dailyBudget:budget,
+                dailyBudget: budget,
                 cateId: 20,
                 act: 'reset_budget',
               }

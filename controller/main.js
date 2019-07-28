@@ -1,48 +1,68 @@
 let schedule = require('node-schedule');
-let fs = require('fs')
+let Ganji = require('./58ganji')
 let Task1 = require('./Task1');
 let Task2 = require('./Task2');
 let Task3 = require('./Task3');
+let Task4 = require('./Task4');
+let ganji = new Ganji();
 let task1 = new Task1();
 let task2 = new Task2();
 let task3 = new Task3();
-
+let task4 = new Task4();
+//每小时执行
+schedule.scheduleJob('30 1 * * * *', async function () {
+  try {
+    //更新session
+    ganji.mainTask();
+  } catch (err) {
+    console.log(err)
+  }
+  try {
+    //监听精选
+    task4.main();
+  } catch (err) {
+    console.log(err)
+  }
+});
 //每天2点执行
 schedule.scheduleJob('1 1 2 * * *', async function () {
   try {
     //店铺<-->houseid
     await task2.main();
+  } catch (err) {
+    console.log(err)
+  }
+  try {
     //刷新,推送
-    fs.unlinkSync('./catch/task1.json');
     await task1.main();
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
 });
 
-// //每天8点执行
-// schedule.scheduleJob('1 1 8 * * *', async function () {
-//   //精选
-//   task3.main();
-// });
+//每天9点执行
+schedule.scheduleJob('1 1 9 * * *', async function () {
+  try {
+    //精选
+    await task3.main();
+  } catch (err) {
+    console.log(err)
+  }
+});
 
-//shopID<-->houseid
-// task2.main();
-
-
-//刷新,推送
-// task1.main();
-
-(async function () {
+async function main() {
+  console.log('>>>main')
   try {
     //店铺<-->houseid
-    // await task2.main();
+    //await task2.main();
     //刷新,推送
-    // fs.unlinkSync('./catch/task1.json');
-    // await task1.main();
-
-    await task2.main();
+    //await task1.main();
+    //精选
+    //await task3.main();
+    //监听精选
+    await task4.main();
   } catch (err) {
     console.log(err);
   }
-})();
+}
+main();

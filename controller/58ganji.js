@@ -490,4 +490,4 @@ class GanJi {
   }
 
 }
-new GanJi().main();
+module.exports = GanJi
