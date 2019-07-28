@@ -5,7 +5,7 @@ let config = require('../config.js')
 let mysql = require('mysql');
 let Util = require('../common/util.js')
 /**
- *精选
+ *监听精选 是否超过当前设置的预算
  */
 class Task4 extends Util {
   constructor() {
@@ -78,6 +78,12 @@ class Task4 extends Util {
       });
       await this.page.waitForSelector('.ui-boxer.ui-boxer-default.ui-boxer-fang');
       await this.sleep(500);
+      let sxCount=await this.page.evaluate(()=>{
+        return $('i:contains("预算已达上限")').toArray().length
+      })
+      if(sxCount&&sxCount>0){
+        this.log('查找超额数据1')
+      }
       //当预算已达上限修改  预算
       await this.page.evaluate((user) => {
         var shopList = $('i:contains("预算已达上限")').toArray().map(t => {
@@ -117,6 +123,9 @@ class Task4 extends Util {
         }
       },user);
       await this.sleep(1000)
+      if(sxCount&&sxCount>0){
+        this.log('查找超额数据2')
+      }
     } catch (err) {
       let len = await this.waitElement('.login-mod')
       if (len) {

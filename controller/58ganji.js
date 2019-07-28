@@ -3,6 +3,9 @@ let schedule = require('node-schedule');
 var mysql = require('mysql');
 let fs = require('fs')
 const moment = require('moment');
+/**
+ * 更新userSession
+ */
 class GanJi {
   constructor() {
     this.log('>>>constructor');
@@ -74,7 +77,7 @@ class GanJi {
       this.log(err);
     }
     this.browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       args: ['--start-maximized', '--disable-infobars']
     });
     this.page = await this.browser.newPage();

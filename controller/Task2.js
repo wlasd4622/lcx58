@@ -4,6 +4,9 @@ let moment = require('moment');
 let config = require('./../config.js')
 let mysql = require('mysql');
 let Util = require('../common/util.js')
+/**
+ * 映射infoid<-->houseId
+ */
 class Task2 extends Util {
   constructor() {
     super();
@@ -112,16 +115,33 @@ class Task2 extends Util {
       }
       //更新 推送状态
       let pushInfoIds = Object.keys(pushInfoMap || {});
-      for (let i = 0; i < pushInfoIds.length; i++) {
-        console.log(`>>>>>>>>>>>${i}`);
-        const infoId = pushInfoIds[i];
-        console.log(infoId);
-        let sql = `UPDATE gj_house_id
-                  SET is_push = ${pushInfoIds[i] ? 1 : 0}
-                  WHERE
-                    gj_id = '${infoId}'`;
-        await this.execSql(0, sql);
+      if (pushInfoIds && pushInfoIds.length) {
+        let list0 = [];
+        let list1 = [];
+        for (let i = 0; i < pushInfoIds.length; i++) {
+          let infoId=pushInfoIds[i];
+          if (pushInfoMap[infoId]) {
+            list1.push(infoId.toString())
+          } else {
+            list0.push(infoId.toString())
+          }
+        }
+        if (list0 && list0.length) {
+          let sql = `UPDATE gj_house_id
+          SET is_push = 0
+          WHERE
+            gj_id in ('${list0.join("','")}');`;
+          await this.execSql(0, sql);
+        }
+        if (list1 && list1.length) {
+          let sql = `UPDATE gj_house_id
+          SET is_push = 1
+          WHERE
+            gj_id in ('${list1.join("','")}');`;
+          await this.execSql(0, sql);
+        }
       }
+
     } catch (err) {
       let len = await this.waitElement('.login-mod', this.page)
       if (len) {
