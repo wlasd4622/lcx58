@@ -79,7 +79,7 @@ class Task4 extends Util {
       await this.page.waitForSelector('.ui-boxer.ui-boxer-default.ui-boxer-fang');
       await this.sleep(500);
       //当预算已达上限修改  预算
-      await this.page.evaluate(() => {
+      await this.page.evaluate((user) => {
         var shopList = $('i:contains("预算已达上限")').toArray().map(t => {
           return $(t).parents('[tid]')
         }).map(tr => {
@@ -115,7 +115,7 @@ class Task4 extends Util {
             console.log(err);
           }
         }
-      });
+      },user);
       await this.sleep(1000)
     } catch (err) {
       let len = await this.waitElement('.login-mod')
