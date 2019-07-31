@@ -68,16 +68,16 @@ schedule.scheduleJob('1 1 19 * * *', async function () {
 async function main() {
   console.log('>>>main')
   try {
-    //店铺<-->houseid
-    await task2.main();
-    //刷新,推送
-    //await task1.main();
-    //精选
-    //await task3.main();
-    //监听精选
-    // await task4.main();
+    //更新userSession
+    ganji.mainTask();
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
+  // try {
+  //   //监听精选 是否超过当前设置的预算
+  //   task4.main();
+  // } catch (err) {
+  //   console.log(err)
+  // }
 }
-// main();
+main();

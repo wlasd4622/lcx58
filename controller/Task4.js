@@ -85,7 +85,8 @@ class Task4 extends Util {
         this.log('查找超额数据1')
       }
       //当预算已达上限修改  预算
-      await this.page.evaluate((user) => {
+      let logs=await this.page.evaluate((user) => {
+        let logs = [];
         var shopList = $('i:contains("预算已达上限")').toArray().map(t => {
           return $(t).parents('[tid]')
         }).map(tr => {
@@ -106,6 +107,7 @@ class Task4 extends Util {
             console.log(infoid);
             console.log(id);
             console.log(budget);
+            logs.push(`infoid:${infoid},budget:${budget}`);
             $.ajax({
               type: 'post',
               url: 'http://vip.58ganji.com/ajax/spread/houseinfo58',
@@ -121,7 +123,13 @@ class Task4 extends Util {
             console.log(err);
           }
         }
-      },user);
+        return logs;
+      }, user);
+      if (logs && logs.length) {
+        logs.map(log => {
+          this.log(log);
+        })
+      }
       await this.sleep(1000)
       if(sxCount&&sxCount>0){
         this.log('查找超额数据2')
