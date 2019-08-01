@@ -39,7 +39,7 @@ class Task4 extends Util {
         }
         user = Object.assign(user, userList[0])
         if (!user.maximum) {
-          user.maximum = 25;
+          user.maximum =35;
         }
       } catch (err) {
         this.log(err)
