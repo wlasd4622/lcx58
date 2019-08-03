@@ -19,7 +19,7 @@ class Task1 extends Util {
   async init() {
     try {
       this.log(`>>>init`);
-      fs.unlinkSync('../catch/task1.json');
+      fs.unlinkSync('./catch/task1.json');
       this.userList && this.userList.map(user => {
         if (user.db1 && !user.db4) {
           user.db4 = user.db1

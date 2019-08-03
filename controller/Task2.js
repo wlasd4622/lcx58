@@ -158,35 +158,6 @@ class Task2 extends Util {
   async task2GetHouseList() {
     let houseList = [];
     try {
-      // houseList = await this.page.evaluate(() => {
-      //   function getHouseList() {
-      //     return new Promise((resolve, reject) => {
-      //       try {
-      //         let houseList = []
-      //         $.ajax({
-      //           url: `http://vip.58ganji.com/separation/houselist/search?pageIndex=1&pageSize=20&cateId=20`,
-      //           contentType: 'applicaiton/json',
-      //           success: function (res) {
-      //             let data = JSON.parse(res);
-      //             if (data.data && data.data.infos && data.data.infos.length) {
-      //               houseList = data.data.infos;
-      //             }
-      //             resolve(houseList)
-      //           },
-      //           error: function (err) {
-      //             reject(err)
-      //           }
-      //         });
-      //       } catch (error) {
-      //         reject(error)
-      //       }
-      //     })
-      //   }
-      //   return getHouseList()
-      // });
-      // if (houseList.length > 490) {
-      //   throw new Error('获取的数据超过490条，请确认是否还有下一页')
-      // }
       //获取HouseList
       houseList = await this.page.evaluate(() => {
         return $('.phase span:contains(编号)').toArray().map(s => {

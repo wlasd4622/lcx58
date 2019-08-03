@@ -377,6 +377,15 @@ class Util {
           }
         }
       });
+      houseInfo.data2.map(id => {
+        if (newHouseIdMap[id]) {
+          newHouseIdMap[id].type.push(2)
+        } else {
+          newHouseIdMap[id] = {
+            type: [2]
+          }
+        }
+      });
       //如果是石家庄或者廊坊账号需要转换id
       if (this.userType(user) === 1) {
         for (let key in newHouseIdMap) {
