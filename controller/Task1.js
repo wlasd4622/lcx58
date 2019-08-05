@@ -19,7 +19,6 @@ class Task1 extends Util {
   async init() {
     try {
       this.log(`>>>init`);
-      fs.unlinkSync('./catch/task1.json');
       this.userList && this.userList.map(user => {
         if (user.db1 && !user.db4) {
           user.db4 = user.db1
@@ -44,19 +43,7 @@ class Task1 extends Util {
   async main() {
     this.log(`>>>main`);
     await this.init();
-    let catchDate = this.readCatch();
-    if (!catchDate) {
-      catchDate = {};
-      this.writeCatch(catchDate)
-    }
-    let forIndex = catchDate['main_for_1_index'] || 0;
-    for (let index = forIndex; index < this.userList.length; index++) {
-      catchDate = this.readCatch();
-      if (catchDate['main_for_1_index'] != index) {
-        catchDate['loopHouseHandle_for_1_index'] = 0;
-      }
-      catchDate['main_for_1_index'] = index;
-      this.writeCatch(catchDate)
+    for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
       // if (this.userType(user) === 0 || user.user_name === '廊坊010号') {
@@ -272,6 +259,7 @@ class Task1 extends Util {
    * @param {*} shopId
    */
   async LFHousePushHandle(houseId, user, result, shopId) {
+    this.log(`>>>LFHousePushHandle`)
     try {
       //判断是否正常推送中
       let isPushIn = await this.page.evaluate((shopId) => {
@@ -291,6 +279,7 @@ class Task1 extends Util {
           return $('.taocanshengyu:visible:eq(0)').text().match(/\d+/)[0] || 0;
         });
         this.log('非正常推送中')
+        this.log(`surplusDays:${surplusDays}`);
         if (surplusDays > 0) {
           result = {
             status: 300,
@@ -403,6 +392,7 @@ class Task1 extends Util {
    * @param {*} user
    */
   async housePushHandle(houseId, user, result, shopId) {
+    this.log(`>>>housePushHandle`)
     try {
       //判断是否正常推送中
       let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
@@ -660,12 +650,7 @@ class Task1 extends Util {
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
       //刷新
-      let catchData = this.readCatch();
-      let forIndex = catchData['loopHouseHandle_for_1_index'] || 0
-      for (let index = forIndex; index < houseIdKeys.length; index++) {
-        catchData = this.readCatch();
-        catchData['loopHouseHandle_for_1_index'] = index;
-        this.writeCatch(catchData);
+      for (let index = 0; index < houseIdKeys.length; index++) {
         if (houseList[houseIdKeys[index]].type.includes(0) || houseList[houseIdKeys[index]].type.includes(1)) {
           await this.houseRefreshHandle(Object.assign({
             id: houseIdKeys[index],
