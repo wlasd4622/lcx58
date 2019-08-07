@@ -172,6 +172,7 @@ Function refresh(houseId)
     refresh=rHouseStatus
 End Function
 Function editHouseInfo(houseId)
+    log "editHouseInfo"
     editCount=0
     Rem rEditHouseInfo
     editStatus=3507
@@ -580,8 +581,11 @@ Function updateStatus(userInfo, status)
     End If
     Rem rAjaxUpdateHouseInfo
     ajaxCount=0
-    js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
-    Call execjs(js)
+    if newUrl <> "" Then
+      js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
+      Call execjs(js)
+    End if
+    newUrl = ""
     Rem rGetUpdateHouseInfoStatus
     Delay 500
     result = execjs("window.updateHouseInfoStatus")

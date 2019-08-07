@@ -357,7 +357,8 @@ function updateHouseInfo(key, status, houseUrl, type) {
     url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
     data = {
       transfer_store_id: key,
-      site:2
+      site: 2,
+      post_type: 7
     }
 
   } else if (type == 3) {
@@ -365,20 +366,26 @@ function updateHouseInfo(key, status, houseUrl, type) {
     url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
     data = {
       transfer_store_id: key,
-      site:3
+      site: 3,
+      post_type: 7
     }
   } else if (type == 4) {
     //998
     url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
     data = {
       transfer_store_id: key,
-      site:4
+      site: 4,
+      post_type: 7
     }
   }
   data.status = status;
   if (houseUrl) {
     data.wbUrl = houseUrl;
     data.gjUrl = houseUrl.replace('58.com/shangpu/', 'ganji.com/wbdetail/shangpu/')
+  } else {
+    window.updateHouseInfoStatus = "更新错误"
+    window.updateHouseInfoMessage = 'url为空'
+    return false;
   }
   if (url) {
     $.ajax({
@@ -389,16 +396,8 @@ function updateHouseInfo(key, status, houseUrl, type) {
       },
       data,
       success: function (res) {
-        if (res) {
-          //更新成功
-          console.log('更新成功');
-          window.updateHouseInfoStatus = '更新成功'
-        }
-        if (houseUrl && !res.data) {
-          //更新失败
-          console.log('更新失败');
-          window.updateHouseInfoStatus = '更新失败'
-        }
+        console.log('更新成功');
+        window.updateHouseInfoStatus = '更新成功'
       },
       error: function (err) {
         console.log(err);
