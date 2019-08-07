@@ -354,21 +354,25 @@ function updateHouseInfo(key, status, houseUrl, type) {
   } else if (type == 2) {
     //dazhijia
     //短  数字
-    data = {
-      transfer_store_id: key
-    }
     url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
+    data = {
+      transfer_store_id: key,
+      site:2
+    }
+
   } else if (type == 3) {
     //bs
-    url = `https://api.010shangpu.com/api/openchangegeneralizestatus`
+    url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
     data = {
-      transfer_store_id: key
+      transfer_store_id: key,
+      site:3
     }
   } else if (type == 4) {
     //998
-    url = `https://api.998pu.com/api/open/changegeneralizestatus`
+    url = `https://api.dianzhijia.com/api/open/changegeneralizestatus`
     data = {
-      transfer_store_id: key
+      transfer_store_id: key,
+      site:4
     }
   }
   data.status = status;

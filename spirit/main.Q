@@ -74,7 +74,7 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<6) or (currHour >= 8 and currHour<19) Then
+    If (currHour >= 0 and currHour<5) or (currHour >= 8 and currHour<19) Then
         status=false
     Else
         status=true
@@ -593,7 +593,7 @@ Function updateStatus(userInfo, status)
             Goto rAjaxUpdateHouseInfo
         End If
     End If
-    If result = "更新错误" Then
+    If result <> "更新成功" Then
         MessageBox "更新错误"
     End If
     Rem fUpdateStatus
@@ -1159,10 +1159,10 @@ Function log(info)
     sDate = Plugin.Sys.GetDateTime()
     logName = split(sDate, " ")(0)
     info=cstr(info)
-    If len(info) > 100 Then
-        info=mid(info,1,100)+"..."
-    End If
+    //If len(info) > 100 Then
+    //    info=mid(info,1,100)+"..."
+    //End If
     info = cstr(sDate) + " " +info
-    TracePrint info
+    //TracePrint info
     Call Plugin.File.WriteFileEx("d:\logs\"+logName+".log",info)
 End Function

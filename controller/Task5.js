@@ -29,17 +29,7 @@ class Task5 extends Util {
         if (!userList || userList.length == 0) {
           throw new Error('获取用户信息异常')
         }
-        user = Object.assign(user, userList[0])
-        var now = new Date();
-        var day = now.getDay();
-        if (day === 0) {
-          day = 7
-        }
-
-        //晚上是否下线,默认下线0，1：不下线
-        if (user.is_retain === 1) {
-          break;
-        }
+        user = Object.assign(user, userList[0]);
 
       } catch (err) {
         this.log(err)
@@ -49,6 +39,63 @@ class Task5 extends Util {
       }
     }
     this.log('END')
+  }
+
+  /**
+   * 获取下线list
+   * @param {*} houseObj
+   * @param {*} user
+   */
+  async getRetainList(sxShopIdList) {
+    let retainList = [];
+    try {
+      for (let i = 0; i < sxShopIdList.length; i++) {
+        let sql = `SELECT * from gj_selected WHERE gj_id='${sxShopIdList[i]}'`;
+        let result = await this.execSql(0, sql);
+        if (result && result.length) {
+          let isRetain = result[0].is_retain || '0'; //默认下线
+          if (isRetain == 0) {
+            retainList.push(sxShopIdList[i]);
+          }
+        } else {
+          retainList.push(sxShopIdList[i]);
+        }
+      }
+
+    } catch (err) {
+      this.log(err);
+    }
+    return retainList;
+  }
+  /**
+   * 更新到晚上的实际消费
+   */
+  async updatacosts(sxShopIdList) {
+    try {
+      this.log(`>>>updatacosts`);
+      for (let i = 0; i < sxShopIdList.length; i++) {
+        let tid = sxShopIdList[0];
+        let obj = await this.page.evaluate((tid) => {
+          let preselection = $(`[tid="${tid}"] p:contains("今日预算")`).text().replace('今日预算：', '');
+          let actual = $(`[tid="${tid}"] p:contains("剩余预算")`).text().replace('剩余预算：', '');
+          let costs = preselection - actual;
+          return {
+            preselection,
+            actual,
+            costs
+          }
+        }, tid);
+        this.log(obj);
+        let sql = `update gj_selected set costs=${obj.costs},update_time=NOW() where gj_id='${tid}'`;
+        try {
+          await this.execSql(0, sql)
+        } catch (err) {
+          this.log(err);
+        }
+      }
+    } catch (err) {
+      this.log(err)
+    }
   }
 
   async loopHouseHandle(user) {
@@ -79,6 +126,10 @@ class Task5 extends Util {
       });
       //下线精选
       if (sxShopIdList && sxShopIdList.length) {
+        //更新到晚上的实际消费
+        await this.updatacosts(sxShopIdList);
+        let retainList = await this.getRetainList(sxShopIdList);
+
         await this.page.evaluate((sxShopIdList) => {
           function get(id) {
             return new Promise((resolve, reject) => {
@@ -113,7 +164,9 @@ class Task5 extends Util {
               resolve()
             }
           })
-        }, sxShopIdList)
+        }, retainList);
+        this.log(`取消精选`);
+        this.log(retainList)
       }
     } catch (err) {
       let len = await this.waitElement('.login-mod')

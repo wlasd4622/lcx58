@@ -26,6 +26,9 @@ class Util {
       if (user.db1 && !user.db4) {
         user.db4 = user.db1
       }
+      if (user.db1 && !user.db5) {
+        user.db5 = user.db1
+      }
       return user;
     })
   }
@@ -61,16 +64,22 @@ class Util {
       } else {
         info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
       }
+      try {
+        info=info.replace(/\\n/g,'').replace(/\s+/g,' ')
+      } catch (err) {
+        console.log(err);
+      }
       info = moment().format('YYYY-MM-DD HH:mm:ss') + ' ' + info
       console.log(info);
-      if (info.length > 200) {
-        info = info.substr(0, 200) + '...'
-      }
+      // if (info.length > 200) {
+      //   info = info.substr(0, 200) + '...'
+      // }
       if (this.taskName) {
         if (!fs.existsSync(`./logs/${this.taskName}/`)) {
           fs.mkdirSync(`./logs/${this.taskName}/`)
         }
-        fs.appendFileSync(`./logs/${this.taskName}/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
+        fs.appendFileSync(`./logs/${this.taskName}/${moment().format('YYYY-MM-DD')}.log`, info
+          + '\n')
       } else {
         fs.appendFileSync(`./logs/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
       }
@@ -186,7 +195,7 @@ class Util {
    * @param {*} sql
    */
   async execSql(nameIndex, sql) {
-    let name = ['datarefresh', 'bjhyty', 'dianzhijia', 'bs'][nameIndex];
+    let name = ['datarefresh', 'bjhyty', 'dianzhijia', 'bs', 'pu'][nameIndex];
     this.log('>>>execSql');
     this.log(name);
     this.log(sql)
@@ -261,11 +270,11 @@ class Util {
               )
               AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
               AND a.url IS NOT NULL`,
-        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
         type: [0, 1] //0：刷新，1：重新推送，2：精选
       }
       dataManager.db12 = {
-        msg: '数据库dianzhijia,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        msg: '数据库dianzhijia,刷新，精选',
         sql: `SELECT
               url as url
             FROM
@@ -275,7 +284,7 @@ class Util {
               a.post_type = 9
               AND b.generalize_handle_status < 3 AND generalize_account = ${user.db1} AND a.end_time > curdate( )
               AND a.url IS NOT NULL`,
-        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        dbIndex: 2, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
         type: [0, 2] //0：刷新，1：重新推送，2：精选
       }
       dataManager.db21 = {
@@ -290,11 +299,11 @@ class Util {
               AND promoted_accounts = ${user.db2}
             ORDER BY
               expiry_date`,
-        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
         type: [0, 1] //0：刷新，1：重新推送，2：精选
       };
       dataManager.db31 = {
-        msg: '数据库bjhyty,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        msg: '数据库bjhyty,刷新，精选',
         sql: `SELECT
               url_58_choiceness as url
             FROM
@@ -305,7 +314,7 @@ class Util {
               AND do_post_type = ${user.db3}
             ORDER BY
               date_of_maturity`,
-        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        dbIndex: 1, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
         type: [0, 2] //0：刷新，1：重新推送，2：精选
       };
       dataManager.db41 = {
@@ -322,11 +331,11 @@ class Util {
               )
               AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
               AND a.url IS NOT NULL`,
-        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
         type: [0, 1] //0：刷新，1：重新推送，2：精选
       };
       dataManager.db42 = {
-        msg: '数据库bs,刷新，早上9点-10点点击精选，输入15元，确定即可',
+        msg: '数据库bs,刷新，精选',
         sql: `SELECT
               url as url
             FROM
@@ -336,7 +345,38 @@ class Util {
               a.post_type = 9
               AND b.generalize_handle_status < 3 AND generalize_account = ${user.db4} AND a.end_time > curdate( )
               AND a.url IS NOT NULL`,
-        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs']
+        dbIndex: 3, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
+        type: [0, 2] //0：刷新，1：重新推送，2：精选
+      };
+      dataManager.db51 = {
+        msg: '数据库pu,刷新，重新推送',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              (
+                a.post_type = 8
+                OR a.post_type = 17
+              )
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db5} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 4, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
+        type: [0, 1] //0：刷新，1：重新推送，2：精选
+      };
+      dataManager.db52 = {
+        msg: '数据库pu,刷新，精选',
+        sql: `SELECT
+              url as url
+            FROM
+              generalizes AS a
+              LEFT JOIN sign_details AS b ON a.transfer_store_id = b.transfer_store_id
+            WHERE
+              a.post_type = 9
+              AND b.generalize_handle_status < 3 AND generalize_account = ${user.db5} AND a.end_time > curdate( )
+              AND a.url IS NOT NULL`,
+        dbIndex: 4, //['datarefresh', 'bjhyty', 'dianzhijia', 'bs','pu']
         type: [0, 2] //0：刷新，1：重新推送，2：精选
       };
       let keys = Object.keys(dataManager);
@@ -390,7 +430,7 @@ class Util {
       if (this.userType(user) === 1) {
         for (let key in newHouseIdMap) {
           let houseId = key;
-          let sql = `SELECT * from gj_house_id
+          let sql = `SELECT * from gj_selected
                       where house_id='${houseId}'`;
           let result = await this.execSql(0, sql);
           let shopId = ''

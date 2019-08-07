@@ -38,14 +38,7 @@ class Task3 extends Util {
         if (day === 0) {
           day = 7
         }
-        //精选日期,空或者1,2,3,4,5,6,7  判断数据库是否设置了selected_date，如果设置再判断是否包含当天日期
-        if (!user.selected_date) {
-          user.selected_date = `1,2,3,4,5,6,7`;
-        }
-        if (!user.selected_date.includes(day.toString())) {
-          break;
-        }
-
+        user.nowWeek = day;
       } catch (err) {
         this.log(err)
       }
@@ -55,10 +48,38 @@ class Task3 extends Util {
     }
     this.log('END')
   }
+
+  /**
+   * 是否设置精选
+   * @param {*} houseObj
+   * @param {*} user
+   */
+  async isSelected(houseObj, user) {
+    try {
+      //精选日期,空或者1,2,3,4,5,6,7  判断数据库是否设置了selected_date，如果设置再判断是否包含当天日期
+      let sql = `SELECT * from gj_selected
+                  WHERE gj_id='${houseObj.shopId}'`;
+      let result = await this.execSql(0, sql);
+      if (result && result.length) {
+        let selected_date = result[0].selected_date || '1,2,3,4,5,6,7';
+        if (selected_date.includes(user.nowWeek.toString())) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    } catch (err) {
+      this.log(err);
+      return true;
+    }
+  }
+
   async popularizeHandle(houseObj, user, sxShopIdList) {
     this.log(`>>>popularizeHandle`);
     try {
-      if (houseObj.shopId && houseObj.type.includes(2) && !sxShopIdList.includes(houseObj.shopId)) {
+      if (houseObj.shopId && houseObj.type.includes(2) && !sxShopIdList.includes(houseObj.shopId) && await this.isSelected(houseObj, user)) {
         //跳转推广页面
         let url = `http://vip.58ganji.com/biz58/jinpai58/set/${houseObj.shopId}`;
         console.log(url);

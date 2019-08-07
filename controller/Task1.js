@@ -23,6 +23,9 @@ class Task1 extends Util {
         if (user.db1 && !user.db4) {
           user.db4 = user.db1
         }
+        if (user.db1 && !user.db5) {
+          user.db5 = user.db1
+        }
         return user;
       })
       let keys = Object.keys(this.db)

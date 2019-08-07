@@ -100,13 +100,13 @@ class Task2 extends Util {
         for (let index = 0; index < houseList.length; index++) {
           const house = houseList[index];
           let shopId = house
-          let sql = `SELECT * from gj_house_id
+          let sql = `SELECT * from gj_selected
                     where gj_id='${shopId}'`
           let result = await this.execSql(0, sql)
           if (!result.length) {
             let houseUrl = await this.task2Get58HouseUrl(shopId)
             let houseId = houseUrl.match(/\d{8,}/)[0];
-            sql = `insert into \`gj_house_id\` (\`house_id\`,\`gj_id\`,\`create_time\`,\`user_id\`,\`user_name\`)
+            sql = `insert into \`gj_selected\` (\`house_id\`,\`gj_id\`,\`create_time\`,\`user_id\`,\`user_name\`)
                  values ('${houseId}','${shopId}',now(),${user.id},'${user.user_name}')`
             await this.execSql(0, sql)
           }
@@ -127,14 +127,14 @@ class Task2 extends Util {
           }
         }
         if (list0 && list0.length) {
-          let sql = `UPDATE gj_house_id
+          let sql = `UPDATE gj_selected
           SET is_push = 0
           WHERE
             gj_id in ('${list0.join("','")}');`;
           await this.execSql(0, sql);
         }
         if (list1 && list1.length) {
-          let sql = `UPDATE gj_house_id
+          let sql = `UPDATE gj_selected
           SET is_push = 1
           WHERE
             gj_id in ('${list1.join("','")}');`;
