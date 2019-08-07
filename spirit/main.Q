@@ -584,22 +584,22 @@ Function updateStatus(userInfo, status)
     if newUrl <> "" Then
       js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
       Call execjs(js)
+      Rem rGetUpdateHouseInfoStatus
+      Delay 500
+      result = execjs("window.updateHouseInfoStatus")
+      If result = "" Then
+          ajaxCount = ajaxCount + 1
+          If ajaxCount < 10 Then
+              Goto rGetUpdateHouseInfoStatus
+          Else
+              Goto rAjaxUpdateHouseInfo
+          End If
+      End If
+      If result <> "更新成功" Then
+          MessageBox "更新错误"
+      End If
     End if
     newUrl = ""
-    Rem rGetUpdateHouseInfoStatus
-    Delay 500
-    result = execjs("window.updateHouseInfoStatus")
-    If result = "" Then
-        ajaxCount = ajaxCount + 1
-        If ajaxCount < 10 Then
-            Goto rGetUpdateHouseInfoStatus
-        Else
-            Goto rAjaxUpdateHouseInfo
-        End If
-    End If
-    If result <> "更新成功" Then
-        MessageBox "更新错误"
-    End If
     Rem fUpdateStatus
     log  "updateStatus:"&status
     //每次只能更新一个字段
