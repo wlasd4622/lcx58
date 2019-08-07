@@ -90,12 +90,18 @@ class Task1 extends Util {
     let editPage = null;
     try {
       let jqueryExist = false;
+      let doCount = 0;
       do {
+        doCount++;
         this.log(`do:jqueryExist:${jqueryExist}`)
         await this.sleep()
         jqueryExist = await this.page.evaluate(() => {
           return typeof window.jQuery === 'function'
         })
+        if (doCount > 20) {
+          doCount = 0;
+          await this.loadJquery(this.page);
+        }
       } while (!jqueryExist);
       let editUrl = null;
       if (this.userType(user) === 0) {

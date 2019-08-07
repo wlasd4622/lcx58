@@ -65,7 +65,7 @@ class Util {
         info = JSON.stringify(T).replace(/^\"+/, '').replace(/\"+$/, '')
       }
       try {
-        info=info.replace(/\\n/g,'').replace(/\s+/g,' ')
+        info = info.replace(/\\n/g, '').replace(/\s+/g, ' ')
       } catch (err) {
         console.log(err);
       }
@@ -78,8 +78,8 @@ class Util {
         if (!fs.existsSync(`./logs/${this.taskName}/`)) {
           fs.mkdirSync(`./logs/${this.taskName}/`)
         }
-        fs.appendFileSync(`./logs/${this.taskName}/${moment().format('YYYY-MM-DD')}.log`, info
-          + '\n')
+        fs.appendFileSync(`./logs/${this.taskName}/${moment().format('YYYY-MM-DD')}.log`, info +
+          '\n')
       } else {
         fs.appendFileSync(`./logs/${moment().format('YYYY-MM-DD')}.log`, info + '\n')
       }
@@ -129,6 +129,20 @@ class Util {
     }
   }
 
+  async loadJquery(page = this.page) {
+    try {
+      await page.evaluate(() => {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//cdn.bootcss.com/jquery/2.1.2/jquery.min.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      })
+      await this.sleep(1000)
+    } catch (err) {
+      this.log(err)
+    }
+  }
+
   /**
    * 查找等待元素出现
    * @param {*} selector
@@ -140,12 +154,18 @@ class Util {
       this.log('>>>waitElement');
       this.log(selector)
       let jqueryExist = false;
+      let doCount = 0
       do {
+        doCount++;
         this.log(`do:jqueryExist:${jqueryExist}`)
         await this.sleep()
         jqueryExist = await page.evaluate(() => {
           return typeof window.jQuery === 'function'
         })
+        if (doCount > 20) {
+          doCount = 0;
+          await this.loadJquery(page);
+        }
       } while (!jqueryExist)
 
       for (let index = 0; index < 10; index++) {
@@ -170,15 +190,22 @@ class Util {
   /**
    * 等待jquery
    */
-  async waitJquery() {
+  async waitJquery(page = this.page) {
     this.log(`>>>waitJquery`)
     let jqueryExist = false;
+    let doCount = 0;
     do {
+      doCount++;
       this.log(`do:jqueryExist:${jqueryExist}`)
       await sleep()
       jqueryExist = await page.evaluate(() => {
         return typeof window.jQuery === 'function'
       })
+
+      if (doCount > 20) {
+        doCount = 0;
+        await this.loadJquery(page);
+      }
     } while (!jqueryExist)
   }
 
