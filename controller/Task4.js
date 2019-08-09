@@ -38,9 +38,9 @@ class Task4 extends Util {
           throw new Error('获取用户信息异常')
         }
         user = Object.assign(user, userList[0])
-        if (!user.maximum) {
-          user.maximum =35;
-        }
+        // if (user.user_name != '重庆店之家') {
+        //   continue;
+        // }
       } catch (err) {
         this.log(err)
       }
@@ -78,31 +78,47 @@ class Task4 extends Util {
       });
       await this.page.waitForSelector('.ui-boxer.ui-boxer-default.ui-boxer-fang');
       await this.sleep(500);
-      let sxCount=await this.page.evaluate(()=>{
+      let sxCount = await this.page.evaluate(() => {
         return $('i:contains("预算已达上限")').toArray().length
       })
-      if(sxCount&&sxCount>0){
-        this.log('查找超额数据1')
+      if (sxCount && sxCount > 0) {
+        this.log(`查找超额数据:${sxCount}`)
       }
-      //当预算已达上限修改  预算
-      let logs=await this.page.evaluate((user) => {
-        let logs = [];
+      let excessShopList = await this.page.evaluate(() => {
         var shopList = $('i:contains("预算已达上限")').toArray().map(t => {
           return $(t).parents('[tid]')
         }).map(tr => {
           return $(tr).attr('tid');
         });
+        return shopList || [];
+      })
+      let excessShopMap = {};
+      for (let i = 0; i < excessShopList.length; i++) {
+        let gjId = excessShopList[i];
+        let sql = `SELECT * from gj_selected WHERE gj_id ='${gjId}'`;
+        let result = await this.execSql(0, sql);
+        if (result && result.length && result[0].maximum) {
+          excessShopMap[gjId] = result[0].maximum;
+        } else {
+          excessShopMap[gjId] = 35;
+        }
+      }
+      //当预算已达上限修改  预算
+      let logs = await this.page.evaluate((excessShopMap) => {
+        let logs = [];
+        let shopList = Object.keys(excessShopMap);
         for (let i = 0; i < shopList.length; i++) {
           try {
             var infoid = shopList[i];
             var id = $('[tid="' + infoid + '"]').attr('tgid');
             var budget = $('[tid="' + infoid + '"] p:contains(今日预算)').text().match(/\d+/)[0];
-            if (parseInt(budget) >= user.maximum) {
+            var maximum = excessShopMap[infoid] || 35;
+            if (parseInt(budget) >= maximum) {
               continue;
             }
             budget = parseInt(budget) + 5;
-            if (budget > user.maximum) {
-              budget = user.maximum;
+            if (budget > maximum) {
+              budget = maximum;
             }
             console.log(infoid);
             console.log(id);
@@ -124,16 +140,13 @@ class Task4 extends Util {
           }
         }
         return logs;
-      }, user);
+      }, excessShopMap);
       if (logs && logs.length) {
         logs.map(log => {
           this.log(log);
         })
       }
-      await this.sleep(1000)
-      if(sxCount&&sxCount>0){
-        this.log('查找超额数据2')
-      }
+      await this.sleep(2000)
     } catch (err) {
       let len = await this.waitElement('.login-mod')
       if (len) {
