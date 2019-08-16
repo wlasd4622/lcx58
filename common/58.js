@@ -74,10 +74,18 @@ function getHouseDetail() {
   // var span = baseContent.find('span:contains(位置)').parent().find('span').toArray();
   var address3 = baseContent.find('span:contains(位置)').parent().find('span').eq(1).text().trim();
   //----------------------------
-  //姓名
-  var name = $('.agent-name').text().trim().split('(')[0];
-  //是否是个人
-  var isSingle = $('.agent-name').text().trim().indexOf('个人') > -1 ? true : false;
+  var name = null;
+  var isSingle = null;
+  if ($('.poster-name').length) {
+    name = $('.poster-name').text().trim();
+    isSingle = $('.poster-identity').text().trim().indexOf('个人') > -1 ? true : false;
+  } else {
+    //姓名
+    name = $('.agent-name').text().trim().split('(')[0];
+    //是否是个人
+    isSingle = $('.agent-name').text().trim().indexOf('个人') > -1 ? true : false;
+  }
+
   //phone
   var phone = $('p.phone-num').text();
   //phoneAddress
