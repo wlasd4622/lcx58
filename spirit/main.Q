@@ -88,7 +88,9 @@ Function loadJquery()
     count=0
     Do
         Delay 100
+        TracePrint ">>>loadJquery do"
         flag = execjs("$===null")
+        TracePrint flag
         flag = CBool(flag)
         count=count+1
     Loop While flag and count < 10 * 5
@@ -845,7 +847,8 @@ Function addHouseInfo(houseId)
                 addHouseInfoCount=addHouseInfoCount+1
                 If addHouseInfoCount > 4 Then
                     addStatus = 3511
-                    messages="addHouseInfoFail"
+                    messages = "addHouseInfoFail"
+                    MessageBox messages
                     Goto rBreak
                 Else
                     Goto rAddHouseInfo
