@@ -165,7 +165,7 @@ class GanJi {
         await this.myService(user);
         //推送中，在线购买，还可推送，今日推送到期数量
         await this.yxtgsp58(user);
-        // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
+        // 房产推广币，日期选到两年以后，查询最近6笔的余额到期时间及剩余金额
         await this.myperiod(user);
         //回到首页 获取cookie
         url = `http://vip.58ganji.com/user/brokerhomeV2`
@@ -442,7 +442,7 @@ class GanJi {
     return result;
   }
 
-  // 房产推广币，日期选到两年以后，查询最近3笔的余额到期时间及剩余金额
+  // 房产推广币，日期选到两年以后，查询最近6笔的余额到期时间及剩余金额
   async myperiod(user) {
     this.log(`>>>myperiod`);
     let url = `https://my.58.com/pro/tuiguangbi/myperiod/`
@@ -465,7 +465,7 @@ class GanJi {
     await this.sleep(2000)
     let data = await this.page.evaluate(() => {
       function format() {
-        return $('table tr:gt(0):lt(3)').toArray().map(item => {
+        return $('table tr:gt(0):lt(6)').toArray().map(item => {
           return {
             '推广币': $(item).find('td:eq(2)').text().trim(),
             '到期时间': $(item).find('td:eq(4)').text().trim(),

@@ -12,8 +12,10 @@ class Task5 extends Util {
     super();
     this.taskName = 'Task5'
   }
-  init() {
-
+  async init() {
+    //重置字段costs
+    let sql = `update gj_selected set costs=null`;
+    await this.execSql(0, sql);
   }
 
   async main() {
@@ -74,7 +76,7 @@ class Task5 extends Util {
     try {
       this.log(`>>>updatacosts`);
       for (let i = 0; i < sxShopIdList.length; i++) {
-        let tid = sxShopIdList[0];
+        let tid = sxShopIdList[i];
         let obj = await this.page.evaluate((tid) => {
           let preselection = $(`[tid="${tid}"] p:contains("今日预算")`).text().replace('今日预算：', '');
           let actual = $(`[tid="${tid}"] p:contains("剩余预算")`).text().replace('剩余预算：', '');
