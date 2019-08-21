@@ -22,19 +22,22 @@ function getHouseDetail() {
   //转让费单位
   var transferFeeUnit = $('span.house_basic_title_money_zrf').text().replace(transferFee, '')
   //baseContent
-  var baseContent = $(`<div>${$('ul.house_basic_title_content').html().replace(/[\n\t\r]/g, '').replace(/\&nbsp\;/g, '')}</div>`);
+  var baseContent = $(`<div>${$('#intro').html().replace(/[\n\t\r]/g, '').replace(/\&nbsp\;/g, '')}</div>`);
   //面积
-  var span = baseContent.find('span:contains(面积)').next().text().trim().replace(/\s/g, '');
+  var span = $('.house_basic_title_info span:contains(㎡)').text();
   var area = span.match(/\d+/)[0];
   var areaUnit = span.match(/\d+(.*)/)[1];
   //类型
-  var span = baseContent.find('span:contains(类型)').next().text().trim().replace(/\s/g, '');
+  var span = baseContent.find('span:contains(商铺类型)').next().text().trim().replace(/\s/g, '');
   var type = span.split('-')[0];
   //是否临街
   var isStreet = span.split('-')[1];
   //楼层
   var span = baseContent.find('span:contains(楼层)').next().text().trim().replace(/\s/g, '');
   var curFloor = span.split('/')[0].replace('层', '');
+  if (curFloor == 0) {
+    curFloor = '1';
+  }
   var totalFloot = span.split('/')[1].match(/\d+/)[0];
   //规格
   var span = baseContent.find('span:contains(规格)').next().text().trim().replace(/\s/g, '');
@@ -47,11 +50,11 @@ function getHouseDetail() {
   //状态
   var status = baseContent.find('span:contains(状态)').next().text().trim().replace(/\s/g, '');
   //付款方式
-  var span = baseContent.find('span:contains(付款方式)').next().text().trim().replace(/\s/g, '');
+  var span = baseContent.find('span:contains(押付)').next().text().trim().replace(/\s/g, '');
   var payType1 = span && span.match(/付(\d+)/)[1]; //付
   var payType2 = span && span.match(/押(\d+)/)[1]; //押
   //经营行业
-  var span = baseContent.find('span:contains(经营行业)').next().text().trim().replace(/\s/g, '');
+  var span = baseContent.find('span:contains(经营类型)').next().text().trim().replace(/\s/g, '').split('-')[0];
   var industry = span;
   //起租期
   var span = baseContent.find('span:contains(起租期)').next().text().trim().replace(/\s/g, '');
@@ -69,10 +72,10 @@ function getHouseDetail() {
   var passengerFlow = span;
   //位置
   // var span = baseContent.find('span:contains(位置)').parent().find('a').toArray();
-  var address1 = baseContent.find('span:contains(位置)').parent().find('a').eq(0).text().trim();
-  var address2 = baseContent.find('span:contains(位置)').parent().find('a').eq(1).text().trim();
+  var address1 = ____json4fe.locallist[1].name;
+  var address2 = ____json4fe.locallist[2].name;
   // var span = baseContent.find('span:contains(位置)').parent().find('span').toArray();
-  var address3 = baseContent.find('span:contains(位置)').parent().find('span').eq(1).text().trim();
+  var address3 = ____json4fe.xiaoqu.dizhi;
   //----------------------------
   var name = null;
   var isSingle = null;
@@ -85,7 +88,8 @@ function getHouseDetail() {
     //是否是个人
     isSingle = $('.agent-name').text().trim().indexOf('个人') > -1 ? true : false;
   }
-
+  // 全部设置成个人
+  isSingle = true;
   //phone
   var phone = $('p.phone-num').text();
   //phoneAddress
