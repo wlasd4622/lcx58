@@ -444,5 +444,6 @@ function getEditHouseInfo() {
   } catch (err) {
     console.log(err);
   }
+  window.editData = editData;
   return editData;
 }
