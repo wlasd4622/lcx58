@@ -429,3 +429,20 @@ function updateHouseInfo(key, status, houseUrl, type) {
     type
   }
 }
+
+function editHouseInfo() {
+  var editData = {};
+  try {
+    editData.surplusMonth = $('span:contains(剩余租期:)').length ? $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1] : '';
+    editData.surplusMonthUnit = $('span:contains(剩余租期:)').length ? $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[2] : '';
+    editData.zuJInUnit = $('span.house_basic_title_money_num').length ? $('span.house_basic_title_money_num').next().text() : '';
+    editData.zuJIn = $('span.house_basic_title_money_num').text();
+    editData.status = $('.intro-item span:contains(经营状态)').next().text().trim();
+    editData.title = $('.house-title h1').text().replace(/\(转让\)/g, '').replace(/\(出租\)/g, '').replace(/\(出售\)/g, '').trim().substr(0, 30);
+    editData.zrf = $('span.house_basic_title_money_zrf').length ? $('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[1] : '';
+    editData.zrfUnit = $('span.house_basic_title_money_zrf').length ? $('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[2] : '';
+  } catch (err) {
+    console.log(err);
+  }
+  return editData;
+}
