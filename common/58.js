@@ -430,7 +430,7 @@ function updateHouseInfo(key, status, houseUrl, type) {
   }
 }
 
-function editHouseInfo() {
+function getEditHouseInfo() {
   var editData = {};
   try {
     editData.surplusMonth = $('span:contains(剩余租期:)').length ? $('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1] : '';
