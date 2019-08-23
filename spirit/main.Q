@@ -196,7 +196,9 @@ Function editHouseInfo(houseId)
             editStatus = 3507
             Goto rBreak
         End If
-        length=execjs("location.href.includes('404.html')?1:0")
+        length = execjs("location.href.includes('404.html')?1:0")
+        If length = "" Then the
+         length=0
         If cint(length) > 0 Then
             editStatus = 3507
             Goto rBreak
@@ -210,21 +212,10 @@ Function editHouseInfo(houseId)
         log "未处理异常1146"
         Goto rEditHouseInfo
     End If
-    Call execjs("var editData={};"&_
-    			"editData.surplusMonth = $('span:contains(剩余租期:)').length?$('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[1]:'';"&_
-				"editData.surplusMonthUnit = $('span:contains(剩余租期:)').length?$('span:contains(剩余租期:)').next().text().trim().match(/(\d+)(.*)/)[2]:'';"&_
-				"editData.zuJInUnit=$('span.house_basic_title_money_num').length?$('span.house_basic_title_money_num').next().text():'';"&_
-				"editData.zuJIn=$('span.house_basic_title_money_num').text();"&_
-				"editData.status=$($('.house_basic_title_content').html().replace(/[\n\t]/g,'').replace(/\&nbsp\;/g,'')).find('span:contains(状态)').next().text().trim();"&_
-				"editData.title=$('.house-title h1').text().replace(/\(转让\)/g,'').replace(/\(出租\)/g,'').replace(/\(出售\)/g,'').trim().substr(0,30);"&_
-				"editData.zrf=$('span.house_basic_title_money_zrf').length?$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[1]:'';"&_
-				"editData.zrfUnit=$('span.house_basic_title_money_zrf').length?$('span.house_basic_title_money_zrf').text().match(/(\d+)(.*)/)[2]:'';")
-    editData = execjs("JSON.stringify(editData)")
+    execjs("getEditHouseInfo();")
+    editData = execjs("JSON.stringify(editData);")
     log editData
     length = find("editData&&editData.title?editData.title.length:0","获取title长度")
-    If length = "" Then
-        length=0
-    End If
     If cint(length) = 0 Then
         Goto rEditHouseInfo
     End If
@@ -245,7 +236,7 @@ Function editHouseInfo(houseId)
     Delay 3000
     length = find("$('#postForm div').length", "获取form下面的div个数，以证明页面渲染完成")
     If length > 0 Then
-        log "var editData="&editData&";"
+        log "var editData=" & editData & ";"
         Call execjs("var editData=" & editData & ";")
         Call execjs("$('[name=title] input').val(editData['title']);"&_
 					"$('[name=params_205] label:contains(' + editData['status'] + ')').parent().click();"&_
@@ -730,7 +721,7 @@ Function addHouseInfo(houseId)
     If hosueDetailCode = "" Then
         Goto rAddHouseInfo
     End If
-    codeKey=execjs("$('a.house_basic_title_content_item3.blue-link:eq(0)').attr('href').match(/\w*.*?\.com/)[0].replace('//','')")
+    codeKey=execjs("location.host")
     If codeKey = "" Then
         log "codeKey为空"
         Goto rAddHouseInfo
@@ -960,7 +951,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='13766896058' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='13020215153' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
@@ -1060,6 +1051,8 @@ Function getHouseId(url)
     getHouseId=regr1
 End Function
 Function queryCode(key)
+	log "queryCode"
+	log key
     Rem fQueryCode
     code=-1
     log "queryCode:" & key
@@ -1170,6 +1163,6 @@ Function log(info)
     //    info=mid(info,1,100)+"..."
     //End If
     info = cstr(sDate) + " " +info
-    //TracePrint info
+    TracePrint info
     Call Plugin.File.WriteFileEx("d:\logs\"+logName+".log",info)
 End Function

@@ -23,9 +23,9 @@ class Task4 extends Util {
 
   async main() {
     this.log(`>>>main`);
-    if (!this.checkTime()) {
-      return false;
-    }
+    // if (!this.checkTime()) {
+    //   return false;
+    // }
     await this.init();
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)

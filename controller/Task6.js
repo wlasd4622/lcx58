@@ -8,13 +8,13 @@ let axios = require('axios')
 class Task6 extends Util {
   constructor() {
     super();
-    this.taskName = "task1"
+    this.taskName = "task6"
     this.userList = config.user;
     this.db = config.db;
   }
   async init() {
+    this.log(`>>>init`);
     try {
-      this.log(`>>>init`);
       this.userList && this.userList.map(user => {
         if (user.db1 && !user.db4) {
           user.db4 = user.db1
@@ -45,7 +45,7 @@ class Task6 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (user.user_name !== 'bjdzj5') {
+      // if (user.user_name !== '7plus3') {
       //   continue;
       // }
       this.log(user)
@@ -61,9 +61,8 @@ class Task6 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
-        await this.sydcdown(user);
+        // await this.sydcdown(user);
         await this.sydcup(user)
-        console.log(666);
       }
     }
     this.log('END')
@@ -88,7 +87,6 @@ class Task6 extends Util {
                 houseIds.push(item.unityInfoId)
               })
             }
-
             resolve(houseIds)
           }).catch(err => {
             resolve([])
@@ -137,7 +135,6 @@ class Task6 extends Util {
     for (let i = 0; i < houseIdsArr.length; i++) {
       await request.call(this, houseIdsArr[i])
     }
-    console.log('sydcdownRequestEnd');
   }
 
   /**
@@ -166,6 +163,7 @@ class Task6 extends Util {
    * 从数据库获取houseids
    */
   async getHouseIdsByDB(user) {
+    this.log(`>>>getHouseIdsByDB`)
     let houseList = await this.getHouseListByDB(user); //0：刷新，1：重新推送，2：精选
     this.log(houseList)
     let houseIdKeys = Object.keys(houseList);
@@ -186,8 +184,9 @@ class Task6 extends Util {
    * 上架
    */
   async sydcupRequest(user, houseIds = []) {
+    this.log(`>>>sydcupRequest`)
     let url = `http://vip.58ganji.com/separation/house/taocan/sydcup?platform=wb&pushDay=1&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
-    console.log(`${url}`);
+    this.log(`${url}`);
     return new Promise((resolve, reject) => {
       axios.request({
         url,
@@ -197,7 +196,20 @@ class Task6 extends Util {
       }).then(res => {
         if (res.data.status === 'ok') {
           this.log(res.data.data)
-          if (res.data.data.wb.message === '上架套数已满'||res.data.data.wb.message === '您当日上架次数已达上限') {
+          if (res.data.data.wb && res.data.data.wb.data && res.data.data.wb.data.errorDataList && res.data.data.wb.data.errorDataList.length) {
+            let list = res.data.data.wb.data.errorDataList;
+            for (let i = 0; i < list.length; i++) {
+              //过滤信息
+              if (list[i].errorMessage === '信息状态不合法') {
+                if (!user.filterHouseIds) {
+                  user.filterHouseIds = [];
+                }
+                user.filterHouseIds.push(list[i].houseId)
+              }
+            }
+          }
+          if (res.data.data.wb.message === '上架套数已满' || res.data.data.wb.message === '您当日上架次数已达上限' || res.data.data.wb.message.includes('检测到您提交的房源中有房源不是您的')) {
+            this.log(`上架异常:`)
             this.log(res.data.data.wb.message)
             resolve(-1)
           } else {
@@ -223,12 +235,13 @@ class Task6 extends Util {
     return newArray;
   }
 
-  filterHouseIds(houseIds = [], existHouseIds = []) {
+  filterHouseIds(houseIds = [], existHouseIds = [], user) {
+    this.log(`>>>filterHouseIds`)
     //排除页面上以及存在的上架houseid
     let newHouseIds = [];
     if (houseIds.length) {
       houseIds.map(id => {
-        if (!existHouseIds.includes(parseInt(id)) && id) {
+        if (!existHouseIds.includes(parseInt(id)) && id && !(user.filterHouseIds||[]).includes(parseInt(id))) {
           newHouseIds.push(id)
         }
       })
@@ -250,7 +263,7 @@ class Task6 extends Util {
         //账户中已经上架的
         let existHouseIds = await this.searchHouseIds(user);
         //过滤已经存在的
-        houseIds = await this.filterHouseIds(houseIds, existHouseIds)
+        houseIds = await this.filterHouseIds(houseIds, existHouseIds, user)
         if (houseIds.length) {
           let houseIdsArr = this.groupArray(houseIds, 5)
           //调取上架接口（每次上架10条）循环知道上架结束

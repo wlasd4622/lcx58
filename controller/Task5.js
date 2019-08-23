@@ -18,8 +18,13 @@ class Task5 extends Util {
     await this.execSql(0, sql);
   }
 
-  async main() {
+  /**
+   *
+   * @param {*} flag 0:取消除成都账户精选，1：取消成都账户精选
+   */
+  async main(flag = 0) {
     this.log(`>>>main`);
+    this.log(`flag:${flag}`)
     await this.init();
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
@@ -37,7 +42,9 @@ class Task5 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
-        await this.loopHouseHandle(user);
+        if ((flag === 0 && !user.user_name.includes('成都')) || (flag === 1 && user.user_name.includes('成都'))) {
+          await this.loopHouseHandle(user);
+        }
       }
     }
     this.log('END')
