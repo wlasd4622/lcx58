@@ -726,7 +726,11 @@ Function addHouseInfo(houseId)
         log "codeKey为空"
         Goto rAddHouseInfo
     End If
-    code = queryCode(codeKey)
+    //code = queryCode(codeKey)
+    code = execjs("____json4fe.guessDispId")
+    If code = "" Then
+    	MessageBox "code为空"
+    End If
     Rem rNotabsPage
     //回到列表页面点击编辑进入详情编辑页面
     url = "https://fangmypost.58.com/fang/infoall/notabs"
@@ -1163,6 +1167,6 @@ Function log(info)
     //    info=mid(info,1,100)+"..."
     //End If
     info = cstr(sDate) + " " +info
-    //TracePrint info
+    TracePrint info
     Call Plugin.File.WriteFileEx("d:\logs\"+logName+".log",info)
 End Function
