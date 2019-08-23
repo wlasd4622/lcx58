@@ -1163,6 +1163,6 @@ Function log(info)
     //    info=mid(info,1,100)+"..."
     //End If
     info = cstr(sDate) + " " +info
-    TracePrint info
+    //TracePrint info
     Call Plugin.File.WriteFileEx("d:\logs\"+logName+".log",info)
 End Function
