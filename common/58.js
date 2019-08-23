@@ -227,7 +227,8 @@ function addHouseInfoData(code, userName) {
       $('[name=params_110] label:contains(' + name + ')').click();
     });
     //商铺位置
-    $('[name=localArea01] .optiondef li:contains(' + houseDetailData.address1.replace('区', '') + ')').click();
+    // $('[name=localArea01] .optiondef li:contains(' + houseDetailData.address1.replace('区', '') + ')').click();
+    $('[name=localArea01] .optiondef li:contains(' + houseDetailData.address1 + ')').click();
     if (!houseDetailData.address2 && $('[name=localDiduan01] .optiondef li').length == 2) {
       houseDetailData.address2 = $('[name=localDiduan01] .optiondef li:eq(1)').text().trim();
     } else if (!houseDetailData.address2) {
