@@ -831,6 +831,7 @@ Function addHouseInfo(houseId)
                     Delay 3000
                     Goto rGetResultUrl
                 End If
+                Delay 500
                 addStatus = 3510
                 newUrl = execjs("'http:'+$('.p_active_btn').attr('href').replace(/^http\w{0,1}\:/,'')")
                 If newUrl = "" Then
