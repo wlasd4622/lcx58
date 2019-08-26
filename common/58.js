@@ -189,8 +189,12 @@ function addHouseInfoData(code, userName) {
     //当前状态
     $('[name=params_205] label:contains(' + houseDetailData.status + ')').click();
     //经营行业
-    if (houseDetailData.industry == '家居建材') {
-      houseDetailData.industry = "家具建材"
+    if (houseDetailData.industry == '家居建材' || houseDetailData.industry == '家具建材') {
+      if ($('[name=params_22701] .optiondef li:contains(' + '家具建材' + ')').length) {
+        houseDetailData.industry ='家具建材'
+      } else {
+        houseDetailData.industry = '家居建材';
+      }
     }
     $('[name=params_22701] .optiondef li:contains(' + houseDetailData.industry + ')').click();
     $('[name=params_20601] .optiondef li:eq(1)').click();
