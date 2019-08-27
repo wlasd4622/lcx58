@@ -61,7 +61,9 @@ class Task6 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
-        // await this.sydcdown(user);
+        //先下架
+        await this.sydcdown(user);
+        //后上架
         await this.sydcup(user)
       }
     }

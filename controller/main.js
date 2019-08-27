@@ -30,8 +30,8 @@ schedule.scheduleJob('30 1 * * * *', async function () {
   }
 });
 
-//每天2点执行
-schedule.scheduleJob('1 1 2 * * *', async function () {
+//每天1,9,13,15点执行
+schedule.scheduleJob('1 1 1,9,13,15 * * *', async function () {
   try {
     //映射infoid<-->houseId
     await task2.main();
@@ -42,7 +42,7 @@ schedule.scheduleJob('1 1 2 * * *', async function () {
     //急速 推送上架
     await task6.main();
     //刷新,推送 houseInfo
-    await task1.main();
+    // await task1.main();
   } catch (err) {
     console.log(err)
   }
@@ -94,9 +94,13 @@ async function main() {
     // await task5.main();
 
     // await task6.main();
-    ganji.mainTask();
+    // ganji.mainTask();
+    // await ganji.mainTask();
+    // schedule.scheduleJob('30,31,35,34 * * * * *', ()=>{
+    //   console.log('scheduleCronstyle:'+ new Date());
+    // })
   } catch (err) {
     console.log(err);
   }
 }
-// main();
+//main();
