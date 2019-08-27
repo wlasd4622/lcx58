@@ -5,11 +5,13 @@ let config = require('./../config.js')
 let mysql = require('mysql');
 
 class Util {
-  constructor() {
-    this.db = config.db;
-    this.userList = config.user;
-    this.getUserList();
-    this.initDB();
+  constructor(args) {
+    if (args != 0) {
+      this.db = config.db;
+      this.userList = config.user;
+      this.getUserList();
+      this.initDB();
+    }
   }
 
   initDB() {
