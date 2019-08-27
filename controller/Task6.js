@@ -45,7 +45,7 @@ class Task6 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (user.user_name !== '7plus3') {
+      // if (user.user_name !== '石家庄998') {
       //   continue;
       // }
       this.log(user)
@@ -115,6 +115,9 @@ class Task6 extends Util {
     function request(houseIds = []) {
       return new Promise((resolve, reject) => {
         let url = `http://vip.58ganji.com/separation/house/taocan/sydcdown?platform=wb&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
+        if (user.user_name.includes('石家庄')) {
+          url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&apiType=comboHouseDown&from=jp&_=${new Date().getTime()}`
+        }
         console.log(`${url}`);
         axios.request({
           url,
@@ -188,6 +191,9 @@ class Task6 extends Util {
   async sydcupRequest(user, houseIds = []) {
     this.log(`>>>sydcupRequest`)
     let url = `http://vip.58ganji.com/separation/house/taocan/sydcup?platform=wb&pushDay=1&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
+    if (user.user_name.includes('石家庄')) {
+      url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&paySourceNum=1&apiType=comboHouseUp&from=jp&_=${new Date().getTime()}`
+    }
     this.log(`${url}`);
     return new Promise((resolve, reject) => {
       axios.request({
@@ -196,6 +202,9 @@ class Task6 extends Util {
           cookie: decodeURIComponent(user.session)
         }
       }).then(res => {
+        if (user.user_name.includes('石家庄')) {
+          this.log(res)
+        }
         if (res.data.status === 'ok') {
           this.log(res.data.data)
           if (res.data.data.wb && res.data.data.wb.data && res.data.data.wb.data.errorDataList && res.data.data.wb.data.errorDataList.length) {
@@ -243,7 +252,7 @@ class Task6 extends Util {
     let newHouseIds = [];
     if (houseIds.length) {
       houseIds.map(id => {
-        if (!existHouseIds.includes(parseInt(id)) && id && !(user.filterHouseIds||[]).includes(parseInt(id))) {
+        if (!existHouseIds.includes(parseInt(id)) && id && !(user.filterHouseIds || []).includes(parseInt(id))) {
           newHouseIds.push(id)
         }
       })
