@@ -93,7 +93,7 @@ async function main() {
 
     // await task5.main();
 
-    // await task6.main();
+    await task6.main();
     // ganji.mainTask();
     // await ganji.mainTask();
     // schedule.scheduleJob('30,31,35,34 * * * * *', ()=>{
@@ -103,4 +103,4 @@ async function main() {
     console.log(err);
   }
 }
-//main();
+main();

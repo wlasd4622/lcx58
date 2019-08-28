@@ -111,6 +111,10 @@ class Util {
       width: 1200,
       height: 800
     })
+    return {
+      browser: this.browser,
+      page: this.page
+    }
   }
 
   async goto(url, selector, page = this.page) {

@@ -61,6 +61,8 @@ class Task6 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
+        // 是否开通全网通套餐的城市x
+        this.isServiceCombo = await this.getIsServiceCombo(user);
         //先下架
         await this.sydcdown(user);
         //后上架
@@ -102,7 +104,7 @@ class Task6 extends Util {
         _ids = await getIds.call(this, pageIndex);
         pageIndex++;
         houseIds_1 = houseIds_1.concat(_ids)
-        await this.sleep(300)
+        await this.sleep(1000)
       } while (_ids.length >= 20)
     } catch (err) {
       this.log(err)
@@ -114,8 +116,9 @@ class Task6 extends Util {
 
     function request(houseIds = []) {
       return new Promise((resolve, reject) => {
+        //是否套餐服务化城市，兼容新旧接口
         let url = `http://vip.58ganji.com/separation/house/taocan/sydcdown?platform=wb&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
-        if (user.user_name.includes('石家庄')) {
+        if (this.isServiceCombo) {
           url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&apiType=comboHouseDown&from=jp&_=${new Date().getTime()}`
         }
         console.log(`${url}`);
@@ -139,6 +142,7 @@ class Task6 extends Util {
     let houseIdsArr = this.groupArray(houseIds, 20);
     for (let i = 0; i < houseIdsArr.length; i++) {
       await request.call(this, houseIdsArr[i])
+      await this.sleep(10000)
     }
   }
 
@@ -156,7 +160,7 @@ class Task6 extends Util {
         if (houseIds.length) {
           this.log(`待下架：${houseIds}`)
           await this.sydcdownRequest(user, houseIds)
-          await this.sleep(1000);
+          await this.sleep(10000);
         }
       } while (houseIds.length && doCount < 6);
     } catch (err) {
@@ -186,12 +190,37 @@ class Task6 extends Util {
   }
 
   /**
+   * 获取是否开通全网通套餐的城市x
+   */
+  async getIsServiceCombo(user) {
+    this.log(`>>>getIsServiceCombo`)
+    let url = `http://vip.58ganji.com/sydchug/list/sydc`
+    return new Promise((resolve, reject) => {
+      try {
+        axios.request({
+          url,
+          headers: {
+            cookie: decodeURIComponent(user.session)
+          }
+        }).then(res => {
+          resolve(res.data.match(/var\sisServiceCombo.*?;/)[0].includes('1'))
+        }).catch(err => {
+          resolve(false);
+        })
+      } catch (err) {
+        resolve(false)
+      }
+    })
+  }
+
+  /**
    * 上架
    */
   async sydcupRequest(user, houseIds = []) {
     this.log(`>>>sydcupRequest`)
+    //是否套餐服务化城市，兼容新旧接口
     let url = `http://vip.58ganji.com/separation/house/taocan/sydcup?platform=wb&pushDay=1&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
-    if (user.user_name.includes('石家庄')) {
+    if (this.isServiceCombo) {
       url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&paySourceNum=1&apiType=comboHouseUp&from=jp&_=${new Date().getTime()}`
     }
     this.log(`${url}`);
@@ -202,9 +231,6 @@ class Task6 extends Util {
           cookie: decodeURIComponent(user.session)
         }
       }).then(res => {
-        if (user.user_name.includes('石家庄')) {
-          this.log(res)
-        }
         if (res.data.status === 'ok') {
           this.log(res.data.data)
           if (res.data.data.wb && res.data.data.wb.data && res.data.data.wb.data.errorDataList && res.data.data.wb.data.errorDataList.length) {
@@ -284,11 +310,10 @@ class Task6 extends Util {
               flag = false;
               break;
             }
-            await this.sleep(2000)
+            await this.sleep(10000)
           }
         }
       } while (houseIds.length && flag);
-      console.log('e');
     } catch (err) {
       this.log(err)
     }
