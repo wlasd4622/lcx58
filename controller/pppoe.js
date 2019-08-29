@@ -217,10 +217,10 @@ class SwitchIP extends util {
 
   async main() {
     this.log(`>>>main`);
-    await this.runPuppeteer({
-      headless: true
-    });
-    this.watch58();
+    // await this.runPuppeteer({
+    //   headless: true
+    // });
+    // this.watch58();
     await this.task1();
     //早上4点到8点需要不换Ip，其他时间每隔15分钟换Ip，路由器设置，
     setInterval(async () => {
