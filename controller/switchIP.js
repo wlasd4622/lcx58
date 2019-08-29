@@ -199,9 +199,9 @@ class SwitchIP extends util {
       })
     })
   }
-  watch58() {
+  async watch58() {
     this.log(`>>>watch58`)
-    setInterval(async () => {
+    do {
       try {
         let result = await this.getShangPuHtml();
         if (result) {
@@ -209,9 +209,10 @@ class SwitchIP extends util {
           await this.task1();
         }
       } catch (err) {
-        this.log(er)
+        this.log(err)
       }
-    }, 1000 * 60)
+      await this.sleep(1000 * 2)
+    } while (true)
   }
 
   async main() {
