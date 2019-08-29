@@ -13,9 +13,7 @@ class Task5 extends Util {
     this.taskName = 'Task5'
   }
   async init() {
-    //重置字段costs
-    let sql = `update gj_selected set costs=null`;
-    await this.execSql(0, sql);
+
   }
 
   /**
@@ -43,6 +41,9 @@ class Task5 extends Util {
       }
       if (user.session && user.status == 0) {
         if ((flag === 0 && !user.user_name.includes('成都')) || (flag === 1 && user.user_name.includes('成都'))) {
+          //重置字段costs
+          let sql = `update gj_selected set costs=null WHERE user_name='${user.user_name}'`;
+          await this.execSql(0, sql);
           await this.loopHouseHandle(user);
         }
       }
