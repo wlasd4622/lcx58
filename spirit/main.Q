@@ -74,7 +74,7 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<5) or (currHour >= 8 and currHour<19) Then
+    If (currHour >= 0 and currHour<5) or (currHour >= 8 and currHour<20) Then
         status=false
     Else
         status=true
@@ -840,6 +840,12 @@ Function addHouseInfo(houseId)
                 Call addNewHouseInfo(newUrl)
             Else
                 log "发布失败"
+                result=execjs("checkAlertMessage")
+                If result <> "" Then
+                	messages = result
+                	addStatus = 3511
+                	Goto rBreak
+                End If
                 addHouseInfoCount=addHouseInfoCount+1
                 If addHouseInfoCount > 4 Then
                     addStatus = 3511

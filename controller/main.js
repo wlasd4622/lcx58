@@ -30,8 +30,8 @@ schedule.scheduleJob('30 1 * * * *', async function () {
   }
 });
 
-//每天1,9,13,15点执行
-schedule.scheduleJob('1 1 1,9,13,15 * * *', async function () {
+//每天9,13,15点执行
+schedule.scheduleJob('1 1 9,13,15 * * *', async function () {
   try {
     //映射infoid<-->houseId
     await task2.main();
@@ -101,7 +101,7 @@ async function main() {
     //监听精选
     // await task4.main();
 
-    // await task5.main();
+    await task6.main(1);
 
     // await task6.main();
     // ganji.mainTask();
@@ -113,4 +113,4 @@ async function main() {
     console.log(err);
   }
 }
-//main();
+// main();

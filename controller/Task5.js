@@ -27,6 +27,9 @@ class Task5 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
+      if (user.user_name !== '成都3号') {
+        continue;
+      }
       this.log(user)
       let sql = `select * from gj_user where username='${user.user_name}'`
       try {

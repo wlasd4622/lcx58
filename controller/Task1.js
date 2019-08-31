@@ -569,15 +569,15 @@ class Task1 extends Util {
           this.log(`编辑保存-->>刷新`)
           await this.houseEditHandle(houseId, user, houseObj.shopId);
         }
-        //if (houseObj.type.includes(1)) {
-          //推送--->重新推送
-          //this.log(`推送--->重新推送`)
-          //if (this.userType(user) === 0) {
-            //result = await this.housePushHandle(houseId, user, result, houseObj.shopId);
-          //} else {
-            //result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
-          //}
-        //}
+        if (houseObj.type.includes(1)) {
+          // 推送--->重新推送
+          this.log(`推送--->重新推送`)
+          if (this.userType(user) === 0) {
+            result = await this.housePushHandle(houseId, user, result, houseObj.shopId);
+          } else {
+            result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
+          }
+        }
       } else {
         this.log('未找到此房源')
         result = {

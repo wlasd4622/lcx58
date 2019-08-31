@@ -94,9 +94,11 @@ class Task6 extends Util {
               }
               resolve(houseIds)
             }).catch(err => {
+              this.log(err)
               resolve([])
             })
           } catch (err) {
+            this.log(err)
             resolve([])
           }
         })
@@ -106,6 +108,7 @@ class Task6 extends Util {
       let pageIndex = 1
       do {
         _ids = await getIds.call(this, pageIndex);
+        this.log(_ids)
         pageIndex++;
         houseIds_1 = houseIds_1.concat(_ids)
         await this.sleep(1000)
@@ -151,7 +154,7 @@ class Task6 extends Util {
     let houseIdsArr = this.groupArray(houseIds, 20);
     for (let i = 0; i < houseIdsArr.length; i++) {
       await request.call(this, houseIdsArr[i])
-      await this.sleep(10000)
+      await this.sleep(15000)
     }
   }
 
@@ -169,7 +172,7 @@ class Task6 extends Util {
         if (houseIds.length) {
           this.log(`待下架：${houseIds}`)
           await this.sydcdownRequest(user, houseIds)
-          await this.sleep(10000);
+          await this.sleep(15000);
         }
       } while (houseIds.length && doCount < 6);
     } catch (err) {
@@ -263,7 +266,7 @@ class Task6 extends Util {
               resolve(res);
             }
           } else {
-            this.log(`未处理异常:${res.data.message}`)
+            this.log(`未处理异常:${res.data}`)
             resolve(-1)
           }
         }).catch(err => {
@@ -324,7 +327,7 @@ class Task6 extends Util {
               flag = false;
               break;
             }
-            await this.sleep(10000)
+            await this.sleep(15000)
           }
         }
       } while (houseIds.length && flag);
