@@ -452,3 +452,14 @@ function getEditHouseInfo() {
   window.editData = editData;
   return editData;
 }
+
+/**
+ * 检查保存编辑的时候是否有弹窗弹出
+ */
+function checkAlertMessage() {
+  let result = '';
+  if ($('div:contains(Alert):visible').length) {
+    result = encodeURIComponent($('div:contains(Alert):visible').text()||'');
+  }
+  return result;
+}

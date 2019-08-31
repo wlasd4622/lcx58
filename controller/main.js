@@ -48,6 +48,16 @@ schedule.scheduleJob('1 1 1,9,13,15 * * *', async function () {
   }
 });
 
+//每天2点执行
+schedule.scheduleJob('1 1 2 * * *', async function () {
+  try {
+    //刷新
+    await task1.main();
+  } catch (err) {
+    console.log(err)
+  }
+});
+
 //每天9点执行
 schedule.scheduleJob('1 1 9 * * *', async function () {
   try {
@@ -68,8 +78,8 @@ schedule.scheduleJob('1 1 19 * * *', async function () {
   }
 });
 
-//每天22点执行
-schedule.scheduleJob('1 1 22 * * *', async function () {
+//每天23点执行
+schedule.scheduleJob('1 1 23 * * *', async function () {
   try {
     //下架精选houseInfo  下架成都账户的精选
     await task5.main(1);
@@ -93,7 +103,7 @@ async function main() {
 
     // await task5.main();
 
-    await task6.main();
+    // await task6.main();
     // ganji.mainTask();
     // await ganji.mainTask();
     // schedule.scheduleJob('30,31,35,34 * * * * *', ()=>{
@@ -103,4 +113,4 @@ async function main() {
     console.log(err);
   }
 }
-main();
+//main();

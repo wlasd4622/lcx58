@@ -79,22 +79,26 @@ class Task6 extends Util {
         return new Promise((resolve, reject) => {
           let url = `http://vip.58ganji.com/separation/houselist/search?pageIndex=${pageIndex}&pageSize=20&pt=58taocan&tg=no_ecommerce_limit&sp=no_vrvideo_limit&lb=allCategory&bt=&id=&px=updatedesc&cateId=20&searchAction=&_=${new Date().getTime()}`;
           this.log(url);
-          axios.request({
-            url,
-            headers: {
-              cookie: decodeURIComponent(user.session)
-            }
-          }).then(res => {
-            let houseIds = [];
-            if (res.data.data && res.data.data.infos && res.data.data.infos.length) {
-              res.data.data.infos.map(item => {
-                houseIds.push(item.unityInfoId)
-              })
-            }
-            resolve(houseIds)
-          }).catch(err => {
+          try {
+            axios.request({
+              url,
+              headers: {
+                cookie: decodeURIComponent(user.session)
+              }
+            }).then(res => {
+              let houseIds = [];
+              if (res.data.data && res.data.data.infos && res.data.data.infos.length) {
+                res.data.data.infos.map(item => {
+                  houseIds.push(item.unityInfoId)
+                })
+              }
+              resolve(houseIds)
+            }).catch(err => {
+              resolve([])
+            })
+          } catch (err) {
             resolve([])
-          })
+          }
         })
       }
 
@@ -122,21 +126,26 @@ class Task6 extends Util {
           url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&apiType=comboHouseDown&from=jp&_=${new Date().getTime()}`
         }
         console.log(`${url}`);
-        axios.request({
-          url,
-          headers: {
-            cookie: decodeURIComponent(user.session)
-          }
-        }).then(res => {
-          if (res.data.status === 'ok') {
-            this.log(res.data.data.wb)
-          } else {
-            this.log(`未处理异常2:${res.data.message}`)
-          }
-          resolve(res);
-        }).catch(err => {
-          resolve();
-        })
+        try {
+          axios.request({
+            url,
+            headers: {
+              cookie: decodeURIComponent(user.session)
+            }
+          }).then(res => {
+            if (res.data.status === 'ok') {
+              this.log(res.data.data.wb)
+            } else {
+              this.log(`未处理异常2:${res.data.message}`)
+            }
+            resolve(res);
+          }).catch(err => {
+            resolve();
+          })
+        } catch (err) {
+          this.log(err)
+          resolve()
+        }
       })
     }
     let houseIdsArr = this.groupArray(houseIds, 20);
@@ -225,40 +234,45 @@ class Task6 extends Util {
     }
     this.log(`${url}`);
     return new Promise((resolve, reject) => {
-      axios.request({
-        url,
-        headers: {
-          cookie: decodeURIComponent(user.session)
-        }
-      }).then(res => {
-        if (res.data.status === 'ok') {
-          this.log(res.data.data)
-          if (res.data.data.wb && res.data.data.wb.data && res.data.data.wb.data.errorDataList && res.data.data.wb.data.errorDataList.length) {
-            let list = res.data.data.wb.data.errorDataList;
-            for (let i = 0; i < list.length; i++) {
-              //过滤信息
-              if (list[i].errorMessage === '信息状态不合法') {
-                if (!user.filterHouseIds) {
-                  user.filterHouseIds = [];
+      try {
+        axios.request({
+          url,
+          headers: {
+            cookie: decodeURIComponent(user.session)
+          }
+        }).then(res => {
+          if (res.data.status === 'ok') {
+            this.log(res.data.data)
+            if (res.data.data.wb && res.data.data.wb.data && res.data.data.wb.data.errorDataList && res.data.data.wb.data.errorDataList.length) {
+              let list = res.data.data.wb.data.errorDataList;
+              for (let i = 0; i < list.length; i++) {
+                //过滤信息
+                if (list[i].errorMessage === '信息状态不合法') {
+                  if (!user.filterHouseIds) {
+                    user.filterHouseIds = [];
+                  }
+                  user.filterHouseIds.push(list[i].houseId)
                 }
-                user.filterHouseIds.push(list[i].houseId)
               }
             }
-          }
-          if (res.data.data.wb.message === '上架套数已满' || res.data.data.wb.message === '您当日上架次数已达上限' || res.data.data.wb.message.includes('检测到您提交的房源中有房源不是您的')) {
-            this.log(`上架异常:`)
-            this.log(res.data.data.wb.message)
-            resolve(-1)
+            if (res.data.data.wb.message === '上架套数已满' || res.data.data.wb.message === '您当日上架次数已达上限' || res.data.data.wb.message.includes('检测到您提交的房源中有房源不是您的')) {
+              this.log(`上架异常:`)
+              this.log(res.data.data.wb.message)
+              resolve(-1)
+            } else {
+              resolve(res);
+            }
           } else {
-            resolve(res);
+            this.log(`未处理异常:${res.data.message}`)
+            resolve(-1)
           }
-        } else {
-          this.log(`未处理异常:${res.data.message}`)
-          resolve(-1)
-        }
-      }).catch(err => {
-        resolve();
-      })
+        }).catch(err => {
+          resolve();
+        })
+      } catch (err) {
+        this.log(`未处理异常3:${err.message}`)
+        resolve(-1)
+      }
     })
 
   }
