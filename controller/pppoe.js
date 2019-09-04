@@ -224,6 +224,7 @@ class SwitchIP extends util {
         this.log('网络状态：'+result)
         if (!result) {
           await this.task1();
+          await this.sleep(1000*10)
         }
       } catch (err) {
         this.log(err)

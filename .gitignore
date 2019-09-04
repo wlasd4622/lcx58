@@ -17,3 +17,4 @@ dianzhijia.sql
 debug.log
 *.log
 config.js
+/temp/
