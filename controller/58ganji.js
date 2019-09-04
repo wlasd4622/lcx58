@@ -150,6 +150,7 @@ class GanJi {
         await this.page.goto(url);
         await this.page.waitForSelector('.balance-detail .info-box-item .estate')
         await this.sleep(2000)
+        await this.closeDialog()
         //房产推广币
         let blanceHbg58 = await this.page.evaluate(() => {
           // return $('.account-mod li:eq(1) b').text();
@@ -172,6 +173,7 @@ class GanJi {
         url = `http://vip.58ganji.com/broker/balancedetail/generalize`
         await this.page.goto(url);
         await this.page.waitForSelector('.balance-detail .info-box-item .estate')
+        await this.closeDialog()
         cookie = await this.getCookie()
         await this.updateUser(user, blanceHbg58, cookie, nickName)
       } else {
@@ -323,6 +325,7 @@ class GanJi {
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
+    await this.closeDialog()
     let username = '';
     try {
       await this.page.waitForSelector('.info-header-username')
@@ -344,13 +347,14 @@ class GanJi {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('#ContainerFrame')
+    await this.closeDialog()
     url = await this.page.$eval('#ContainerFrame', ele => ele.src)
     this.log(url);
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('table')
-
+    await this.closeDialog()
     let serviceArr = await this.page.evaluate(() => {
       function filter() {
         let serviceArr = []
@@ -397,6 +401,7 @@ class GanJi {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('.platform-data .bold')
+    await this.closeDialog()
     result = await this.page.evaluate(() => {
       function foamat() {
         var data = {}
@@ -413,6 +418,7 @@ class GanJi {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('.layout-right')
+    await this.closeDialog()
     let result2 = await this.page.evaluate(() => {
       function foamat() {
         var data = {}
@@ -432,7 +438,10 @@ class GanJi {
       return foamat()
     })
     // }
-    result={...result2,...result}
+    result = {
+      ...result2,
+      ...result
+    }
     let sql = "insert into `gj_push`(`user_id`,`username`,`in_progress`,`surplus`,`expire`,`purchase`,`create_time`)" +
       "values(" + user.id + ",'" + user.username + "','" + result['推送中'] + "','" + result['还可推送'] + "','" + result['今日推送到期'] + "','" + result['在线购买'] + "',NOW())"
 
@@ -452,12 +461,14 @@ class GanJi {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('#ContainerFrame')
+    await this.closeDialog()
     url = await this.page.$eval('#ContainerFrame', ele => ele.src)
     this.log(url);
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
     await this.page.waitForSelector('#details-ul')
+    await this.closeDialog()
     await this.page.click('#accountkind7')
     await this.page.waitForSelector('#createTimeTos')
     await this.page.evaluate(() => {
@@ -493,6 +504,17 @@ class GanJi {
     }
     return data;
   }
-
+  /**
+   * 关闭弹窗
+   */
+  async closeDialog(page = this.page) {
+    this.log(`>>>closeDialog`)
+    await page.evaluate(() => {
+      if ($('div.ui-mask:visible').length) {
+        $('div.ui-mask:visible').hide();
+        $('div.ui-dialog:visible').hide();
+      }
+    })
+  }
 }
 module.exports = GanJi

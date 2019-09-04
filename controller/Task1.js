@@ -49,7 +49,7 @@ class Task1 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (this.userType(user) === 0 || user.user_name === '廊坊010号') {
+      // if (user.user_name !== 'dell64012') {
       //   continue;
       // }
       this.log(user)
@@ -521,6 +521,7 @@ class Task1 extends Util {
         $('#houselist').remove();
         $('table.ui-table.sydc-table tbody tr').remove();
       })
+      await this.closeDialog();
       let houseElement = null;
       if (this.userType(user) === 0) {
         await this.page.type('#search-name', houseId)
@@ -804,7 +805,5 @@ class Task1 extends Util {
     }
     return houseDetailData;
   }
-
-
 }
 module.exports = Task1

@@ -76,6 +76,7 @@ class Task2 extends Util {
       });
       await this.sleep(1000)
       await this.page.waitForSelector('table.ui-table.sydc-table');
+      await this.closeDialog()
       let houseList = [];
       let pushInfoMap = {};
       let nextDisabled = null;
@@ -180,6 +181,7 @@ class Task2 extends Util {
         waitUntil: 'domcontentloaded'
       })
       await this.page.waitForSelector('.status-part a')
+      await this.closeDialog()
       houseUrl = await this.page.evaluate(() => {
         return $('.status-part a:eq(0)').attr('href');
       })

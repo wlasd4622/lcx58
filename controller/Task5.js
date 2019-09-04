@@ -132,6 +132,7 @@ class Task5 extends Util {
       });
       await this.page.waitForSelector('.ui-boxer.ui-boxer-default.ui-boxer-fang');
       await this.sleep(500);
+      await this.closeDialog()
       let sxShopIdList = await this.page.evaluate(() => {
         return $('.date.date-jpzw:contains("编号")').toArray().map(t => {
           return $(t).text().match(/\d+/)[0]

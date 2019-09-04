@@ -1,6 +1,7 @@
 let fs = require('fs')
 let util = require('../common/util')
 let axios = require('axios')
+const isOnline = require('is-online');
 
 function Base64() {
   // private property
@@ -211,17 +212,32 @@ class SwitchIP extends util {
       } catch (err) {
         this.log(err)
       }
-      await this.sleep(1000 * 2)
+      await this.sleep(1000 * 15)
     } while (true)
   }
 
+  async watchOnline() {
+    this.log(`>>>isOnline`)
+    do {
+      try {
+        let result = await isOnline()
+        this.log('网络状态：'+result)
+        if (!result) {
+          await this.task1();
+        }
+      } catch (err) {
+        this.log(err)
+      }
+      await this.sleep(1000)
+    } while (true)
+  }
   async main() {
     this.log(`>>>main`);
-    // await this.runPuppeteer({
-    //   headless: true
-    // });
-    // this.watch58();
-    await this.task1();
+    await this.runPuppeteer({
+      headless: true
+    });
+    this.watchOnline()
+    this.watch58();
     //早上4点到8点需要不换Ip，其他时间每隔15分钟换Ip，路由器设置，
     setInterval(async () => {
       try {

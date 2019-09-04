@@ -78,6 +78,7 @@ class Task4 extends Util {
       });
       await this.page.waitForSelector('.ui-boxer.ui-boxer-default.ui-boxer-fang');
       await this.sleep(500);
+      await this.closeDialog()
       let sxCount = await this.page.evaluate(() => {
         return $('i:contains("预算已达上限")').toArray().length
       })

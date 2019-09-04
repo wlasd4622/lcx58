@@ -530,5 +530,19 @@ class Util {
   writeCatch(data) {
     fs.writeFileSync(`./catch/${this.taskName}.json`, JSON.stringify(data))
   }
+
+
+  /**
+   * 关闭弹窗
+   */
+  async closeDialog(page = this.page) {
+    this.log(`>>>closeDialog`)
+    await page.evaluate(() => {
+      if ($('div.ui-mask:visible').length) {
+        $('div.ui-mask:visible').hide();
+        $('div.ui-dialog:visible').hide();
+      }
+    })
+  }
 }
 module.exports = Util;
