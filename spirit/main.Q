@@ -23,6 +23,7 @@
 //租金为空					3523
 //电话校验回填验证码			3524
 //上传的图片小于5K			3525
+//经纪人						3526
 //--------------------------------------
 //账户正常					2000
 //密码错 					4000
@@ -198,7 +199,7 @@ Function editHouseInfo(houseId)
         End If
         length = execjs("location.href.includes('404.html')?1:0")
         If length = "" Then the
-         length=0
+        length=0
         If cint(length) > 0 Then
             editStatus = 3507
             Goto rBreak
@@ -575,22 +576,22 @@ Function updateStatus(userInfo, status)
     Rem rAjaxUpdateHouseInfo
     ajaxCount=0
     if newUrl <> "" Then
-      js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
-      Call execjs(js)
-      Rem rGetUpdateHouseInfoStatus
-      Delay 500
-      result = execjs("window.updateHouseInfoStatus")
-      If result = "" Then
-          ajaxCount = ajaxCount + 1
-          If ajaxCount < 10 Then
-              Goto rGetUpdateHouseInfoStatus
-          Else
-              Goto rAjaxUpdateHouseInfo
-          End If
-      End If
-      If result <> "更新成功" Then
-          MessageBox "更新错误"
-      End If
+        js="updateHouseInfo('"+cstr(userInfo(3))+"',  "+cstr(status)+",'"+newUrl+"','"+userInfo(6)+"')"
+        Call execjs(js)
+        Rem rGetUpdateHouseInfoStatus
+        Delay 500
+        result = execjs("window.updateHouseInfoStatus")
+        If result = "" Then
+            ajaxCount = ajaxCount + 1
+            If ajaxCount < 10 Then
+                Goto rGetUpdateHouseInfoStatus
+            Else
+                Goto rAjaxUpdateHouseInfo
+            End If
+        End If
+        If result <> "更新成功" Then
+            MessageBox "更新错误"
+        End If
     End if
     newUrl = ""
     Rem fUpdateStatus
@@ -729,7 +730,7 @@ Function addHouseInfo(houseId)
     //code = queryCode(codeKey)
     code = execjs("____json4fe.guessDispId")
     If code = "" Then
-    	MessageBox "code为空"
+        MessageBox "code为空"
     End If
     Rem rNotabsPage
     //回到列表页面点击编辑进入详情编辑页面
@@ -753,7 +754,14 @@ Function addHouseInfo(houseId)
     // 等待载入完成
     Delay 1500
     length = find("$('.submit_wrap').length", "查找发布按钮")
-    If length = 0 Then
+    If length = 0 Then 
+        //经纪人
+        flag = execjs("document.title.includes('错误提示：请您前往中国网络经纪人平台')?1:0")
+        If flag = 1 Then 
+            log "异常：经纪人"
+            addStatus=3526
+            Goto rBreak
+        End If
         Goto fJsAddpage
     End If
     Call loadScript("58")
@@ -844,14 +852,13 @@ Function addHouseInfo(houseId)
                 log "发布失败"
                 result=execjs("checkAlertMessage")
                 If result <> "" Then
-                	messages = result
-                	addStatus = 3511
-                	Goto rBreak
+                    messages = result
+                    addStatus = 3511
+                    Goto rBreak
                 End If
                 addHouseInfoCount=addHouseInfoCount+1
                 If addHouseInfoCount > 4 Then
                     addStatus = 3511
-               
                     Goto rBreak
                 Else
                     Goto rAddHouseInfo
@@ -1063,8 +1070,8 @@ Function getHouseId(url)
     getHouseId=regr1
 End Function
 Function queryCode(key)
-	log "queryCode"
-	log key
+    log "queryCode"
+    log key
     Rem fQueryCode
     code=-1
     log "queryCode:" & key
