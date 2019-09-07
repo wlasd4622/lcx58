@@ -74,7 +74,7 @@ End Function
 Function sleep()
     status=true
     currHour = Hour(now)
-    If (currHour >= 0 and currHour<5) or (currHour >= 8 and currHour<20) Then
+    If (currHour >= 0 and currHour<5) or (currHour >= 8 and currHour<23) Then
         status=false
     Else
         status=true
@@ -835,6 +835,8 @@ Function addHouseInfo(houseId)
                 addStatus = 3510
                 newUrl = execjs("'http:'+$('.p_active_btn').attr('href').replace(/^http\w{0,1}\:/,'')")
                 If newUrl = "" Then
+                    //MessageBox "url为空"
+                    log "url为空"
                     Goto rGetResultUrl
                 End If
                 Call addNewHouseInfo(newUrl)
@@ -849,7 +851,7 @@ Function addHouseInfo(houseId)
                 addHouseInfoCount=addHouseInfoCount+1
                 If addHouseInfoCount > 4 Then
                     addStatus = 3511
-                    messages = execjs("encodeURIComponent($('body div:contains(内容中)').text())")
+               
                     Goto rBreak
                 Else
                     Goto rAddHouseInfo
