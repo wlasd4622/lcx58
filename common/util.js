@@ -129,7 +129,9 @@ class Util {
   async closePuppeteer() {
     this.log('>>>closePuppeteer');
     try {
-      if (this.browser) await this.browser.close()
+      if (this.browser) {
+        await this.browser.close()
+      }
     } catch (error) {
       this.log(error)
     }
@@ -530,9 +532,9 @@ class Util {
   writeCatch(data) {
     fs.writeFileSync(`./catch/${this.taskName}.json`, JSON.stringify(data))
   }
+  
 
-
-  /**
+    /**
    * 关闭弹窗
    */
   async closeDialog(page = this.page) {
