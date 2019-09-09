@@ -191,6 +191,12 @@ Function editHouseInfo(houseId)
         length=0
     End If
     If cint(length) = 0 Then
+        flag = execjs("document.title.includes('请输入验证码')?1:0")
+        if flag=1 Then
+            log "58 ip受限"
+            delay 10000
+            Goto rEditHouseInfo
+        end if
         //页面异常
         length = execjs("$('h1:visible:contains(您访问的页面居然不存在)').length")
         If cint(length) > 0 Then
@@ -709,6 +715,12 @@ Function addHouseInfo(houseId)
         Delay 10
     Loop While Plugin.chrome.is_loading(id)
     length = find("$('.house-title h1').length", "查找详情页标题")
+    flag = execjs("document.title.includes('请输入验证码')?1:0")
+    if flag=1 Then
+        log "58 ip受限"
+        delay 10000
+        Goto rAddHouseInfo
+    end if
     errorPage = execjs("location.href.includes('404.htm')?1:0")
     If cint(errorPage) = 1 Then
         //404
