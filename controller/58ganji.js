@@ -381,6 +381,10 @@ class GanJi {
     })
     for (let index = 0; index < serviceArr.length; index++) {
       const service = serviceArr[index];
+      if (service.start) {
+        service.start = service.start.replace('年', '-').replace('月', '-').replace('日', '')
+        service.end = service.end.replace('年', '-').replace('月', '-').replace('日', '')
+      }
       let sql = "insert into `gj_service`(`user_id`,`username`,`status`,`start`,`end`,`days`,`create_time`) values (" + user.id + ",'" + user.username + "','" + service.status + "','" + service.start + "','" + service.end + "'," + (service.days || '') + ",NOW())"
       try {
         await this.execSql(sql)
