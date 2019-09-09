@@ -55,6 +55,8 @@ schedule.scheduleJob('1 1 2 * * *', async function () {
   try {
     //刷新
     await task1.main();
+    //编辑保存
+    await task0.main();
   } catch (err) {
     console.log(err)
   }
