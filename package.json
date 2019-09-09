@@ -19,6 +19,7 @@
   "homepage": "https://github.com/wlasd4622/lcx58#readme",
   "devDependencies": {
     "axios": "^0.19.0",
+    "get-pixels": "^3.3.2",
     "install": "^0.12.2",
     "ip": "^1.1.5",
     "is-online": "^8.2.0",
@@ -28,7 +29,6 @@
     "node-xlsx": "^0.14.1",
     "npm": "^6.9.0",
     "nw": "^0.40.1",
-    "opencv": "^6.2.0",
     "puppeteer": "^1.13.0",
     "qrcode-terminal": "^0.12.0",
     "sqlite3": "^4.0.7",
