@@ -3,9 +3,12 @@
 - 58ganji.js:保持session有效
     - 每小时执行一次
     - 保持session有效
+- task0.js:
+    - 每天凌晨2点task2执行完毕开始执行
+    - 刷新（编辑保存）
 - task1.js:
     - 每天凌晨2点task2执行完毕开始执行
-    - 刷新,推送帖子
+    - 推送帖子（上架）
 - task2.js:
     - 每天凌晨2点开始执行
     - 更新infoid对应的houseId到数据库里

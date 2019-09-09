@@ -1,5 +1,6 @@
 let schedule = require('node-schedule');
 let Ganji = require('./58ganji')
+let Task0 = require('./Task0');
 let Task1 = require('./Task1');
 let Task2 = require('./Task2');
 let Task3 = require('./Task3');
@@ -7,6 +8,7 @@ let Task4 = require('./Task4');
 let Task5 = require('./Task5');
 let Task6 = require('./Task6');
 let ganji = new Ganji();
+let task0 = new Task1();
 let task1 = new Task1();
 let task2 = new Task2();
 let task3 = new Task3();

@@ -3,12 +3,12 @@ let config = require('../config.js')
 let Util = require('../common/util')
 
 /**
- * 上架
+ * 刷新
  */
-class Task1 extends Util {
+class Task0 extends Util {
   constructor() {
     super();
-    this.taskName = "task1"
+    this.taskName = "task0"
     this.userList = config.user;
     this.db = config.db;
   }
@@ -561,20 +561,20 @@ class Task1 extends Util {
         // if (isAdd) {
         //   return false;
         // }
-        // if (houseObj.type.includes(0)) {
-        //   //编辑保存-->>刷新
-        //   this.log(`编辑保存-->>刷新`)
-        //   await this.houseEditHandle(houseId, user, houseObj.shopId);
-        // }
-        if (houseObj.type.includes(1)) {
-          // 推送--->重新推送
-          this.log(`推送--->重新推送`)
-          if (this.userType(user) === 0) {
-            result = await this.housePushHandle(houseId, user, result, houseObj.shopId);
-          } else {
-            result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
-          }
+        if (houseObj.type.includes(0)) {
+          //编辑保存-->>刷新
+          this.log(`编辑保存-->>刷新`)
+          await this.houseEditHandle(houseId, user, houseObj.shopId);
         }
+        // if (houseObj.type.includes(1)) {
+        //   // 推送--->重新推送
+        //   this.log(`推送--->重新推送`)
+        //   if (this.userType(user) === 0) {
+        //     result = await this.housePushHandle(houseId, user, result, houseObj.shopId);
+        //   } else {
+        //     result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
+        //   }
+        // }
       } else {
         this.log('未找到此房源')
         result = {
@@ -802,4 +802,4 @@ class Task1 extends Util {
     return houseDetailData;
   }
 }
-module.exports = Task1
+module.exports = Task0
