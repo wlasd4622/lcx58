@@ -2,8 +2,8 @@ let fs = require('fs')
 let util = require('../common/util')
 let axios = require('axios')
 const isOnline = require('is-online');
-let Verification = require('./verification')
-let verification = new Verification();
+let V = require('./verification.js')
+let verification = new V();
 
 function Base64() {
   // private property
@@ -228,15 +228,15 @@ class SwitchIP extends util {
     this.watchOnline()
     this.watch58();
     //早上4点到8点需要不换Ip，其他时间每隔15分钟换Ip，路由器设置，
-    setInterval(async () => {
-      try {
-        if (this.checkHandle()) {
-          await this.task1()
-        }
-      } catch (error) {
-        this.log(error)
-      }
-    }, 1000 * 60 * 15);
+    // setInterval(async () => {
+    //   try {
+    //     if (this.checkHandle()) {
+    //       await this.task1()
+    //     }
+    //   } catch (error) {
+    //     this.log(error)
+    //   }
+    // }, 1000 * 60 * 15);
   }
 }
 

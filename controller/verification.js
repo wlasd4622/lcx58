@@ -146,5 +146,5 @@ class Verification extends Util {
     await this.closePuppeteer();
   }
 }
-// module.exports = Verification;
-new Verification().main();
+module.exports = Verification;
+// new Verification().main();
