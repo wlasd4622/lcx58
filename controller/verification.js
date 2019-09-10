@@ -18,8 +18,9 @@ class Verification extends Util {
 
   }
   async monitor() {
+    this.log(`>>>monitor`)
     let url = `https://sh.58.com/shangpucz/pn2`;
-    url = `https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F`
+    // url = `https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
@@ -29,18 +30,40 @@ class Verification extends Util {
       return document.title.includes('请输入验证码')
     })
     if (result) {
+      await this.tips();
       await this.page.click('#btnSubmit')
       await this.sleep(1000);
       let clip = await this.screenshot();
       let coordinate = await this.getCoordinate();
       await this.mouseMoveHandle(clip, coordinate)
+      await this.sleep(1000 * 10);
+      await this.monitor();
     }
+  }
+
+  async tips() {
+    this.log(`>>>tips`)
+    await this.page.evaluate(() => {
+      let msg = `<div style="position: fixed;
+      width: 500px;
+      background: #fff;
+      height: 100px;
+      top: 10px;
+      z-index: 99000;
+      left: 50%;
+      margin-left: -250px;
+      box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.278);
+      text-align: center;
+      line-height: 100px;">正在尝试破解验证码,请稍后...</div>`
+      $('body').append(msg)
+    });
   }
 
   /**
    * 截图
    */
   async screenshot() {
+    this.log(`>>>screenshot`)
     let clip = await this.page.evaluate(() => {
       return {
         x: document.getElementById('dvc-captcha__canvas').getBoundingClientRect().left,
@@ -54,7 +77,7 @@ class Verification extends Util {
       type: 'png',
       path: path.join(__dirname, '../temp/vtemp.png')
     })
-    await this.sleep(1000);
+    await this.sleep(1000 * 5);
     return clip;
   }
 
@@ -62,6 +85,7 @@ class Verification extends Util {
    *获取坐标
    */
   async getCoordinate() {
+    this.log(`>>>getCoordinate`)
     let img = images(path.join(__dirname, '../temp/vtemp.png'));
     images(path.join(__dirname, '../temp/vBg.png')).draw(img, 0, 0)
       .save(path.join(__dirname, '../temp/output.png'), {
@@ -82,13 +106,14 @@ class Verification extends Util {
   }
 
   async mouseMoveHandle(clip, coordinate) {
+    this.log(`>>>mouseMoveHandle`)
     for (let i = 0; i < coordinate.length; i++) {
       if (i === 0) {
         await this.page.mouse.move(parseInt(coordinate[i].x) + clip.x, parseInt(coordinate[i].y) + clip.y)
         await this.page.mouse.down();
       } else {
         await this.page.mouse.move(parseInt(coordinate[i].x) + clip.x, parseInt(coordinate[i].y) + clip.y, {
-          steps: 30
+          steps: 50
         });
       }
       if (i === coordinate.length - 1) {

@@ -195,6 +195,7 @@ Function editHouseInfo(houseId)
         if flag=1 Then
             log "58 ip受限"
             delay 10000
+            Call ipLimit()
             Goto rEditHouseInfo
         end if
         //页面异常
@@ -564,6 +565,15 @@ Function login()
     End If
     login=loginStatus
 End Function
+
+Function ipLimit()
+    sql = "UPDATE config SET `value`=1,updata_date=now() WHERE `key`='ipLimit'"
+    log sql
+    Call Plugin.Super_MySQL.mysql_query(mysql, sql)
+    store = Plugin.Super_MySQL.store_result(mysql)
+    rows = Plugin.Super_MySQL.num_rows(store)
+End Function
+
 Function updateStatus(userInfo, status)
     Rem rUpdateStatus
     If status = 3507 Then
@@ -719,6 +729,7 @@ Function addHouseInfo(houseId)
     if flag=1 Then
         log "58 ip受限"
         delay 10000
+        Call ipLimit()
         Goto rAddHouseInfo
     end if
     errorPage = execjs("location.href.includes('404.htm')?1:0")
@@ -766,10 +777,10 @@ Function addHouseInfo(houseId)
     // 等待载入完成
     Delay 1500
     length = find("$('.submit_wrap').length", "查找发布按钮")
-    If length = 0 Then 
+    If length = 0 Then
         //经纪人
         flag = execjs("document.title.includes('错误提示：请您前往中国网络经纪人平台')?1:0")
-        If flag = 1 Then 
+        If flag = 1 Then
             log "异常：经纪人"
             addStatus=3526
             Goto rBreak

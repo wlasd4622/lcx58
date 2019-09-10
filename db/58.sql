@@ -38,6 +38,15 @@ create table house_list(
    PRIMARY KEY ( id )
 );
 
+drop table if exists config;
+create table config(
+   `id` INT NOT NULL AUTO_INCREMENT,
+   `key` VARCHAR(100) DEFAULT NULL COMMENT 'key',
+   `value` VARCHAR(10000) DEFAULT NULL COMMENT 'value',
+   `updata_date` Time COMMENT '更新时间',
+   PRIMARY KEY ( id )
+);
+
 
 
 drop table if exists `log`;
