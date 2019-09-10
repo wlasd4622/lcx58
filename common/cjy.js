@@ -6,7 +6,7 @@ module.exports = (img) => {
       multipart: true,
       data: {
         'user': 'wlasd5688',
-        'pass': '111qqq',
+        'pass2': '6005545589ffb607bc7f9f90ce44e31d',
         'softid': '894153',
         'codetype': '9004',
         'file_base64': img.replace('data:image/png;base64,', '')
