@@ -9,7 +9,6 @@ module.exports = (img) => {
         'pass': '111qqq',
         'softid': '894153',
         'codetype': '9004',
-        // 'userfile': rest.file(filename, null, fs.statSync(filename).size, null, 'image/png')
         'file_base64': img.replace('data:image/png;base64,', '')
       },
       headers: {

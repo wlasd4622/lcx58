@@ -6,21 +6,28 @@ var base64Img = require('base64-img');
 var images = require("images");
 var cjy = require('../common/cjy')
 /**
- * 刷新,推送 houseInfo
+ * 破解58验证码
+ *
  */
 class Verification extends Util {
   constructor() {
     super();
     this.taskName = "verification"
+    this.verifyPicturesPath = path.join(__dirname, '../temp/verifyPictures')
+    this.init()
   }
-  async init() {
+  init() {
     this.log(`>>>init`);
 
+    if (!fs.existsSync(path.join(__dirname, '../temp'))) {
+      fs.mkdirSync(path.join(__dirname, '../temp'))
+    }
+    if (!fs.existsSync(this.verifyPicturesPath)) {
+      fs.mkdirSync(this.verifyPicturesPath)
+    }
   }
-  async monitor() {
+  async monitor(url = 'https://sh.58.com/shangpucz/pn2') {
     this.log(`>>>monitor`)
-    let url = `https://sh.58.com/shangpucz/pn2`;
-    // url = `https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F`
     await this.page.goto(url, {
       waitUntil: 'domcontentloaded'
     })
@@ -36,8 +43,10 @@ class Verification extends Util {
       let clip = await this.screenshot();
       let coordinate = await this.getCoordinate();
       await this.mouseMoveHandle(clip, coordinate)
-      await this.sleep(1000 * 10);
+      await this.sleep(1000 * 2);
       await this.monitor();
+    } else {
+      this.log('58正常')
     }
   }
 
@@ -72,12 +81,13 @@ class Verification extends Util {
         height: parseInt(document.getElementById('dvc-captcha__canvas').getAttribute('height')),
       };
     })
+    this.vImage = path.join(this.verifyPicturesPath, `${new Date().getTime()}.png`);
     await this.page.screenshot({
       clip,
       type: 'png',
-      path: path.join(__dirname, '../temp/vtemp.png')
+      path: this.vImage
     })
-    await this.sleep(1000 * 5);
+    await this.sleep(500);
     return clip;
   }
 
@@ -86,22 +96,26 @@ class Verification extends Util {
    */
   async getCoordinate() {
     this.log(`>>>getCoordinate`)
-    let img = images(path.join(__dirname, '../temp/vtemp.png'));
-    images(path.join(__dirname, '../temp/vBg.png')).draw(img, 0, 0)
-      .save(path.join(__dirname, '../temp/output.png'), {
-        quality: 100
-      });
-    img = base64Img.base64Sync(path.join(__dirname, '../temp/output.png'));
     let local = null;
-    do {
-      try {
-        local = await cjy(img)
-      } catch (err) {
-        this.log(err)
-        this.sleep(1000)
-      }
-    } while (!local)
-    this.log(local)
+    try {
+      images(path.join(__dirname, '../temp/vBg.png')).draw(images(this.vImage), 0, 0)
+        .save(path.join(__dirname, '../temp/output.png'), {
+          quality: 100
+        });
+      let img = base64Img.base64Sync(path.join(__dirname, '../temp/output.png'));
+      do {
+        try {
+          this.log(`>>>cjy`)
+          local = await cjy(img)
+        } catch (err) {
+          this.log(err)
+          this.sleep(1000)
+        }
+      } while (!local)
+      this.log(local)
+    } catch (err) {
+      this.log(err)
+    }
     return local;
   }
 
@@ -124,8 +138,13 @@ class Verification extends Util {
 
   async main() {
     this.log('>>>main')
-    await this.runPuppeteer();
-    await this.monitor()
+    await this.runPuppeteer({
+      headless: true
+    });
+    // await this.monitor('https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F')
+    await this.monitor();
+    await this.closePuppeteer();
   }
 }
+// module.exports = Verification;
 new Verification().main();

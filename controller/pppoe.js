@@ -2,6 +2,8 @@ let fs = require('fs')
 let util = require('../common/util')
 let axios = require('axios')
 const isOnline = require('is-online');
+let Verification = require('./verification')
+let verification = new Verification();
 
 function Base64() {
   // private property
@@ -106,7 +108,7 @@ function Base64() {
 }
 class SwitchIP extends util {
   constructor() {
-    super(0)
+    super()
     this.taskName = "switchIP"
     this.ip = ""
     this.user = "admin";
@@ -115,23 +117,6 @@ class SwitchIP extends util {
     this.Authorization = `Basic ` + this.base64.encode(`${this.user}:${this.password}`)
   }
 
-  /**
-   * 获取商户页面内容，检查是否访问过于频繁，
-   */
-  async getShangPuHtml() {
-    console.log(`>>>getShangPuHtml`);
-    let url = `https://sh.58.com/shangpucz/pn2`;
-    await this.page.goto(url, {
-      waitUntil: 'domcontentloaded'
-    })
-    await this.page.waitForSelector('body')
-    await this.sleep(1000)
-    let result = await this.page.evaluate(() => {
-      return document.title.includes('请输入验证码')
-    })
-    return result;
-
-  }
   //连 接
   async doConnect() {
     this.log(`>>>doConnect`)
@@ -204,15 +189,18 @@ class SwitchIP extends util {
     this.log(`>>>watch58`)
     do {
       try {
-        let result = await this.getShangPuHtml();
-        if (result) {
-          this.log('58：请输入验证码')
-          await this.task1();
+        let sql = `SELECT * from config WHERE \`key\`='ipLimit'`;
+        let result = await this.execSql(0, sql)
+        if (result.length && result[0].value === '1') {
+          console.log('ip受限');
+          await verification.main();
+          sql = `UPDATE config SET \`value\`=0,updata_date=now() WHERE \`key\`='ipLimit' `;
+          await this.execSql(0, sql)
         }
       } catch (err) {
         this.log(err)
       }
-      await this.sleep(1000 * 15)
+      await this.sleep(1000 * 2)
     } while (true)
   }
 
@@ -221,10 +209,10 @@ class SwitchIP extends util {
     do {
       try {
         let result = await isOnline()
-        this.log('网络状态：'+result)
+        this.log('网络状态：' + result)
         if (!result) {
           await this.task1();
-          await this.sleep(1000*10)
+          await this.sleep(1000 * 10)
         }
       } catch (err) {
         this.log(err)
