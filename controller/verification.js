@@ -142,10 +142,10 @@ class Verification extends Util {
     await this.runPuppeteer({
       headless: true
     });
-    await this.monitor('https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F')
-    // await this.monitor();
+    // await this.monitor('https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F')
+    await this.monitor();
     await this.closePuppeteer();
   }
 }
-// module.exports = Verification;
-new Verification().main();
+module.exports = Verification;
+// new Verification().main();
