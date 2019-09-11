@@ -72,8 +72,8 @@ function getHouseDetail() {
   var passengerFlow = span;
   //位置
   // var span = baseContent.find('span:contains(位置)').parent().find('a').toArray();
-  var address1 = ____json4fe.locallist[1].name;
-  var address2 = ____json4fe.locallist[2].name;
+  var address1 = ____json4fe.locallist[1]?____json4fe.locallist[1].name:'';
+  var address2 = ____json4fe.locallist[2]?____json4fe.locallist[2].name:'';
   // var span = baseContent.find('span:contains(位置)').parent().find('span').toArray();
   var address3 = ____json4fe.xiaoqu.dizhi;
   //----------------------------
