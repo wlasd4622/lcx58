@@ -24,6 +24,7 @@
 //电话校验回填验证码			3524
 //上传的图片小于5K			3525
 //经纪人						3526
+//无商圈，编辑的时候需要		3527
 //--------------------------------------
 //账户正常					2000
 //密码错 					4000
@@ -326,6 +327,12 @@ Function editHouseInfo(houseId)
             editStatus=3505
         Else
             log "重新编辑提交异常"
+            flag = execjs("$('[name=localDiduan01]').length&&!houseDetailData.address2?1:0")
+            If flag = 1 Then 
+            	editStatus = 3527
+            	log "该帖子没有商圈信息，但编辑的时候需要填写商圈信息"
+            	Goto rBreak
+            End If
             editCount = editCount + 1
             If editCount > 3 Then
                 editStatus=3507
@@ -993,7 +1000,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='13020215153' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='18241666608' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
