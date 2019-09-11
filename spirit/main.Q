@@ -574,7 +574,7 @@ Function login()
 End Function
 
 Function ipLimit()
-    sql = "UPDATE config SET `value`=1,updata_date=now() WHERE `key`='ipLimit'"
+    sql = "UPDATE config SET `value`=1,`updata_date`=now() WHERE `key`='ipLimit'"
     log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
