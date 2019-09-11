@@ -1,9 +1,8 @@
 let Util = require('../common/util')
-let getPixels = require("get-pixels")
 let path = require('path')
 let fs = require('fs')
 var base64Img = require('base64-img');
-var images = require("images");
+var gm = require("gm");
 var cjy = require('../common/cjy')
 /**
  * 破解58验证码
@@ -98,10 +97,12 @@ class Verification extends Util {
     this.log(`>>>getCoordinate`)
     let local = null;
     try {
-      images(path.join(__dirname, '../temp/vBg.png')).draw(images(this.vImage), 0, 0)
-        .save(path.join(__dirname, '../temp/output.png'), {
-          quality: 100
-        });
+      gm()
+        .command("composite")
+        .in(this.vImage)
+        .in(path.join(__dirname, '../temp/vBg.png'))
+        .write(path.join(__dirname, '../temp/output.png'), function (err) {});
+      await this.sleep(500)
       let img = base64Img.base64Sync(path.join(__dirname, '../temp/output.png'));
       do {
         try {
@@ -141,10 +142,10 @@ class Verification extends Util {
     await this.runPuppeteer({
       headless: true
     });
-    // await this.monitor('https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F')
-    await this.monitor();
+    await this.monitor('https://callback.58.com/firewall/verifycode?serialId=c348af788a49ca27ab63bf29f8e998ba_24b81a988b824f2caf826fba3bd03a21&code=22&sign=e00f3edec10939a78d819120ed072c70&namespace=fangchan_business_pc&url=https%3A%2F%2Fsh.58.comangpucz%2Fpn2%2F')
+    // await this.monitor();
     await this.closePuppeteer();
   }
 }
-module.exports = Verification;
-// new Verification().main();
+// module.exports = Verification;
+new Verification().main();
