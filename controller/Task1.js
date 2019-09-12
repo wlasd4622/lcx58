@@ -45,7 +45,7 @@ class Task1 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (user.user_name !== 'dell64012') {
+      // if (user.user_name !== 'bjdzj1') {
       //   continue;
       // }
       this.log(user)
@@ -76,184 +76,36 @@ class Task1 extends Util {
   }
 
   /**
-   * 房屋编辑保存
-   * @param {*} houseId
-   * @param {*} user
+   * 获取58上架端口数据
    */
-  async houseEditHandle(houseId, user, shopId) {
-    this.log(`>>>houseEditHandle`)
-    let result = ''
-    let editPage = null;
-    try {
-      let jqueryExist = false;
-      let doCount = 0;
-      do {
-        doCount++;
-        this.log(`do:jqueryExist:${jqueryExist}`)
-        await this.sleep()
-        jqueryExist = await this.page.evaluate(() => {
-          return typeof window.jQuery === 'function'
-        })
-        if (doCount > 20) {
-          doCount = 0;
-          await this.loadJquery(this.page);
+  async search58() {
+    return await this.page.evaluate(() => {
+      return new Promise((resolve, reject) => {
+        try {
+          $('li[data-val=58taocan]').click();
+          $('button.ui-button.ui-button-small.search-btn').click()
+          var ids = [];
+
+          function getIds() {
+            setTimeout(() => {
+              ids = [...ids, ...$('.phase span:contains(编号)').toArray().map(item => {
+                let span = $(item).text();
+                return span.match(/\d{10,}/)[0]
+              })]
+              if ($('.next:not(.disabled):visible').length) {
+                $('.next:not(.disabled):visible').click()
+                getIds();
+              } else {
+                resolve(ids)
+              }
+            }, 3000);
+          }
+          getIds();
+        } catch (err) {
+          reject(err)
         }
-      } while (!jqueryExist);
-      let editUrl = null;
-      if (this.userType(user) === 0) {
-        editUrl = await this.page.evaluate((houseId) => {
-          return jQuery(`tr[tid='${houseId}'] a:contains("编辑")`).attr('href')
-        }, houseId)
-      } else {
-        editUrl = await this.page.evaluate((shopId) => {
-          let url = $(`[data-unityinfoid=${shopId}] .edit-btn`).attr('data-href')
-          if (!url) {
-            return ''
-          }
-          return location.origin + url;
-        }, shopId)
-      }
-      if (!editUrl) {
-        throw new Error('未处理异常:editUrl为空');
-      }
-      this.log(editUrl)
-      // await this.page.click(`tr[tid='${houseId}'] #edit`);
-      // await this.sleep(1000)
-      let pages = await this.browser.pages()
-      editPage = pages[0];
-      await editPage.bringToFront()
-
-      let clickStatus = false
-      for (let index = 0; index < 5; index++) {
-        this.log(`for:${index}`)
-
-        let url = ""
-        await editPage.goto(editUrl, {
-          waitUntil: 'domcontentloaded'
-        })
-        await this.sleep(1000)
-        await editPage.waitForSelector('#fieldTypeMod')
-
-        await editPage.evaluate(() => {
-          //商铺性质:默认选择二手商铺
-          if (!$('[name=params_122]').val()) {
-            $('[name=params_122]').val(2)
-          }
-          //相关费用
-          // 物业费
-          let value = $('[name="params_218"]').val()
-          if (value === '0.0') {
-            $('[name="params_218"]').val('')
-          }
-          //电费
-          value = $('[name="params_216"]').val()
-          if (value === '0.0') {
-            $('[name="params_216"]').val('')
-          }
-        });
-
-        let submitBtnElement = await editPage.evaluate(() => {
-          let submitBtnElement = ''
-          try {
-            window.scrollTo(0, 90000)
-          } catch (error) {
-            console.log(error);
-          }
-          if ($('#publish-jpshop-add').length) {
-            submitBtnElement = '#publish-jpshop-add'
-            $('#publish-jpshop-add').trigger('click')
-            console.log();
-          } else if ($('#publish-jpoffice-add').length) {
-            submitBtnElement = '#publish-jpoffice-add'
-            $('#publish-jpoffice-add').trigger('click')
-          }
-          window.submitStatus = `>>>>>>click:submitBtnElement`;
-          console.log('>>>>>>click:submitBtnElement');
-          return submitBtnElement;
-        })
-        // if (!submitBtnElement) {
-        //   throw "没找到编辑页面提交按钮"
-        // }
-        // this.log('click:' + submitBtnElement)
-        // await this.sleep(600);
-        // let submitBtn = await editPage.$(submitBtnElement);
-        // if (submitBtn) {
-        //   await submitBtn.click()
-        // }
-        await this.sleep(2000);
-        url = editPage.url()
-        this.log(url)
-        if (url.includes('publish/result') || url.includes('house/result')) {
-          clickStatus = true;
-          break;
-        }
-        //判断提交是否异常
-        let message = '修改保存异常'
-        let submitMessage = await this.checkSaveDataHandle(editPage);
-        if (submitMessage) {
-          message = message + ':' + submitMessage
-          throw message
-        }
-      }
-      if (!clickStatus) {
-        let message = '修改保存异常'
-        let submitMessage = await this.checkSaveDataHandle(editPage);
-        if (submitMessage) {
-          message = message + ':' + submitMessage
-        }
-        throw message
-      }
-
-      let len = await this.waitElement('.result-title:contains(保存成功),dt:contains(编辑成功)', editPage)
-      if (len) {
-        //保存成功
-        this.log('保存成功')
-      } else {
-        //保存失败
-        this.log('保存失败')
-      }
-    } catch (error) {
-      let result = {
-        status: 500
-      }
-      if (typeof error == 'string') {
-        result.msg = error;
-      } else {
-        result.msg = error.message
-      }
-      if (result.msg === '修改保存异常') {
-        throw new Error('修改保存异常')
-      }
-      //更新数据库
-      await this.updateHouseStatus(Object.assign({}, JSON.parse(JSON.stringify(user)), result, {
-        houseId
-      }))
-    }
-    await this.sleep(600)
-    await this.page.bringToFront()
-  }
-
-  /**
-   * 检查是否保存成功，并返回错误信息
-   * @param {*} editPage
-   */
-  async checkSaveDataHandle(editPage) {
-    this.log('>>>checkSaveDataHandle')
-    let message = ""
-    try {
-      let errArr = await editPage.evaluate(() => {
-        return $('.ui-tips-fail-noborder').toArray().map(item => {
-          return $(item).text().replace('', '') || []
-        })
       })
-
-      if (errArr && errArr.length) {
-        message = errArr.toString();
-      }
-    } catch (error) {
-      this.log(error)
-    }
-    return message;
+    });
   }
 
   /**
@@ -320,7 +172,7 @@ class Task1 extends Util {
           if (!dy) {
             throw new Error('未找到上架平台58端口')
           }
-          let selectList = [1]; //15, 7, 5, 3, 1
+          let selectList = [15, 7, 5, 3, 1]; //15, 7, 5, 3, 1
           let selectedDays = 0;
           for (let i = 0; i < selectList.length; i++) {
             let days = selectList[i];
@@ -329,11 +181,13 @@ class Task1 extends Util {
               break;
             }
           }
+          if (selectedDays > 3) {
+            selectedDays=3
+          }
           if (selectedDays) {
             let trIndex = await this.page.evaluate((days) => {
               let td = $('.on-shelf-table tbody td:contains(58):eq(0)');
               td.parent().find(`[data-val=${days}]`).click();
-              // td.parent().find('[type="checkbox"]').click();
               return td.parent().index();
             }, selectedDays)
             await this.sleep(200);
@@ -391,105 +245,7 @@ class Task1 extends Util {
     }
     return result;
   }
-  /**
-   * house push
-   * @param {*} houseId
-   * @param {*} user
-   */
-  async housePushHandle(houseId, user, result, shopId) {
-    this.log(`>>>housePushHandle`)
-    try {
-      //判断是否正常推送中
-      let grey = await this.page.$(`tr[tid='${houseId}'] .grey`);
-      if (grey) {
-        //正常推送中
-        this.log('正常推送中')
-        result = {
-          status: 200,
-          msg: '正常推送中'
-        }
-      } else {
-        //非正常推送中
-        this.log('非正常推送中')
-        if (user.status == 306) {
-          //余额不足
-          this.log('余额不足')
-          result = {
-            status: 306,
-            msg: '余额不足'
-          }
-        } else {
-          result = {
-            status: 300,
-            msg: '非正常推送中'
-          }
-          let batchproyx = await this.page.$(`tr[tid='${houseId}'] .opt-link.batchproyx`);
-          await batchproyx.click();
-          await this.sleep(500)
-          let timeContList = await this.page.$('.time-cont label:last-child')
-          if (timeContList) {
-            await timeContList.click();
-          }
-          await this.sleep(500)
-          await this.page.click('.ui-dialog-content .btn-ok');
-          //查找 点击确定推送反馈结果弹窗
-          let len = await this.waitElement('.ui-alert-mainMsg:visible')
-          if (len) {
-            len = await this.waitElement('.ui-alert-subMsg:visible')
-            if (len) {
-              let content = await this.page.evaluate(() => {
-                return $('.ui-alert-subMsg:visible').text();
-              })
-              if (content.includes('推送成功')) {
-                //推送成功
-                this.log('推送成功')
-                result = {
-                  status: 202,
-                  msg: '推送成功'
-                }
-              } else {
-                //推送失败
-                this.log(`推送失败:${content}`)
-                result = {
-                  status: 303,
-                  msg: `推送失败:${content}`
-                }
-              }
-            } else {
-              this.log('未处理异常，没有找到点击推送后消息内容')
-              result = {
-                status: 302,
-                msg: '未处理异常，没有找到点击推送后消息内容'
-              }
-            }
-          } else {
-            let len = await this.waitElement('span:contains(余额不足，请):visible')
-            if (len) {
-              user.status = 306;
-              this.log('余额不足')
-              result = {
-                status: 306,
-                msg: '余额不足'
-              }
-            } else {
-              this.log('未处理异常，没有找到点击推送后结果弹窗')
-              result = {
-                status: 301,
-                msg: '未处理异常，没有找到点击推送后结果弹窗'
-              }
-            }
-          }
-        }
-        await this.sleep(500)
-      }
-      if (!['正常推送中', '非正常推送中', '推送成功', '推送失败', '余额不足'].includes(result.msg)) {
-        throw new Error('housePushHandle result 未处理异常')
-      }
-    } catch (err) {
-      this.log(err)
-    }
-    return result;
-  }
+
 
   async houseRefreshHandle(houseObj, user) {
     this.log(`>>>houseRefreshHandle`)
@@ -497,86 +253,49 @@ class Task1 extends Util {
     this.log(`houseId:${houseId},type:${houseObj.type.map(i => {
       return ['刷新', '重新推送', '精选'][i]
     })}`);
-
+    let url = `http://vip.58ganji.com/sydchug/list/sydc`
+    await this.page.goto(url, {
+      waitUntil: 'domcontentloaded'
+    });
+    await this.page.waitForSelector('table.ui-table.sydc-table')
+    await this.page.evaluate(() => {
+      $('#houselist').remove();
+      $('table.ui-table.sydc-table tbody tr').remove();
+    })
     let result = {
       status: 0,
       msg: ''
     };
     try {
-      let url = this.userType(user) === 0 ? `http://vip.58ganji.com/jp58/kcfysp58` : `http://vip.58ganji.com/sydchug/list/sydc`
-      await this.page.goto(url, {
-        waitUntil: 'domcontentloaded'
-      });
-      if (this.userType(user) === 0) {
-        await this.page.waitForSelector('.ui-boxer-title')
-      } else {
-        await this.page.waitForSelector('table.ui-table.sydc-table')
-      }
-
-      await this.page.evaluate(() => {
-        $('#houselist').remove();
-        $('table.ui-table.sydc-table tbody tr').remove();
-      })
-      await this.closeDialog();
       let houseElement = null;
-      if (this.userType(user) === 0) {
-        await this.page.type('#search-name', houseId)
-        await this.page.click('input[type=submit]')
-        await this.page.waitForSelector('#houselist')
-        houseElement = await this.page.$(`tr[tid='${houseId}']`);
-      } else {
-        houseElement = null;
-        if (houseObj.shopId) {
-          await this.page.type('#shop_search_num', `${houseObj.shopId}`)
-          await this.sleep(1000);
-          await this.page.evaluate(() => {
-            $('button.search-btn').trigger('click');
+      if (houseObj.shopId) {
+        await this.page.type('#shop_search_num', `${houseObj.shopId}`)
+        await this.sleep(1000);
+        await this.page.evaluate(() => {
+          $('[data-val=no_paltfrom_limit]').click();
+          $('button.search-btn').trigger('click');
 
-            function searchDone() {
-              return new Promise((resolve, reject) => {
-                let trimer = setInterval(() => {
-                  if ($('td.no-list,[data-unityinfoid]').length && $('td.no-list,[data-unityinfoid]').length === 1) {
-                    clearInterval(trimer);
-                    resolve();
-                  } else {
-                    $('button.search-btn').trigger('click');
-                  }
-
-                }, 1000);
-              });
-            }
-            return searchDone();
-          })
-          // await this.page.click('button.ui-button.ui-button-small.search-btn')
-          await this.page.waitForSelector('table.ui-table.sydc-table')
-          houseElement = await this.page.$(`tr[data-unityinfoid='${houseObj.shopId}']`);
-        }
-      }
-      // if (houseObj.shopId && !houseElement) {
-      //   throw new Error('未处理异常3431');
-      // }
-      if (houseElement) {
-        //重新发布信息
-        // let isAdd = await this.addHouseInfo(houseId, user);
-        // if (isAdd) {
-        //   return false;
-        // }
-        // if (houseObj.type.includes(0)) {
-        //   //编辑保存-->>刷新
-        //   this.log(`编辑保存-->>刷新`)
-        //   await this.houseEditHandle(houseId, user, houseObj.shopId);
-        // }
-        if (houseObj.type.includes(1)) {
-          // 推送--->重新推送
-          this.log(`推送--->重新推送`)
-          if (this.userType(user) === 0) {
-            result = await this.housePushHandle(houseId, user, result, houseObj.shopId);
-          } else {
-            result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
+          function searchDone() {
+            return new Promise((resolve, reject) => {
+              let trimer = setInterval(() => {
+                if ($('td.no-list,[data-unityinfoid]').length && $('td.no-list,[data-unityinfoid]').length === 1) {
+                  clearInterval(trimer);
+                  resolve();
+                } else {
+                  $('button.search-btn').trigger('click');
+                }
+              }, 1000);
+            });
           }
-        }
+          return searchDone();
+        })
+        await this.page.waitForSelector('table.ui-table.sydc-table')
+        houseElement = await this.page.$(`tr[data-unityinfoid='${houseObj.shopId}']`);
+      }
+
+      if (houseElement) {
+        result = await this.LFHousePushHandle(houseId, user, result, houseObj.shopId);
       } else {
-        this.log('未找到此房源')
         result = {
           status: 304,
           msg: `未找到此房源`
@@ -584,10 +303,6 @@ class Task1 extends Util {
       }
     } catch (error) {
       this.log(error)
-      // result = {
-      //   status: 305,
-      //   msg: `未处理异常:${error.message}`
-      // }
     }
     this.log(`------------------------------------`)
     this.log(result);
@@ -627,8 +342,6 @@ class Task1 extends Util {
     }
   }
 
-
-
   /**
    * 启动浏览器，setcookie,循环房屋信息
    * @param {*} user
@@ -655,9 +368,20 @@ class Task1 extends Util {
       await this.setCookie(session, '.anjuke.com', this.page);
       await this.setCookie(session, '.vip.58ganji.com', this.page);
       await this.sleep(500)
+      let url = `http://vip.58ganji.com/sydchug/list/sydc`
+      await this.page.goto(url, {
+        waitUntil: 'domcontentloaded'
+      });
+      await this.page.waitForSelector('table.ui-table.sydc-table')
+      await this.page.evaluate(() => {
+        $('#houselist').remove();
+        $('table.ui-table.sydc-table tbody tr').remove();
+      })
+      await this.closeDialog();
+      let ids58 = await this.search58();
       //刷新
       for (let index = 0; index < houseIdKeys.length; index++) {
-        if (houseList[houseIdKeys[index]].type.includes(0) || houseList[houseIdKeys[index]].type.includes(1)) {
+        if (houseList[houseIdKeys[index]].shopId && houseList[houseIdKeys[index]].type.includes(1) && !ids58.includes(houseList[houseIdKeys[index]].shopId)) {
           await this.houseRefreshHandle(Object.assign({
             id: houseIdKeys[index],
             shopId: houseList[houseIdKeys[index]].shopId,
@@ -672,134 +396,6 @@ class Task1 extends Util {
       }
       this.log(err)
     }
-    // console.log('refresh-end');
-  }
-
-
-
-
-  /**
-   * 超过十天的帖子 重新发布帖子
-   * @param {*} houseId
-   * @param {*} user
-   */
-  async addHouseInfo(houseId, user) {
-    this.log(`>>>addHouseInfo:${houseId}`);
-    let result = false;
-    try {
-      await this.waitJquery();
-      let status = await this.page.evaluate((houseId) => {
-        let status = -1
-        try {
-          function addDate(date, days) {
-            var d = new Date(date);
-            d.setDate(d.getDate() + days);
-            var m = d.getMonth() + 1;
-            return d.getFullYear() + '-' + m + '-' + d.getDate();
-          }
-          var houseTr = $(`tr[tid=${houseId}]`);
-          var time = $(houseTr).find('p:contains(发布)').text().split(' ')[0].replace('发布：', '')
-          var month = time.split('-')[0];
-          var day = time.split('-')[1];
-          var currYear = new Date().getFullYear()
-          var currMonth = new Date().getMonth() + 1
-          if (month > currMonth) {
-            currYear = currYear - 1
-          }
-          var publishDate = new Date(`${currYear}-${month}-${day}`)
-          if (new Date() > new Date(addDate(publishDate, 10))) {
-            //超过10天
-            console.log('超过10天');
-            status = 1400
-          } else {
-            //未超过10天
-            console.log('未超过10天');
-            status = 1000
-          }
-        } catch (error) {
-          setInterval(() => {
-            console.error(error)
-          }, 2000)
-          status = -1500
-        }
-        return status
-      }, houseId);
-      if (status === -1500) {
-        this.log('未处理异常56343')
-      } else if (status === 1000) {
-        //未超过10天
-        this.log('未超过10天');
-      } else if (status === 1400) {
-        //超过10天
-        this.log('超过10天');
-        result = true
-        let houseDetail = await this.getHouseDetail(houseId);
-        this.log(houseDetail)
-        await this.addHouseInfoPage(houseDetail, houseId, user)
-      }
-    } catch (error) {
-      this.log(error)
-    }
-    return result;
-  }
-
-  async addHouseInfoPage(houseDetail, houseId, user) {
-    this.log(`>>>addHouseInfoPage`)
-    try {
-      if (!houseDetail || !houseDetail.title) {
-        throw new Error('houseDetail对象异常')
-      }
-      let url = `http://vip.58ganji.com/house/publish/shop/?jpChooseType=2&chooseWeb%5B%5D=2`
-      let addHousePage = (await this.browser.pages())[0];
-      await addHousePage.bringToFront();
-      addHousePage.goto(url, {
-        waitUntil: 'domcontentloaded'
-      })
-      await addHousePage.waitForSelector('#publish_form')
-    } catch (error) {
-      this.log(error)
-    }
-  }
-
-
-  /**
-   * 获取房屋详情信息
-   */
-  async getHouseDetail(houseId) {
-    this.log(`>>>getHouseDetail:${houseId}`);
-    let houseDetailData = {}
-    try {
-      let houseUrl = await this.page.evaluate((houseId) => {
-        var houseTr = $(`tr[tid=${houseId}]`);
-        return houseTr.find('.f-cont a:last').attr('href');
-      }, houseId)
-      if (!houseUrl) {
-        throw `houseUrl为空`
-      }
-      this.log(houseUrl)
-      let detailPage = (await this.browser.pages())[0];
-      await detailPage.bringToFront();
-      detailPage.goto(houseUrl, {
-        waitUntil: 'domcontentloaded'
-      })
-      await detailPage.waitForSelector('.house-title')
-      await detailPage.addScriptTag({
-        url: 'https://wlasd4622.github.io/lcx58/common/58.js'
-      })
-      await this.sleep(1000)
-      houseDetailData = await detailPage.evaluate(() => {
-        try {
-          getHouseDetail();
-        } catch (error) {
-          console.lerror(error)
-        }
-        return window.houseDetailData;
-      })
-      console.log(houseDetailData);
-    } catch (error) {
-      this.log(error)
-    }
-    return houseDetailData;
   }
 }
 module.exports = Task1
