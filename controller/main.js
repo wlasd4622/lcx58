@@ -33,28 +33,32 @@ schedule.scheduleJob('30 1 * * * *', async function () {
 });
 
 //每天9,13,15点执行
-schedule.scheduleJob('1 1 9,13,15 * * *', async function () {
-  try {
-    //映射infoid<-->houseId
-    await task2.main();
-  } catch (err) {
-    console.log(err)
-  }
-  try {
-    //急速 推送上架
-    await task6.main();
-    //刷新,推送 houseInfo
-    // await task1.main();
-  } catch (err) {
-    console.log(err)
-  }
-});
+// schedule.scheduleJob('1 1 9,13,15 * * *', async function () {
+//   try {
+//     //映射infoid<-->houseId
+//     // await task2.main();
+//   } catch (err) {
+//     console.log(err)
+//   }
+//   try {
+//     //急速 推送上架
+//     //await task6.main();
+//     //刷新,推送 houseInfo
+//     // await task1.main();
+//   } catch (err) {
+//     console.log(err)
+//   }
+// });
 
 //每天2点执行
 schedule.scheduleJob('1 1 2 * * *', async function () {
   try {
     //刷新
     await task1.main();
+  } catch (err) {
+    console.log(err)
+  }
+  try {
     //编辑保存
     await task0.main();
   } catch (err) {
@@ -64,6 +68,12 @@ schedule.scheduleJob('1 1 2 * * *', async function () {
 
 //每天9点执行
 schedule.scheduleJob('1 1 9 * * *', async function () {
+  try {
+    //映射infoid<-->houseId
+    await task2.main();
+  } catch (err) {
+    console.log(err)
+  }
   try {
     //设置精选
     await task3.main();
