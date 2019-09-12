@@ -532,7 +532,7 @@ class Util {
   writeCatch(data) {
     fs.writeFileSync(`./catch/${this.taskName}.json`, JSON.stringify(data))
   }
-  
+
 
     /**
    * 关闭弹窗
@@ -545,6 +545,15 @@ class Util {
         $('div.ui-dialog:visible').hide();
       }
     })
+  }
+
+  groupArray(array, subGroupLength) {
+    let index = 0;
+    let newArray = [];
+    while (index < array.length) {
+      newArray.push(array.slice(index, index += subGroupLength));
+    }
+    return newArray;
   }
 }
 module.exports = Util;

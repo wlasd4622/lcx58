@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 let config = require('../config.js')
 let Util = require('../common/util')
-
+let axios = require('axios')
 /**
  * 上架
  */
@@ -61,6 +61,7 @@ class Task1 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
+        await this.sydcdown(user)
         await this.loopHouseHandle(user);
       }
     }
@@ -182,7 +183,7 @@ class Task1 extends Util {
             }
           }
           if (selectedDays > 3) {
-            selectedDays=3
+            selectedDays = 3
           }
           if (selectedDays) {
             let trIndex = await this.page.evaluate((days) => {
@@ -395,6 +396,115 @@ class Task1 extends Util {
         this.log('账户session失效')
       }
       this.log(err)
+    }
+  }
+
+  /**
+   * 下架
+   */
+  async sydcdown(user) {
+    this.log(`>>>sydcdown`)
+    try {
+      let houseIds = [];
+      let doCount = 0;
+      do {
+        doCount++;
+        houseIds = await this.searchHouseIds(user);
+        if (houseIds.length) {
+          this.log(`待下架：${houseIds}`)
+          await this.sydcdownRequest(user, houseIds)
+          await this.sleep(3000);
+        }
+      } while (houseIds.length && doCount < 6);
+    } catch (err) {
+      this.log(err);
+    }
+  }
+
+  async searchHouseIds(user) {
+    this.log(`>>>searchHouseIds`)
+    let houseIds_1 = [];
+    try {
+      function getIds(pageIndex = 1) {
+        return new Promise((resolve, reject) => {
+          let url = `http://vip.58ganji.com/separation/houselist/search?pageIndex=${pageIndex}&pageSize=20&pt=58taocan&tg=no_ecommerce_limit&sp=no_vrvideo_limit&lb=allCategory&bt=&id=&px=updatedesc&cateId=20&searchAction=&_=${new Date().getTime()}`;
+          this.log(url);
+          try {
+            axios.request({
+              url,
+              headers: {
+                cookie: decodeURIComponent(user.session)
+              }
+            }).then(res => {
+              let houseIds = [];
+              if (res.data.data && res.data.data.infos && res.data.data.infos.length) {
+                res.data.data.infos.map(item => {
+                  houseIds.push(item.unityInfoId)
+                })
+              }
+              resolve(houseIds)
+            }).catch(err => {
+              this.log(err)
+              resolve([])
+            })
+          } catch (err) {
+            this.log(err)
+            resolve([])
+          }
+        })
+      }
+
+      let _ids = [];
+      let pageIndex = 1
+      do {
+        _ids = await getIds.call(this, pageIndex);
+        this.log(_ids)
+        pageIndex++;
+        houseIds_1 = houseIds_1.concat(_ids)
+        await this.sleep(1000)
+      } while (_ids.length >= 20)
+    } catch (err) {
+      this.log(err)
+    }
+    return houseIds_1;
+  }
+  async sydcdownRequest(user, houseIds = []) {
+    this.log(`>>>sydcdownRequest`)
+
+    function request(houseIds = []) {
+      return new Promise((resolve, reject) => {
+        //是否套餐服务化城市，兼容新旧接口
+        let url = `http://vip.58ganji.com/separation/house/taocan/sydcdown?platform=wb&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
+        if (this.isServiceCombo) {
+          url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&apiType=comboHouseDown&from=jp&_=${new Date().getTime()}`
+        }
+        console.log(`${url}`);
+        try {
+          axios.request({
+            url,
+            headers: {
+              cookie: decodeURIComponent(user.session)
+            }
+          }).then(res => {
+            if (res.data.status === 'ok') {
+              this.log(res.data.data.wb)
+            } else {
+              this.log(`未处理异常2:${res.data.message}`)
+            }
+            resolve(res);
+          }).catch(err => {
+            resolve();
+          })
+        } catch (err) {
+          this.log(err)
+          resolve()
+        }
+      })
+    }
+    let houseIdsArr = this.groupArray(houseIds, 20);
+    for (let i = 0; i < houseIdsArr.length; i++) {
+      await request.call(this, houseIdsArr[i])
+      await this.sleep(3000)
     }
   }
 }
