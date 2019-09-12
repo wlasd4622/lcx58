@@ -6,11 +6,12 @@ let axios = require('axios')
  * 上架
  */
 class Task1 extends Util {
-  constructor() {
+  constructor(index, count) {
     super();
-    this.taskName = "task1"
     this.userList = config.user;
     this.db = config.db;
+    this.userList = this.groupArray(this.userList, Math.ceil(this.userList.length / count))[index]
+    this.taskName = "task1_" + index;
   }
   async init() {
     try {
@@ -42,6 +43,7 @@ class Task1 extends Util {
   async main() {
     this.log(`>>>main`);
     await this.init();
+    console.log(this.userList);
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
@@ -359,7 +361,7 @@ class Task1 extends Util {
       }
       await this.closePuppeteer();
       await this.runPuppeteer({
-        headless: false
+        headless: true
       });
       // let url = `http://vip.58ganji.com/jp58/kcfysp58`
       let session = decodeURIComponent(user.session)

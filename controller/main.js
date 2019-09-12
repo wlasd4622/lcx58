@@ -8,8 +8,14 @@ let Task4 = require('./Task4');
 let Task5 = require('./Task5');
 let Task6 = require('./Task6');
 let ganji = new Ganji();
-let task0 = new Task1();
-let task1 = new Task1();
+let task0 = new Task0();
+let task1_0 = new Task1(0, 7);
+let task1_1 = new Task1(1, 7);
+let task1_2 = new Task1(2, 7);
+let task1_3 = new Task1(3, 7);
+let task1_4 = new Task1(4, 7);
+let task1_5 = new Task1(5, 7);
+let task1_6 = new Task1(6, 7);
 let task2 = new Task2();
 let task3 = new Task3();
 let task4 = new Task4();
@@ -54,7 +60,14 @@ schedule.scheduleJob('30 1 * * * *', async function () {
 schedule.scheduleJob('1 1 2 * * *', async function () {
   try {
     //刷新
-    await task1.main();
+    task1_0.main();
+    task1_1.main();
+    task1_2.main();
+    task1_3.main();
+    task1_4.main();
+    task1_5.main();
+    task1_6.main();
+
   } catch (err) {
     console.log(err)
   }
@@ -115,7 +128,7 @@ async function main() {
     //监听精选
     // await task4.main();
 
-    await task6.main(1);
+    // await task6.main(1);
 
     // await task6.main();
     // ganji.mainTask();
@@ -123,8 +136,16 @@ async function main() {
     // schedule.scheduleJob('30,31,35,34 * * * * *', ()=>{
     //   console.log('scheduleCronstyle:'+ new Date());
     // })
+    // task0.main()
+    task1_0.main();
+    task1_1.main();
+    task1_2.main();
+    task1_3.main();
+    task1_4.main();
+    task1_5.main();
+    task1_6.main();
   } catch (err) {
     console.log(err);
   }
 }
-// main();
+main();
