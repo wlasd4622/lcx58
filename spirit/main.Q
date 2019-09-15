@@ -5,6 +5,7 @@
 //免费刷新用完：不管 			3100
 //个人删除 					3404
 //需返回修改 				3401
+//该条信息已过期 			3405
 //订单异常					3500
 //审核不通过 				3501
 //刷新成功 					3502
@@ -395,6 +396,8 @@ Function houseList()
                 "return 3501"&_
                 "}else if(statusContent.indexOf('返回修改')>-1){"&_
                 "return 3401"&_
+                "}else if(statusContent.indexOf('该条信息已过期')>-1){"&_
+                "return 3405"&_
                 "}"&_
                 "}")
                 houseStatus = execjs("getHouseStatusJs();")
@@ -1000,7 +1003,7 @@ Function getUser()
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
     sql = "SELECT * FROM house_list WHERE `block` IS NULL AND username IS NOT NULL ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
-    //sql = "SELECT * FROM house_list WHERE `username`='18241666608' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
+    //sql = "SELECT * FROM house_list WHERE `username`='15633080824' ORDER BY RAND( ) LIMIT 1 FOR UPDATE"
     log sql
     Call Plugin.Super_MySQL.mysql_query(mysql, sql)
     store = Plugin.Super_MySQL.store_result(mysql)
