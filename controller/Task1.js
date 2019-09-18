@@ -43,11 +43,11 @@ class Task1 extends Util {
   async main() {
     this.log(`>>>main`);
     await this.init();
-    console.log(this.userList);
+    this.log(JSON.stringify(this.userList));
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (user.user_name !== 'bjdzj1') {
+      // if (user.user_name !== 'bjdzj3') {
       //   continue;
       // }
       this.log(user)
@@ -63,7 +63,7 @@ class Task1 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
-        await this.sydcdown(user)
+        // await this.sydcdown(user)
         await this.loopHouseHandle(user);
       }
     }
@@ -82,13 +82,23 @@ class Task1 extends Util {
    * 获取58上架端口数据
    */
   async search58() {
+    this.log(`>>>search58`)
+    await this.sleep(500)
+    await this.page.evaluate(()=>{
+      $('li[data-val=58taocan]').click();
+    })
+    await this.sleep(500)
+    await this.page.evaluate(()=>{
+      $('button.ui-button.ui-button-small.search-btn').click();
+    })
+    await this.sleep(500)
+    let searchBtn=await this.page.$('button.ui-button.ui-button-small.search-btn')
+    await searchBtn.click();
+    console.log('>>>>>>click')
     return await this.page.evaluate(() => {
       return new Promise((resolve, reject) => {
         try {
-          $('li[data-val=58taocan]').click();
-          $('button.ui-button.ui-button-small.search-btn').click()
           var ids = [];
-
           function getIds() {
             setTimeout(() => {
               ids = [...ids, ...$('.phase span:contains(编号)').toArray().map(item => {
@@ -382,6 +392,7 @@ class Task1 extends Util {
       })
       await this.closeDialog();
       let ids58 = await this.search58();
+      this.log('search58Arr:',ids58)
       //刷新
       for (let index = 0; index < houseIdKeys.length; index++) {
         if (houseList[houseIdKeys[index]].shopId && houseList[houseIdKeys[index]].type.includes(1) && !ids58.includes(houseList[houseIdKeys[index]].shopId)) {
