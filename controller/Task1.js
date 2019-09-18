@@ -47,7 +47,7 @@ class Task1 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (user.user_name !== 'bjdzj3') {
+      // if (user.user_name !== '店之家1') {
       //   continue;
       // }
       this.log(user)
@@ -63,7 +63,7 @@ class Task1 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
-        // await this.sydcdown(user)
+        await this.sydcdown(user)
         await this.loopHouseHandle(user);
       }
     }
@@ -84,15 +84,15 @@ class Task1 extends Util {
   async search58() {
     this.log(`>>>search58`)
     await this.sleep(500)
-    await this.page.evaluate(()=>{
+    await this.page.evaluate(() => {
       $('li[data-val=58taocan]').click();
     })
     await this.sleep(500)
-    await this.page.evaluate(()=>{
+    await this.page.evaluate(() => {
       $('button.ui-button.ui-button-small.search-btn').click();
     })
     await this.sleep(500)
-    let searchBtn=await this.page.$('button.ui-button.ui-button-small.search-btn')
+    let searchBtn = await this.page.$('button.ui-button.ui-button-small.search-btn')
     await searchBtn.click();
     console.log('>>>>>>click')
     return await this.page.evaluate(() => {
@@ -101,10 +101,17 @@ class Task1 extends Util {
           var ids = [];
           function getIds() {
             setTimeout(() => {
-              ids = [...ids, ...$('.phase span:contains(编号)').toArray().map(item => {
-                let span = $(item).text();
-                return span.match(/\d{10,}/)[0]
-              })]
+
+              let itemArr = $('.phase span:contains(编号)').toArray();
+              let trIds = [];
+              for (let i = 0; i < itemArr.length; i++) {
+                if ($(itemArr[i]).parents('tr').find('td:eq(2)').text().includes('58')) {
+                  let span = $(itemArr[i]).text();
+                  trIds.push(span.match(/\d{10,}/)[0])
+                }
+              }
+
+              ids = [...ids, ...trIds]
               if ($('.next:not(.disabled):visible').length) {
                 $('.next:not(.disabled):visible').click()
                 getIds();
@@ -130,6 +137,7 @@ class Task1 extends Util {
    */
   async LFHousePushHandle(houseId, user, result, shopId) {
     this.log(`>>>LFHousePushHandle`)
+    await this.closeDialog();
     try {
       //判断是否正常推送中
       let isPushIn = await this.page.evaluate((shopId) => {
@@ -392,7 +400,9 @@ class Task1 extends Util {
       })
       await this.closeDialog();
       let ids58 = await this.search58();
-      this.log('search58Arr:',ids58)
+      this.log('search58Arr');
+      this.log(ids58);
+      houseIdKeys = this.unique(houseIdKeys);
       //刷新
       for (let index = 0; index < houseIdKeys.length; index++) {
         if (houseList[houseIdKeys[index]].shopId && houseList[houseIdKeys[index]].type.includes(1) && !ids58.includes(houseList[houseIdKeys[index]].shopId)) {
