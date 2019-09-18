@@ -62,7 +62,7 @@ class Task6 extends Util {
       }
       if (user.session && user.status == 0) {
         // 是否开通全网通套餐的城市x
-        this.isServiceCombo = await this.getIsServiceCombo(user);
+        window.isServiceCombo = await this.getIsServiceCombo(user);
         //先下架
         await this.sydcdown(user);
         //后上架
@@ -125,7 +125,7 @@ class Task6 extends Util {
       return new Promise((resolve, reject) => {
         //是否套餐服务化城市，兼容新旧接口
         let url = `http://vip.58ganji.com/separation/house/taocan/sydcdown?platform=wb&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
-        if (this.isServiceCombo) {
+        if (window.isServiceCombo) {
           url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&apiType=comboHouseDown&from=jp&_=${new Date().getTime()}`
         }
         console.log(`${url}`);
@@ -232,7 +232,7 @@ class Task6 extends Util {
     this.log(`>>>sydcupRequest`)
     //是否套餐服务化城市，兼容新旧接口
     let url = `http://vip.58ganji.com/separation/house/taocan/sydcup?platform=wb&pushDay=1&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
-    if (this.isServiceCombo) {
+    if (window.isServiceCombo) {
       url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&paySourceNum=1&apiType=comboHouseUp&from=jp&_=${new Date().getTime()}`
     }
     this.log(`${url}`);

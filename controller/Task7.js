@@ -531,7 +531,7 @@ class Task1 extends Util {
       return new Promise((resolve, reject) => {
         //是否套餐服务化城市，兼容新旧接口
         let url = `http://vip.58ganji.com/separation/house/taocan/sydcdown?platform=wb&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
-        if (this.isServiceCombo) {
+        if (window.isServiceCombo) {
           url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&apiType=comboHouseDown&from=jp&_=${new Date().getTime()}`
         }
         console.log(`${url}`);
