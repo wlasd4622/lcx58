@@ -90,7 +90,7 @@ class Wechaty extends Util {
     let wechaty1 = await wx.start('wechaty1');
     let wechaty2 = await wx.start('wechaty2');
     //每天10，15点执行
-    schedule.scheduleJob('31 11 15 * * *', async function () {
+    schedule.scheduleJob('31 14 15 * * *', async function () {
       that.log(`>>>scheduleJob`);
       try {
         await that.publishInfo(wechaty1);
