@@ -47,7 +47,7 @@ class Task1 extends Util {
     for (let index = 0; index < this.userList.length; index++) {
       this.log(`user.index:${index}`)
       let user = this.userList[index];
-      // if (user.user_name !== '店之家1') {
+      // if (!user.user_name.includes('石家庄')) {
       //   continue;
       // }
       this.log(user)
@@ -63,6 +63,7 @@ class Task1 extends Util {
         this.log(err)
       }
       if (user.session && user.status == 0) {
+        this.isServiceCombo = await this.getIsServiceCombo(user);
         await this.sydcdown(user)
         await this.loopHouseHandle(user);
       }
@@ -99,6 +100,7 @@ class Task1 extends Util {
       return new Promise((resolve, reject) => {
         try {
           var ids = [];
+
           function getIds() {
             setTimeout(() => {
 
@@ -498,7 +500,7 @@ class Task1 extends Util {
       return new Promise((resolve, reject) => {
         //是否套餐服务化城市，兼容新旧接口
         let url = `http://vip.58ganji.com/separation/house/taocan/sydcdown?platform=wb&houseIds=${encodeURIComponent(houseIds.join())}&_=${new Date().getTime()}`;
-        if (window.isServiceCombo) {
+        if (this.isServiceCombo) {
           url = `http://vip.58ganji.com/separation/house/combo?houseIds=${encodeURIComponent(houseIds.join())}&upPlat=wb&apiType=comboHouseDown&from=jp&_=${new Date().getTime()}`
         }
         console.log(`${url}`);
@@ -529,6 +531,30 @@ class Task1 extends Util {
       await request.call(this, houseIdsArr[i])
       await this.sleep(3000)
     }
+  }
+
+  /**
+   * 获取是否开通全网通套餐的城市x
+   */
+  async getIsServiceCombo(user) {
+    this.log(`>>>getIsServiceCombo`)
+    let url = `http://vip.58ganji.com/sydchug/list/sydc`
+    return new Promise((resolve, reject) => {
+      try {
+        axios.request({
+          url,
+          headers: {
+            cookie: decodeURIComponent(user.session)
+          }
+        }).then(res => {
+          resolve(res.data.match(/var\sisServiceCombo.*?;/)[0].includes('1'))
+        }).catch(err => {
+          resolve(false);
+        })
+      } catch (err) {
+        resolve(false)
+      }
+    })
   }
 }
 module.exports = Task1

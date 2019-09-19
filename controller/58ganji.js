@@ -77,7 +77,7 @@ class GanJi {
       this.log(err);
     }
     this.browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ['--start-maximized', '--disable-infobars']
     });
     this.page = await this.browser.newPage();
@@ -496,8 +496,14 @@ class GanJi {
     if (data && data.length) {
       for (let index = 0; index < data.length; index++) {
         const element = data[index];
+        let 剩余可用数量 = 0;
+        try {
+          剩余可用数量 = parseFloat((element['剩余可用数量'] || '').replace(/\,/g, '') || 0)
+        } catch (err) {
+          this.log(err)
+        }
         let sql = "insert into `gj_extension`(`user_id`,`username`,`account`,`expire`,`quantity`,`create_time`)" +
-          "values(" + user.id + ",'" + user.username + "','" + element['推广币'] + "','" + element['到期时间'] + "','" + element['剩余可用数量'] + "',NOW())"
+          "values(" + user.id + ",'" + user.username + "','" + element['推广币'] + "','" + element['到期时间'] + "'," + 剩余可用数量 + ",NOW())"
 
         try {
           await this.execSql(sql)
