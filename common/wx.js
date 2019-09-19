@@ -5,29 +5,6 @@ const {
   log
 } = require("wechaty");
 
-async function onScan(qrcode, status) {
-  require('qrcode-terminal').generate(qrcode)
-}
-
-async function onLogin(user) {
-  log.info('StarterBot', '%s login', user)
-
-  // const oldRoom = await bot.Room.find({
-  //   name: '美食'
-  // })
-  // console.log(oldRoom);
-}
-
-async function onLogout(user) {
-  log.info('StarterBot', '%s logout', user)
-}
-
-async function onMessage(msg) {
-  log.info('StarterBot', msg.toString())
-}
-
-
-
 async function findAll(roomName, bot) {
   let roomReg = eval(`/${roomName}/i`);
   return await bot.Room.findAll({
@@ -35,21 +12,19 @@ async function findAll(roomName, bot) {
   });
 }
 
-async function send() {
-
-}
-
-async function getList() {
-
-}
-async function start(name) {
+async function start(name, remarks) {
   let bot = null;
   return new Promise(async (resolve, reject) => {
     try {
       bot = new Wechaty({
         name: name || 'wechaty'
       })
-      bot.on('scan', onScan)
+
+      bot.on('scan', (qrcode, status) => {
+        console.log(`${name}:请用${remarks}微信账号扫码登录`);
+        require('qrcode-terminal').generate(qrcode)
+      })
+
       bot.on('login', user => {
         log.info('StarterBot', '%s login', user)
         resolve({
@@ -58,20 +33,25 @@ async function start(name) {
           bot
         })
       })
-      bot.on('logout', onLogout)
+
+      bot.on('logout', user => {
+        log.info('StarterBot', '%s logout', user)
+      })
+
       bot.on('message', msg => {
         log.info('StarterBot', msg.toString())
       })
+
       await bot.start()
+
     } catch (err) {
       console.log(err);
       reject(err)
     }
   })
 }
+
 module.exports = {
   start,
-  getList,
-  findAll,
-  send
+  findAll
 }

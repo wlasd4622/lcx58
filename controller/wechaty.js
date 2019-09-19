@@ -87,8 +87,9 @@ class Wechaty extends Util {
   async main() {
     let that = this;
     this.log(`>>>main`);
-    let wechaty1 = await wx.start('wechaty1');
-    let wechaty2 = await wx.start('wechaty2');
+    await wx.start('wenlong', '文龙');
+    let wechaty1 = await wx.start('wechaty1', '店之家');
+    let wechaty2 = await wx.start('wechaty2', '商铺网');
     //每天10，15点执行
     schedule.scheduleJob('31 14 15 * * *', async function () {
       that.log(`>>>scheduleJob`);
