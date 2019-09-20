@@ -72,10 +72,18 @@ function getHouseDetail() {
   var passengerFlow = span;
   //位置
   // var span = baseContent.find('span:contains(位置)').parent().find('a').toArray();
-  var address1 = ____json4fe.locallist[1]?____json4fe.locallist[1].name:'';
-  var address2 = ____json4fe.locallist[2]?____json4fe.locallist[2].name:'';
+  var address1 = ____json4fe.locallist[1] ? ____json4fe.locallist[1].name : '';
+  var address2 = ____json4fe.locallist[2] ? ____json4fe.locallist[2].name : '';
   // var span = baseContent.find('span:contains(位置)').parent().find('span').toArray();
-  var address3 = ____json4fe.xiaoqu.dizhi;
+  var address3 = '';
+  try {
+    address3 = $('.house_basic_title_info_2 .title:contains(地)').parent().text().replace(/\s/g, '').replace('地址：', '').replace('地图', '')
+  } catch (err) {
+    console.log(err);
+  }
+  if (!address3) {
+    ____json4fe.xiaoqu.dizhi;
+  }
   //----------------------------
   var name = null;
   var isSingle = null;
@@ -191,7 +199,7 @@ function addHouseInfoData(code, userName) {
     //经营行业
     if (houseDetailData.industry == '家居建材' || houseDetailData.industry == '家具建材') {
       if ($('[name=params_22701] .optiondef li:contains(' + '家具建材' + ')').length) {
-        houseDetailData.industry ='家具建材'
+        houseDetailData.industry = '家具建材'
       } else {
         houseDetailData.industry = '家居建材';
       }
@@ -459,7 +467,20 @@ function getEditHouseInfo() {
 function checkAlertMessage() {
   let result = '';
   if ($('div:contains(Alert):visible').length) {
-    result = encodeURIComponent($('div:contains(Alert):visible').text()||'');
+    result = encodeURIComponent($('div:contains(Alert):visible').text() || '');
   }
   return result;
 }
+
+
+// function deleteExpireHouse() {
+//   let houseArr = $('.my-item-item').toArray().map(item => {
+//     return {
+//       date: $(item).find('.my-item-item-content-left-date').text(),
+//       id: $(item).find('.my-item-item-tb-content-option a').attr('href').match(/\d{16,}/)[0]
+//     }
+//   })
+//   for (let i = 0; i < houseArr.length; i++) {
+//     $.get(`https://post.58.com/commercial/completeDelete/${houseArr[i].id}`)
+//   }
+// }
