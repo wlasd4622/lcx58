@@ -472,15 +472,48 @@ function checkAlertMessage() {
   return result;
 }
 
+/**
+ * 排序
+ * @param {*} prop
+ */
+function compare(prop) {
+  return function (obj1, obj2) {
+    var val1 = obj1[prop];
+    var val2 = obj2[prop];
+    if (val1 < val2) {
+      return -1;
+    } else if (val1 > val2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+}
 
-// function deleteExpireHouse() {
-//   let houseArr = $('.my-item-item').toArray().map(item => {
-//     return {
-//       date: $(item).find('.my-item-item-content-left-date').text(),
-//       id: $(item).find('.my-item-item-tb-content-option a').attr('href').match(/\d{16,}/)[0]
-//     }
-//   })
-//   for (let i = 0; i < houseArr.length; i++) {
-//     $.get(`https://post.58.com/commercial/completeDelete/${houseArr[i].id}`)
-//   }
-// }
+
+/**
+ * 获取过期house，保留2条最近的
+ */
+function getExpireHouse() {
+  var houseArr = $('.my-item-item').toArray().map(item => {
+    return {
+      date: new Date($(item).find('.my-item-item-content-left-date').text()).getTime(),
+      id: $(item).find('.my-item-item-tb-content-option a').attr('href').match(/\d{16,}/)[0]
+    }
+  })
+  houseArr = houseArr.sort(compare("date"))
+  houseArr.pop();
+  houseArr.pop()
+  return JSON.stringify(houseArr);
+}
+
+/**
+ * 批量删除房产信息
+ * @param {*} houseArrStr
+ */
+function deleteExpireHouse(houseArrStr = []) {
+  let houseArr = JSON.parse(houseArrStr);
+  for (let i = 0; i < houseArr.length; i++) {
+    $.get(`https://post.58.com/commercial/completeDelete/${houseArr[i].id}`)
+  }
+}
