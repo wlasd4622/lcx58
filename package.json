@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/wlasd4622/lcx58#readme",
   "devDependencies": {
-    "mysql": "^2.17.1"
+    "mysql": "^2.18.0"
   }
 }
